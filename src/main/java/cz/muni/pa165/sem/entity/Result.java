@@ -34,7 +34,8 @@ public class Result {
     private Integer position;
     
     @NotNull
-    @Column(name = "sportsman")
+    @ManyToOne
+    @JoinColumn(name = "sportsman")
     private Sportsman sportsman;
     
     @Column(name = "note")
