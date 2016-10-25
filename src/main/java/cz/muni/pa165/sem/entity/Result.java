@@ -41,7 +41,10 @@ public class Result {
     @Column(name = "note")
     private String note;
     
-    //TODO Event
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "event")
+    private Event event;
     
     public Long getId(){
             return id;
@@ -108,6 +111,14 @@ public class Result {
         this.note = note;
     }
     
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+    
     @Override //TREBA OTESTOVAT CI TO OZAJ FUNGUJE
     public boolean equals(Object o){
         if(o == null) return false;
@@ -122,7 +133,8 @@ public class Result {
         if(!getPerformanceUnit().equals(result.getPerformanceUnit())) return false;
         if(!getPosition().equals(result.getPosition()))return false;
         if(!getSportsman().equals(result.getSportsman())) return false;
-        return getNote().equals(result.getNote());
+        if(!getNote().equals(result.getNote())) return false;
+        return getEvent().equals(result.getEvent());
     }
     
     @Override
@@ -131,6 +143,7 @@ public class Result {
         result = 31 * result + getPerformance().hashCode();
         result = 31 * result + getPosition().hashCode();
         result = 31 * result + getNote().hashCode();
+        result = 31 * result + getEvent().hashCode();
         return result;
     }
 }
