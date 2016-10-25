@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  *
  *
- * @author Kamil
+ * @author Kamil Triscik
  */
 @Entity
 public class Sport {
@@ -53,7 +53,7 @@ public class Sport {
         final int prime = 53;
         int hashCode = 7;
         hashCode = 43 * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
-        hashCode = 43 * hashCode + ((this.name == null) ? 0 : this.description.hashCode());
+        hashCode = 43 * hashCode + ((this.description == null) ? 0 : this.description.hashCode());
         return hashCode;
     }
 
