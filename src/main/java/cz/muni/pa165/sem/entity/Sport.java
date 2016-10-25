@@ -1,8 +1,7 @@
 package cz.muni.pa165.sem.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  *
