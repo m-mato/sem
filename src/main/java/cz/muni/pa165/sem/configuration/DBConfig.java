@@ -20,14 +20,13 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
 
-
 /**
  * @author Matej Majdis
  */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackages = "cz.muni.pa165.sem")
+@ComponentScan(basePackages = "cz.muni.pa165.sem.dao")
 public class DBConfig {
 
 	@Bean
@@ -35,11 +34,6 @@ public class DBConfig {
 		return new JpaTransactionManager(entityManagerFactory().getObject());
 	}
 
-	/**
-	 * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
-	 *
-	 * @return entity manager factory to be used
-	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -76,7 +70,6 @@ public class DBConfig {
 		EmbeddedDatabase db = builder
 				.setType(EmbeddedDatabaseType.DERBY)
 				.setName("semDB")
-				.addScript("scripts/create-db.sql")
 				.build();
 
 		return db;
