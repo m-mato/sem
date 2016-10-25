@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
@@ -61,7 +61,7 @@ public class Event {
     @JoinColumn(name = "admin")
     private Sportsman admin;
     
-    @OneToMany
+    @ManyToMany
     private Set<Sportsman> participants = new HashSet<Sportsman>();
 
     public Long getId() {

@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Matej Majdis
@@ -37,7 +39,8 @@ public class Sportsman {
 	@Column(name = "password")
 	private String password;
 
-	//TODO: events
+	@ManyToMany(mappedBy = "participants")
+	private Set<Event> events = new HashSet<Event>();
 
 	public Long getId() {
 		return id;
@@ -86,7 +89,15 @@ public class Sportsman {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Set<Event> getEvents() {
+		return events;
+	}
 
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+        
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -99,7 +110,8 @@ public class Sportsman {
 		if (!getSurname().equals(sportsman.getSurname())) return false;
 		if (!getBirthDate().equals(sportsman.getBirthDate())) return false;
 		if (!getEmail().equals(sportsman.getEmail())) return false;
-		return getPassword().equals(sportsman.getPassword());
+		if (!getPassword().equals(sportsman.getPassword())) return false;
+		return getEvents().equals(sportsman.getEvents());
 
 	}
 
@@ -111,6 +123,7 @@ public class Sportsman {
 		result = 31 * result + getBirthDate().hashCode();
 		result = 31 * result + getEmail().hashCode();
 		result = 31 * result + getPassword().hashCode();
+		result = 31 * result + getEvents().hashCode();
 		return result;
 	}
 }
