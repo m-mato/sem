@@ -62,7 +62,7 @@ public class Event {
     private Sportsman admin;
     
     @ManyToMany
-    private Set<Sportsman> participants = new HashSet<Sportsman>();
+    private Set<Sportsman> participants = new HashSet<>();
 
     public Long getId() {
         return id;
