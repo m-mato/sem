@@ -35,7 +35,7 @@ public class ExampleController {
 	}
 
 	@RequestMapping("/sportsman/get-all")
-	public String getAllNames() {
-		return "Not implemented";
+	public List<String> getAllNames() {
+		return exampleService.getAllNames();
 	}
 }

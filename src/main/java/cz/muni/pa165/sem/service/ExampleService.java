@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +20,15 @@ public class ExampleService {
 
 	@Transactional
 	public List<String> getAllNames() {
-		return null;
+
+		List<String> result = new ArrayList<>();
+		sportsmanDAO.getAll().forEach(item -> result.add(item.getName()));
+		return result;
 	}
 
 	@Transactional
 	public void addSportsman(Sportsman sportsman) {
+
+		sportsmanDAO.addSportsman(sportsman);
 	}
 }
