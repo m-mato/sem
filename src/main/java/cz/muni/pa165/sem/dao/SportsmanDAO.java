@@ -9,7 +9,17 @@ import java.util.List;
  */
 public interface SportsmanDAO {
 
-	void addSportsman(Sportsman sportsman);
+	void create(Sportsman sportsman);
+
+	Sportsman findById(Long id);
+
+	Sportsman findByName(String name);
+
+	Sportsman findBySurname(String surname);
+
+	void update(Sportsman sportsman);
+
+	void delete(Sportsman sportsman);
 
 	List<Sportsman> getAll();
 }

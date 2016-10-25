@@ -29,6 +29,6 @@ public class ExampleService {
 	@Transactional
 	public void addSportsman(Sportsman sportsman) {
 
-		sportsmanDAO.addSportsman(sportsman);
+		sportsmanDAO.create(sportsman);
 	}
 }
