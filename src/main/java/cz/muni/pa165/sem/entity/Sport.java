@@ -16,7 +16,7 @@ public class Sport {
     private Long id;
 
     @NotNull
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @NotNull
@@ -51,8 +51,8 @@ public class Sport {
     public int hashCode() {
         final int prime = 53;
         int hashCode = 7;
-        hashCode = 43 * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
-        hashCode = 43 * hashCode + ((this.description == null) ? 0 : this.description.hashCode());
+        hashCode = prime * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
+        hashCode = prime * hashCode + ((this.description == null) ? 0 : this.description.hashCode());
         return hashCode;
     }
 
