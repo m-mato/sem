@@ -12,10 +12,13 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * @author Kamil Triscik
@@ -24,6 +27,10 @@ import java.util.Calendar;
 @ContextConfiguration(locations = "classpath:dao-context.xml")
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class EventDAOTest extends AbstractTestNGSpringContextTests {
+
+    private List<Sportsman> sportsmans;
+    private List<Sport> sports;
+    private final int eventsCount = 2;
 
     @Autowired
     private EventDAO eventDAO;
@@ -34,51 +41,34 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private SportDAO sportDAO;
 
-    @BeforeClass
-    public void setUp() throws Exception {   }
+    // TODO: 28-Oct-16 try mocking??? 
+    
+    @BeforeMethod
+    public void setUp() throws Exception {
+        sportsmans = this.generateSportmans(7);
+        sports = this.generateSports(2);
 
-//    @After
-//    public void tearDown() throws Exception {
-//
-//    }
+        eventDAO.create(getEvent("existingEvent",sportsmans.get(0)));
+        for (int i = 0; i < eventsCount; i++) {
+            eventDAO.create(getEvent("event" + (i+1),sportsmans.get(1)));
+        }
+        eventDAO.create(getEvent("event"+(eventsCount+1),sportsmans.get(0), sports.get(1)));
+    }
+
+    @AfterClass
+    public void tearDown() throws Exception {
+        List<Event> events = eventDAO.findAll();
+        events.forEach(eventDAO::delete);
+    }
 
     @Test
-    public void createValidData() throws Exception {
-        Sportsman sportsman = new Sportsman();
-        sportsman.setName("Sportsman1");
-        sportsman.setSurname("Sportsman1");
-        sportsman.setBirthDate(Calendar.getInstance());
-        sportsman.setEmail("sportsman1@email.com");
-        sportsman.setPassword("pass1");
-        sportsmanDAO.create(sportsman);
-
-        Sport sport = new Sport();
-        sport.setName("Marathon");
-        sport.setDescription("Marathon description");
-        sportDAO.create(sport);
-
-
-        Event event = new Event();
-        String eventName = "newEvent";
-        event.setName(eventName);
-        String description = "New event description";
-        event.setDescription(description);
-        Calendar date = Calendar.getInstance();
-        event.setDate(date);
-        event.setAdmin(sportsman);
-        Integer capacity = 5;
-        event.setCapacity(capacity);
-        event.setSport(sport);
-        String address = "Botanicka 35";
-        event.setAddress(address);
-        String city = "Brno";
-        event.setCity(city);
+    public void createValidEvent() throws Exception {
+        Event event = getEvent("newEvent", sportsmans.get(0));
         eventDAO.create(event);
 
         Event eventDB = eventDAO.findById(event.getId());
         Assert.assertNotNull(eventDB);
-        Assert.assertEquals(eventDB.getName(), eventName);
-        Assert.assertEquals(eventDB.getDescription(), description);
+        Assert.assertEquals(eventDB, event);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -92,55 +82,169 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         eventDAO.create(event);
     }
 
+    @Test
+    public void findExistingEventById() throws Exception {
+        String eventName = "existingEvent";
+        Event eventByName = eventDAO.findByName(eventName);
 
+        Event eventByID = eventDAO.findById(eventByName.getId());
 
-//    @Test
-//    public void findById() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findByName() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findByDate() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findBySport() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findByCity() throws Exception {
-//
-//    }
-//
-//    public void findByAdmin() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findByParticipant() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void findAll() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void update() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void delete() throws Exception {
-//
-//    }
+        Assert.assertNotNull(eventByID);
+        Assert.assertEquals(eventByID.getId(), eventByName.getId());
+        Assert.assertEquals(eventByID.getName(), eventByName.getName());
+
+    }
+
+    @Test
+    public void findNonExistingEventById() throws Exception {
+        Long id = Long.MAX_VALUE;
+        Assert.assertNull(eventDAO.findById(id));
+    }
+
+    @Test
+    public void findExistingEventByName() throws Exception {
+        String name = "existingEvent";
+        Event eventByName = eventDAO.findByName(name);
+        Assert.assertNotNull(eventByName);
+        Assert.assertEquals(name, eventByName.getName());
+    }
+
+    @Test
+    public void findNonExistingEventByName() throws Exception {
+        String name = "nonexisting";
+        Assert.assertNull(eventDAO.findByName(name));
+    }
+
+    @Test
+    public void findByDate() throws Exception {
+        Assert.fail("not implemented");
+    }
+
+    @Test
+    public void findBySport() throws Exception {
+        Integer events = eventDAO.findAll().size();
+        List<Event> fromDB = eventDAO.findBySport(sports.get(0));
+        Assert.assertNotNull(fromDB);
+        Assert.assertEquals(fromDB.size(), events-1);
+
+        fromDB = eventDAO.findBySport(sports.get(1));
+        Assert.assertNotNull(fromDB);
+        Assert.assertEquals(fromDB.size(), 1);
+        Assert.assertEquals(fromDB.get(0).getName(), "event"+(eventsCount+1));
+    }
+
+    @Test
+    public void findByCity() throws Exception {
+        List<Event> events = eventDAO.findAll();
+        Event ev = events.get(0);
+        String city = "city2";
+        ev.setCity(city);
+        eventDAO.update(ev);
+
+        List<Event> eventsCity = eventDAO.findByCity("city");
+        Assert.assertNotNull(eventsCity);
+        Assert.assertEquals(eventsCity.size(), events.size()-1);
+
+        eventsCity = eventDAO.findByCity(city);
+        Assert.assertNotNull(eventsCity);
+        Assert.assertEquals(eventsCity.size(), 1);
+    }
+
+    @Test
+    public void findByAdmin() throws Exception {
+        List<Event> fromDB = eventDAO.findByAdmin(sportsmans.get(1));
+        Assert.assertNotNull(fromDB);
+        Assert.assertEquals(fromDB.size(), eventsCount);//size = 2{event1, event2}
+        for (int i = 0; i < fromDB.size(); i++) {
+            Assert.assertEquals(fromDB.get(i).getName(), "event"+ (i+1));
+        }
+    }
+
+    @Test
+    public void findByParticipant() throws Exception {
+        Assert.fail("not implemented");
+    }
+
+    @Test
+    public void findAll() throws Exception {
+        List<Event> fromDB = eventDAO.findAll();
+        Assert.assertNotNull(fromDB);
+        Assert.assertEquals(fromDB.size(), 4);
+    }
+
+    @Test
+    public void update() throws Exception {
+        Event event = getEvent("updateEvent", sportsmans.get(0));
+        eventDAO.create(event);
+        Long id = event.getId();
+
+        String description = event.getDescription() + "testing desc";
+        event.setDescription(description);
+
+        eventDAO.update(event);
+
+        event = eventDAO.findById(id);
+        Assert.assertEquals(event.getDescription(), description);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        Event event = getEvent("deleteEvent", sportsmans.get(0));
+        eventDAO.create(event);
+        Long id = event.getId();
+
+        eventDAO.delete(event);
+        Assert.assertNull(eventDAO.findById(id));
+    }
+
+    public Event getEvent(String name, Sportsman sportsman) {
+        return getEvent(name, sportsman, sports.get(0));
+    }
+
+    public Event getEvent(String name, Sportsman sportsman, Sport sport) {
+        Event event = new Event();
+        String eventName = name;
+        event.setName(eventName);
+        String description = "New event: name";
+        event.setDescription(description);
+        Calendar date = Calendar.getInstance();
+        event.setDate(date);
+        event.setAdmin(sportsman);
+        Integer capacity = 5;
+        event.setCapacity(capacity);
+        event.setSport(sport);
+        String address = "address";
+        event.setAddress(address);
+        String city = "city";
+        event.setCity(city);
+        return event;
+    }
+
+    public List<Sportsman> generateSportmans(int count) {
+        List<Sportsman> sportsmanList = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            Sportsman sportsman = new Sportsman();
+            sportsman.setName("Sportsman" + i);
+            sportsman.setSurname("Sportsman" + i);
+            sportsman.setBirthDate(Calendar.getInstance());
+            sportsman.setEmail("sportsman1@email.com");
+            sportsman.setPassword("pass1");
+            sportsmanDAO.create(sportsman);
+            sportsmanList.add(sportsman);
+        }
+        return sportsmanList;
+    }
+
+    public List<Sport> generateSports(int count) {
+        List<Sport> sportsList = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            Sport sport = new Sport();
+            sport.setName("Sport"+i);
+            sport.setDescription("Sport" + i + " description");
+            sportDAO.create(sport);
+            sportsList.add(sport);
+        }
+        return sportsList;
+    }
 
 }
