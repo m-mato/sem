@@ -7,13 +7,22 @@ package cz.muni.pa165.sem.entity;
 
 /**
  *
- * @author xaksamit
+ * @author Veronika Aksamitova
  */
 public enum PerformanceUnits {
-    MINUTE,
+    //time
+    MILLISECOND,
     SECOND,
-    KILOMETER,
+
+    //length
+    MILLIMETER,
     METER,
-    CENTIMETER,
-    MILLIMETER
+
+    //score
+    POINT,
+    ROUND,
+
+    //weight
+    GRAM,
+    KILOGRAM
 }

@@ -48,7 +48,12 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         sportsmans = this.generateSportmans(7);
         sports = this.generateSports(2);
 
-        eventDAO.create(getEvent("existingEvent",sportsmans.get(0)));
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        Event ev = getEvent("existingEvent",sportsmans.get(0));
+        ev.setDate(cal);
+        eventDAO.create(ev);
+
         for (int i = 0; i < eventsCount; i++) {
             eventDAO.create(getEvent("event" + (i+1),sportsmans.get(1)));
         }
@@ -117,7 +122,25 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByDate() throws Exception {
-        Assert.fail("not implemented");
+        /* All events have as event date set today.
+           Only one event has as event date set yesterday.
+         */
+
+        Assert.fail("Not implemented yet!");
+
+
+//        List<Event> events = eventDAO.findAll();
+//
+//        Calendar cal = Calendar.getInstance();
+//
+//        List<Event> eventsByDate = eventDAO.findByDate(cal);
+//        Assert.assertNotNull(eventsByDate);
+//        Assert.assertEquals(eventsByDate.size(), events.size()-1);
+//
+//        cal.add(Calendar.DAY_OF_MONTH, -1);
+//        eventsByDate = eventDAO.findByDate(cal);
+//        Assert.assertNotNull(eventsByDate);
+//        Assert.assertEquals(eventsByDate.size(), 1);
     }
 
     @Test
