@@ -115,7 +115,7 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event participant is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE participant = :participant");
+            Query query = em.createQuery("SELECT e FROM Event e JOIN e.participants p WHERE p = :participant");
             query.setParameter("participant", participant);
             return query.getResultList();
         }
