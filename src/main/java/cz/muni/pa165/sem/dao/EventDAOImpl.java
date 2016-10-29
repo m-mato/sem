@@ -27,7 +27,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public Event findById(Long id) {
+    public Event findById(Long id) throws IllegalArgumentException {
         if (id == null) {
             throw new IllegalArgumentException("Event ID is null");
         }
@@ -35,7 +35,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByName(String name) {
+    public List<Event> findByName(String name) throws IllegalArgumentException {
         if (name == null) {
             throw new IllegalArgumentException("Event name is null");
         }
@@ -50,7 +50,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByDate(Calendar date) {
+    public List<Event> findByDate(Calendar date) throws IllegalArgumentException {
         if (date == null) {
             throw new IllegalArgumentException("Event date is null");
         }
@@ -65,7 +65,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findBySport(Sport sport) {
+    public List<Event> findBySport(Sport sport) throws IllegalArgumentException {
         if (sport == null) {
             throw new IllegalArgumentException("Event sport is null");
         }
@@ -80,7 +80,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByCity(String city) {
+    public List<Event> findByCity(String city) throws IllegalArgumentException {
         if (city == null) {
             throw new IllegalArgumentException("Event city is null");
         }
@@ -95,7 +95,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByAdmin(Sportsman admin) {
+    public List<Event> findByAdmin(Sportsman admin) throws IllegalArgumentException {
         if (admin == null) {
             throw new IllegalArgumentException("Event admin is null");
         }
@@ -110,7 +110,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByParticipant(Sportsman participant) {
+    public List<Event> findByParticipant(Sportsman participant) throws IllegalArgumentException {
         if (participant == null) {
             throw new IllegalArgumentException("Event participant is null");
         }
