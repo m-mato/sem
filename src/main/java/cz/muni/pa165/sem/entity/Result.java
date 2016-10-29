@@ -7,7 +7,6 @@ package cz.muni.pa165.sem.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
