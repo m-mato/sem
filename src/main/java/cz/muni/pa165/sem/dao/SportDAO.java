@@ -2,6 +2,8 @@ package cz.muni.pa165.sem.dao;
 
 import cz.muni.pa165.sem.entity.Sport;
 
+import java.util.List;
+
 /**
  * The interface SportDao is used to provide CRUD operations for Sport entity.
  *
@@ -15,6 +17,13 @@ public interface SportDAO {
      * @param sport the sport object to be put into DB
      */
     void create(Sport sport);
+
+    /**
+     * This method finds all sports.
+     *
+     * @return List of found sport objects.
+     */
+    List<Sport> findAll();
 
     /**
      * This method find sport object with specific id.

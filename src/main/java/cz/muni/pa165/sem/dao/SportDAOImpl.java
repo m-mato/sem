@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kamil Triscik
@@ -20,6 +23,17 @@ public class SportDAOImpl implements SportDAO {
     @Override
     public void create(Sport sport) {
         em.persist(sport);
+    }
+
+    @Override
+    public List<Sport> findAll() {
+        try {
+            Query query = em.createQuery("SELECT s FROM Sport s");
+            return query.getResultList();
+        }
+        catch(NoResultException e) {
+            return new ArrayList<>();
+        }
     }
 
     @Override
