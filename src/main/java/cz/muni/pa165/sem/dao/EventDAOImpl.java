@@ -55,8 +55,17 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event date is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE date = :date");
-            query.setParameter("date", date);
+            Calendar startOfDay = (Calendar) date.clone();
+            startOfDay.set(Calendar.HOUR_OF_DAY, 0);
+            startOfDay.set(Calendar.MINUTE, 0);
+            startOfDay.set(Calendar.SECOND, 0);
+            startOfDay.set(Calendar.MILLISECOND, 0);
+            Calendar endOfDay = (Calendar) startOfDay.clone();
+            endOfDay.add(Calendar.DAY_OF_MONTH, 1);
+            
+            Query query = em.createQuery("SELECT e FROM Event e WHERE date >= :start AND date < :end");
+            query.setParameter("start", startOfDay);
+            query.setParameter("end", endOfDay);
             return query.getResultList();
         }
         catch(NoResultException e) {
