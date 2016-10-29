@@ -35,17 +35,17 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public Event findByName(String name) {
+    public List<Event> findByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Event name is null");
         }
         try {
             Query query = em.createQuery("SELECT e FROM Event e WHERE name = :name");
             query.setParameter("name", name);
-            return (Event) query.getSingleResult();
+            return query.getResultList();
         }
         catch(NoResultException e) {
-            return null;
+            return new ArrayList<>();
         }
     }
 

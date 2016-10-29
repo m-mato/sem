@@ -15,7 +15,7 @@ public interface EventDAO {
 
     Event findById(Long id);
     
-    Event findByName(String name);
+    List<Event> findByName(String name);
     
     List<Event> findByDate(Calendar date);
     

@@ -90,7 +90,8 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findExistingEventById() throws Exception {
         String eventName = "existingEvent";
-        Event eventByName = eventDAO.findByName(eventName);
+        List<Event> eventsByName = eventDAO.findByName(eventName);
+        Event eventByName = eventsByName.get(0);
 
         Event eventByID = eventDAO.findById(eventByName.getId());
 
@@ -109,7 +110,8 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findExistingEventByName() throws Exception {
         String name = "existingEvent";
-        Event eventByName = eventDAO.findByName(name);
+        List<Event> eventsByName = eventDAO.findByName(name);
+        Event eventByName = eventsByName.get(0);
         Assert.assertNotNull(eventByName);
         Assert.assertEquals(name, eventByName.getName());
     }
