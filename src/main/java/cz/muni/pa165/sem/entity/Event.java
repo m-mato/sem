@@ -143,6 +143,14 @@ public class Event {
     public void setParticipants(Set<Sportsman> participants) {
         this.participants = participants;
     }
+    
+    public void addParticipant(Sportsman participant) {
+        this.participants.add(participant);
+    }
+    
+    public void removeParticipant(Sportsman participant) {
+        this.participants.remove(participant);
+    }
 
     @Override
     public int hashCode() {
