@@ -16,6 +16,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -52,12 +53,18 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         cal.add(Calendar.DAY_OF_MONTH, -1);
         Event ev = getEvent("existingEvent",sportsmans.get(0));
         ev.setDate(cal);
+        ev.addParticipant(sportsmans.get(0));
+        ev.addParticipant(sportsmans.get(1));
+        ev.addParticipant(sportsmans.get(2));
         eventDAO.create(ev);
 
         for (int i = 0; i < eventsCount; i++) {
             eventDAO.create(getEvent("event" + (i+1),sportsmans.get(1)));
         }
-        eventDAO.create(getEvent("event"+(eventsCount+1),sportsmans.get(0), sports.get(1)));
+        ev = getEvent("event"+(eventsCount+1),sportsmans.get(0), sports.get(1));
+        ev.addParticipant(sportsmans.get(2));
+        ev.addParticipant(sportsmans.get(3));
+        eventDAO.create(ev);
     }
 
     @AfterClass
@@ -119,7 +126,9 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findNonExistingEventByName() throws Exception {
         String name = "nonexisting";
-        Assert.assertNull(eventDAO.findByName(name));
+        List<Event> eventsByName = eventDAO.findByName(name);
+        Assert.assertNotNull(eventsByName);
+        Assert.assertEquals(eventsByName.size(), 0);
     }
 
     @Test
@@ -187,7 +196,25 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByParticipant() throws Exception {
-        Assert.fail("not implemented");
+        List<Event> eventsByPart = eventDAO.findByParticipant(sportsmans.get(0));
+        Assert.assertNotNull(eventsByPart);
+        Assert.assertEquals(eventsByPart.size(), 1);
+
+        eventsByPart = eventDAO.findByParticipant(sportsmans.get(1));
+        Assert.assertNotNull(eventsByPart);
+        Assert.assertEquals(eventsByPart.size(), 1);
+
+        eventsByPart = eventDAO.findByParticipant(sportsmans.get(2));
+        Assert.assertNotNull(eventsByPart);
+        Assert.assertEquals(eventsByPart.size(), 2);
+
+        eventsByPart = eventDAO.findByParticipant(sportsmans.get(3));
+        Assert.assertNotNull(eventsByPart);
+        Assert.assertEquals(eventsByPart.size(), 1);
+
+        eventsByPart = eventDAO.findByParticipant(sportsmans.get(4));
+        Assert.assertNotNull(eventsByPart);
+        Assert.assertEquals(eventsByPart.size(), 0);
     }
 
     @Test
