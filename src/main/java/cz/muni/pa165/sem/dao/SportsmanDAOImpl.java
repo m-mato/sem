@@ -29,20 +29,22 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 	}
 
 	@Override
-	public Sportsman findByName(String name) {
+	public List<Sportsman> findByName(String name) {
+            if(name == null) throw new IllegalArgumentException("name is null");
 		try {
 			return entityManager.createQuery("select s from Sportsman s where name = :name",
-					Sportsman.class).setParameter("name", name).getSingleResult();
+					Sportsman.class).setParameter("name", name).getResultList();
 		} catch (NoResultException nrf) {
 			return null;
 		}
 	}
 
 	@Override
-	public Sportsman findBySurname(String surname) {
+	public List<Sportsman> findBySurname(String surname) {
+            if(surname == null) throw new IllegalArgumentException("surename is null");
 		try {
 			return entityManager.createQuery("select s from Sportsman s where surname = :surname",
-					Sportsman.class).setParameter("surname", surname).getSingleResult();
+					Sportsman.class).setParameter("surname", surname).getResultList();
 		} catch (NoResultException nrf) {
 			return null;
 		}

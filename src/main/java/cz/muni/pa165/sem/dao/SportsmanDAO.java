@@ -13,9 +13,9 @@ public interface SportsmanDAO {
 
 	Sportsman findById(Long id);
 
-	Sportsman findByName(String name);
+	List<Sportsman> findByName(String name);
 
-	Sportsman findBySurname(String surname);
+	List<Sportsman> findBySurname(String surname);
 
 	void update(Sportsman sportsman);
 
