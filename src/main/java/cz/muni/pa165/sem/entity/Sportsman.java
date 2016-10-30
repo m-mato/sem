@@ -40,7 +40,7 @@ public class Sportsman {
 	private String password;
 
 	@ManyToMany(mappedBy = "participants")
-	private Set<Event> events = new HashSet<Event>();
+	private Set<Event> events = new HashSet<>();
 
 	public Long getId() {
 		return id;
