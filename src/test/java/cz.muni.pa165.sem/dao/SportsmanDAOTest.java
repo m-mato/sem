@@ -111,24 +111,24 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void testFindBySurenameNotFound(){
+    public void testFindBySurnameNotFound(){
         List<Sportsman> result = sportsmanDAO.findBySurname("Jano");
         assertTrue(result.size() == 0);
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testFindBySurenameNull(){
+    public void testFindBySurnameNull(){
         List<Sportsman> result = sportsmanDAO.findBySurname(null);
     }
     
     @Test
-    public void testFindBySurename(){
-        String expectedSurename = "Nejaký";
+    public void testFindBySurname(){
+        String expectedSurname = "Nejaký";
         Sportsman expResult = generateSportsman("Jano");
-        expResult.setSurname(expectedSurename);
+        expResult.setSurname(expectedSurname);
         sportsmanDAO.create(expResult);
         
-        List<Sportsman> result = sportsmanDAO.findBySurname(expectedSurename);
+        List<Sportsman> result = sportsmanDAO.findBySurname(expectedSurname);
         assertNotNull(result);
         assertEquals(result.get(0), expResult);
     }

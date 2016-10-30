@@ -41,7 +41,7 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 
 	@Override
 	public List<Sportsman> findBySurname(String surname) {
-            if(surname == null) throw new IllegalArgumentException("surename is null");
+            if(surname == null) throw new IllegalArgumentException("surname is null");
 		try {
 			return entityManager.createQuery("select s from Sportsman s where surname = :surname",
 					Sportsman.class).setParameter("surname", surname).getResultList();
