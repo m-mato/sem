@@ -7,13 +7,11 @@ package cz.muni.pa165.sem.dao;
 
 import cz.muni.pa165.sem.entity.*;
 import java.util.*;
-import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.*;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.Assert;
 import static org.testng.Assert.*;
 import org.testng.annotations.*;
 /**
@@ -23,22 +21,12 @@ import org.testng.annotations.*;
 @Transactional
 @ContextConfiguration(locations = "classpath:dao-context.xml")
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
-    
-    private List<Event> events;
-    
+public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {    
     @Autowired
     private SportsmanDAO sportsmanDAO;
     
     @Autowired
-    private EventDAO eventDAO;
-    
-    @Autowired
-    private ResultDAO resultDAO;
-    
-     @Autowired
-    private SportDAO sportDAO;
-    
+    private EventDAO eventDAO;    
     
     @BeforeMethod
     public void setUp(){
@@ -75,7 +63,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByIdNull(){
-        Sportsman sportsman1 = sportsmanDAO.findById(null);
+        sportsmanDAO.findById(null);
     }
     
     @Test
@@ -92,12 +80,12 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindByNameNotFound() {
         List<Sportsman> sportsmans = sportsmanDAO.findByName("Jarka");
-        assertTrue(sportsmans.size() == 0);
+        assertTrue(sportsmans.isEmpty());
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNameNull(){
-        List<Sportsman> sportsman1 = sportsmanDAO.findByName(null);
+        sportsmanDAO.findByName(null);
     }
     
     @Test
@@ -113,12 +101,12 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindBySurnameNotFound(){
         List<Sportsman> result = sportsmanDAO.findBySurname("Jano");
-        assertTrue(result.size() == 0);
+        assertTrue(result.isEmpty());
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindBySurnameNull(){
-        List<Sportsman> result = sportsmanDAO.findBySurname(null);
+        sportsmanDAO.findBySurname(null);
     }
     
     @Test
