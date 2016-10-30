@@ -23,10 +23,7 @@ import org.testng.annotations.*;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {    
     @Autowired
-    private SportsmanDAO sportsmanDAO;
-    
-    @Autowired
-    private EventDAO eventDAO;    
+    private SportsmanDAO sportsmanDAO;  
     
     @BeforeMethod
     public void setUp(){
@@ -34,8 +31,6 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     
     @AfterClass
     public void tearDown() {
-            List<Event> events = eventDAO.findAll();
-            events.forEach(eventDAO::delete);
             List<Sportsman> sportsmans = sportsmanDAO.getAll();
             sportsmans.forEach(sportsmanDAO::delete);
     }
