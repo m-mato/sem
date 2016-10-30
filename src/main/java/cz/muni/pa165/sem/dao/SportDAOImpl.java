@@ -43,6 +43,9 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public Sport findByName(String name) {
+        if(name == null) {
+            throw new IllegalArgumentException("Sport name to find results for is null!");
+        }
         try {
             return em.createQuery("select s from Sport s where name = :name",
                     Sport.class).setParameter("name", name).getSingleResult();
