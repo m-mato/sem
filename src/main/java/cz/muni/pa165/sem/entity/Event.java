@@ -164,7 +164,6 @@ public class Event {
         hash = 41 * hash + Objects.hashCode(this.city);
         hash = 41 * hash + Objects.hashCode(this.address);
         hash = 41 * hash + Objects.hashCode(this.admin);
-        hash = 41 * hash + Objects.hashCode(this.participants);
         return hash;
     }
 
@@ -205,9 +204,6 @@ public class Event {
             return false;
         }
         if (!Objects.equals(this.admin, other.admin)) {
-            return false;
-        }
-        if (!Objects.equals(this.participants, other.participants)) {
             return false;
         }
         return true;
