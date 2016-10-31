@@ -5,6 +5,8 @@
  */
 package cz.muni.pa165.sem.entity;
 
+import cz.muni.pa165.sem.utils.PerformanceUnits;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

@@ -31,7 +31,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     
     @AfterClass
     public void tearDown() {
-            List<Sportsman> sportsmans = sportsmanDAO.getAll();
+            List<Sportsman> sportsmans = sportsmanDAO.findAll();
             sportsmans.forEach(sportsmanDAO::delete);
     }
     
@@ -143,7 +143,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testGetAll(){
         generateSportsmans(5);
-        List<Sportsman> result = sportsmanDAO.getAll();
+        List<Sportsman> result = sportsmanDAO.findAll();
         assertTrue(result.size() == 5);
     }
     

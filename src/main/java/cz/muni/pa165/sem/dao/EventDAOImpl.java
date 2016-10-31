@@ -3,6 +3,7 @@ package cz.muni.pa165.sem.dao;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,17 +19,20 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class EventDAOImpl implements EventDAO {
-    
+
     @PersistenceContext
     private EntityManager em;
 
     @Override
     public void create(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event is null");
+        }
         em.persist(event);
     }
 
     @Override
-    public Event findById(Long id) throws IllegalArgumentException {
+    public Event findById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Event ID is null");
         }
@@ -35,7 +40,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> findByName(String name) throws IllegalArgumentException {
+    public List<Event> findByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Event name is null");
         }
@@ -43,14 +48,13 @@ public class EventDAOImpl implements EventDAO {
             Query query = em.createQuery("SELECT e FROM Event e WHERE name = :name");
             query.setParameter("name", name);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public List<Event> findByDate(Calendar date) throws IllegalArgumentException {
+    public List<Event> findByDate(Calendar date) {
         if (date == null) {
             throw new IllegalArgumentException("Event date is null");
         }
@@ -62,19 +66,18 @@ public class EventDAOImpl implements EventDAO {
             startOfDay.set(Calendar.MILLISECOND, 0);
             Calendar endOfDay = (Calendar) startOfDay.clone();
             endOfDay.add(Calendar.DAY_OF_MONTH, 1);
-            
+
             Query query = em.createQuery("SELECT e FROM Event e WHERE date >= :start AND date < :end");
             query.setParameter("start", startOfDay);
             query.setParameter("end", endOfDay);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public List<Event> findBySport(Sport sport) throws IllegalArgumentException {
+    public List<Event> findBySport(Sport sport) {
         if (sport == null) {
             throw new IllegalArgumentException("Event sport is null");
         }
@@ -82,14 +85,13 @@ public class EventDAOImpl implements EventDAO {
             Query query = em.createQuery("SELECT e FROM Event e WHERE sport = :sport");
             query.setParameter("sport", sport);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public List<Event> findByCity(String city) throws IllegalArgumentException {
+    public List<Event> findByCity(String city) {
         if (city == null) {
             throw new IllegalArgumentException("Event city is null");
         }
@@ -97,14 +99,13 @@ public class EventDAOImpl implements EventDAO {
             Query query = em.createQuery("SELECT e FROM Event e WHERE city = :city");
             query.setParameter("city", city);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public List<Event> findByAdmin(Sportsman admin) throws IllegalArgumentException {
+    public List<Event> findByAdmin(Sportsman admin) {
         if (admin == null) {
             throw new IllegalArgumentException("Event admin is null");
         }
@@ -112,14 +113,13 @@ public class EventDAOImpl implements EventDAO {
             Query query = em.createQuery("SELECT e FROM Event e WHERE admin = :admin");
             query.setParameter("admin", admin);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
-    public List<Event> findByParticipant(Sportsman participant) throws IllegalArgumentException {
+    public List<Event> findByParticipant(Sportsman participant) {
         if (participant == null) {
             throw new IllegalArgumentException("Event participant is null");
         }
@@ -127,8 +127,7 @@ public class EventDAOImpl implements EventDAO {
             Query query = em.createQuery("SELECT e FROM Event e JOIN e.participants p WHERE p = :participant");
             query.setParameter("participant", participant);
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
@@ -138,20 +137,25 @@ public class EventDAOImpl implements EventDAO {
         try {
             Query query = em.createQuery("SELECT e FROM Event e");
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
     public void update(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event is null");
+        }
         em.merge(event);
     }
 
     @Override
     public void delete(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event is null");
+        }
         em.remove(event);
     }
-    
+
 }

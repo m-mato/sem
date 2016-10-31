@@ -1,7 +1,7 @@
 package cz.muni.pa165.sem.dao;
 
 import cz.muni.pa165.sem.entity.Event;
-import cz.muni.pa165.sem.entity.PerformanceUnits;
+import cz.muni.pa165.sem.utils.PerformanceUnits;
 import cz.muni.pa165.sem.entity.Result;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
@@ -69,7 +69,7 @@ public class ResultDAOTest extends AbstractTestNGSpringContextTests {
         events.forEach(eventDAO::delete);
         List<Sport> sports = sportDAO.findAll();
         sports.forEach(sportDAO::delete);
-        List<Sportsman> sportsmans = sportsmanDAO.getAll();
+        List<Sportsman> sportsmans = sportsmanDAO.findAll();
         sportsmans.forEach(sportsmanDAO::delete);
     }
 
@@ -330,10 +330,10 @@ public class ResultDAOTest extends AbstractTestNGSpringContextTests {
     }
 
     /**
-     * Test of getAll method, of class ResultDAO.
+     * Test of findAll method, of class ResultDAO.
      */
     @Test
-    public void testGetAll() {
+    public void testFindAll() {
         List<Result> results = resultDAO.getAll();
         assertNotNull(results);
     }

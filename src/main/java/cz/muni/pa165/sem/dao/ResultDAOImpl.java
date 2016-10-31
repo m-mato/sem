@@ -3,6 +3,7 @@ package cz.muni.pa165.sem.dao;
 import org.springframework.stereotype.Repository;
 
 import cz.muni.pa165.sem.entity.*;
+
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,17 +12,19 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
- *
  * @author xaksamit
  */
 @Repository
-public class ResultDAOImpl implements ResultDAO{
+public class ResultDAOImpl implements ResultDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     @Override
     public void create(Result result) {
+        if (result == null) {
+            throw new IllegalArgumentException("Result is null");
+        }
         entityManager.persist(result);
     }
 
@@ -38,13 +41,12 @@ public class ResultDAOImpl implements ResultDAO{
         if (sportsman == null) {
             throw new IllegalArgumentException("Sportsman to find results for is null");
         }
-        
-        try{
+
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE sportsman = :sportsman");
             quer.setParameter("sportsman", sportsman);
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
@@ -54,13 +56,12 @@ public class ResultDAOImpl implements ResultDAO{
         if (event == null) {
             throw new IllegalArgumentException("Event to find results for is null");
         }
-        
-        try{
+
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE r.event = :event");
             quer.setParameter("event", event);
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
@@ -70,15 +71,13 @@ public class ResultDAOImpl implements ResultDAO{
         if (sport == null) {
             throw new IllegalArgumentException("Sport to find results for is null");
         }
-        try{
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE r.event.sport = :sport");
             quer.setParameter("sport", sport);
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
-        
     }
 
     @Override
@@ -86,13 +85,12 @@ public class ResultDAOImpl implements ResultDAO{
         if (performance == null) {
             throw new IllegalArgumentException("Performance you want to find in results is null");
         }
-        
-        try{
+
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE r.performance = :performance");
             quer.setParameter("performance", performance);
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
@@ -102,12 +100,11 @@ public class ResultDAOImpl implements ResultDAO{
         if (position == null) {
             throw new IllegalArgumentException("Position you want to find in results is null");
         }
-        try{
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE r.position = :position");
             quer.setParameter("position", position);
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
@@ -117,30 +114,28 @@ public class ResultDAOImpl implements ResultDAO{
         if (note == null) {
             throw new IllegalArgumentException("Note you want to find in results is null");
         }
-        try{
+        try {
             Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE upper(r.note) LIKE :note");
-            quer.setParameter("note", "%" + note.toUpperCase() + "%" );
+            quer.setParameter("note", "%" + note.toUpperCase() + "%");
             return quer.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
 
     @Override
     public List<Result> getAll() {
-        try{
+        try {
             Query query = entityManager.createQuery("SELECT r FROM Result r");
             return query.getResultList();
-        }
-        catch(NoResultException excp){
+        } catch (NoResultException excp) {
             return new ArrayList<>();
         }
     }
 
     @Override
     public void update(Result result) {
-        if(result == null){
+        if (result == null) {
             throw new IllegalArgumentException("Result you want to update is null");
         }
         entityManager.merge(result);
@@ -148,10 +143,10 @@ public class ResultDAOImpl implements ResultDAO{
 
     @Override
     public void delete(Result result) {
-        if(result == null){
+        if (result == null) {
             throw new IllegalArgumentException("Result you want to delete is null");
         }
         entityManager.remove(result);
     }
-    
+
 }

@@ -22,7 +22,7 @@ public class ExampleService {
 	public List<String> getAllNames() {
 
 		List<String> result = new ArrayList<>();
-		sportsmanDAO.getAll().forEach(item -> result.add(item.getName()));
+		sportsmanDAO.findAll().forEach(item -> result.add(item.getName()));
 		return result;
 	}
 

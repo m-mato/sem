@@ -15,6 +15,7 @@ public interface SportDAO {
      * Method create new sport.
      *
      * @param sport the sport object to be put into DB
+     * @throws IllegalArgumentException When sport is {@code null}.
      */
     void create(Sport sport);
 
@@ -30,6 +31,7 @@ public interface SportDAO {
      *
      * @param id the id value of object we want to find.
      * @return null if object does not exist in DB otherwise return sport object.
+     * @throws IllegalArgumentException When sport id is {@code null}.
      */
     Sport findById(Long id);
 
@@ -38,6 +40,7 @@ public interface SportDAO {
      *
      * @param name the name value of object we want to find.
      * @return null if object does not exist in DB otherwise return sport object.
+     * @throws IllegalArgumentException When name is {@code null}.
      */
     Sport findByName(String name);
 
@@ -45,6 +48,7 @@ public interface SportDAO {
      * Method update sport object.
      *
      * @param sport the sport object to be updated in DB
+     * @throws IllegalArgumentException When sport is {@code null}.
      */
     void update(Sport sport);
 
@@ -52,6 +56,7 @@ public interface SportDAO {
      * Method delete sport object.
      *
      * @param sport the sport object to be dropped drom DB
+     * @throws IllegalArgumentException When sport is {@code null}.
      */
     void delete(Sport sport);
 

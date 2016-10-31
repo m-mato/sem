@@ -22,6 +22,9 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public void create(Sport sport) {
+        if (sport == null) {
+            throw new IllegalArgumentException("Sport is null");
+        }
         em.persist(sport);
     }
 
@@ -30,20 +33,22 @@ public class SportDAOImpl implements SportDAO {
         try {
             Query query = em.createQuery("SELECT s FROM Sport s");
             return query.getResultList();
-        }
-        catch(NoResultException e) {
+        } catch (NoResultException e) {
             return new ArrayList<>();
         }
     }
 
     @Override
     public Sport findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Sport ID is null");
+        }
         return em.find(Sport.class, id);
     }
 
     @Override
     public Sport findByName(String name) {
-        if(name == null) {
+        if (name == null) {
             throw new IllegalArgumentException("Sport name to find results for is null!");
         }
         try {
@@ -56,11 +61,17 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public void update(Sport sport) {
+        if (sport == null) {
+            throw new IllegalArgumentException("Sport is null");
+        }
         em.merge(sport);
     }
 
     @Override
     public void delete(Sport sport) {
+        if (sport == null) {
+            throw new IllegalArgumentException("Sport is null");
+        }
         em.remove(sport);
     }
 }

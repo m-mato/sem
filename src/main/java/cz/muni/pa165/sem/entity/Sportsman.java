@@ -46,10 +46,6 @@ public class Sportsman {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -89,7 +85,7 @@ public class Sportsman {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Set<Event> getEvents() {
 		return events;
 	}
@@ -97,7 +93,7 @@ public class Sportsman {
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
-        
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -105,25 +101,33 @@ public class Sportsman {
 
 		Sportsman sportsman = (Sportsman) o;
 
-		if (getId() != null ? !getId().equals(sportsman.getId()) : sportsman.getId() != null) return false;
-		if (!getName().equals(sportsman.getName())) return false;
-		if (!getSurname().equals(sportsman.getSurname())) return false;
-		if (!getBirthDate().equals(sportsman.getBirthDate())) return false;
-		if (!getEmail().equals(sportsman.getEmail())) return false;
-		if (!getPassword().equals(sportsman.getPassword())) return false;
-		return getEvents().equals(sportsman.getEvents());
+		if (!getId().equals(sportsman.getId())) {
+			return false;
+		}
+		if (getName() != null ? !getName().equals(sportsman.getName()) : sportsman.getName() != null) {
+			return false;
+		}
+		if (getSurname() != null ? !getSurname().equals(sportsman.getSurname()) : sportsman.getSurname() != null) {
+			return false;
+		}
+		if (getBirthDate() != null ? !getBirthDate().equals(sportsman.getBirthDate()) : sportsman.getBirthDate() != null) {
+			return false;
+		}
+		if (getEmail() != null ? !getEmail().equals(sportsman.getEmail()) : sportsman.getEmail() != null) {
+			return false;
+		}
+		return getPassword() != null ? getPassword().equals(sportsman.getPassword()) : sportsman.getPassword() == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getId() != null ? getId().hashCode() : 0;
-		result = 31 * result + getName().hashCode();
-		result = 31 * result + getSurname().hashCode();
-		result = 31 * result + getBirthDate().hashCode();
-		result = 31 * result + getEmail().hashCode();
-		result = 31 * result + getPassword().hashCode();
-		result = 31 * result + getEvents().hashCode();
+		int result = getId().hashCode();
+		result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+		result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+		result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
+		result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+		result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
 		return result;
 	}
 }

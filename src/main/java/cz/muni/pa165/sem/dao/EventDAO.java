@@ -3,20 +3,22 @@ package cz.muni.pa165.sem.dao;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
+
 import java.util.Calendar;
 import java.util.List;
 
 /**
  * The interface EventDAO is used to provide CRUD operations for Event entity.
- * 
+ *
  * @author Vit Hovezak
  */
 public interface EventDAO {
-    
+
     /**
      * This method creates new event.
      *
      * @param event The event object to be created.
+     * @throws IllegalArgumentException When event is {@code null}.
      */
     void create(Event event);
 
@@ -28,7 +30,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When id is {@code null}.
      */
     Event findById(Long id) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific name.
      *
@@ -37,7 +39,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When name is {@code null}.
      */
     List<Event> findByName(String name) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific date.
      *
@@ -46,7 +48,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When date is {@code null}.
      */
     List<Event> findByDate(Calendar date) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific sport.
      *
@@ -55,7 +57,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When sport is {@code null}.
      */
     List<Event> findBySport(Sport sport) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific city.
      *
@@ -64,7 +66,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When city is {@code null}.
      */
     List<Event> findByCity(String city) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific admin.
      *
@@ -73,7 +75,7 @@ public interface EventDAO {
      * @throws IllegalArgumentException When admin is {@code null}.
      */
     List<Event> findByAdmin(Sportsman admin) throws IllegalArgumentException;
-    
+
     /**
      * This method finds events with specific participant.
      *
@@ -94,6 +96,7 @@ public interface EventDAO {
      * This method updates event.
      *
      * @param event The event object.
+     * @throws IllegalArgumentException When event is {@code null}.
      */
     void update(Event event);
 
@@ -101,7 +104,8 @@ public interface EventDAO {
      * This method deletes event.
      *
      * @param event The event object.
+     * @throws IllegalArgumentException When event is {@code null}.
      */
     void delete(Event event);
-    
+
 }

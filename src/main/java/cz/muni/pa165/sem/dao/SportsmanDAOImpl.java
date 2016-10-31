@@ -20,17 +20,27 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 
 	public void create(Sportsman sportsman) {
 
+		if (sportsman == null) {
+			throw new IllegalArgumentException("Sportsman is null");
+		}
 		entityManager.persist(sportsman);
 	}
 
 	@Override
 	public Sportsman findById(Long id) {
+
+		if (id == null) {
+			throw new IllegalArgumentException("id is null");
+		}
 		return entityManager.find(Sportsman.class, id);
 	}
 
 	@Override
 	public List<Sportsman> findByName(String name) {
-            if(name == null) throw new IllegalArgumentException("name is null");
+
+		if (name == null) {
+			throw new IllegalArgumentException("name is null");
+		}
 		try {
 			return entityManager.createQuery("select s from Sportsman s where name = :name",
 					Sportsman.class).setParameter("name", name).getResultList();
@@ -41,7 +51,10 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 
 	@Override
 	public List<Sportsman> findBySurname(String surname) {
-            if(surname == null) throw new IllegalArgumentException("surname is null");
+
+		if (surname == null) {
+			throw new IllegalArgumentException("surname is null");
+		}
 		try {
 			return entityManager.createQuery("select s from Sportsman s where surname = :surname",
 					Sportsman.class).setParameter("surname", surname).getResultList();
@@ -52,17 +65,25 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 
 	@Override
 	public void update(Sportsman sportsman) {
+
+		if (sportsman == null) {
+			throw new IllegalArgumentException("Sportsman is null");
+		}
 		entityManager.merge(sportsman);
 	}
 
 	@Override
 	public void delete(Sportsman sportsman) {
+
+		if (sportsman == null) {
+			throw new IllegalArgumentException("Sportsman is null");
+		}
 		entityManager.remove(sportsman);
 	}
 
-	public List<Sportsman> getAll() {
+	public List<Sportsman> findAll() {
 
 		Query query = entityManager.createQuery("SELECT s FROM Sportsman s");
-		return  query.getResultList();
+		return query.getResultList();
 	}
 }
