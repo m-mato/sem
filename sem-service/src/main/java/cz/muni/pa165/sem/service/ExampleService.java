@@ -1,7 +1,7 @@
 package cz.muni.pa165.sem.service;
 
-import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.dao.SportsmanDAO;
+import cz.muni.pa165.sem.entity.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
