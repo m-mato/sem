@@ -13,6 +13,7 @@
         <module>sem-persistence</module>
         <module>sem-service</module>
         <module>sem-mvc</module>
+        <module>sem-api</module>
     </modules>
 
     <name>System for Management of Sporting Events</name>
