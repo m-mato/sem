@@ -2,6 +2,7 @@ package cz.muni.pa165.sem.service.facade;
 
 import cz.muni.pa165.sem.dto.EventCreateDTO;
 import cz.muni.pa165.sem.dto.EventDTO;
+import cz.muni.pa165.sem.dto.SportDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.service.EventService;

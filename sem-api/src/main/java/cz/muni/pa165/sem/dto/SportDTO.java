@@ -1,30 +1,20 @@
-package cz.muni.pa165.sem.entity;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+package cz.muni.pa165.sem.dto;
 
 /**
- *
- *
  * @author Kamil Triscik
  */
-@Entity
-public class Sport {
+public class SportDTO {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Column(name = "name", unique = true)
     private String name;
-
-    @NotNull
-    @Column(name = "description")
     private String description;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -46,7 +36,7 @@ public class Sport {
     @Override
     public int hashCode() {
         final int prime = 53;
-        int hashCode = 7;
+        int hashCode = id.hashCode();
         hashCode = prime * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
         hashCode = prime * hashCode + ((this.description == null) ? 0 : this.description.hashCode());
         return hashCode;
@@ -54,33 +44,33 @@ public class Sport {
 
     @Override
     public boolean equals(Object obj) {
-        if ((obj == null) || (!(obj instanceof Sport)))
+        if ((obj == null) || (!(obj instanceof SportDTO)))
             return false;
 
         if (this == obj)
             return true;
 
-        Sport objSport = (Sport) obj;
-        if (name == null) {
-            if (objSport.getName() != null)
+        SportDTO objSportDTO = (SportDTO) obj;
+        if (id == null) {
+            if (objSportDTO.getId() != null)
                 return false;
-        } else if (!name.equals(objSport.getName())) {
+        } else if (!id.equals(objSportDTO.getId())) {
+            return false;
+        }
+        if (name == null) {
+            if (objSportDTO.getName() != null)
+                return false;
+        } else if (!name.equals(objSportDTO.getName())) {
             return false;
         }
 
         if (description == null) {
-            if (objSport.getDescription() != null)
+            if (objSportDTO.getDescription() != null)
                 return false;
-        } else if (!description.equals(objSport.getDescription()))
+        } else if (!description.equals(objSportDTO.getDescription()))
             return false;
 
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "{id: " + id + ", " +
-                "name: " + name + ", " +
-                "description: " + description + " }";
-    }
 }

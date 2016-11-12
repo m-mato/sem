@@ -11,7 +11,7 @@ import java.util.List;
  * @author Matej Majdis
  */
 @Service
-public class SortsmanServiceImpl implements SportsmanService {
+public class SportsmanServiceImpl implements SportsmanService {
 
 	@Autowired
 	SportsmanDAO sportsmanDAO;

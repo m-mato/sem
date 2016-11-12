@@ -1,31 +1,17 @@
-package cz.muni.pa165.sem.entity;
+package cz.muni.pa165.sem.dto;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- *
  * @author Kamil Triscik
  */
-@Entity
-public class Sport {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+public class SportCreateDTO {
 
     @NotNull
-    @Column(name = "name", unique = true)
     private String name;
 
     @NotNull
-    @Column(name = "description")
     private String description;
-
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -54,33 +40,27 @@ public class Sport {
 
     @Override
     public boolean equals(Object obj) {
-        if ((obj == null) || (!(obj instanceof Sport)))
+        if ((obj == null) || (!(obj instanceof SportCreateDTO)))
             return false;
 
         if (this == obj)
             return true;
 
-        Sport objSport = (Sport) obj;
+        SportCreateDTO sportCreateDTO = (SportCreateDTO) obj;
+
         if (name == null) {
-            if (objSport.getName() != null)
+            if (sportCreateDTO.getName() != null)
                 return false;
-        } else if (!name.equals(objSport.getName())) {
+        } else if (!name.equals(sportCreateDTO.getName())) {
             return false;
         }
 
         if (description == null) {
-            if (objSport.getDescription() != null)
+            if (sportCreateDTO.getDescription() != null)
                 return false;
-        } else if (!description.equals(objSport.getDescription()))
+        } else if (!description.equals(sportCreateDTO.getDescription()))
             return false;
 
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "{id: " + id + ", " +
-                "name: " + name + ", " +
-                "description: " + description + " }";
     }
 }
