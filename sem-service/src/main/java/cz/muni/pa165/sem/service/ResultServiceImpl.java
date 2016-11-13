@@ -36,8 +36,11 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-    public void delete(Result result) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Result result) {try{
+            resultDAO.delete(result);
+        }catch(Exception ex){
+            throw new DataIntegrityViolationException("Failed to delete Result " + result + ", exception\n" + ex);
+        }
     }
 
     @Override
