@@ -45,7 +45,7 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event name is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE name = :name");
+            Query query = em.createQuery("SELECT e FROM Event e WHERE e.name = :name");
             query.setParameter("name", name);
             return query.getResultList();
         } catch (NoResultException e) {
@@ -67,7 +67,7 @@ public class EventDAOImpl implements EventDAO {
             Calendar endOfDay = (Calendar) startOfDay.clone();
             endOfDay.add(Calendar.DAY_OF_MONTH, 1);
 
-            Query query = em.createQuery("SELECT e FROM Event e WHERE date >= :start AND date < :end");
+            Query query = em.createQuery("SELECT e FROM Event e WHERE e.date >= :start AND e.date < :end");
             query.setParameter("start", startOfDay);
             query.setParameter("end", endOfDay);
             return query.getResultList();
@@ -82,7 +82,7 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event sport is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE sport = :sport");
+            Query query = em.createQuery("SELECT e FROM Event e WHERE e.sport = :sport");
             query.setParameter("sport", sport);
             return query.getResultList();
         } catch (NoResultException e) {
@@ -96,7 +96,7 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event city is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE city = :city");
+            Query query = em.createQuery("SELECT e FROM Event e WHERE e.city = :city");
             query.setParameter("city", city);
             return query.getResultList();
         } catch (NoResultException e) {
@@ -110,7 +110,7 @@ public class EventDAOImpl implements EventDAO {
             throw new IllegalArgumentException("Event admin is null");
         }
         try {
-            Query query = em.createQuery("SELECT e FROM Event e WHERE admin = :admin");
+            Query query = em.createQuery("SELECT e FROM Event e WHERE e.admin = :admin");
             query.setParameter("admin", admin);
             return query.getResultList();
         } catch (NoResultException e) {
