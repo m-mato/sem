@@ -20,7 +20,7 @@ public interface EventDAO {
      * @param event The event object to be created.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void create(Event event);
+    void create(Event event) throws IllegalArgumentException;
 
     /**
      * This method finds event with specific id.
@@ -98,7 +98,7 @@ public interface EventDAO {
      * @param event The event object.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void update(Event event);
+    void update(Event event) throws IllegalArgumentException;
 
     /**
      * This method deletes event.
@@ -106,6 +106,6 @@ public interface EventDAO {
      * @param event The event object.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void delete(Event event);
+    void delete(Event event) throws IllegalArgumentException;
 
 }
