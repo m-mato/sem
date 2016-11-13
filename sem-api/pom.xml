@@ -12,4 +12,11 @@
     <artifactId>sem-api</artifactId>
     <packaging>pom</packaging>
     <name>API</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sem-persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
