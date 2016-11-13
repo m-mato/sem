@@ -17,9 +17,10 @@ public interface ResultFacade {
      * This method puts results object to database
      *
      * @param result the result object to be created
+     * @return result
      * @throws IllegalArgumentException When result is {@code null}.
      */
-    void create(ResultCreateDTO result);
+    ResultDTO create(ResultCreateDTO result);
 
     /**
      * This method finds results object by id

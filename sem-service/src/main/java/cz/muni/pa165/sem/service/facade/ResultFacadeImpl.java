@@ -1,0 +1,119 @@
+package cz.muni.pa165.sem.service.facade;
+
+import cz.muni.pa165.sem.dto.EventDTO;
+import cz.muni.pa165.sem.dto.*;
+import cz.muni.pa165.sem.entity.*;
+import cz.muni.pa165.sem.facade.ResultFacade;
+import java.util.List;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import cz.muni.pa165.sem.service.BeanMappingService;
+import cz.muni.pa165.sem.service.ResultService;
+
+/**
+ *
+ * @author Veronika Aksamitova
+ */
+@Service
+@Transactional
+public class ResultFacadeImpl implements ResultFacade{
+
+    @Autowired
+    private BeanMappingService beanMappingService;
+    
+    @Autowired
+    private ResultService resultService;
+    
+    @Override
+    public ResultDTO create(ResultCreateDTO result) {
+        Result result1 = new Result();
+        
+        EventDTO eventDTO = result.getEvent();
+        result1.setEvent(beanMappingService.mapTo(eventDTO, Event.class));
+        
+        SportsmanDTO sportsmanDTO = result.getSportsman();
+        result1.setSportsman(beanMappingService.mapTo(sportsmanDTO, Sportsman.class));
+        
+        result1.setPosition(result.getPosition());
+        result1.setPerformance(result.getPerformance());
+        result1.setPerformanceUnit(result.getPerformanceUnit());
+        result1.setNote(result.getNote());
+        
+        resultService.create(result1);
+        return beanMappingService.mapTo(result, ResultDTO.class);
+    }
+
+    @Override
+    public ResultDTO findById(Long id) {
+        Result result = resultService.findById(id);
+        return beanMappingService.mapTo(result, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> findBySportsman(SportsmanDTO sportsman) {
+        List<Result> results = resultService.findBySportsman(beanMappingService.mapTo(sportsman, SportsmanDTO.class));
+        return beanMappingService.mapTo(results, ResultDTO.class);
+        
+    }
+
+    @Override
+    public List<ResultDTO> findByEvent(EventDTO event) {
+        List<Result> results = resultService.findByEvent(beanMappingService.mapTo(event, EventDTO.class));
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> findBySport(SportDTO sport) {
+        List<Result> results = resultService.findBySport(beanMappingService.mapTo(sport, SportDTO.class));
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> findByPerformance(Double performance) {
+        List<Result> results = resultService.findByPerformance(performance);
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> findByPosition(Integer position) {
+        List<Result> results = resultService.findByPosition(position);
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> findByNote(String note) {
+        List<Result> results = resultService.findByNote(note);
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public List<ResultDTO> getAll() {
+        List<Result> results = resultService.getAll();
+        return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public void update(ResultUpdateDTO resultUpdateDTO) {
+        Result result = resultService.findById(resultUpdateDTO.getId());
+        
+        EventDTO eventDTO = resultUpdateDTO.getEvent();
+        result.setEvent(beanMappingService.mapTo(eventDTO, Event.class));
+        
+        SportsmanDTO sportsmanDTO = resultUpdateDTO.getSportsman();
+        result.setSportsman(beanMappingService.mapTo(sportsmanDTO, Sportsman.class));
+        
+        result.setPosition(result.getPosition());
+        result.setPerformance(result.getPerformance());
+        result.setPerformanceUnit(result.getPerformanceUnit());
+        result.setNote(result.getNote());
+        
+        resultService.update(result);
+    }
+
+    @Override
+    public void delete(ResultDTO result) {
+        resultService.delete(resultService.findById(result.getId()));
+    }
+    
+}
