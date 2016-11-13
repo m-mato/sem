@@ -6,7 +6,9 @@ import java.util.Objects;
 /**
  * @author Vit Hovezak
  */
-public class EventCreateDTO {
+public class EventUpdateDTO {
+
+    private Long id;
 
     private String name;
 
@@ -23,6 +25,14 @@ public class EventCreateDTO {
     private String address;
 
     private SportsmanDTO admin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -91,6 +101,7 @@ public class EventCreateDTO {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
         hash = 47 * hash + Objects.hashCode(this.name);
         hash = 47 * hash + Objects.hashCode(this.description);
         hash = 47 * hash + Objects.hashCode(this.date);
@@ -113,7 +124,7 @@ public class EventCreateDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final EventCreateDTO other = (EventCreateDTO) obj;
+        final EventUpdateDTO other = (EventUpdateDTO) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -124,6 +135,9 @@ public class EventCreateDTO {
             return false;
         }
         if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
@@ -143,7 +157,8 @@ public class EventCreateDTO {
 
     @Override
     public String toString() {
-        return "EventCreateDTO{"
+        return "EventUpdateDTO{"
+                + "id=" + id
                 + ", name=" + name
                 + ", description=" + description
                 + ", date=" + date
