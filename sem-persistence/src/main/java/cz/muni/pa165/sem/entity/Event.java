@@ -204,5 +204,21 @@ public class Event {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Event{"
+                + "id=" + id
+                + ", name=" + name
+                + ", description=" + description
+                + ", date=" + date
+                + ", sport=" + sport
+                + ", capacity=" + capacity
+                + ", city=" + city
+                + ", address=" + address
+                + ", admin=" + admin
+                + ", participants=" + participants
+                + '}';
+    }
     
 }
