@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.pa165.sem.entity;
 
 import cz.muni.pa165.sem.utils.PerformanceUnits;
@@ -12,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author xaksamit
+ * @author Veronika Aksamitova
  */
 @Entity
 @Table(name = "result")
@@ -68,7 +63,7 @@ public class Result {
     }
     
     public void setPerformanceUnit(PerformanceUnits unit){
-        if(unit == null ){//||ak to nie je platny enum ...spavit 
+        if(unit == null ){
             throw new IllegalArgumentException("units value is not valid");
         }
         
@@ -96,7 +91,6 @@ public class Result {
             throw new NullPointerException("Sportsman is null");
         }
         
-        // TODO skontrolovat ci dany hrac naozaj existuje v DB
         this.sportsman = sportsman;
     }
     
@@ -120,7 +114,7 @@ public class Result {
         this.event = event;
     }
     
-    @Override //TREBA OTESTOVAT CI TO OZAJ FUNGUJE
+    @Override 
     public boolean equals(Object o){
         if(o == null) return false;
         if(this == o) return true;
@@ -146,5 +140,16 @@ public class Result {
         result = 31 * result + getNote().hashCode();
         result = 31 * result + getEvent().hashCode();
         return result;
+    }
+    
+    @Override
+    public String toString() {
+        return "Result:"
+                + " id = " + id
+                + ", event = " + event
+                + ", sportsman = " + sportsman
+                + ", position = " + position
+                + ", performance = " + performance + " " + performanceUnit
+                + ", note = " + this.note;
     }
 }

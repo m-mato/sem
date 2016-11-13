@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.pa165.sem.dao;
 
 import cz.muni.pa165.sem.entity.Event;
@@ -15,7 +10,7 @@ import java.util.List;
 /**
  * The interface ResultDao is used to provide CRUD operations for Result
  *
- * @author xaksamit
+ * @author Veronika Aksamitova
  */
 public interface ResultDAO {
 
