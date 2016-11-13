@@ -14,13 +14,12 @@ import java.util.List;
 public class SportsmanServiceImpl implements SportsmanService {
 
 	@Autowired
-	SportsmanDAO sportsmanDAO;
+	private SportsmanDAO sportsmanDAO;
 
 	@Override
-	public Long create(Sportsman sportsman) {
+	public void create(Sportsman sportsman) {
 
 		sportsmanDAO.create(sportsman);
-		return sportsman.getId();
 	}
 
 	@Override
@@ -30,22 +29,33 @@ public class SportsmanServiceImpl implements SportsmanService {
 	}
 
 	@Override
+	public List<Sportsman> findByName(String name) {
+
+		return sportsmanDAO.findByName(name);
+	}
+
+	@Override
+	public List<Sportsman> findBySurname(String surname) {
+
+		return sportsmanDAO.findBySurname(surname);
+	}
+
+	@Override
 	public List<Sportsman> findAll() {
 
 		return sportsmanDAO.findAll();
 	}
 
 	@Override
-	public void removeSportsman(Sportsman sportsman) {
+	public void update(Sportsman sportsman) {
 
-		sportsmanDAO.delete(sportsman);
+		sportsmanDAO.update(sportsman);
 	}
 
 	@Override
-	public Long updateSportsman(Sportsman sportsman) {
+	public void delete(Sportsman sportsman) {
 
-		sportsmanDAO.update(sportsman);
-		return sportsman.getId();
+		sportsmanDAO.delete(sportsman);
 	}
 
 }

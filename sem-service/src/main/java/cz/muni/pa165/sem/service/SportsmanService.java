@@ -9,13 +9,17 @@ import java.util.List;
  */
 public interface SportsmanService {
 
-	Long create(Sportsman sportsman);
+	void create(Sportsman sportsman);
 
 	Sportsman findById(Long id);
 
+	List<Sportsman> findByName(String name);
+
+	List<Sportsman> findBySurname(String surname);
+
 	List<Sportsman> findAll();
 
-	void removeSportsman(Sportsman sportsman);
+	void delete(Sportsman sportsman);
 
-	Long updateSportsman(Sportsman sportsman);
+	void update(Sportsman sportsman);
 }

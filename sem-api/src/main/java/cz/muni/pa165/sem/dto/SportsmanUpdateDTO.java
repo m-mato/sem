@@ -1,49 +1,30 @@
-package cz.muni.pa165.sem.entity;
+package cz.muni.pa165.sem.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Matej Majdis
  */
-@Entity
-@Table(name = "sportsman")
-public class Sportsman {
+public class SportsmanUpdateDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@Column(name = "name")
 	private String name;
 
-	@NotBlank
-	@Column(name = "surname")
 	private String surname;
 
-	@NotNull
-	@Column(name = "birth_date")
 	private Calendar birthDate;
 
-	@NotBlank
-	@Column(name = "email")
 	private String email;
 
-	@NotBlank
-	@Column(name = "password")
 	private String password;
-
-	@ManyToMany(mappedBy = "participants")
-	private Set<Event> events = new HashSet<>();
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -86,20 +67,12 @@ public class Sportsman {
 		this.password = password;
 	}
 
-	public Set<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(Set<Event> events) {
-		this.events = events;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof Sportsman)) return false;
+		if (!(o instanceof SportsmanDTO)) return false;
 
-		Sportsman sportsman = (Sportsman) o;
+		SportsmanDTO sportsman = (SportsmanDTO) o;
 
 		if (getId() != null ? !getId().equals(sportsman.getId()) : sportsman.getId() != null) return false;
 		if (!getName().equals(sportsman.getName())) return false;
@@ -123,12 +96,13 @@ public class Sportsman {
 
 	@Override
 	public String toString() {
-		return "Sportsman{" +
+		return "SportsmanUpdateDTO{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", surname='" + surname + '\'' +
 				", birthDate=" + birthDate +
 				", email='" + email + '\'' +
+				", password='" + password + '\'' +
 				'}';
 	}
 }
