@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SportsmanFacade {
 
-	SportsmanDTO createSportsman(SportsmanCreateDTO sportCreateDTO);
+	SportsmanDTO create(SportsmanCreateDTO sportCreateDTO);
 
 	SportsmanDTO getById(Long id);
 

@@ -25,7 +25,7 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	private SportsmanService sportsmanService;
 
 	@Override
-	public SportsmanDTO createSportsman(SportsmanCreateDTO sportCreateDTO) {
+	public SportsmanDTO create(SportsmanCreateDTO sportCreateDTO) {
 
 		Sportsman sportsman = new Sportsman();
 		sportsman.setName(sportCreateDTO.getName());
