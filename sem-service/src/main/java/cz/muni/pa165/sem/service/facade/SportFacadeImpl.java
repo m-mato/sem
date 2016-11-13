@@ -27,10 +27,11 @@ public class SportFacadeImpl implements SportFacade {
     private SportService sportService;
 
     @Override
-    public SportDTO createSport(SportCreateDTO sportCreateDTO) {
+    public SportDTO create(SportCreateDTO sportCreateDTO) {
         Sport sport = new Sport();
         sport.setName(sportCreateDTO.getName());
         sport.setDescription(sportCreateDTO.getDescription());
+
         sportService.create(sport);
         return beanMappingService.mapTo(sport, SportDTO.class);
     }
@@ -52,15 +53,16 @@ public class SportFacadeImpl implements SportFacade {
     }
 
     @Override
-    public void updateSport(SportUpdateDTO sportUpdateDTO) {
-        Sport sport = new Sport();
+    public void update(SportUpdateDTO sportUpdateDTO) {
+        Sport sport = sportService.findById(sportUpdateDTO.getId());
         sport.setName(sportUpdateDTO.getName());
         sport.setDescription(sportUpdateDTO.getDescription());
+
         sportService.update(sport);
     }
 
     @Override
-    public void deleteSport(Long sportId) {
+    public void delete(Long sportId) {
         sportService.delete(sportService.findById(sportId));
     }
 }

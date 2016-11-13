@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SportFacade {
 
-    SportDTO createSport(SportCreateDTO sportCreateDTO);
+    SportDTO create(SportCreateDTO sportCreateDTO);
 
     SportDTO getSportById(Long id);
 
@@ -19,7 +19,7 @@ public interface SportFacade {
 
     List<SportDTO> getAllSports();
 
-    void updateSport(SportUpdateDTO sportUpdateDTO);
+    void update(SportUpdateDTO sportUpdateDTO);
 
-    void deleteSport(Long sportId);
+    void delete(Long sportId);
 }
