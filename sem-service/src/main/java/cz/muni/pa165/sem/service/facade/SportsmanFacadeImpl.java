@@ -61,7 +61,7 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	@Override
 	public void update(SportsmanUpdateDTO sportsmanUpdateDTO) {
 
-		Sportsman sportsman = new Sportsman();
+		Sportsman sportsman = sportsmanService.findById(sportsmanUpdateDTO.getId());
 		sportsman.setName(sportsmanUpdateDTO.getName());
 		sportsman.setSurname(sportsmanUpdateDTO.getSurname());
 		sportsman.setBirthDate(sportsmanUpdateDTO.getBirthDate());
