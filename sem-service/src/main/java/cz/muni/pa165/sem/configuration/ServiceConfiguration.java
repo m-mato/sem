@@ -1,9 +1,11 @@
 package cz.muni.pa165.sem.configuration;
 
 import cz.muni.pa165.sem.dto.EventDTO;
+import cz.muni.pa165.sem.dto.ResultDTO;
 import cz.muni.pa165.sem.dto.SportDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.entity.Event;
+import cz.muni.pa165.sem.entity.Result;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
 import org.dozer.DozerBeanMapper;
@@ -55,7 +57,7 @@ public class ServiceConfiguration {
     private class DozerResultConfig extends BeanMappingBuilder {
         @Override
         protected void configure() {
-//            mapping(Result.class, ResultDTO.class);
+            mapping(Result.class, ResultDTO.class);
         }
     }
 }

@@ -113,5 +113,5 @@ public class ResultFacadeImpl implements ResultFacade{
     public void delete(ResultDTO result) {
         resultService.delete(resultService.findById(result.getId()));
     }
-    
+
 }
