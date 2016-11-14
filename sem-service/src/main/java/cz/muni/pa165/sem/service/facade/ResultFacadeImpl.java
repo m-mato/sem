@@ -52,20 +52,19 @@ public class ResultFacadeImpl implements ResultFacade{
 
     @Override
     public List<ResultDTO> findBySportsman(SportsmanDTO sportsman) {
-        List<Result> results = resultService.findBySportsman(beanMappingService.mapTo(sportsman, SportsmanDTO.class));
+        List<Result> results = resultService.findBySportsman(beanMappingService.mapTo(sportsman, Sportsman.class));
         return beanMappingService.mapTo(results, ResultDTO.class);
-        
     }
 
     @Override
     public List<ResultDTO> findByEvent(EventDTO event) {
-        List<Result> results = resultService.findByEvent(beanMappingService.mapTo(event, EventDTO.class));
+        List<Result> results = resultService.findByEvent(beanMappingService.mapTo(event, Event.class));
         return beanMappingService.mapTo(results, ResultDTO.class);
     }
 
     @Override
     public List<ResultDTO> findBySport(SportDTO sport) {
-        List<Result> results = resultService.findBySport(beanMappingService.mapTo(sport, SportDTO.class));
+        List<Result> results = resultService.findBySport(beanMappingService.mapTo(sport, Sport.class));
         return beanMappingService.mapTo(results, ResultDTO.class);
     }
 
@@ -107,7 +106,6 @@ public class ResultFacadeImpl implements ResultFacade{
         result.setPerformance(result.getPerformance());
         result.setPerformanceUnit(result.getPerformanceUnit());
         result.setNote(result.getNote());
-        
         resultService.update(result);
     }
 
