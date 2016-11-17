@@ -23,6 +23,8 @@ public class SportsmanDTO {
 
 	private Set<EventDTO> events = new HashSet<>();
 
+	private Set<InvitationDTO> invitations = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +81,14 @@ public class SportsmanDTO {
 		this.events = events;
 	}
 
+	public Set<InvitationDTO> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(Set<InvitationDTO> invitations) {
+		this.invitations = invitations;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -116,6 +126,7 @@ public class SportsmanDTO {
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
 				", events=" + events +
+				", invitations=" + invitations +
 				'}';
 	}
 }

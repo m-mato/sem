@@ -18,6 +18,7 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Override
 	public void create(Sportsman sportsman) {
 
 		if (sportsman == null) {
@@ -81,6 +82,7 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 		entityManager.remove(sportsman);
 	}
 
+	@Override
 	public List<Sportsman> findAll() {
 
 		Query query = entityManager.createQuery("SELECT s FROM Sportsman s");

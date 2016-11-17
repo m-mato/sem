@@ -42,6 +42,9 @@ public class Sportsman {
 	@ManyToMany(mappedBy = "participants")
 	private Set<Event> events = new HashSet<>();
 
+	@OneToMany(mappedBy = "invitee")
+	private Set<Invitation> invitations = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -92,6 +95,14 @@ public class Sportsman {
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
+	}
+
+	public Set<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(Set<Invitation> invitations) {
+		this.invitations = invitations;
 	}
 
 	@Override

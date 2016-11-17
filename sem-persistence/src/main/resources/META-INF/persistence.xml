@@ -10,6 +10,7 @@
         <class>cz.muni.pa165.sem.entity.Sport</class>
         <class>cz.muni.pa165.sem.entity.Event</class>
         <class>cz.muni.pa165.sem.entity.Result</class>
+        <class>cz.muni.pa165.sem.entity.Invitation</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:derby:memory:semDB;create=true"/>
             <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
