@@ -3,7 +3,7 @@ INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('John'
 INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('Matej', 'Majdis', '1994-02-27 19:05:00', 'mato@example.com', 'supersilneheslo');
 INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('Kamil', 'Triscik', '1990-08-30 19:05:00', 'kamil@example.com', 'supersilneheslo');
 INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('Vit', 'Hovezak', '1990-08-30 19:05:00', 'vit@example.com', 'supersilneheslo');
-INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('Veronika', 'Aksamitova', '1990-08-30 19:05:00', 'vit@example.com', 'supersilneheslo');
+INSERT INTO sportsman(name, surname, birth_date, email, password) VALUES ('Veronika', 'Aksamitova', '1990-08-30 19:05:00', 'veronika@example.com', 'supersilneheslo');
 
 INSERT INTO sport(name, description) VALUES ('Triathlon', 'Triathlon description');
 INSERT INTO sport(name, description) VALUES ('Swimming', 'Swimming description');
