@@ -1,9 +1,7 @@
 package cz.muni.pa165.sem.controller;
 
-import cz.muni.pa165.sem.dao.InvitationDAO;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Invitation;
-import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -29,9 +26,6 @@ public class ExampleController {
 
 	@Autowired
 	private InvitationService invitationService;
-
-	@Autowired
-	private InvitationDAO invitationDAO;
 
 	@Autowired
 	private EventService eventService;
@@ -62,7 +56,7 @@ public class ExampleController {
 
 		Invitation invitation = invitationService.invite(event, sportsman);
 		if(invitation == null) {
-			return sportsman.getName() + "is already member of event : " + event.getName();
+			return sportsman.getName() + " is already member of event : " + event.getName();
 		}
 		switch (invitation.getState()) {
 			case INVITED:
@@ -74,6 +68,21 @@ public class ExampleController {
 			default:
 				throw new IllegalStateException("Invitation is in unexpected state");
 		}
+	}
+
+	@RequestMapping("/invitation/accept/{invitationId}")
+	@Transactional
+	public String invitationAccept(@PathVariable(value = "invitationId") String invitationId) {
+
+		Long invitationIdLong = Long.valueOf(invitationId);
+
+		Invitation invitation = invitationService.findById(invitationIdLong);
+		if (invitation == null) {
+			return "Invitation not found";
+		}
+
+		Invitation invitationResponse = invitationService.accept(invitation);
+		return "Event participants: " + invitation.getEvent().getParticipants().toString();
 	}
 
 	@RequestMapping("/sportsman/get-all")
@@ -90,7 +99,7 @@ public class ExampleController {
 		sb.append("\n\n");
 		eventService.findAll().forEach(sb::append);
 		sb.append("\n\n");
-		invitationDAO.findAll().forEach(sb::append);
+		invitationService.findAll().forEach(sb::append);
 
 		return sb.toString();
 	}

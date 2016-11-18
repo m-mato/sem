@@ -33,4 +33,8 @@ public interface EventService {
 
     void delete(Event event);
 
+    void edit(Event event);
+
+    void cancel(Event event);
+
 }

@@ -5,7 +5,10 @@ import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -19,6 +22,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventDAO eventDAO;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public void create(Event event) {
@@ -117,6 +123,27 @@ public class EventServiceImpl implements EventService {
         } catch (Exception e) {
             throw new DataIntegrityViolationException("Failed to delete " + event + ", exception: ", e);
         }
+    }
+
+    @Override
+    public void edit(Event event) {
+
+        Set<Sportsman> participants = new HashSet<>();
+        participants.addAll(event.getParticipants());
+
+        try {
+            eventDAO.update(event);
+        } catch (Exception e) {
+            throw new DataIntegrityViolationException("Failed to update " + event + ", exception: ", e);
+        }
+
+        notificationService.notifyEventEdited(participants, event);
+    }
+
+    @Override
+    public void cancel(Event event) {
+
+        //TODO
     }
 
 }
