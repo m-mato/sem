@@ -1,5 +1,6 @@
 package cz.muni.pa165.sem.service;
 
+import cz.muni.pa165.sem.dao.EventDAO;
 import cz.muni.pa165.sem.dao.InvitationDAO;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Invitation;
@@ -18,6 +19,9 @@ public class InvitationServiceImpl implements InvitationService {
 	private InvitationDAO invitationDAO;
 
 	@Autowired
+	private EventDAO eventDAO;
+
+	@Autowired
 	private EmailService emailService;
 
 	@Override
@@ -30,9 +34,17 @@ public class InvitationServiceImpl implements InvitationService {
 			throw new IllegalArgumentException("Invitee can not be null");
 		}
 
+		if(event.getAdmin().equals(invitee)) {
+			throw new IllegalStateException("Cannot invite yourself");
+		}
+
+		if(event.getParticipants().contains(invitee)) {
+			return null;
+		}
+
 		//check and process existing invitations
 		Invitation existingInvitation = invitationDAO.findByEventAndInvitee(event, invitee);
-		if (existingInvitation != null) {
+		if (existingInvitation != null && !isFinished(existingInvitation)) {
 			if (InvitationState.INVITED.equals(existingInvitation.getState())) {
 				emailService.sendInvitationMessage(existingInvitation);
 				return changeInvitationState(existingInvitation, InvitationState.REINVITED);
@@ -42,17 +54,21 @@ public class InvitationServiceImpl implements InvitationService {
 			return existingInvitation;
 		}
 
-		//if there is no existing invitation create new
+		//if there is no existing invitation || is finished create new
 		Invitation newInvitation = new Invitation();
 		newInvitation.setState(InvitationState.INVITED);
 		newInvitation.setEvent(event);
 		newInvitation.setInvitee(invitee);
 		invitationDAO.create(newInvitation);
 
-		//sendInvitation(invitee.getEmail());
 		emailService.sendInvitationMessage(newInvitation);
 
 		return newInvitation;
+	}
+
+	private boolean isFinished(Invitation existingInvitation) {
+		InvitationState state =  existingInvitation.getState();
+		return state.equals(InvitationState.ACCEPTED) || state.equals(InvitationState.DECLINED);
 	}
 
 	private Invitation changeInvitationState(Invitation invitation, InvitationState state) {

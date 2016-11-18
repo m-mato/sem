@@ -38,7 +38,7 @@ public class Event implements Serializable {
     private String description;
     
     @NotNull
-    @Column(name = "date")
+    @Column(name = "event_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar date;
     

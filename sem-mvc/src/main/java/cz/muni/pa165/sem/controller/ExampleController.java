@@ -1,13 +1,13 @@
 package cz.muni.pa165.sem.controller;
 
+import cz.muni.pa165.sem.dao.InvitationDAO;
 import cz.muni.pa165.sem.entity.Event;
+import cz.muni.pa165.sem.entity.Invitation;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
-import cz.muni.pa165.sem.service.EventService;
-import cz.muni.pa165.sem.service.ExampleService;
-import cz.muni.pa165.sem.service.InvitationService;
-import cz.muni.pa165.sem.service.SportService;
+import cz.muni.pa165.sem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,57 +31,72 @@ public class ExampleController {
 	private InvitationService invitationService;
 
 	@Autowired
+	private InvitationDAO invitationDAO;
+
+	@Autowired
 	private EventService eventService;
 
 	@Autowired
 	private SportService sportService;
 
-	@RequestMapping("/invite")
+	@Autowired
+	private SportsmanService sportsmanService;
+
+	@RequestMapping("/invite/{eventId}/{sportsmanId}")
 	@Transactional
-	public String invite(@RequestParam String value) {
+	public String inviteTest(@PathVariable(value = "eventId") String eventId,
+							 @PathVariable(value = "sportsmanId") String sportsmanId) {
 
-		Sportsman admin = new Sportsman();
-		admin.setName("Dusan");
-		admin.setSurname("Fetak");
-		admin.setEmail("fetak.dusan@example.com");
-		admin.setPassword("examplePassword");
-		admin.setBirthDate(Calendar.getInstance());
-		exampleService.addSportsman(admin);
+		Long eventIdLong = Long.valueOf(eventId);
+		Long sportsmanIdLong = Long.valueOf(sportsmanId);
 
-		Sportsman sportsman = new Sportsman();
-		sportsman.setName(value);
-		sportsman.setSurname("Lakatos");
-		sportsman.setEmail("mato.majdis@gmail.com");
-		sportsman.setPassword("examplePassword");
-		sportsman.setBirthDate(Calendar.getInstance());
-		exampleService.addSportsman(sportsman);
+		Event event = eventService.findById(eventIdLong);
+		if (event == null) {
+			return "Event not found";
+		}
 
-		Sport sport = new Sport();
-		sport.setName("football");
-		sport.setDescription("test desc");
-		sportService.create(sport);
+		Sportsman sportsman = sportsmanService.findById(sportsmanIdLong);
+		if (sportsman == null) {
+			return "Sportsman not found";
+		}
 
-		Event event = new Event();
-		event.setAddress("Brno - Botanicka");
-		event.setAdmin(admin);
-		event.setCapacity(666);
-		event.setCity("Brno");
-		event.setDate(Calendar.getInstance());
-		event.setDescription("test event");
-		event.setSport(sport);
-		event.setName("test event");
-		event.setParticipants(new HashSet<>());
-		eventService.create(event);
+		Invitation invitation = invitationService.invite(event, sportsman);
+		if(invitation == null) {
+			return sportsman.getName() + "is already member of event : " + event.getName();
+		}
+		switch (invitation.getState()) {
+			case INVITED:
+				return sportsman.getName() + " SUCCESSFULLY invited to event : " + event.getName() + ".";
+			case REINVITED:
+				return sportsman.getName() + " SUCCESSFULLY re-invited to event : " + event.getName() + ".";
+			case ALREADY_INVITED:
+				return sportsman.getName() + " WAS ALREADY re-invited to event : " + event.getName() + ".";
+			default:
+				throw new IllegalStateException("Invitation is in unexpected state");
+		}
+	}
 
-		invitationService.invite(event, sportsman);
+	@RequestMapping("/sportsman/get-all")
+	public List<String> getAllSportsmansName() {
+		return exampleService.getAllNames();
+	}
 
-		//invitationService.invite(event, sportsman);
+	@RequestMapping("/data/get-all")
+	public String getAllData() {
+		StringBuilder sb = new StringBuilder();
+		sportsmanService.findAll().forEach(sb::append);
+		sb.append("\n\n");
+		sportService.findAll().forEach(sb::append);
+		sb.append("\n\n");
+		eventService.findAll().forEach(sb::append);
+		sb.append("\n\n");
+		invitationDAO.findAll().forEach(sb::append);
 
-		return "ADDED";
+		return sb.toString();
 	}
 
 	@RequestMapping("/sportsman/example-add")
-	public String addSportsman(@RequestParam String value) {
+	public String addSportsmantest(@RequestParam String value) {
 
 		Sportsman sportsman = new Sportsman();
 		sportsman.setName(value);
@@ -92,10 +107,5 @@ public class ExampleController {
 
 		exampleService.addSportsman(sportsman);
 		return "ADDED: " + value;
-	}
-
-	@RequestMapping("/sportsman/get-all")
-	public List<String> getAllNames() {
-		return exampleService.getAllNames();
 	}
 }
