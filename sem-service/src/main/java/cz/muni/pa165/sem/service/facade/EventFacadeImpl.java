@@ -127,4 +127,5 @@ public class EventFacadeImpl implements EventFacade {
         Event event = eventService.findById(eventId);
         eventService.delete(event);
     }
+
 }

@@ -127,7 +127,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void edit(Event event) {
-
         Set<Sportsman> participants = new HashSet<>();
         participants.addAll(event.getParticipants());
 
@@ -136,13 +135,11 @@ public class EventServiceImpl implements EventService {
         } catch (Exception e) {
             throw new DataIntegrityViolationException("Failed to update " + event + ", exception: ", e);
         }
-
         notificationService.notifyEventEdited(participants, event);
     }
 
     @Override
     public void cancel(Event event) {
-
         //TODO
     }
 

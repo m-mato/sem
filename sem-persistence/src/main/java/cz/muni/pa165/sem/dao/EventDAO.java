@@ -20,7 +20,7 @@ public interface EventDAO {
      * @param event The event object to be created.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void create(Event event) throws IllegalArgumentException;
+    void create(Event event);
 
     /**
      * This method finds event with specific id.
@@ -29,7 +29,7 @@ public interface EventDAO {
      * @return Found event object or {@code null} otherwise.
      * @throws IllegalArgumentException When id is {@code null}.
      */
-    Event findById(Long id) throws IllegalArgumentException;
+    Event findById(Long id);
 
     /**
      * This method finds events with specific name.
@@ -38,7 +38,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When name is {@code null}.
      */
-    List<Event> findByName(String name) throws IllegalArgumentException;
+    List<Event> findByName(String name);
 
     /**
      * This method finds events with specific date.
@@ -47,7 +47,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When date is {@code null}.
      */
-    List<Event> findByDate(Calendar date) throws IllegalArgumentException;
+    List<Event> findByDate(Calendar date);
 
     /**
      * This method finds events with specific sport.
@@ -56,7 +56,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When sport is {@code null}.
      */
-    List<Event> findBySport(Sport sport) throws IllegalArgumentException;
+    List<Event> findBySport(Sport sport);
 
     /**
      * This method finds events with specific city.
@@ -65,7 +65,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When city is {@code null}.
      */
-    List<Event> findByCity(String city) throws IllegalArgumentException;
+    List<Event> findByCity(String city);
 
     /**
      * This method finds events with specific admin.
@@ -74,7 +74,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When admin is {@code null}.
      */
-    List<Event> findByAdmin(Sportsman admin) throws IllegalArgumentException;
+    List<Event> findByAdmin(Sportsman admin);
 
     /**
      * This method finds events with specific participant.
@@ -83,7 +83,7 @@ public interface EventDAO {
      * @return List of found event objects.
      * @throws IllegalArgumentException When participant is {@code null}.
      */
-    List<Event> findByParticipant(Sportsman participant) throws IllegalArgumentException;
+    List<Event> findByParticipant(Sportsman participant);
 
     /**
      * This method finds all events.
@@ -98,7 +98,7 @@ public interface EventDAO {
      * @param event The event object.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void update(Event event) throws IllegalArgumentException;
+    void update(Event event);
 
     /**
      * This method deletes event.
@@ -106,6 +106,6 @@ public interface EventDAO {
      * @param event The event object.
      * @throws IllegalArgumentException When event is {@code null}.
      */
-    void delete(Event event) throws IllegalArgumentException;
+    void delete(Event event);
 
 }
