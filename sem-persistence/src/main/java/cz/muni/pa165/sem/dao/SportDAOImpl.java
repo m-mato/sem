@@ -15,7 +15,6 @@ import java.util.List;
  * @author Kamil Triscik
  */
 @Repository
-@Transactional
 public class SportDAOImpl implements SportDAO {
     @PersistenceContext
     private EntityManager em;
@@ -48,7 +47,7 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public Sport findByName(String name) {
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Sport name to find results for is null!");
         }
         try {
