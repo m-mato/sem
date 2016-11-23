@@ -45,6 +45,9 @@ public class Sportsman {
 	@OneToMany(mappedBy = "invitee")
 	private Set<Invitation> invitations = new HashSet<>();
 
+	public void setId(Long id){
+		this.id = id;
+	}
 	public Long getId() {
 		return id;
 	}
