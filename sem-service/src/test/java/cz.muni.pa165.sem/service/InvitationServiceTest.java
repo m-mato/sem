@@ -66,7 +66,7 @@ public class InvitationServiceTest {
         MockitoAnnotations.initMocks(this);
         
         sportsman = new Sportsman();
-        sportsman.setId((long)1);
+        sportsman.setId((long) 2);
         sportsman.setName("SportsmanName");
         sportsman.setSurname("SportsmanSurname");
         sportsman.setBirthDate(Calendar.getInstance());
@@ -74,7 +74,7 @@ public class InvitationServiceTest {
         sportsman.setPassword("safe password");
         
         eventAdmin = new Sportsman();
-        eventAdmin.setId((long)2);
+        eventAdmin.setId((long) 1);
         eventAdmin.setName("AdminSportsmanName");
         eventAdmin.setSurname("AdminSportsmanSurname");
         eventAdmin.setBirthDate(Calendar.getInstance());
@@ -95,6 +95,7 @@ public class InvitationServiceTest {
         sport.setName("SportName");
         
         event = Mockito.spy(new Event());
+        event.setId((long) 4);
         event.setName("EventName");
         event.setDescription("New event: EventName");
         event.setDate(Calendar.getInstance());
@@ -167,6 +168,8 @@ public class InvitationServiceTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteSportsmanAlreadyAdded(){
         expectedException.expect(IllegalArgumentException.class);
+        Invitation invitationR = invitationService.invite(event, anotherSportsman);
+        invitationService.accept(invitationR);
         invitationService.invite(event, anotherSportsman);
     }
     
@@ -179,9 +182,8 @@ public class InvitationServiceTest {
     
     @Test
     public void inviteAlreadyINVITED(){
-        Invitation result = invitationService.invite(event, sportsman);
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
-        
+        Invitation result = invitationService.invite(event, sportsman);
         verify(emailServiceMock, times(1)).sendInvitationMessage(invitation);
         invitation.setState(InvitationState.REINVITED);
         assertEquals(invitation, result);
@@ -190,9 +192,8 @@ public class InvitationServiceTest {
     @Test
     public void inviteAlreadyREINVITED(){
         invitation.setState(InvitationState.REINVITED);
-        Invitation result = invitationService.invite(event, sportsman);
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
-        
+        Invitation result = invitationService.invite(event, sportsman);
         verify(emailServiceMock, times(0)).sendInvitationMessage(invitation);
         invitation.setState(InvitationState.ALREADY_INVITED);
         assertEquals(invitation, result);
@@ -200,9 +201,9 @@ public class InvitationServiceTest {
     
     @Test
     public void inviteALREADY_INVITED(){
-        Invitation result = invitationService.invite(event, sportsman);
-        Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
         invitation.setState(InvitationState.ALREADY_INVITED);
+        Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
+        Invitation result = invitationService.invite(event, sportsman);
         verify(emailServiceMock, times(0)).sendInvitationMessage(invitation);
         assertEquals(invitation, result);
     }
