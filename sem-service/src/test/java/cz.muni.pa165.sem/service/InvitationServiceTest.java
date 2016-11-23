@@ -15,6 +15,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.List;
+import java.util.jar.Attributes;
 
 import static org.mockito.Matchers.argThat;
 import static org.hamcrest.CoreMatchers.not;
@@ -65,6 +66,7 @@ public class InvitationServiceTest {
         MockitoAnnotations.initMocks(this);
         
         sportsman = new Sportsman();
+        sportsman.setId((long)1);
         sportsman.setName("SportsmanName");
         sportsman.setSurname("SportsmanSurname");
         sportsman.setBirthDate(Calendar.getInstance());
@@ -72,20 +74,27 @@ public class InvitationServiceTest {
         sportsman.setPassword("safe password");
         
         eventAdmin = new Sportsman();
-        eventAdmin .setName("AdminSportsmanName");
-        eventAdmin .setSurname("AdminSportsmanSurname");
-        eventAdmin .setBirthDate(Calendar.getInstance());
-        eventAdmin .setEmail("adm@email");
-        eventAdmin .setPassword("Admins safe password");
+        eventAdmin.setId((long)2);
+        eventAdmin.setName("AdminSportsmanName");
+        eventAdmin.setSurname("AdminSportsmanSurname");
+        eventAdmin.setBirthDate(Calendar.getInstance());
+        eventAdmin.setEmail("adm@email");
+        eventAdmin.setPassword("Admins safe password");
         
         anotherSportsman = new Sportsman();
+        anotherSportsman.setId((long) 3);
         anotherSportsman.setName("anotherSportsmanName");
+        anotherSportsman.setSurname("anotherSportsmanSurname");
+        anotherSportsman.setBirthDate(Calendar.getInstance());
+        anotherSportsman.setEmail("anotherSportsman@email");
+        anotherSportsman.setPassword("anotherSportsman safe password");
+
         
         sport = new Sport();
         sport.setDescription("Sport description");
         sport.setName("SportName");
         
-        
+        event = Mockito.spy(new Event());
         event.setName("EventName");
         event.setDescription("New event: EventName");
         event.setDate(Calendar.getInstance());
@@ -113,49 +122,49 @@ public class InvitationServiceTest {
         Mockito.when(sportsmanDAOMock.findById(sportsman.getId())).thenReturn(sportsman);
         Mockito.when(sportsmanDAOMock.findById(anotherSportsman.getId())).thenReturn(anotherSportsman);
         Mockito.when(sportsmanDAOMock.findById(eventAdmin.getId())).thenReturn(eventAdmin);
-        Mockito.when(sportsmanDAOMock.findById(sportsman.getId()+anotherSportsman.getId()+eventAdmin.getId())).thenReturn(null); 
+        Mockito.when(sportsmanDAOMock.findById(Long.MAX_VALUE)).thenReturn(null);
     
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(null);
     }
 
-    @Test
-    public void inviteWithEventIdNull(){
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void inviteWithNotExistingEvent(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.invite(event.getId()-1, sportsman.getId());
     }
     
-    @Test
-    public void inviteWithSportsmanIdNull(){
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void inviteNotExistingSportsman(){
         expectedException.expect(IllegalArgumentException.class);
-        invitationService.invite(event.getId(), sportsman.getId()-1);
+        invitationService.invite(event.getId(), Long.MAX_VALUE);
     }
     
-    @Test
-    public void inviteCallsInviteTest(){
-        invitationService.invite(event.getId(), sportsman.getId()-1);
-        //ALEBO TAKTO ? verify(invitationService.invite(event, sportsman), times(1));
-        verify(invitationService, times(1)).invite(event, sportsman);
-    }
+//    @Test
+//    public void inviteCallsInviteTest(){
+//        invitationService.invite(event.getId(), sportsman.getId()-1);
+//        //ALEBO TAKTO ? verify(invitationService.invite(event, sportsman), times(1));
+//        verify(invitationService, times(1)).invite(event, sportsman);
+//    }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteEventNull(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.invite(null, sportsman);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteSportsmanNull(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.invite(event, null);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalStateException.class)
     public void inviteSportsmanAlsoAdmin(){
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(IllegalStateException.class);
         invitationService.invite(event, eventAdmin);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteSportsmanAlreadyAdded(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.invite(event, anotherSportsman);
@@ -191,69 +200,62 @@ public class InvitationServiceTest {
     
     @Test
     public void inviteALREADY_INVITED(){
-        invitation.setState(InvitationState.ALREADY_INVITED);
         Invitation result = invitationService.invite(event, sportsman);
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
-        
+        invitation.setState(InvitationState.ALREADY_INVITED);
         verify(emailServiceMock, times(0)).sendInvitationMessage(invitation);
         assertEquals(invitation, result);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void acceptInvitationNull(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.accept(null);
     }
     
     //Finished means Accepted or Declined
-    @Test
+    @Test(expectedExceptions = IllegalStateException.class)
     public void acceptFinishedACCEPTED(){
         invitation.setState(InvitationState.ACCEPTED);
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(IllegalStateException.class);
         invitationService.accept(invitation);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalStateException.class)
     public void acceptFinishedDECLINED(){
         invitation.setState(InvitationState.DECLINED);
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(IllegalStateException.class);
         invitationService.accept(invitation);
     }
     
     @Test
     public void acceptAddingParticipants(){
         Invitation result = invitationService.accept(invitation);
-        verify(event, times(1)).getParticipants().add(sportsman);
+        //verify(event, times(1)).getParticipants().add(sportsman);
         verify(eventDAOMock, times(1)).update(event);
         invitation.setState(InvitationState.ACCEPTED);
         verify(notificationServiceMock, times(1)).notifyInvitationAccepted(invitation);
         assertEquals(invitation, result);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void declineInvitationNull(){
         expectedException.expect(IllegalArgumentException.class);
         invitationService.decline(null);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalStateException.class)
     public void declineInvitationAlreadyDECLINED(){
         invitation.setState(InvitationState.DECLINED);
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(IllegalStateException.class);
         invitationService.decline(invitation);
     }
-    
-    @Test
-    public void declineInvitationAlreadyACCEPTED(){
+
+    @Test(expectedExceptions = IllegalStateException.class)
+    public void declineInvitationAlreadyACCEPTED() {
         invitation.setState(InvitationState.ACCEPTED);
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(IllegalStateException.class);
         Invitation result = invitationService.decline(invitation);
-        verify(event, times(1)).getParticipants().remove(sportsman);
-        verify(eventDAOMock, times(1)).update(event);
-        invitation.setState(InvitationState.DECLINED);
-        //DALA BY SA PRIDAT NOTIFIKACIA PRI DECLINE
-        //verify(notificationServiceMock, times(1)).notifyInvitationDeclined(invitation);
-        assertEquals(invitation, result);
     }
 
 }
