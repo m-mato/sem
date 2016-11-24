@@ -28,101 +28,68 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void create(Event event) {
-        try {
-            eventDAO.create(event);
-        } catch (Exception e) {
-            throw new DataIntegrityViolationException("Failed to create " + event + ", exception: ", e);
-        }
+
+        eventDAO.create(event);
     }
 
     @Override
     public Event findById(Long id) {
-        try {
-            return eventDAO.findById(id);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by id " + id + ", exception: ", e);
-        }
+
+        return eventDAO.findById(id);
     }
 
     @Override
     public List<Event> findByName(String name) {
-        try {
-            return eventDAO.findByName(name);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by name " + name + ", exception: ", e);
-        }
+
+        return eventDAO.findByName(name);
     }
 
     @Override
     public List<Event> findByDate(Calendar date) {
-        try {
-            return eventDAO.findByDate(date);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by date " + date + ", exception: ", e);
-        }
+
+        return eventDAO.findByDate(date);
     }
 
     @Override
     public List<Event> findBySport(Sport sport) {
-        try {
-            return eventDAO.findBySport(sport);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by sport " + sport + ", exception: ", e);
-        }
+
+        return eventDAO.findBySport(sport);
     }
 
     @Override
     public List<Event> findByCity(String city) {
-        try {
-            return eventDAO.findByCity(city);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by city " + city + ", exception: ", e);
-        }
+
+        return eventDAO.findByCity(city);
     }
 
     @Override
     public List<Event> findByAdmin(Sportsman admin) {
-        try {
-            return eventDAO.findByAdmin(admin);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by admin " + admin + ", exception: ", e);
-        }
+
+        return eventDAO.findByAdmin(admin);
     }
 
     @Override
     public List<Event> findByParticipant(Sportsman participant) {
-        try {
-            return eventDAO.findByParticipant(participant);
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find event by participant " + participant + ", exception: ", e);
-        }
+
+        return eventDAO.findByParticipant(participant);
     }
 
     @Override
     public List<Event> findAll() {
-        try {
-            return eventDAO.findAll();
-        } catch (Exception e) {
-            throw new DataRetrievalFailureException("Failed to find all events, exception: ", e);
-        }
+
+        return eventDAO.findAll();
     }
 
     @Override
     public void update(Event event) {
-        try {
-            eventDAO.update(event);
-        } catch (Exception e) {
-            throw new DataIntegrityViolationException("Failed to update " + event + ", exception: ", e);
-        }
+
+        eventDAO.update(event);
     }
 
     @Override
     public void delete(Event event) {
-        try {
-            eventDAO.delete(event);
-        } catch (Exception e) {
-            throw new DataIntegrityViolationException("Failed to delete " + event + ", exception: ", e);
-        }
+
+        eventDAO.delete(event);
     }
 
     @Override
@@ -130,11 +97,7 @@ public class EventServiceImpl implements EventService {
         Set<Sportsman> participants = new HashSet<>();
         participants.addAll(event.getParticipants());
 
-        try {
-            eventDAO.update(event);
-        } catch (Exception e) {
-            throw new DataIntegrityViolationException("Failed to update " + event + ", exception: ", e);
-        }
+        eventDAO.update(event);
         notificationService.notifyEventEdited(participants, event);
     }
 
