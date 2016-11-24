@@ -244,11 +244,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertNull(eventDAO.findById(id));
     }
 
-    public Event getEvent(String name, Sportsman sportsman) {
+    private Event getEvent(String name, Sportsman sportsman) {
         return getEvent(name, sportsman, sports.get(0));
     }
 
-    public Event getEvent(String name, Sportsman sportsman, Sport sport) {
+    private Event getEvent(String name, Sportsman sportsman, Sport sport) {
         Event event = new Event();
         String eventName = name;
         event.setName(eventName);
@@ -267,7 +267,7 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         return event;
     }
 
-    public List<Sportsman> generateSportmans(int count) {
+    private List<Sportsman> generateSportmans(int count) {
         List<Sportsman> sportsmanList = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
             Sportsman sportsman = new Sportsman();
