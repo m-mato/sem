@@ -129,6 +129,7 @@ public class BeanMappingServiceTest {
         Mockito.verify(dozer, times(1)).map(sportsman1, SportsmanDTO.class);
         Mockito.verify(dozer, times(1)).map(sportsman2, SportsmanDTO.class);
     }
+
     private Result getResult(Sportsman sportsman, Event event) {
         Result result = new Result();
         result.setEvent(event);
