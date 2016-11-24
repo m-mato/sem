@@ -75,7 +75,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindByNameNotFound() {
         List<Sportsman> sportsmans = sportsmanDAO.findByName("Jarka");
-        assertTrue(sportsmans.isEmpty());
+        assertNull(sportsmans);
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -96,7 +96,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testFindBySurnameNotFound(){
         List<Sportsman> result = sportsmanDAO.findBySurname("Jano");
-        assertTrue(result.isEmpty());
+        assertNull(result);
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)

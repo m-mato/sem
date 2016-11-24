@@ -123,12 +123,6 @@ public class InvitationServiceImpl implements InvitationService {
 			throw new IllegalStateException("Invitation is already in state: " + invitation.getState());
 		}
 
-		Event event = invitation.getEvent();
-		event.getParticipants().remove(invitation.getInvitee());
-		eventDAO.update(event);
-
-		//notificationService.notifyInvitationDeclined(invitation);
-
 		return changeInvitationState(invitation, InvitationState.DECLINED);
 	}
 

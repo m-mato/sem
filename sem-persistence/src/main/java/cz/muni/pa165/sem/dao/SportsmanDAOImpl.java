@@ -43,8 +43,12 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 			throw new IllegalArgumentException("name is null");
 		}
 		try {
-			return entityManager.createQuery("select s from Sportsman s where name = :name",
+			List<Sportsman> result = entityManager.createQuery("select s from Sportsman s where name = :name",
 					Sportsman.class).setParameter("name", name).getResultList();
+			if(result.isEmpty()) {
+				return null;
+			}
+			return result;
 		} catch (NoResultException nrf) {
 			return null;
 		}
@@ -57,8 +61,12 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 			throw new IllegalArgumentException("surname is null");
 		}
 		try {
-			return entityManager.createQuery("select s from Sportsman s where surname = :surname",
+			List<Sportsman> result = entityManager.createQuery("select s from Sportsman s where surname = :surname",
 					Sportsman.class).setParameter("surname", surname).getResultList();
+			if(result.isEmpty()) {
+				return null;
+			}
+			return result;
 		} catch (NoResultException nrf) {
 			return null;
 		}

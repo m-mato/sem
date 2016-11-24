@@ -32,7 +32,7 @@ public class Sportsman {
 	private Calendar birthDate;
 
 	@NotBlank
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@NotBlank
