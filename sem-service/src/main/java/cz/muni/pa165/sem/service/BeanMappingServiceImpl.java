@@ -18,6 +18,9 @@ public class BeanMappingServiceImpl implements BeanMappingService {
 
     @Override
     public <T> List<T> mapTo(List<?> objects, Class<T> mapToClass) {
+        if (objects == null) {
+            return null;
+        }
         List<T> mappedList = new ArrayList<>();
         for (Object object : objects) {
             mappedList.add(dozer.map(object, mapToClass));
@@ -27,6 +30,9 @@ public class BeanMappingServiceImpl implements BeanMappingService {
 
     @Override
     public <T> T mapTo(Object u, Class<T> mapToClass) {
+        if (u == null) {
+            return null;
+        }
         return dozer.map(u, mapToClass);
     }
 
