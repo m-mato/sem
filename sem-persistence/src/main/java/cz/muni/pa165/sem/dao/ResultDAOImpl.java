@@ -124,7 +124,7 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
-    public List<Result> getAll() {
+    public List<Result> findAll() {
         try {
             Query query = entityManager.createQuery("SELECT r FROM Result r");
             return query.getResultList();

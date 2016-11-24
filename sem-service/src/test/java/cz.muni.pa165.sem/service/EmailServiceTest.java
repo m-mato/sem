@@ -74,11 +74,13 @@ public class EmailServiceTest {
         Assert.assertEquals(result, false);
     }
 
+
 //    @Test
 //    public void sendMessage(){
 //        boolean result = emailService.sendMessage("subject", "body","veronika.aksamitova@gmail.com");
 //        Assert.assertEquals(result, true);
 //    }
+
 
 
    

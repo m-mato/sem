@@ -67,49 +67,17 @@ public class InvitationServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         
-        sportsman = new Sportsman();
-        sportsman.setName("SportsmanName");
-        sportsman.setSurname("SportsmanSurname");
-        sportsman.setBirthDate(Calendar.getInstance());
-        sportsman.setEmail("email@email");
-        sportsman.setPassword("safe password");
-        
-        eventAdmin = new Sportsman();
-        eventAdmin.setName("AdminSportsmanName");
-        eventAdmin.setSurname("AdminSportsmanSurname");
-        eventAdmin.setBirthDate(Calendar.getInstance());
-        eventAdmin.setEmail("adm@email");
-        eventAdmin.setPassword("Admins safe password");
-        
-        anotherSportsman = new Sportsman();
-        anotherSportsman.setName("anotherSportsmanName");
-        anotherSportsman.setSurname("anotherSportsmanSurname");
-        anotherSportsman.setBirthDate(Calendar.getInstance());
-        anotherSportsman.setEmail("anotherSportsman@email");
-        anotherSportsman.setPassword("anotherSportsman safe password");
+        sportsman = getSportsman("sportsman");
+        eventAdmin = getSportsman("eventAdmin");
+        anotherSportsman = getSportsman("anotherSportsman");
 
-        
         sport = new Sport();
         sport.setDescription("Sport description");
         sport.setName("SportName");
         
-        event = Mockito.spy(new Event());
-        event.setName("EventName");
-        event.setDescription("New event: EventName");
-        event.setDate(Calendar.getInstance());
-        event.setAdmin(eventAdmin);
-        Integer capacity = 5;
-        event.setCapacity(capacity);
-        event.setSport(sport);
-        event.setAddress("EventAddress");
-        event.setCity("EventCity");
-        event.addParticipant(anotherSportsman);
-        
-        
-        invitation = new Invitation();
-        invitation.setEvent(event);
-        invitation.setInvitee(sportsman);
-        invitation.setState(InvitationState.INVITED);
+        event = getEvent();
+        invitation = getInvitation(sportsman, getEvent());
+
         
         Mockito.when(eventDAOMock.findById(event.getId())).thenReturn(event);
         Mockito.when(eventDAOMock.findById(argThat(not(event.getId())))).thenReturn(null);
@@ -131,6 +99,7 @@ public class InvitationServiceTest {
         Mockito.when(invitationDAOMock.findAll()).thenReturn(Collections.singletonList(invitation));
     }
 
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteWithNotExistingEvent(){
         expectedException.expect(IllegalArgumentException.class);
@@ -142,14 +111,7 @@ public class InvitationServiceTest {
         expectedException.expect(IllegalArgumentException.class);
         invitationService.invite(5L, 4L);
     }
-    
-//    @Test
-//    public void inviteCallsInviteTest(){
-//        invitationService.invite(event.getId(), sportsman.getId()-1);
-//        //ALEBO TAKTO ? verify(invitationService.invite(event, sportsman), times(1));
-//        verify(invitationService, times(1)).invite(event, sportsman);
-//    }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteEventNull(){
         expectedException.expect(IllegalArgumentException.class);
@@ -294,4 +256,38 @@ public class InvitationServiceTest {
         Assert.assertEquals(result.size(), 1);
         Mockito.verify(invitationDAOMock, times(1)).findAll();
     }
+
+    private Invitation getInvitation(Sportsman sportsman, Event event){
+        Invitation invitation = new Invitation();
+        invitation.setEvent(event);
+        invitation.setInvitee(sportsman);
+        invitation.setState(InvitationState.INVITED);
+        return invitation;
+    }
+
+    private Sportsman getSportsman(String name) {
+        Sportsman sportsman= new Sportsman();
+        sportsman.setName(name);
+        sportsman.setSurname(name +" Surname");
+        sportsman.setBirthDate(Calendar.getInstance());
+        sportsman.setEmail(name.replace(" ","") +"@email");
+        sportsman.setPassword(name +"s safe password");
+        return sportsman;
+    }
+
+    private Event getEvent() {
+        Event event = new Event();
+        event.setName(" Name");
+        event.setDescription("New event: EventName");
+        event.setDate(Calendar.getInstance());
+        event.setAdmin(eventAdmin);
+        Integer capacity = 5;
+        event.setCapacity(capacity);
+        event.setSport(sport);
+        event.setAddress("EventAddress");
+        event.setCity("EventCity");
+        event.addParticipant(anotherSportsman);
+        return event;
+    }
+
 }

@@ -101,7 +101,7 @@ public class ResultServiceTest {
         Mockito.when(resultDAO.findByPosition(argThat(not(2)))).thenReturn(new ArrayList<>());
         Mockito.when(resultDAO.findByNote("note")).thenReturn(Collections.singletonList(result));
         Mockito.when(resultDAO.findByNote(argThat(not("note")))).thenReturn(new ArrayList<>());
-        Mockito.when(resultDAO.getAll()).thenReturn(Collections.singletonList(result));
+        Mockito.when(resultDAO.findAll()).thenReturn(Collections.singletonList(result));
     }
 
     @Test
@@ -369,7 +369,7 @@ public class ResultServiceTest {
         List<Result> results = resultService.getAll();
         Assert.assertNotNull(results);
         Assert.assertEquals(results.size(),1);
-        Mockito.verify(resultDAO, times(1)).getAll();
+        Mockito.verify(resultDAO, times(1)).findAll();
     }
 
 
