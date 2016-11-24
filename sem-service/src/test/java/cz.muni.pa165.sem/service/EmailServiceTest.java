@@ -1,28 +1,24 @@
 package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.configuration.EmailConfiguration;
-import cz.muni.pa165.sem.dao.*;
-import cz.muni.pa165.sem.entity.*;
-import cz.muni.pa165.sem.utils.InvitationState;
-import java.util.ArrayList;
-import java.util.Calendar;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import cz.muni.pa165.sem.configuration.EmailConfiguration;
+
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.util.List;
-
-import static org.mockito.Matchers.argThat;
-import static org.hamcrest.CoreMatchers.not;
-import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.testng.annotations.Test;
+import javax.mail.Session;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
 
@@ -41,6 +37,7 @@ public class EmailServiceTest {
 
     @Mock
     private EmailConfiguration emailConfigurationMock;
+    private Session session;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -75,13 +72,10 @@ public class EmailServiceTest {
     }
 
 
-//    @Test
-//    public void sendMessage(){
-//        boolean result = emailService.sendMessage("subject", "body","veronika.aksamitova@gmail.com");
-//        Assert.assertEquals(result, true);
-//    }
+    @Test
+    public void sendWithoutMessage(){
+        boolean result = emailService.sendMessage(null);
+        Assert.assertEquals(result, false);
+    }
 
-
-
-   
 }
