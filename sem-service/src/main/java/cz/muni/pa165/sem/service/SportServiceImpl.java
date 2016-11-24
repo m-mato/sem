@@ -21,63 +21,31 @@ public class SportServiceImpl implements SportService {
 
     @Override
     public Sport findById(Long id) {
-        Sport sport;
-        try {
-            sport = sportDAO.findById(id);
-        } catch (Exception ex) {
-            throw new DataRetrievalFailureException("Failed to find Sport with id \"" + id + "\", exception \n" , ex);
-        }
-        return sport;
+        return sportDAO.findById(id);
     }
 
     @Override
     public void create(Sport sport) {
-        try {
-            sportDAO.create(sport);
-        } catch (Exception ex) {
-            throw new DataIntegrityViolationException("Failed to create Sport \"" + sport + "\", exception: \n" , ex);
-        }
+        sportDAO.create(sport);
     }
 
     @Override
     public void update(Sport sport) {
-        try {
-            sportDAO.update(sport);
-        } catch (Exception ex) {
-            throw new DataIntegrityViolationException("Failed to update Sport \"" + sport + "\", exception: \n" , ex);
-        }
+        sportDAO.update(sport);
     }
 
     @Override
     public void delete(Sport sport) {
-        try {
-            sportDAO.delete(sport);
-        } catch (Exception ex) {
-            throw new DataIntegrityViolationException("Failed to delete Sport \"" + sport + "\", exception: \n" , ex);
-        }
+        sportDAO.delete(sport);
     }
 
     @Override
     public List<Sport> findAll() {
-        List<Sport> resultList;
-
-        try {
-            resultList = sportDAO.findAll();
-        } catch (Exception ex) {
-            throw new DataRetrievalFailureException("Failed to find all Sports, exception: \n" , ex);
-        }
-        return resultList == null ? new ArrayList<>() : resultList;
+        return sportDAO.findAll();
     }
 
     @Override
     public Sport findByName(String name) {
-        Sport sport;
-
-        try {
-            sport = sportDAO.findByName(name);
-        } catch (Exception ex) {
-            throw new DataRetrievalFailureException("Failed to find Sport by name \"" + name + "\", exception: \n" , ex);
-        }
-        return sport;
+        return sportDAO.findByName(name);
     }
 }
