@@ -42,7 +42,6 @@ public class SportsmanServiceTest {
 
         sportsmen = new ArrayList();
         sportsman = new Sportsman();
-        sportsman.setId(1L);
         sportsman.setName("Sportsman");
         sportsman.setSurname("Surname");
         sportsman.setBirthDate(Calendar.getInstance());

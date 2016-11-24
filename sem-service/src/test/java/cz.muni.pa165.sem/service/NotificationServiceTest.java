@@ -1,16 +1,13 @@
 package cz.muni.pa165.sem.service;
 
-import cz.muni.pa165.sem.dao.InvitationDAO;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.utils.InvitationState;
-import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import static org.testng.Assert.fail;
 import org.testng.Assert;
