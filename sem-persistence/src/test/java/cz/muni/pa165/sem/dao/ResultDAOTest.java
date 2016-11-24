@@ -63,7 +63,7 @@ public class ResultDAOTest extends AbstractTestNGSpringContextTests {
     
     @AfterMethod
     public void tearDown() {
-        List<Result> results = resultDAO.getAll();
+        List<Result> results = resultDAO.findAll();
         results.forEach(resultDAO::delete);
         List<Event> events = eventDAO.findAll();
         events.forEach(eventDAO::delete);
@@ -334,7 +334,7 @@ public class ResultDAOTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testFindAll() {
-        List<Result> results = resultDAO.getAll();
+        List<Result> results = resultDAO.findAll();
         assertNotNull(results);
     }
 

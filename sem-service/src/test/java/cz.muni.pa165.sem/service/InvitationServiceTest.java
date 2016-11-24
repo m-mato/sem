@@ -14,8 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.util.List;
-import java.util.jar.Attributes;
+import java.util.*;
 
 import static org.mockito.Matchers.argThat;
 import static org.hamcrest.CoreMatchers.not;
@@ -23,6 +22,9 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import javax.validation.constraints.AssertTrue;
+
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
 
@@ -65,53 +67,17 @@ public class InvitationServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         
-        sportsman = new Sportsman();
-        sportsman.setId((long) 2);
-        sportsman.setName("SportsmanName");
-        sportsman.setSurname("SportsmanSurname");
-        sportsman.setBirthDate(Calendar.getInstance());
-        sportsman.setEmail("email@email");
-        sportsman.setPassword("safe password");
-        
-        eventAdmin = new Sportsman();
-        eventAdmin.setId((long) 1);
-        eventAdmin.setName("AdminSportsmanName");
-        eventAdmin.setSurname("AdminSportsmanSurname");
-        eventAdmin.setBirthDate(Calendar.getInstance());
-        eventAdmin.setEmail("adm@email");
-        eventAdmin.setPassword("Admins safe password");
-        
-        anotherSportsman = new Sportsman();
-        anotherSportsman.setId((long) 3);
-        anotherSportsman.setName("anotherSportsmanName");
-        anotherSportsman.setSurname("anotherSportsmanSurname");
-        anotherSportsman.setBirthDate(Calendar.getInstance());
-        anotherSportsman.setEmail("anotherSportsman@email");
-        anotherSportsman.setPassword("anotherSportsman safe password");
+        sportsman = getSportsman("sportsman");
+        eventAdmin = getSportsman("eventAdmin");
+        anotherSportsman = getSportsman("anotherSportsman");
 
-        
         sport = new Sport();
         sport.setDescription("Sport description");
         sport.setName("SportName");
         
-        event = Mockito.spy(new Event());
-        event.setId((long) 4);
-        event.setName("EventName");
-        event.setDescription("New event: EventName");
-        event.setDate(Calendar.getInstance());
-        event.setAdmin(eventAdmin);
-        Integer capacity = 5;
-        event.setCapacity(capacity);
-        event.setSport(sport);
-        event.setAddress("EventAddress");
-        event.setCity("EventCity");
-        event.addParticipant(anotherSportsman);
-        
-        
-        invitation = new Invitation();
-        invitation.setEvent(event);
-        invitation.setInvitee(sportsman);
-        invitation.setState(InvitationState.INVITED);
+        event = getEvent();
+        invitation = getInvitation(sportsman, getEvent());
+
         
         Mockito.when(eventDAOMock.findById(event.getId())).thenReturn(event);
         Mockito.when(eventDAOMock.findById(argThat(not(event.getId())))).thenReturn(null);
@@ -119,34 +85,33 @@ public class InvitationServiceTest {
         List<Event> events = new ArrayList<>();
         events.add(event);
         Mockito.when(eventDAOMock.findByName(event.getName())).thenReturn(events);
-        
-        Mockito.when(sportsmanDAOMock.findById(sportsman.getId())).thenReturn(sportsman);
-        Mockito.when(sportsmanDAOMock.findById(anotherSportsman.getId())).thenReturn(anotherSportsman);
-        Mockito.when(sportsmanDAOMock.findById(eventAdmin.getId())).thenReturn(eventAdmin);
-        Mockito.when(sportsmanDAOMock.findById(Long.MAX_VALUE)).thenReturn(null);
-    
+        Mockito.when(eventDAOMock.findById(5L)).thenReturn(event);
+        Mockito.when(eventDAOMock.findById(10L)).thenReturn(null);
+
+        Mockito.when(sportsmanDAOMock.findById(1L)).thenReturn(sportsman);
+        Mockito.when(sportsmanDAOMock.findById(2L)).thenReturn(anotherSportsman);
+        Mockito.when(sportsmanDAOMock.findById(3L)).thenReturn(eventAdmin);
+        Mockito.when(sportsmanDAOMock.findById(4L)).thenReturn(null);
+
+        Mockito.when(invitationDAOMock.findById(argThat(not(1l)))).thenReturn(null);
+        Mockito.when(invitationDAOMock.findById(1L)).thenReturn(invitation);
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(null);
+        Mockito.when(invitationDAOMock.findAll()).thenReturn(Collections.singletonList(invitation));
     }
+
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteWithNotExistingEvent(){
         expectedException.expect(IllegalArgumentException.class);
-        invitationService.invite(event.getId()-1, sportsman.getId());
+        invitationService.invite(10L, 2L);
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteNotExistingSportsman(){
         expectedException.expect(IllegalArgumentException.class);
-        invitationService.invite(event.getId(), Long.MAX_VALUE);
+        invitationService.invite(5L, 4L);
     }
-    
-//    @Test
-//    public void inviteCallsInviteTest(){
-//        invitationService.invite(event.getId(), sportsman.getId()-1);
-//        //ALEBO TAKTO ? verify(invitationService.invite(event, sportsman), times(1));
-//        verify(invitationService, times(1)).invite(event, sportsman);
-//    }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void inviteEventNull(){
         expectedException.expect(IllegalArgumentException.class);
@@ -257,6 +222,72 @@ public class InvitationServiceTest {
         invitation.setState(InvitationState.ACCEPTED);
         expectedException.expect(IllegalStateException.class);
         Invitation result = invitationService.decline(invitation);
+    }
+
+    @Test
+    public void findByIdExisting() {
+        Long id = 1L;
+        Invitation invitation = invitationService.findById(id);
+        Assert.assertNotNull(invitation);
+        Mockito.verify(invitationDAOMock, times(1)).findById(id);
+    }
+
+    @Test
+    public void findByIdNonExisting() {
+        Long id = 2L;
+        Invitation invitation = invitationService.findById(id);
+        Assert.assertNull(invitation);
+        Mockito.verify(invitationDAOMock, times(1)).findById(id);
+    }
+
+    @Test(expectedExceptions = DataAccessException.class)
+    public void findByIdNull() {
+        doThrow(new IllegalArgumentException("Trying to find object by null id!"))
+                .when(invitationDAOMock)
+                .findById(null);
+
+        invitationService.findById(null);
+    }
+
+    @Test
+    public void findAll(){
+        List<Invitation> result = invitationService.findAll();
+        Assert.assertNotNull(result);
+        Assert.assertEquals(result.size(), 1);
+        Mockito.verify(invitationDAOMock, times(1)).findAll();
+    }
+
+    private Invitation getInvitation(Sportsman sportsman, Event event){
+        Invitation invitation = new Invitation();
+        invitation.setEvent(event);
+        invitation.setInvitee(sportsman);
+        invitation.setState(InvitationState.INVITED);
+        return invitation;
+    }
+
+    private Sportsman getSportsman(String name) {
+        Sportsman sportsman= new Sportsman();
+        sportsman.setName(name);
+        sportsman.setSurname(name +" Surname");
+        sportsman.setBirthDate(Calendar.getInstance());
+        sportsman.setEmail(name.replace(" ","") +"@email");
+        sportsman.setPassword(name +"s safe password");
+        return sportsman;
+    }
+
+    private Event getEvent() {
+        Event event = new Event();
+        event.setName(" Name");
+        event.setDescription("New event: EventName");
+        event.setDate(Calendar.getInstance());
+        event.setAdmin(eventAdmin);
+        Integer capacity = 5;
+        event.setCapacity(capacity);
+        event.setSport(sport);
+        event.setAddress("EventAddress");
+        event.setCity("EventCity");
+        event.addParticipant(anotherSportsman);
+        return event;
     }
 
 }

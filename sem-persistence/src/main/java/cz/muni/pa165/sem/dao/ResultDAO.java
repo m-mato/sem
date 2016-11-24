@@ -90,7 +90,7 @@ public interface ResultDAO {
      *
      * @return all results from database
      */
-    List<Result> getAll();
+    List<Result> findAll();
 
     /**
      * Method which updates result object in DB

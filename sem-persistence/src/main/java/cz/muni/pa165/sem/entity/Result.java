@@ -128,7 +128,12 @@ public class Result {
         if(!getPerformanceUnit().equals(result.getPerformanceUnit())) return false;
         if(!getPosition().equals(result.getPosition()))return false;
         if(!getSportsman().equals(result.getSportsman())) return false;
-        if(!getNote().equals(result.getNote())) return false;
+        if(getNote() != null){
+            if(!getNote().equals(result.getNote())) return false;
+        }
+        else{
+            if(result.getNote() != null) return false;
+        }
         return getEvent().equals(result.getEvent());
     }
     
@@ -137,7 +142,6 @@ public class Result {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + getPerformance().hashCode();
         result = 31 * result + getPosition().hashCode();
-        result = 31 * result + getNote().hashCode();
         result = 31 * result + getEvent().hashCode();
         return result;
     }

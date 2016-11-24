@@ -67,10 +67,6 @@ public class Event implements Serializable {
     @ManyToMany
     private Set<Sportsman> participants = new HashSet<>();
 
-    public void setId(Long id){
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
