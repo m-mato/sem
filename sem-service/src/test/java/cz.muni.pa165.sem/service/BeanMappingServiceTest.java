@@ -7,20 +7,16 @@ import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.dozer.Mapper;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import org.testng.Assert;
-import org.testng.annotations.*;
-
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.testng.annotations.*;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static org.mockito.Mockito.*;
 
 /**
  * @author Veronika Aksamitova
@@ -184,7 +180,5 @@ public class BeanMappingServiceTest {
         sport.setDescription("sport description");
         return sport;
     }
-
-   
 
 }
