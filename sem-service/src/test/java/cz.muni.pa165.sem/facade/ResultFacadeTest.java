@@ -96,6 +96,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
         event.setCity("Event 1 city");
         event.setAddress("Event 1 address");
         event.setAdmin(sportsman);
+        event.setParticipants(new HashSet<>());
 
         Mockito.when(eventService.findById(1L)).thenReturn(event);
 
