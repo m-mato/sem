@@ -80,11 +80,6 @@ public class NotificationServiceTest {
                 Mockito.anyString());
     }
 
-    @Test
-    public void notifyEventCanceled(){
-        fail("not done yet");
-    }
-
     private Invitation getInvitation(Sportsman invitee, Event event) {
         Invitation invitation = new Invitation();
         invitation.setEvent(event);

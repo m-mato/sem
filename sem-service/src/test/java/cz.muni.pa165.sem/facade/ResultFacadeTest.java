@@ -107,6 +107,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
         result.setNote("World record");
         result.setEvent(event);
 
+        Mockito.when(resultService.findById(1L)).thenReturn(result);
         Mockito.when(resultService.findById(argThat(not(1L)))).thenReturn(null);
         Mockito.when(resultService.findByPerformance(9.58)).thenReturn(Collections.singletonList(result));
         Mockito.when(resultService.findByPerformance(argThat(not(9.58)))).thenReturn(Collections.emptyList());
@@ -236,7 +237,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testUpdate() {
-        ResultUpdateDTO resultUpdateDTO = beanMappingService.mapTo(result, ResultUpdateDTO.class);
+        ResultUpdateDTO resultUpdateDTO = beanMappingService.mapTo(resultFacade.findById(1L), ResultUpdateDTO.class);
         resultUpdateDTO.setId(1L);
 
         resultFacade.update(resultUpdateDTO);
@@ -246,7 +247,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testDelete() {
-        ResultDTO resultDTO = resultFacade.findById(1L);
+        ResultDTO resultDTO = beanMappingService.mapTo(resultFacade.findById(1L), ResultDTO.class);
         resultDTO.setId(1L);
 
         resultFacade.delete(resultDTO);

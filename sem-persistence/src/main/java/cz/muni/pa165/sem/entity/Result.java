@@ -128,9 +128,7 @@ public class Result {
         if(!(o instanceof Result)) return false;
         
         Result result = (Result) o;
-        
-        if(getId() == null) return false ;
-        if(!getId().equals(result.getId())) return false;
+
         if(!getPerformance().equals(result.getPerformance())) return false;
         if(!getPerformanceUnit().equals(result.getPerformanceUnit())) return false;
         if(!getPosition().equals(result.getPosition()))return false;
