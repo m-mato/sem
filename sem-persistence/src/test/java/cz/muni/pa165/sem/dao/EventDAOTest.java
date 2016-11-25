@@ -113,6 +113,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertNull(eventDAO.findById(id));
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByIdWithNull() {
+        eventDAO.findById(null);
+    }
+
     @Test
     public void findExistingEventByName() throws Exception {
         String name = "existingEvent";
@@ -128,6 +133,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         List<Event> eventsByName = eventDAO.findByName(name);
         Assert.assertNotNull(eventsByName);
         Assert.assertEquals(eventsByName.size(), 0);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNameWithNull() {
+        eventDAO.findByName(null);
     }
 
     @Test
@@ -149,6 +159,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(eventsByDate.size(), 1);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByDateWithNull() {
+        eventDAO.findByDate(null);
+    }
+
     @Test
     public void findBySport() throws Exception {
         Integer events = eventDAO.findAll().size();
@@ -160,6 +175,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertNotNull(fromDB);
         Assert.assertEquals(fromDB.size(), 1);
         Assert.assertEquals(fromDB.get(0).getName(), "event"+(eventsCount+1));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findBySportWithNull() {
+        eventDAO.findBySport(null);
     }
 
     @Test
@@ -179,6 +199,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(eventsCity.size(), 1);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByCityWithNull() {
+        eventDAO.findByCity(null);
+    }
+
     @Test
     public void findByAdmin() throws Exception {
         List<Event> fromDB = eventDAO.findByAdmin(sportsmans.get(1));
@@ -187,6 +212,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         for (int i = 0; i < fromDB.size(); i++) {
             Assert.assertEquals(fromDB.get(i).getName(), "event"+ (i+1));
         }
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByAdminWithNull() {
+        eventDAO.findByAdmin(null);
     }
 
     @Test
@@ -212,6 +242,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(eventsByPart.size(), 0);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByParticipantWithNull() {
+        eventDAO.findByParticipant(null);
+    }
+
     @Test
     public void findAll() throws Exception {
         List<Event> fromDB = eventDAO.findAll();
@@ -234,6 +269,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(event.getDescription(), description);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateWithNull() {
+        eventDAO.update(null);
+    }
+
     @Test
     public void delete() throws Exception {
         Event event = getEvent("deleteEvent", sportsmans.get(0));
@@ -242,6 +282,11 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
 
         eventDAO.delete(event);
         Assert.assertNull(eventDAO.findById(id));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteWithNull() {
+        eventDAO.delete(null);
     }
 
     private Event getEvent(String name, Sportsman sportsman) {
