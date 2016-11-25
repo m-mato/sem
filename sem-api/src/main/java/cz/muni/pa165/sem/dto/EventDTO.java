@@ -1,0 +1,190 @@
+package cz.muni.pa165.sem.dto;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * @author Vit Hovezak
+ */
+public class EventDTO {
+
+    private Long id;
+
+    private String name;
+
+    private String description;
+
+    private Calendar date;
+
+    private SportDTO sport;
+
+    private Integer capacity;
+
+    private String city;
+
+    private String address;
+
+    private SportsmanDTO admin;
+
+    private List<SportsmanDTO> participants = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
+    public SportDTO getSport() {
+        return sport;
+    }
+
+    public void setSport(SportDTO sport) {
+        this.sport = sport;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public SportsmanDTO getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(SportsmanDTO admin) {
+        this.admin = admin;
+    }
+
+    public List<SportsmanDTO> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<SportsmanDTO> participants) {
+        this.participants = participants;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.name);
+        hash = 47 * hash + Objects.hashCode(this.description);
+        hash = 47 * hash + Objects.hashCode(this.date);
+        hash = 47 * hash + Objects.hashCode(this.sport);
+        hash = 47 * hash + Objects.hashCode(this.capacity);
+        hash = 47 * hash + Objects.hashCode(this.city);
+        hash = 47 * hash + Objects.hashCode(this.address);
+        hash = 47 * hash + Objects.hashCode(this.admin);
+        hash = 47 * hash + Objects.hashCode(this.participants);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof EventDTO)) {
+            return false;
+        }
+        final EventDTO other = (EventDTO) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.city, other.city)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.sport, other.sport)) {
+            return false;
+        }
+        if (!Objects.equals(this.capacity, other.capacity)) {
+            return false;
+        }
+        if (!Objects.equals(this.admin, other.admin)) {
+            return false;
+        }
+        if (!Objects.equals(this.participants, other.participants)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "EventDTO{"
+                + "id=" + id
+                + ", name=" + name
+                + ", description=" + description
+                + ", date=" + date
+                + ", sport=" + sport
+                + ", capacity=" + capacity
+                + ", city=" + city
+                + ", address=" + address
+                + ", admin=" + admin
+                + ", participants=" + participants
+                + '}';
+    }
+
+}

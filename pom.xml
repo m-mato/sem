@@ -6,7 +6,15 @@
 
     <groupId>cz.muni.pa165</groupId>
     <artifactId>sem</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>sem-persistence</module>
+        <module>sem-service</module>
+        <module>sem-mvc</module>
+        <module>sem-api</module>
+    </modules>
 
     <name>System for Management of Sporting Events</name>
 
@@ -41,11 +49,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.10.2.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>4.2.6.RELEASE</version>
@@ -55,6 +58,12 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.9.13.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
     </dependencies>
 
