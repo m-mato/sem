@@ -121,7 +121,7 @@ public class EventUpdateDTO {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof EventUpdateDTO)) {
             return false;
         }
         final EventUpdateDTO other = (EventUpdateDTO) obj;

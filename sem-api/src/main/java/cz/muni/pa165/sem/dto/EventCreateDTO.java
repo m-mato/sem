@@ -110,7 +110,7 @@ public class EventCreateDTO {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof EventCreateDTO)) {
             return false;
         }
         final EventCreateDTO other = (EventCreateDTO) obj;
