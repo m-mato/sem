@@ -274,7 +274,7 @@ public class EventDAOTest extends AbstractTestNGSpringContextTests {
             sportsman.setName("Sportsman" + i);
             sportsman.setSurname("Sportsman" + i);
             sportsman.setBirthDate(Calendar.getInstance());
-            sportsman.setEmail("sportsman1@email.com");
+            sportsman.setEmail("sportsman"+i+"@email.com");
             sportsman.setPassword("pass1");
             sportsmanDAO.create(sportsman);
             sportsmanList.add(sportsman);
