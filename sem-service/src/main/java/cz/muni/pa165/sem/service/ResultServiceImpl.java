@@ -40,7 +40,7 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-    public List<Result> getAll() {
+    public List<Result> findAll() {
         List<Result> results = resultDAO.findAll();
         return results == null ? new ArrayList<>() : results;
         

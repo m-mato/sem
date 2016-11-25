@@ -100,10 +100,4 @@ public class EventServiceImpl implements EventService {
         eventDAO.update(event);
         notificationService.notifyEventEdited(participants, event);
     }
-
-    @Override
-    public void cancel(Event event) {
-        //TODO
-    }
-
 }

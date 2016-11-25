@@ -366,7 +366,7 @@ public class ResultServiceTest {
 
     @Test
     public void testFindAll() {
-        List<Result> results = resultService.getAll();
+        List<Result> results = resultService.findAll();
         Assert.assertNotNull(results);
         Assert.assertEquals(results.size(),1);
         Mockito.verify(resultDAO, times(1)).findAll();

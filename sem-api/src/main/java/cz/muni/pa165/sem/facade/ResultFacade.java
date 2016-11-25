@@ -90,7 +90,7 @@ public interface ResultFacade {
      *
      * @return all results from database
      */
-    List<ResultDTO> getAll();
+    List<ResultDTO> findAll();
 
     /**
      * Method which updates result object in DB

@@ -17,7 +17,7 @@ public interface ResultService {
     
     Result findById(Long id);
     
-    List<Result> getAll();
+    List<Result> findAll();
     
     List<Result> findBySportsman(Sportsman sportsman);
 

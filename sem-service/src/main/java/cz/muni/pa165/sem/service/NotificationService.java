@@ -14,6 +14,4 @@ public interface NotificationService {
 	boolean notifyInvitationAccepted(Invitation invitation);
 
 	boolean notifyEventEdited(Set<Sportsman> participants, Event event);
-
-	boolean notifyEventCanceled(Set<Sportsman> participants, Event event);
 }

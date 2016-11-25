@@ -4,6 +4,7 @@ import cz.muni.pa165.sem.utils.InvitationState;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @author Matej Majdis
@@ -77,33 +78,43 @@ public class Invitation {
 
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Invitation)) return false;
+	public boolean equals(Object object){
+		if ((object == null) || (!(object instanceof Invitation))) {
+			return false;
+		}
 
-		Invitation that = (Invitation) o;
+		if (this == object) {
+			return true;
+		}
 
-		if (!getEvent().equals(that.getEvent())) return false;
-		if (!getInvitee().equals(that.getInvitee())) return false;
-		return getState() == that.getState();
+		final Invitation that = (Invitation) object;
+
+		if (!Objects.equals(this.getEvent(), that.getEvent())) return false;
+		if (!Objects.equals(this.getInvitee(), that.getInvitee())) return false;
+		return Objects.equals(this.getState(), that.getState());
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getEvent().hashCode();
-		result = 31 * result + getInvitee().hashCode();
-		result = 31 * result + getState().hashCode();
-		return result;
+		final int prime = 53;
+		int hashCode = 7;
+
+		hashCode = prime * hashCode + ((this.event == null) ? 0 : this.event.hashCode());
+		hashCode = prime * hashCode + ((this.invitee == null) ? 0 : this.invitee.hashCode());
+		hashCode = prime * hashCode + ((this.state == null) ? 0 : this.state.hashCode());
+
+		return hashCode;
 	}
 
 	@Override
 	public String toString() {
-		return "Invitation{" +
-				"id=" + id +
-				", event=" + event +
-				", invitee=" + invitee +
-				", state=" + state +
-				'}';
+		return "Invitation:" +
+					"{" +
+						"id:" + this.id + ", " +
+						"event:" + this.event + ", " +
+						"invitee:" + this.invitee + ", " +
+						"state:" + this.state +
+					"}";
 	}
 }

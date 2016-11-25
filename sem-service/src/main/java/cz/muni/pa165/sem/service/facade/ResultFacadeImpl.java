@@ -87,8 +87,8 @@ public class ResultFacadeImpl implements ResultFacade{
     }
 
     @Override
-    public List<ResultDTO> getAll() {
-        List<Result> results = resultService.getAll();
+    public List<ResultDTO> findAll() {
+        List<Result> results = resultService.findAll();
         return beanMappingService.mapTo(results, ResultDTO.class);
     }
 

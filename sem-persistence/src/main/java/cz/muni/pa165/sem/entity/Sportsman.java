@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -113,40 +114,47 @@ public class Sportsman {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Sportsman)) return false;
+	public boolean equals(Object object){
+		if ((object == null) || (!(object instanceof Sportsman))) {
+			return false;
+		}
 
-		Sportsman sportsman = (Sportsman) o;
+		if (this == object) {
+			return true;
+		}
 
-		if (getId() != null ? !getId().equals(sportsman.getId()) : sportsman.getId() != null) return false;
-		if (!getName().equals(sportsman.getName())) return false;
-		if (!getSurname().equals(sportsman.getSurname())) return false;
-		if (!getBirthDate().equals(sportsman.getBirthDate())) return false;
-		if (!getEmail().equals(sportsman.getEmail())) return false;
-		return getPassword().equals(sportsman.getPassword());
+		final Sportsman sportsman = (Sportsman) object;
 
+		if (!Objects.equals(this.getName(), sportsman.getName())) return false;
+		if (!Objects.equals(this.getSurname(), sportsman.getSurname())) return false;
+		if (!Objects.equals(this.getBirthDate(), sportsman.getBirthDate())) return false;
+		if (!Objects.equals(this.getEmail(), sportsman.getEmail())) return false;
+		return Objects.equals(this.getPassword(), sportsman.getPassword());
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getId() != null ? getId().hashCode() : 0;
-		result = 31 * result + getName().hashCode();
-		result = 31 * result + getSurname().hashCode();
-		result = 31 * result + getBirthDate().hashCode();
-		result = 31 * result + getEmail().hashCode();
-		result = 31 * result + getPassword().hashCode();
-		return result;
+		final int prime = 53;
+		int hashCode = 7;
+
+		hashCode = prime * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
+		hashCode = prime * hashCode + ((this.surname == null) ? 0 : this.surname.hashCode());
+		hashCode = prime * hashCode + ((this.birthDate == null) ? 0 : this.birthDate.hashCode());
+		hashCode = prime * hashCode + ((this.email == null) ? 0 : this.email.hashCode());
+		hashCode = prime * hashCode + ((this.password == null) ? 0 : this.password.hashCode());
+
+		return hashCode;
 	}
 
 	@Override
 	public String toString() {
-		return "Sportsman{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", surname='" + surname + '\'' +
-				", birthDate=" + birthDate +
-				", email='" + email + '\'' +
-				'}';
+		return "Sportsman:" +
+					"{" + ", " +
+						"id:" + this.id + ", " +
+						"name:" + this.name + ", " +
+						"surname:" + this.surname + ", " +
+						"birthDate:" + this.birthDate + ", " +
+						"email:" + this.email +
+					"}";
 	}
 }

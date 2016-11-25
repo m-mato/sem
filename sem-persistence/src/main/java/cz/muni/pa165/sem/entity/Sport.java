@@ -2,6 +2,7 @@ package cz.muni.pa165.sem.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  *
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author Kamil Triscik
  */
 @Entity
+@Table(name = "sport")
 public class Sport {
 
     @Id
@@ -60,34 +62,28 @@ public class Sport {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if ((obj == null) || (!(obj instanceof Sport)))
-            return false;
-
-        if (this == obj)
-            return true;
-
-        Sport objSport = (Sport) obj;
-        if (name == null) {
-            if (objSport.getName() != null)
-                return false;
-        } else if (!name.equals(objSport.getName())) {
+    public boolean equals(Object object){
+        if ((object == null) || (!(object instanceof Sport))) {
             return false;
         }
 
-        if (description == null) {
-            if (objSport.getDescription() != null)
-                return false;
-        } else if (!description.equals(objSport.getDescription()))
-            return false;
+        if (this == object) {
+            return true;
+        }
 
-        return true;
+        final Sport sport = (Sport) object;
+        if (!Objects.equals(this.getName(), sport.getName())) return false;
+        return Objects.equals(this.getDescription(), sport.getDescription());
+
     }
 
     @Override
     public String toString() {
-        return "{id: " + id + ", " +
-                "name: " + name + ", " +
-                "description: " + description + " }";
+        return "Sport:" +
+                    "{" +
+                        "id: " + this.id + ", " +
+                        "name: " + this.name + ", " +
+                        "description: " + this.description +
+                    "}";
     }
 }

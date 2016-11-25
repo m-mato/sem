@@ -160,75 +160,57 @@ public class Event implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + Objects.hashCode(this.description);
-        hash = 41 * hash + Objects.hashCode(this.date);
-        hash = 41 * hash + Objects.hashCode(this.sport);
-        hash = 41 * hash + Objects.hashCode(this.capacity);
-        hash = 41 * hash + Objects.hashCode(this.city);
-        hash = 41 * hash + Objects.hashCode(this.address);
-        hash = 41 * hash + Objects.hashCode(this.admin);
-        return hash;
+        final int prime = 53;
+        int hashCode = 7;
+
+        hashCode = prime * hashCode + ((this.name == null) ? 0 : this.name.hashCode());
+        hashCode = prime * hashCode + ((this.description == null) ? 0 : this.description.hashCode());
+        hashCode = prime * hashCode + ((this.date == null) ? 0 : this.date.hashCode());
+        hashCode = prime * hashCode + ((this.sport == null) ? 0 : this.sport.hashCode());
+        hashCode = prime * hashCode + ((this.capacity == null) ? 0 : this.capacity.hashCode());
+        hashCode = prime * hashCode + ((this.city == null) ? 0 : this.city.hashCode());
+        hashCode = prime * hashCode + ((this.address == null) ? 0 : this.address.hashCode());
+        hashCode = prime * hashCode + ((this.admin == null) ? 0 : this.admin.hashCode());
+
+        return hashCode;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object object){
+        if ((object == null) || (!(object instanceof Event))) {
+            return false;
+        }
+
+        if (this == object) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Event)) {
-            return false;
-        }
-        final Event other = (Event) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.city, other.city)) {
-            return false;
-        }
-        if (!Objects.equals(this.address, other.address)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        if (!Objects.equals(this.sport, other.sport)) {
-            return false;
-        }
-        if (!Objects.equals(this.capacity, other.capacity)) {
-            return false;
-        }
-        if (!Objects.equals(this.admin, other.admin)) {
-            return false;
-        }
-        return true;
+
+        final Event other = (Event) object;
+        if (!Objects.equals(this.name, other.name)) return false;
+        if (!Objects.equals(this.description, other.description))return false;
+        if (!Objects.equals(this.city, other.city)) return false;
+        if (!Objects.equals(this.address, other.address)) return false;
+        if (!Objects.equals(this.id, other.id)) return false;
+        if (!Objects.equals(this.date, other.date)) return false;
+        if (!Objects.equals(this.sport, other.sport)) return false;
+        if (!Objects.equals(this.capacity, other.capacity)) return false;
+        return Objects.equals(this.admin, other.admin);
     }
 
     @Override
     public String toString() {
-        return "Event{"
-                + "id=" + id
-                + ", name=" + name
-                + ", description=" + description
-                + ", date=" + date
-                + ", sport=" + sport
-                + ", capacity=" + capacity
-                + ", city=" + city
-                + ", address=" + address
-                + ", admin=" + admin
-                + ", participants=" + participants
-                + '}';
+        return "Event:" +
+                    "{" +
+                        "id:" + this.id + ", " +
+                        "name:" + this.name + ", " +
+                        "description:" + this.description + ", " +
+                        "date:" + this.date + ", " +
+                        "sport:" + this.sport + ", " +
+                        "capacity:" + this.capacity + ", " +
+                        "city:" + this.city + ", " +
+                        "address:" + this.address + ", " +
+                        "admin:" + this.admin +
+                    "}";
     }
     
 }

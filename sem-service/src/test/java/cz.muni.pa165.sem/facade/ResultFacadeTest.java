@@ -122,7 +122,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
         Mockito.when(resultService.findByEvent(argThat(not(event)))).thenReturn(Collections.emptyList());
         Mockito.when(resultService.findBySport(sport)).thenReturn(Collections.singletonList(result));
         Mockito.when(resultService.findBySport(argThat(not(sport)))).thenReturn(Collections.emptyList());
-        Mockito.when(resultService.getAll()).thenReturn(Collections.singletonList(result));
+        Mockito.when(resultService.findAll()).thenReturn(Collections.singletonList(result));
     }
 
     @Test
@@ -229,9 +229,9 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testGetAll() {
-        List<ResultDTO> resultDTOs = resultFacade.getAll();
+        List<ResultDTO> resultDTOs = resultFacade.findAll();
 
-        Mockito.verify(resultService).getAll();
+        Mockito.verify(resultService).findAll();
         Assert.assertNotNull(resultDTOs);
         Assert.assertEquals(resultDTOs.size(), 1);
     }

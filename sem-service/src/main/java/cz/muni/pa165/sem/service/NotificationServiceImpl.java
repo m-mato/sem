@@ -56,11 +56,4 @@ public class NotificationServiceImpl implements NotificationService {
 
 		return check;
 	}
-
-	@Override
-	public boolean notifyEventCanceled(Set<Sportsman> participants, Event event) {
-
-		//TODO
-		return false;
-	}
 }
