@@ -27,6 +27,13 @@ public class Sport {
         return id;
     }
 
+    /**
+     * Needed for testing purposes.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

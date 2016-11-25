@@ -44,6 +44,13 @@ public class Invitation {
 		return id;
 	}
 
+	/**
+	 * Needed for testing purposes.
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Event getEvent() {
 		return event;
 	}

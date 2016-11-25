@@ -43,7 +43,14 @@ public class Result {
     private Event event;
     
     public Long getId(){
-            return id;
+        return id;
+    }
+
+    /**
+     * Needed for testing purposes.
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public Double getPerformance(){
