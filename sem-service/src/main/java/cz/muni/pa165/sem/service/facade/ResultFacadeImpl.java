@@ -114,4 +114,12 @@ public class ResultFacadeImpl implements ResultFacade{
         resultService.delete(resultService.findById(result.getId()));
     }
 
+    /**
+     * Only for unit tests
+     * @param beanMappingService
+     */
+    public void setBeanMappingService(BeanMappingService beanMappingService) {
+        this.beanMappingService = beanMappingService;
+    }
+
 }

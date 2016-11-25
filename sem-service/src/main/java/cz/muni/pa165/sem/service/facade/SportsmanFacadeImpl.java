@@ -75,4 +75,13 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	public void delete(Long id) {
 		sportsmanService.delete(sportsmanService.findById(id));
 	}
+
+	/**
+	 * Only for unit tests
+	 * @param beanMappingService
+	 */
+	public void setBeanMappingService(BeanMappingService beanMappingService) {
+		this.beanMappingService = beanMappingService;
+	}
+
 }
