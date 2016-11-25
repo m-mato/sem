@@ -75,9 +75,11 @@ public class SportFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getExistingSportById() {
-        sportFacade.getSportById(1L);
+        SportDTO sportDTO = sportFacade.getSportById(1L);
+        Sport foundSport = beanMappingService.mapTo(sportDTO, Sport.class);
 
         Mockito.verify(sportService).findById(1L);
+        Assert.assertEquals(foundSport, sport);
     }
 
     @Test
@@ -90,9 +92,11 @@ public class SportFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getExistingSportByName() {
-        sportFacade.getSportByName("Sport 1 name");
+        SportDTO sportDTO = sportFacade.getSportByName("Sport 1 name");
+        Sport foundSport = beanMappingService.mapTo(sportDTO, Sport.class);
 
         Mockito.verify(sportService).findByName("Sport 1 name");
+        Assert.assertEquals(foundSport, sport);
     }
 
     @Test
@@ -105,11 +109,11 @@ public class SportFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getAllSports() {
-        List<SportDTO> sports = sportFacade.getAllSports();
+        List<SportDTO> sportDTOs = sportFacade.getAllSports();
 
         Mockito.verify(sportService).findAll();
-        Assert.assertNotNull(sports);
-        Assert.assertEquals(sports.size(), 1);
+        Assert.assertNotNull(sportDTOs);
+        Assert.assertEquals(sportDTOs.size(), 1);
     }
 
     @Test
