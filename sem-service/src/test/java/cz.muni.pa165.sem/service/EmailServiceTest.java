@@ -1,11 +1,6 @@
 package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.configuration.EmailConfiguration;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import cz.muni.pa165.sem.configuration.EmailConfiguration;
-
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
