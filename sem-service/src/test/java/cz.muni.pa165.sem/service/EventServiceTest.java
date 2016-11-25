@@ -97,7 +97,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).create(event);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateNull() {
         doThrow(new IllegalArgumentException("Trying to create null object!"))
                 .when(eventDAO)
@@ -106,7 +106,7 @@ public class EventServiceTest {
         eventService.create(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateUninitializedObject() {
         Event event1 = new Event();
         doThrow(new IllegalArgumentException("Trying to create uninitialized object!"))
@@ -116,7 +116,7 @@ public class EventServiceTest {
         eventService.create(event1);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateAlreadyExisted() {
         doThrow(new IllegalArgumentException("Trying to create already existing object!"))
                 .when(eventDAO)
@@ -131,7 +131,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).update(event);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testUpdateNull() {
         doThrow(new IllegalArgumentException("Trying to update null object!"))
                 .when(eventDAO)
@@ -146,7 +146,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).delete(event);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNotExistingObject() {
         doThrow(new IllegalArgumentException("Trying to delete not existing object!"))
                 .when(eventDAO)
@@ -155,7 +155,7 @@ public class EventServiceTest {
         eventService.delete(new Event());
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNull() {
         doThrow(new IllegalArgumentException("Trying to delete null object!"))
                 .when(eventDAO)
@@ -180,7 +180,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findById(id);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullId() {
         doThrow(new IllegalArgumentException("Trying to find object by null id!"))
                 .when(eventDAO)
@@ -206,7 +206,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findByName(name);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullName() {
         doThrow(new IllegalArgumentException("Trying to find object by null name!"))
                 .when(eventDAO)
@@ -232,7 +232,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findBySport(sport1);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullSport() {
         doThrow(new IllegalArgumentException("Trying to find object by null sport!"))
                 .when(eventDAO)
@@ -258,7 +258,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findByCity(city);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullCity() {
         doThrow(new IllegalArgumentException("Trying to find object by null city name!"))
                 .when(eventDAO)
@@ -284,7 +284,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findByAdmin(admin);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullAdmin() {
         doThrow(new IllegalArgumentException("Trying to find object by null admin!"))
                 .when(eventDAO)
@@ -310,7 +310,7 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findByParticipant(participant);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullParticipant() {
         doThrow(new IllegalArgumentException("Trying to find object by null participant!"))
                 .when(eventDAO)
@@ -336,18 +336,13 @@ public class EventServiceTest {
         Mockito.verify(eventDAO, times(1)).findByDate(cal);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullDate() {
         doThrow(new IllegalArgumentException("Trying to find object by null participant!"))
                 .when(eventDAO)
                 .findByDate(null);
 
         eventService.findByDate(null);
-    }
-
-    @Test
-    private void testCancel() {
-        fail("not done yet");
     }
 
     @Test

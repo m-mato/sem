@@ -67,7 +67,7 @@ public class SportServiceTest {
         Mockito.verify(sportDAO, times(1)).findById(id);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullId() {
         doThrow(new IllegalArgumentException("Trying to find object by null id!"))
                 .when(sportDAO)
@@ -93,7 +93,7 @@ public class SportServiceTest {
         Mockito.verify(sportDAO, times(1)).findByName(name);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFindByNullName() {
         doThrow(new IllegalArgumentException("Trying to find object by null name!"))
                 .when(sportDAO)
@@ -119,7 +119,7 @@ public class SportServiceTest {
         Mockito.verify(sportDAO, times(1)).create(sport);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateNull() {
         doThrow(new IllegalArgumentException("Trying to create null object!"))
                 .when(sportDAO)
@@ -128,7 +128,7 @@ public class SportServiceTest {
         sportService.create(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateUninitializedObject() {
         Sport sport= new Sport();
         doThrow(new IllegalArgumentException("Trying to create uninitialized object!"))
@@ -138,7 +138,7 @@ public class SportServiceTest {
         sportService.create(sport);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateAlreadyExisted() {
         doThrow(new IllegalArgumentException("Trying to create already existing object!"))
                 .when(sportDAO)
@@ -157,7 +157,7 @@ public class SportServiceTest {
         Mockito.verify(sportDAO, times(1)).update(updateSport);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testUpdateNull() {
         doThrow(new IllegalArgumentException("Trying to update null object!"))
                 .when(sportDAO)
@@ -176,7 +176,7 @@ public class SportServiceTest {
         Mockito.verify(sportDAO, times(1)).delete(deleteSport);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNull() {
         doThrow(new IllegalArgumentException("Trying to delete null object!"))
                 .when(sportDAO)
