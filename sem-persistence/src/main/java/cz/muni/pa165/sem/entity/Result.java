@@ -4,6 +4,7 @@ import cz.muni.pa165.sem.utils.PerformanceUnits;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  *
@@ -122,43 +123,46 @@ public class Result {
     }
     
     @Override 
-    public boolean equals(Object o){
-        if(o == null) return false;
-        if(this == o) return true;
-        if(!(o instanceof Result)) return false;
-        
-        Result result = (Result) o;
+    public boolean equals(Object object){
+        if ((object == null) || (!(object instanceof Result))) {
+            return false;
+        }
 
-        if(!getPerformance().equals(result.getPerformance())) return false;
-        if(!getPerformanceUnit().equals(result.getPerformanceUnit())) return false;
-        if(!getPosition().equals(result.getPosition()))return false;
-        if(!getSportsman().equals(result.getSportsman())) return false;
-        if(getNote() != null){
-            if(!getNote().equals(result.getNote())) return false;
+        if (this == object) {
+            return true;
         }
-        else{
-            if(result.getNote() != null) return false;
-        }
-        return getEvent().equals(result.getEvent());
+
+        final Result result = (Result) object;
+        if(!Objects.equals(this.getPerformance(), result.getPerformance())) return false;
+        if(!Objects.equals(this.getPerformanceUnit(), result.getPerformanceUnit())) return false;
+        if(!Objects.equals(this.getPosition(), result.getPosition())) return false;
+        if(!Objects.equals(this.getSportsman(), result.getSportsman())) return false;
+        if(!Objects.equals(this.getNote(), result.getNote())) return false;
+        return Objects.equals(this.getEvent(), result.getEvent());
     }
     
     @Override
     public int hashCode(){
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + getPerformance().hashCode();
-        result = 31 * result + getPosition().hashCode();
-        result = 31 * result + getEvent().hashCode();
-        return result;
+        final int prime = 53;
+        int hashCode = 7;
+
+        hashCode = prime * hashCode + ((this.performance == null) ? 0 : this.performance.hashCode());
+        hashCode = prime * hashCode + ((this.position == null) ? 0 : this.position.hashCode());
+        hashCode = prime * hashCode + ((this.event == null) ? 0 : this.event.hashCode());
+
+        return hashCode;
     }
     
     @Override
     public String toString() {
-        return "Result:"
-                + " id = " + id
-                + ", event = " + event
-                + ", sportsman = " + sportsman
-                + ", position = " + position
-                + ", performance = " + performance + " " + performanceUnit
-                + ", note = " + this.note;
+        return "Result:" +
+                "{" +
+                    "id:" + this.id + ", " +
+                    "event:" + this.event + ", " +
+                    "sportsman:" + this.sportsman + ", " +
+                    "position:" + this.position + ", " +
+                    "performance:" + this.performance + " " + this.performanceUnit + ", " +
+                    "note: " + this.note +
+                "}";
     }
 }
