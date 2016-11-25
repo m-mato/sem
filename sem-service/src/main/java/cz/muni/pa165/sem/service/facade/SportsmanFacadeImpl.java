@@ -50,7 +50,7 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 
 	@Override
 	public List<SportsmanDTO> getBySurname(String surname) {
-		return beanMappingService.mapTo(sportsmanService.findByName(surname), SportsmanDTO.class);
+		return beanMappingService.mapTo(sportsmanService.findBySurname(surname), SportsmanDTO.class);
 	}
 
 	@Override
