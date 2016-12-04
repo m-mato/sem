@@ -3,29 +3,26 @@ package cz.muni.pa165.sem.service;
 import cz.muni.pa165.sem.dao.*;
 import cz.muni.pa165.sem.entity.*;
 
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.*;
-
 import static org.mockito.Matchers.argThat;
 import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 
-
 /**
  * @author Veronika Aksamitova
  */
-@RunWith(MockitoJUnitRunner.class)
-public class SportsmanServiceTest {
+@ContextConfiguration(locations = "classpath:service-test-context.xml")
+public class SportsmanServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private SportsmanService sportsmanService = new SportsmanServiceImpl();
@@ -70,7 +67,7 @@ public class SportsmanServiceTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateNull() {
         Sportsman create = null;
-        doThrow(new IllegalArgumentException("Trying to create null object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent null object!"))
                 .when(sportsmanDAO)
                 .create(create);
 
@@ -80,7 +77,7 @@ public class SportsmanServiceTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateUninitializedObject() {
         Sportsman sportsman = new Sportsman();
-        doThrow(new IllegalArgumentException("Trying to create uninitialized object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent uninitialized object!"))
                 .when(sportsmanDAO)
                 .create(sportsman);
 
@@ -89,7 +86,7 @@ public class SportsmanServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateAlreadyExisted() {
-        doThrow(new IllegalArgumentException("Trying to create already existing object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent already existing object!"))
                 .when(sportsmanDAO)
                 .create(this.sportsman);
 
@@ -164,7 +161,7 @@ public class SportsmanServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testUpdateNull() {
-        doThrow(new IllegalArgumentException("Trying to update null object!"))
+        doThrow(new IllegalArgumentException("Trying to updateEvent null object!"))
                 .when(sportsmanDAO)
                 .update(null);
 
@@ -179,7 +176,7 @@ public class SportsmanServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNull() {
-        doThrow(new IllegalArgumentException("Trying to delete null object!"))
+        doThrow(new IllegalArgumentException("Trying to deleteEvent null object!"))
                 .when(sportsmanDAO)
                 .delete(null);
 

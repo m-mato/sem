@@ -8,24 +8,21 @@ import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.service.*;
 import cz.muni.pa165.sem.service.facade.ResultFacadeImpl;
 import cz.muni.pa165.sem.utils.PerformanceUnits;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Matchers.argThat;
 
@@ -33,7 +30,6 @@ import static org.mockito.Matchers.argThat;
  * @author Vit Hovezak
  */
 @ContextConfiguration(locations = "classpath:service-test-context.xml")
-@RunWith(MockitoJUnitRunner.class)
 public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
@@ -58,14 +54,13 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
     private Result result;
     private Sport sport;
     private Sportsman sportsman;
-    private Calendar date;
 
     @BeforeMethod
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         resultFacade.setBeanMappingService(beanMappingService);
 
-        date = Calendar.getInstance();
+        Calendar date = Calendar.getInstance();
 
         sport = new Sport();
         sport.setId(1L);

@@ -9,24 +9,21 @@ import cz.muni.pa165.sem.service.EventService;
 import cz.muni.pa165.sem.service.SportService;
 import cz.muni.pa165.sem.service.SportsmanService;
 import cz.muni.pa165.sem.service.facade.EventFacadeImpl;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Matchers.argThat;
 
@@ -34,7 +31,6 @@ import static org.mockito.Matchers.argThat;
  * @author Vit Hovezak
  */
 @ContextConfiguration(locations = "classpath:service-test-context.xml")
-@RunWith(MockitoJUnitRunner.class)
 public class EventFacadeTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks

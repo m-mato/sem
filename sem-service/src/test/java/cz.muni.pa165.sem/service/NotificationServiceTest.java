@@ -2,30 +2,24 @@ package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.utils.InvitationState;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
-import static org.testng.Assert.fail;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.*;
-
-import static org.mockito.Matchers.argThat;
-import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.*;
 
 /**
  * @author Veronika Aksamitova
  */
 @ContextConfiguration(locations = "classpath:service-test-context.xml")
-@RunWith(MockitoJUnitRunner.class)
-public class NotificationServiceTest {
+public class NotificationServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private NotificationService notificationService = new NotificationServiceImpl();
@@ -35,8 +29,6 @@ public class NotificationServiceTest {
 
     private Invitation invitationWithoutParticipants;
     private Invitation invitationWithParticipants;
-
-    private String subject = "SEM Notification";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -83,8 +75,8 @@ public class NotificationServiceTest {
     private Invitation getInvitation(Sportsman invitee, Event event) {
         Invitation invitation = new Invitation();
         invitation.setEvent(event);
-        invitation.setInvitee(invitee);
         invitation.setState(InvitationState.INVITED);
+        invitation.setInvitee(invitee);
         return invitation;
     }
 
