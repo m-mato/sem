@@ -14,6 +14,7 @@
         <module>sem-service</module>
         <module>sem-mvc</module>
         <module>sem-api</module>
+        <module>sem-rest</module>
     </modules>
 
     <name>System for Management of Sporting Events</name>
