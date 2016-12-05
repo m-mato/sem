@@ -2,7 +2,10 @@ package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.SportsmanDAO;
 import cz.muni.pa165.sem.entity.Sportsman;
+import cz.muni.pa165.sem.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,11 @@ public class SportsmanServiceImpl implements SportsmanService {
 	@Override
 	public void create(Sportsman sportsman) {
 
+		if(sportsman == null || sportsman.getPassword() == null || sportsman.getPassword().isEmpty()) {
+			throw new IllegalArgumentException("Invalid argument - sportsman");
+		}
+
+		sportsman.setPassword(hashPassword(sportsman.getPassword()));
 		sportsmanDAO.create(sportsman);
 	}
 
@@ -58,4 +66,9 @@ public class SportsmanServiceImpl implements SportsmanService {
 		sportsmanDAO.delete(sportsman);
 	}
 
+	private String hashPassword(String password) {
+
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(Constants.BC_STRENGTH);
+		return passwordEncoder.encode(password);
+	}
 }
