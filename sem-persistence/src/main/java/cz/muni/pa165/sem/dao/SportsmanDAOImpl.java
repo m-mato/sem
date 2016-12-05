@@ -73,6 +73,28 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 	}
 
 	@Override
+	//TODO : optimize
+	public Sportsman findByEmail(String email) {
+
+		if (email == null) {
+			throw new IllegalArgumentException("email is null");
+		}
+		try {
+			List<Sportsman> result = entityManager.createQuery("select s from Sportsman s where email = :email",
+					Sportsman.class).setParameter("email", email).getResultList();
+			if(result.isEmpty()) {
+				return null;
+			}
+			if(result.size() != 1) {
+				throw new IllegalStateException("email is not unique");
+			}
+			return result.get(0);
+		} catch (NoResultException nrf) {
+			return null;
+		}
+	}
+
+	@Override
 	public void update(Sportsman sportsman) {
 
 		if (sportsman == null) {
