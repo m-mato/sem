@@ -1,10 +1,10 @@
-package cz.muni.pa165.sem.controllers;
+package cz.muni.pa165.sem.rest.controllers;
 
 import cz.muni.pa165.sem.dto.SportsmanCreateDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.dto.SportsmanUpdateDTO;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
-import cz.muni.pa165.sem.utils.REST_URI;
+import cz.muni.pa165.sem.rest.utils.REST_URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
