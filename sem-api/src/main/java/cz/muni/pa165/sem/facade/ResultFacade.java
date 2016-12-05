@@ -103,8 +103,8 @@ public interface ResultFacade {
     /**
      * Method which deletes result from DB
      *
-     * @param result
+     * @param  resultId
      * @throws IllegalArgumentException When result is {@code null}.
      */
-    void delete(ResultDTO result);
+    void delete(Long resultId);
 }

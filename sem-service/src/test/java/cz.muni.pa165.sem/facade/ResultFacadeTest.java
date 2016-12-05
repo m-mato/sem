@@ -246,7 +246,7 @@ public class ResultFacadeTest extends AbstractTestNGSpringContextTests {
         ResultDTO resultDTO = beanMappingService.mapTo(resultFacade.findById(1L), ResultDTO.class);
         resultDTO.setId(1L);
 
-        resultFacade.delete(resultDTO);
+        resultFacade.delete(resultDTO.getId());
 
         Mockito.verify(resultService).delete(result);
     }
