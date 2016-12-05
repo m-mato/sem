@@ -20,6 +20,7 @@ import java.util.Collection;
 /**
  * Created by Veronika Aksamitova on 5. 12. 2016.
  */
+@RestController
 @RequestMapping(REST_URI.ROOT_RESULTS_URI)
 public class ResultsRESTController {
 
