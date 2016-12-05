@@ -110,8 +110,8 @@ public class ResultFacadeImpl implements ResultFacade{
     }
 
     @Override
-    public void delete(ResultDTO result) {
-        resultService.delete(resultService.findById(result.getId()));
+    public void delete(Long resultId) {
+        resultService.delete(resultService.findById(resultId));
     }
 
     /**

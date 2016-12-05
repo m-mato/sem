@@ -1,4 +1,4 @@
-package cz.muni.pa165.sem.utils;
+package cz.muni.pa165.sem.rest.utils;
 
 /**
  * @author Kamil Triscik.

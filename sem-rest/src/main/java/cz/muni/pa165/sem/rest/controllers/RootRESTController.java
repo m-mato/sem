@@ -1,6 +1,6 @@
-package cz.muni.pa165.sem.controllers;
+package cz.muni.pa165.sem.rest.controllers;
 
-import cz.muni.pa165.sem.utils.REST_URI;
+import cz.muni.pa165.sem.rest.utils.REST_URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
