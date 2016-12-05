@@ -11,9 +11,21 @@
 
     <artifactId>sem-rest</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
     <name>REST Layer</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/sem-rest</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -26,6 +38,14 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.3.4.RELEASE</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-api</artifactId>
+            <version>9.0.0.M13</version>
+        </dependency>
+
     </dependencies>
 
 
