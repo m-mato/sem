@@ -40,6 +40,10 @@ public class Sportsman {
 	@Column(name = "password")
 	private String password;
 
+	@NotNull
+	@Column(name = "is_manager")
+	private Boolean isManager;
+
 	@ManyToMany(mappedBy = "participants")
 	private Set<Event> events = new HashSet<>();
 
@@ -97,6 +101,14 @@ public class Sportsman {
 		this.password = password;
 	}
 
+	public Boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Boolean manager) {
+		isManager = manager;
+	}
+
 	public Set<Event> getEvents() {
 		return events;
 	}
@@ -114,7 +126,7 @@ public class Sportsman {
 	}
 
 	@Override
-	public boolean equals(Object object){
+	public boolean equals(Object object) {
 		if ((object == null) || (!(object instanceof Sportsman))) {
 			return false;
 		}
@@ -129,6 +141,7 @@ public class Sportsman {
 		if (!Objects.equals(this.getSurname(), sportsman.getSurname())) return false;
 		if (!Objects.equals(this.getBirthDate(), sportsman.getBirthDate())) return false;
 		if (!Objects.equals(this.getEmail(), sportsman.getEmail())) return false;
+		if (!Objects.equals(this.getIsManager(), sportsman.getIsManager())) return false;
 		return Objects.equals(this.getPassword(), sportsman.getPassword());
 	}
 
@@ -142,6 +155,7 @@ public class Sportsman {
 		hashCode = prime * hashCode + ((this.birthDate == null) ? 0 : this.birthDate.hashCode());
 		hashCode = prime * hashCode + ((this.email == null) ? 0 : this.email.hashCode());
 		hashCode = prime * hashCode + ((this.password == null) ? 0 : this.password.hashCode());
+		hashCode = prime * hashCode + ((this.isManager == null) ? 0 : this.isManager.hashCode());
 
 		return hashCode;
 	}
@@ -149,12 +163,13 @@ public class Sportsman {
 	@Override
 	public String toString() {
 		return "Sportsman:" +
-					"{" + ", " +
-						"id:" + this.id + ", " +
-						"name:" + this.name + ", " +
-						"surname:" + this.surname + ", " +
-						"birthDate:" + this.birthDate + ", " +
-						"email:" + this.email +
-					"}";
+				"{" + ", " +
+				"id:" + this.id + ", " +
+				"name:" + this.name + ", " +
+				"surname:" + this.surname + ", " +
+				"birthDate:" + this.birthDate + ", " +
+				"is manager:" + this.isManager + ", " +
+				"email:" + this.email +
+				"}";
 	}
 }

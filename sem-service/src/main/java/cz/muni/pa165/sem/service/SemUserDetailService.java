@@ -30,8 +30,8 @@ public class SemUserDetailService implements UserDetailsService {
 
 		Sportsman sportsman = sportsmanDAO.findByEmail(email);
 
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+		Set<GrantedAuthority> authorities = generateAuthorities(sportsman.getIsManager());
 
 		return new User(sportsman.getEmail(), sportsman.getPassword(), true, true, true, true, authorities);
 	}
@@ -42,6 +42,17 @@ public class SemUserDetailService implements UserDetailsService {
 
 	public void setSportsmanDAO(SportsmanDAO sportsmanDAO) {
 		this.sportsmanDAO = sportsmanDAO;
+	}
+
+	private Set<GrantedAuthority> generateAuthorities(boolean isManager) {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+
+		if (isManager) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		return authorities;
 	}
 }
 
