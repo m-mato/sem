@@ -15,13 +15,10 @@ import java.util.Map;
 /**
  * @author Kamil Triscik.
  */
+@RestController
 public class RootRESTController {
 
     final static Logger logger = LoggerFactory.getLogger(RootRESTController.class);
-
-    @RestController
-    public class ParentController {
-
         @RequestMapping(
                 value = REST_URI.ROOT_SEM_URI,
                 method = RequestMethod.GET,
@@ -36,7 +33,5 @@ public class RootRESTController {
 
             return Collections.unmodifiableMap(resourcesMap);
         }
-
-    }
 
 }
