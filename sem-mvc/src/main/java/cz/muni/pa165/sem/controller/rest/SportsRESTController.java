@@ -1,10 +1,10 @@
-package cz.muni.pa165.sem.rest.controllers;
+package cz.muni.pa165.sem.controller.rest;
 
 import cz.muni.pa165.sem.dto.SportCreateDTO;
 import cz.muni.pa165.sem.dto.SportDTO;
 import cz.muni.pa165.sem.dto.SportUpdateDTO;
 import cz.muni.pa165.sem.facade.SportFacade;
-import cz.muni.pa165.sem.rest.utils.REST_URI;
+import cz.muni.pa165.sem.util.REST_URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.Valid;
 import java.util.Collection;
-
 
 /**
  * Created by Veronika Aksamitova on 5. 12. 2016.

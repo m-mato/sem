@@ -5,11 +5,11 @@ import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cz.muni.pa165.sem.service.BeanMappingService;
 import cz.muni.pa165.sem.service.ResultService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *

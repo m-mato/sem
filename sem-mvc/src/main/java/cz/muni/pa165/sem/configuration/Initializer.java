@@ -1,11 +1,11 @@
-package cz.muni.pa165.sem;
+package cz.muni.pa165.sem.configuration;
 
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.ShallowEtagHeaderFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
 
 /**
  * @author Kamil Triscik.
@@ -14,12 +14,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{RootWebContext.class};
-    }
-
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return null;
+        return new Class[]{WebContext.class};
     }
 
     @Override
@@ -33,15 +28,14 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
         encodingFilter.setEncoding("utf-8");
         encodingFilter.setForceEncoding(true);
 
-        ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
+        DelegatingFilterProxy delegatingFilterProxy =  new DelegatingFilterProxy("springSecurityFilterChain");
 
-        return new Filter[]{encodingFilter, shallowEtagHeaderFilter};
+        return new Filter[]{encodingFilter, delegatingFilterProxy};
     }
 
     @Override
-    public void onStartup(javax.servlet.ServletContext servletContext) throws javax.servlet.ServletException {
-        super.onStartup(servletContext);
-        servletContext.addListener(RequestContextListener.class);
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
     }
 
 }

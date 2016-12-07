@@ -1,10 +1,10 @@
-package cz.muni.pa165.sem.rest.controllers;
+package cz.muni.pa165.sem.controller.rest;
 
 import cz.muni.pa165.sem.dto.EventCreateDTO;
 import cz.muni.pa165.sem.dto.EventDTO;
 import cz.muni.pa165.sem.dto.EventUpdateDTO;
 import cz.muni.pa165.sem.facade.EventFacade;
-import cz.muni.pa165.sem.rest.utils.REST_URI;
+import cz.muni.pa165.sem.util.REST_URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

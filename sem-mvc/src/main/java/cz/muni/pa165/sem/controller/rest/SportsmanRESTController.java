@@ -1,10 +1,10 @@
-package cz.muni.pa165.sem.rest.controllers;
+package cz.muni.pa165.sem.controller.rest;
 
 import cz.muni.pa165.sem.dto.SportsmanCreateDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.dto.SportsmanUpdateDTO;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
-import cz.muni.pa165.sem.rest.utils.REST_URI;
+import cz.muni.pa165.sem.util.REST_URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Collection;
  * @author Kamil Triscik.
  */
 @RestController
-@RequestMapping(REST_URI.ROOT_EVENTS_URI)
+@RequestMapping(REST_URI.ROOT_SPORTSMANS_URI)
 public class SportsmanRESTController {
 
     private static Logger logger = LoggerFactory.getLogger(SportsmanRESTController.class);

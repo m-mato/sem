@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HealthCheckController {
 
-	@RequestMapping("/")
+	@RequestMapping("/health")
 	public String health() {
 
-		return "redirect:/health";
+		return "healhCheck";
 	}
 }

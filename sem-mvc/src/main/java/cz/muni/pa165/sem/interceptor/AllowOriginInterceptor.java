@@ -1,4 +1,4 @@
-package cz.muni.pa165.sem;
+package cz.muni.pa165.sem.interceptor;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;

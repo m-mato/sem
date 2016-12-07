@@ -15,14 +15,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>cz.muni.pa165</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>sem-persistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>cz.muni.pa165</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>sem-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -30,19 +30,24 @@
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>cz.muni.pa165</groupId>
-            <artifactId>sem-persistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
     </dependencies>
-
 
 </project>

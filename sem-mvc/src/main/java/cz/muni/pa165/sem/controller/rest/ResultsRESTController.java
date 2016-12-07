@@ -1,10 +1,10 @@
-package cz.muni.pa165.sem.rest.controllers;
+package cz.muni.pa165.sem.controller.rest;
 
 import cz.muni.pa165.sem.dto.ResultCreateDTO;
 import cz.muni.pa165.sem.dto.ResultDTO;
 import cz.muni.pa165.sem.dto.ResultUpdateDTO;
 import cz.muni.pa165.sem.facade.ResultFacade;
-import cz.muni.pa165.sem.rest.utils.REST_URI;
+import cz.muni.pa165.sem.util.REST_URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
