@@ -110,22 +110,16 @@ public class SportsRESTController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public ResponseEntity<SportDTO> deleteSport(@PathVariable("id") Long id){
+    public ResponseEntity<SportDTO> deleteSport(@PathVariable("id") long id){
         logger.debug("Fetching & deleting Sport with id " + id);
 
         SportDTO sport = sportFacade.getSportById(id);
-
-        if(sport == null){
-            logger.warn("Unable to delete. Sport with id " + id + " not found.");
+        if (sport == null) {
+            logger.warn("Unable to delete. Sport with id " + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        try{
-            sportFacade.delete(id);
-        }
-        catch(Exception ex){
-            logger.warn("Sport " + sport + " cannot be deleted. Reason: " + ex);
-        }
 
+        sportFacade.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

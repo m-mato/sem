@@ -10,4 +10,8 @@ INSERT INTO sport(name, description) VALUES ('Triathlon', 'Triathlon description
 INSERT INTO sport(name, description) VALUES ('Swimming', 'Swimming description');
 
 INSERT INTO event(name, description, event_date, sport, capacity, city, address, admin) VALUES ('Triathlon Brno', 'Triathlon in Brno', '2016-08-30 19:05:00', 1, 100, 'Brno', 'Brno, 60200 - CR', 1);
+INSERT INTO event(name, description, event_date, sport, capacity, city, address, admin) VALUES ('Triathlon Brno2', 'Triathlon in Brno', '2016-09-30 19:05:00', 1, 100, 'Brno', 'Brno, 60200 - CR', 2);
+INSERT INTO event(name, description, event_date, sport, capacity, city, address, admin) VALUES ('Triathlon Brno3', 'Triathlon in Brno', '2016-10-30 19:05:00', 1, 100, 'Brno', 'Brno, 60200 - CR', 2);
 
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (20220.2, 1, 1, 1, 'Winner', 2);
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (5456.2, 1, 2, 1, 'silver medal', 2);

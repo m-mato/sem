@@ -8,6 +8,7 @@ import cz.muni.pa165.sem.util.REST_URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -117,7 +118,12 @@ public class EventsRESTController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        eventFacade.delete(id);
+        try {
+            eventFacade.delete(id);
+        } catch (DataAccessException e) {
+            logger.error("Problem with deleting event with id " + id);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
