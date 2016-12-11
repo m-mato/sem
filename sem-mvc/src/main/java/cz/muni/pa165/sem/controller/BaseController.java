@@ -5,8 +5,6 @@ import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.Locale;
-
 /**
  * @author Vit Hovezak
  */

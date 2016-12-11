@@ -22,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan({"cz.muni.pa165.sem.service"})
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
 	@Autowired
 	@Qualifier("semUserDetailsService")
 	private UserDetailsService userDetailsService;
@@ -36,6 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
+		http.formLogin().loginPage("/login").defaultSuccessUrl("/?login").failureUrl("/login?error");
+		http.logout().logoutSuccessUrl("/?logout");
+
 		http.authorizeRequests().antMatchers("/test/**").access("hasRole('ROLE_ADMIN')").and().formLogin();
 		http.authorizeRequests().antMatchers("/auth/**").access("hasRole('ROLE_USER')").and().formLogin();
 		http.authorizeRequests().antMatchers("/manager/**").access("hasRole('ROLE_ADMIN')").and().formLogin();
@@ -48,5 +50,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(Constants.BC_STRENGTH);
 		return passwordEncoder;
 	}
-}
 
+}
