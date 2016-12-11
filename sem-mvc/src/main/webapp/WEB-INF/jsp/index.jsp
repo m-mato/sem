@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<spring:url value="/img/sports.jpg" var="sportsImgUrl"/>
+
 <c:if test="${param.login != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.index.login"/>
@@ -14,4 +16,11 @@
     </div>
 </c:if>
 
-<h2><spring:message code="page.index.welcome"/></h2>
+<div class="row">
+    <div class="col-md-5">
+        <h2><spring:message code="page.index.welcome"/></h2>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="${sportsImgUrl}"/>
+    </div>
+</div>
