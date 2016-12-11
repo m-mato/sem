@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>--%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <c:set var="tilesTitle"><tiles:getAsString name="title" ignore="true"/></c:set>
@@ -21,12 +21,14 @@
 <spring:url value="/js/script.js" var="scriptJsUrl"/>
 
 <spring:url value="/" var="frontUrl"/>
+<spring:url value="/login" var="loginUrl"/>
+<spring:url value="/logout" var="logoutUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
 <spring:url value="?lang=sk" var="skLangUrl"/>
 
 <!DOCTYPE html>
-<html lang="${pageContext.request.locale}">
+<html lang="${language}">
 
     <head>
 
@@ -46,15 +48,55 @@
 
     <body <c:if test="${isFront}">class="front"</c:if>>
 
-        <a href="${frontUrl}" title="<spring:message code="link.index"/>"><img src="${logoImgUrl}"/></a>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only"><spring:message code="link.nav-toggle"/></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="${frontUrl}" title="<spring:message code="link.index"/>">
+                        <img class="navbar-logo" src="${logoImgUrl}"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
+                        <sec:authorize access="isAnonymous()">
+                            <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/></a></li>
+                        </sec:authorize>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="${enLangUrl}" title="<spring:message code="link.lang.en"/>">
+                            <img class="navbar-lang" src="${enImgUrl}"/>
+                        </a></li>
+                        <li><a href="${csLangUrl}" title="<spring:message code="link.lang.cs"/>">
+                            <img class="navbar-lang" src="${czImgUrl}"/>
+                        </a></li>
+                        <li><a href="${skLangUrl}" title="<spring:message code="link.lang.sk"/>">
+                            <img class="navbar-lang" src="${skImgUrl}"/>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <a href="${enLangUrl}" title="<spring:message code="link.lang.en"/>"><img src="${enImgUrl}"/></a>
-        <a href="${csLangUrl}" title="<spring:message code="link.lang.cs"/>"><img src="${czImgUrl}"/></a>
-        <a href="${skLangUrl}" title="<spring:message code="link.lang.sk"/>"><img src="${skImgUrl}"/></a>
+        <div class="container">
 
-        <h1><spring:message code="sem"/></h1>
+            <div class="page-header">
+                <h1><spring:message code="${tilesTitle}"/></h1>
+            </div>
 
-        <tiles:insertAttribute name="body"/>
+            <div class="content">
+                <tiles:insertAttribute name="body"/>
+            </div>
+
+        </div>
 
         <script type="text/javascript" src="${jqueryJsUrl}"></script>
         <script type="text/javascript" src="${bootstrapJsUrl}"></script>
