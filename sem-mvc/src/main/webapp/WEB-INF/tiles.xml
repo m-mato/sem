@@ -15,4 +15,14 @@
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
     </definition>
 
+    <definition name="error.403" extends="layout">
+        <put-attribute name="title" value="title.error.403"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/error/403.jsp"/>
+    </definition>
+
+    <definition name="error.404" extends="layout">
+        <put-attribute name="title" value="title.error.404"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/error/404.jsp"/>
+    </definition>
+
 </tiles-definitions>
