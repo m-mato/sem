@@ -63,6 +63,14 @@ public class ResultFacadeImpl implements ResultFacade{
     }
 
     @Override
+    public ResultDTO findBySportsmanAndEvent(SportsmanDTO sportsman, EventDTO event) {
+        Result result = resultService.findBySportsmanAndEvent(
+                beanMappingService.mapTo(sportsman, Sportsman.class),
+                beanMappingService.mapTo(event, Event.class));
+        return beanMappingService.mapTo(result, ResultDTO.class);
+    }
+
+    @Override
     public List<ResultDTO> findBySport(SportDTO sport) {
         List<Result> results = resultService.findBySport(beanMappingService.mapTo(sport, Sport.class));
         return beanMappingService.mapTo(results, ResultDTO.class);

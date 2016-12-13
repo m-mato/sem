@@ -59,6 +59,11 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
+    public Result findBySportsmanAndEvent(Sportsman sportsman, Event event) {
+        return resultDAO.findBySportsmanAndEvent(sportsman, event);
+    }
+
+    @Override
     public List<Result> findBySport(Sport sport) {
         List<Result> results = resultDAO.findBySport(sport);
         return results == null ? new ArrayList<>() : results;

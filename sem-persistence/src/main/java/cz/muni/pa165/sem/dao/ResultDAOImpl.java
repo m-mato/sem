@@ -67,6 +67,30 @@ public class ResultDAOImpl implements ResultDAO {
     }
 
     @Override
+    public Result findBySportsmanAndEvent(Sportsman sportsman, Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event to find results for is null");
+        }
+        if (sportsman == null) {
+            throw new IllegalArgumentException("Sportsman to find results for is null");
+        }
+
+
+        try {
+            Query quer = entityManager.createQuery("SELECT r FROM Result r WHERE r.event = :event AND r.sportsman = :sportsman");
+            quer.setParameter("event", event);
+            quer.setParameter("sportsman", sportsman);
+            List<Result> results = quer.getResultList();
+            if(results.isEmpty()) {
+                return null;
+            }
+            return results.get(0);
+        } catch (NoResultException excp) {
+            return null;
+        }
+    }
+
+    @Override
     public List<Result> findBySport(Sport sport) {
         if (sport == null) {
             throw new IllegalArgumentException("Sport to find results for is null");
