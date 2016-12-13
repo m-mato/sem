@@ -21,3 +21,77 @@ body {
     margin: 0;
     line-height: 50px;
 }
+
+
+
+
+/*///////////////////////////////*/
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 1500px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height: auto;}
+}
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+#myInput {
+    background-image: url('/img/search-icon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2;
+    cursor: default;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+.event-item {
+    width: 220px;
+}
+
+.list {
+    height: 300px;
+    overflow-y: auto
+}

@@ -24,6 +24,7 @@
 <spring:url value="/login" var="loginUrl"/>
 <spring:url value="/logout" var="logoutUrl"/>
 <spring:url value="/find-event" var="findEventUrl"/>
+<spring:url value="/events" var="eventsUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
 <spring:url value="?lang=sk" var="skLangUrl"/>
@@ -66,6 +67,9 @@
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
                         <li><a href="${findEventUrl}"><spring:message code="link.findEvent"/></a></li>
+                        <sec:authorize access="isAuthenticated()">
+                            <li><a href="${eventsUrl}"><spring:message code="link.events"/></a></li>
+                        </sec:authorize>
                         <sec:authorize access="isAnonymous()">
                             <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
                         </sec:authorize>
