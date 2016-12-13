@@ -19,6 +19,8 @@ public interface SportsmanFacade {
 
 	List<SportsmanDTO> getBySurname(String surname);
 
+	SportsmanDTO getByEmail(String email);
+
 	List<SportsmanDTO> getAll();
 
 	void update(SportsmanUpdateDTO sportsmanUpdateDTO);

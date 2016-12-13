@@ -23,6 +23,7 @@
 <spring:url value="/" var="frontUrl"/>
 <spring:url value="/login" var="loginUrl"/>
 <spring:url value="/logout" var="logoutUrl"/>
+<spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
 <spring:url value="?lang=sk" var="skLangUrl"/>
@@ -64,11 +65,12 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
+                        <li><a href="${findEventUrl}"><spring:message code="link.findEvent"/></a></li>
                         <sec:authorize access="isAnonymous()">
                             <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/></a></li>
+                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUserName}</a></li>
                         </sec:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

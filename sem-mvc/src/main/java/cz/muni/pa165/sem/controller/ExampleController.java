@@ -5,6 +5,7 @@ import cz.muni.pa165.sem.entity.Invitation;
 import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,11 @@ public class ExampleController {
 
 	@Autowired
 	private SportsmanService sportsmanService;
+
+	@RequestMapping("/username")
+	public String currentUserName(Authentication authentication) {
+		return authentication.getName();
+	}
 
 	/*
 		Test controller for invite user

@@ -20,6 +20,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
     </definition>
 
+    <definition name="find-event" extends="layout">
+        <put-attribute name="title" value="title.find-event"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/find-event.jsp"/>
+    </definition>
+
     <definition name="error.403" extends="layout">
         <put-attribute name="title" value="title.error.403"/>
         <put-attribute name="body" value="/WEB-INF/jsp/error/403.jsp"/>

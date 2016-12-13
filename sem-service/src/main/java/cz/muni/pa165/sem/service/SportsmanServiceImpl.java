@@ -49,6 +49,12 @@ public class SportsmanServiceImpl implements SportsmanService {
 	}
 
 	@Override
+	public Sportsman findByEmail(String email) {
+
+		return sportsmanDAO.findByEmail(email);
+	}
+
+	@Override
 	public List<Sportsman> findAll() {
 
 		return sportsmanDAO.findAll();
