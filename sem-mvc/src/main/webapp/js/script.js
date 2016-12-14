@@ -1,6 +1,7 @@
 $(document).on("click", ".event-item", function () {
     var eventId = this.querySelector('[name=event-id]').innerHTML;
-    reloadEvent("https://localhost:8080/pa165/events/" + eventId);
+    alert("Selected event with id=" + eventId + ". Not done yet :p");
+    // reloadEvent("https://localhost:8080/pa165/events/" + eventId);
 });
 
 function reloadEvent(href) {
@@ -18,3 +19,5 @@ function reloadEvent(href) {
         }
     })
 }
+
+

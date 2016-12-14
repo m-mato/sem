@@ -18,6 +18,7 @@
 <spring:url value="/js/html5shiv.min.js" var="html5shivJsUrl"/>
 <spring:url value="/js/jquery.min.js" var="jqueryJsUrl"/>
 <spring:url value="/js/respond.min.js" var="respondJsUrl"/>
+<spring:url value="/js/jquery.select2.js" var="select2js"/>
 <spring:url value="/js/script.js" var="scriptJsUrl"/>
 
 <spring:url value="/" var="frontUrl"/>
@@ -112,8 +113,8 @@
 
         <script type="text/javascript" src="${jqueryJsUrl}"></script>
         <script type="text/javascript" src="${bootstrapJsUrl}"></script>
+        <script type="text/javascript" src="${select2js}"></script>
         <script type="text/javascript" src="${scriptJsUrl}"></script>
-
     </body>
 
 </html>
