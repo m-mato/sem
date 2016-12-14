@@ -18,9 +18,9 @@ import java.util.TreeSet;
  * @author Kamil Triscik
  */
 @Controller
-public class ParticipantController extends BaseController {
+public class EventController extends BaseController {
 
-    Logger logger = org.slf4j.LoggerFactory.getLogger(ParticipantController.class);
+    Logger logger = org.slf4j.LoggerFactory.getLogger(EventController.class);
 
     @Inject
     private EventFacade eventFacade;
