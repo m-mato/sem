@@ -15,3 +15,7 @@ INSERT INTO event(name, description, event_date, sport, capacity, city, address,
 
 INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (20220.2, 1, 1, 1, 'Winner', 1);
 INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (5456.2, 1, 2, 1, 'silver medal', 2);
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (6.2, 4, 1, 6, 'gold medal', 2);
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (7.2, 4, 1, 6, 'gold', 3);
+
+INSERT INTO invitation(event, invitee, state) VALUES(1, 6, 4);

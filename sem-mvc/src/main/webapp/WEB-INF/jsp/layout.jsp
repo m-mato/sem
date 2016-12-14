@@ -23,6 +23,7 @@
 
 <spring:url value="/" var="frontUrl"/>
 <spring:url value="/login" var="loginUrl"/>
+<spring:url value="/my-account" var="myAccountUrl"/>
 <spring:url value="/logout" var="logoutUrl"/>
 <spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
@@ -82,6 +83,9 @@
                         <li><a href="${skLangUrl}" title="<spring:message code="link.lang.sk"/>">
                             <img class="navbar-lang" src="${skImgUrl}"/>
                         </a></li>
+                        <sec:authorize access="isAuthenticated()">
+                            <li><a href="${myAccountUrl}"><spring:message code="link.myAccount"/></a></li>
+                        </sec:authorize>
                         <sec:authorize access="isAnonymous()">
                             <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
                         </sec:authorize>
