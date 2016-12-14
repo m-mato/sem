@@ -71,12 +71,6 @@
                         <sec:authorize access="isAuthenticated()">
                             <li><a href="${eventsUrl}"><spring:message code="link.events"/></a></li>
                         </sec:authorize>
-                        <sec:authorize access="isAnonymous()">
-                            <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
-                        </sec:authorize>
-                        <sec:authorize access="isAuthenticated()">
-                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUserName}</a></li>
-                        </sec:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="${enLangUrl}" title="<spring:message code="link.lang.en"/>">
@@ -88,6 +82,12 @@
                         <li><a href="${skLangUrl}" title="<spring:message code="link.lang.sk"/>">
                             <img class="navbar-lang" src="${skImgUrl}"/>
                         </a></li>
+                        <sec:authorize access="isAnonymous()">
+                            <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
+                        </sec:authorize>
+                        <sec:authorize access="isAuthenticated()">
+                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUserName}</a></li>
+                        </sec:authorize>
                     </ul>
                 </div>
             </div>
