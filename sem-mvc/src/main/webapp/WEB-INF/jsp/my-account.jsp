@@ -7,11 +7,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<c:if test="${param.error != null}">
+<%--c:if test="${param.error != null}">
        <div class="alert alert-danger" role="alert">
-          < <spring:message code="page.error.403.message"/>>
+          <spring:message code="page.error.403.message"/>
        </div>
-</c:if>
+</c:if--%>
 
 <div class="container">
         <p><strong><spring:message code="page.name"/>:</strong><c:out value=" ${name}"/></p>
