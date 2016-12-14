@@ -51,7 +51,7 @@ body {
 }
 
 #myInput {
-    background-image: url('/pa165/img/search-icon.png'); /* Add a search icon to input */
+    background-image: url('../img/search-icon.png'); /* Add a search icon to input */
     background-position: 5px 5px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
     width: 100%; /* Full-width */
