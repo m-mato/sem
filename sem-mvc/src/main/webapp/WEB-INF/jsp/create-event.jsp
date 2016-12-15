@@ -13,7 +13,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<form class="form-horizontal" name="f" action="/create" method="POST">
+<form class="form-horizontal" name="f" action="create" method="POST">
     <div class="form-group form-group-lg">
         <label class="col-sm-3 control-label" for="name"><spring:message code="page.createEvent.name"/></label>
         <div class="col-sm-5">
@@ -25,13 +25,14 @@
         <label class="col-sm-3 control-label" for="event_date"><spring:message code="page.createEvent.eventDate"/></label>
         <div class="col-xs-5 date">
             <div class="input-group input-append date" id="event_date">
+                <input type=text  data-date-format='yy-mm-dd'  >
                 <input type="text" class="form-control" name="event_date" />
                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-3 control-label" for="name"><spring:message code="page.createEvent.sport"/></label>
+        <form:label path="sport" class="col-sm-3 control-label" ><spring:message code="page.createEvent.sport"/></form:label>
         <div class="col-sm-10">
             <form:select path="sport" cssClass="form-control">
                 <c:forEach items="${sports}" var="sport">
@@ -73,45 +74,3 @@
         </div>
     </div>
 </form>
-
-<script>
-    $(document).ready(function() {
-        $('#datePicker')
-                .datepicker({
-                    format: 'mm/dd/yyyy'
-                })
-                .on('changeDate', function(e) {
-                    // Revalidate the date field
-                    $('#eventForm').formValidation('revalidateField', 'date');
-                });
-
-        $('#eventForm').formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                name: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The name is required'
-                        }
-                    }
-                },
-                date: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The date is required'
-                        },
-                        date: {
-                            format: 'MM/DD/YYYY',
-                            message: 'The date is not a valid'
-                        }
-                    }
-                }
-            }
-        });
-    });
-</script>

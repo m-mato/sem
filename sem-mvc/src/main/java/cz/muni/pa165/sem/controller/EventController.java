@@ -90,6 +90,7 @@ public class EventController extends BaseController {
     public String createEvent(Model model){
         logger.debug("Starting to create event");
         model.addAttribute("sports", sportFacade.getAllSports());
+        //pageContext.setAttribute("list", list);
         model.addAttribute("event", new EventCreateDTO());
         return "create-event";
     }

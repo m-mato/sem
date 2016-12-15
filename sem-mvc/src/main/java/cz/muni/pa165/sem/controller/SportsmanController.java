@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -53,4 +54,41 @@ public class SportsmanController extends BaseController {
         model.addAttribute("results", results);
         return "my-account";
     }
+
+
+    @RequestMapping("/accept/{id}")
+    public String accept(@PathVariable Long id) {
+        String email;
+        SportsmanDTO sportsman = new SportsmanDTO();
+        List<ResultDTO> results;
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            email = auth.getName();
+            sportsman = sportsmanFacade.getByEmail(email);
+            sportsman.getInvitations();
+                    //Accept invitation with id
+        }
+        catch(Exception ex){
+        }
+        return "my-account";
+    }
+
+    @RequestMapping("/decline/{id}")
+    public String decline(@PathVariable Long id) {
+        String email;
+        SportsmanDTO sportsman = new SportsmanDTO();
+        List<ResultDTO> results;
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            email = auth.getName();
+            sportsman = sportsmanFacade.getByEmail(email);
+            sportsman.getInvitations();
+            //Accept invitation with id
+        }
+        catch(Exception ex){
+        }
+        return "my-account";
+    }
+
+
 }

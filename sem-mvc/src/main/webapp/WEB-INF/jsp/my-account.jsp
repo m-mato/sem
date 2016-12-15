@@ -64,13 +64,10 @@
                             <c:if test="${invite.state != 'DECLINED'}">
 
                                         <span>
-                                            <a class="btn btn-primary" data-toggle="collapse" style="float:right;" href="collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                <spring:message text='Accept'/>
-                                            </a>
-                                        <a class="btn btn-primary" data-toggle="collapse" style="float:right;" href="collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            <spring:message text='Decline'/>
-                                        </a>
-                                             </span>
+                                            <a href="accept/${invite.id}" style="float:right;" class="btn btn-primary">Accept</a>
+                                            <a href="decline/${invite.id}" style="float:right;" class="btn btn-primary">Decline</a>
+
+                                        </span>
                             </c:if>
                         </td>
                     </tr>
