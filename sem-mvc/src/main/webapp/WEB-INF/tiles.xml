@@ -25,6 +25,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/my-account.jsp"/>
     </definition>
 
+    <definition name="create-event" extends="layout">
+        <put-attribute name="title" value="title.createEvent"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/create-event.jsp"/>
+    </definition>
+
     <definition name="find-event" extends="layout">
         <put-attribute name="title" value="title.find-event"/>
         <put-attribute name="body" value="/WEB-INF/jsp/find-event.jsp"/>

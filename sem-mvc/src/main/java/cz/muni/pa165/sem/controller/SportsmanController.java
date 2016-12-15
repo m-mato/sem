@@ -42,7 +42,7 @@ public class SportsmanController extends BaseController {
             results = resultFacade.findBySportsman(sportsman);
         }
         catch(Exception ex){
-            return "error.403";
+            return "index";
         }
         model.addAttribute("name", sportsman.getName());
         model.addAttribute("surname", sportsman.getSurname());

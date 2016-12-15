@@ -12,13 +12,16 @@
           <spring:message code="page.error.403.message"/>
        </div>
 </c:if--%>
-
+<p>
+    <a href="create-event/${id}" style="float:right;" class="btn btn-primary">Create Event</a>
+</p>
 <div class="container">
         <p><strong><spring:message code="page.name"/>:</strong><c:out value=" ${name}"/></p>
         <p><strong><spring:message code="page.surname"/>:</strong><c:out value=" ${surname}"/></p>
         <p><strong><spring:message code="page.email"/>:</strong><c:out value=" ${email}"/></p>
-        <p><strong><spring:message code="page.birthdate"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${birthdate}" pattern="dd.MM.yyyy"/></p>
+        <p><strong><spring:message code="page.birthdate"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${birthdate.time}" pattern="dd.MM.yyyy"/></p>
         <br/>
+
         <table class="table">
             <thead>
                 <tr>
@@ -46,6 +49,8 @@
                     <th>Event description</th>
                     <th>Admin</th>
                     <th>State</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +60,19 @@
                         <td>${invite.event.description}</td>
                         <td>${invite.event.admin.surname}, ${invite.event.admin.name}</td>
                         <td>${invite.state}</td>
+                        <td>
+                            <c:if test="${invite.state != 'DECLINED'}">
+
+                                        <span>
+                                            <a class="btn btn-primary" data-toggle="collapse" style="float:right;" href="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                <spring:message text='Accept'/>
+                                            </a>
+                                        <a class="btn btn-primary" data-toggle="collapse" style="float:right;" href="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            <spring:message text='Decline'/>
+                                        </a>
+                                             </span>
+                            </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>

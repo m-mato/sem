@@ -3,16 +3,21 @@ package cz.muni.pa165.sem.controller;
 import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.facade.ResultFacade;
+import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import org.slf4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import javax.validation.Valid;
 
 /**
  * @author Kamil Triscik
@@ -24,6 +29,9 @@ public class EventController extends BaseController {
 
     @Inject
     private EventFacade eventFacade;
+
+    @Inject
+    private SportFacade sportFacade;
 
     @Inject
     private SportsmanFacade sportsmanFacade;
@@ -76,6 +84,36 @@ public class EventController extends BaseController {
     public String invite(@PathVariable Long id) {
 //        InvitationDTO invitationDTO =
         return null;
+    }
+
+    @RequestMapping(value = "/create-event", method=RequestMethod.GET)
+    public String createEvent(Model model){
+        logger.debug("Starting to create event");
+        model.addAttribute("sports", sportFacade.getAllSports());
+        model.addAttribute("event", new EventCreateDTO());
+        return "create-event";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("productCreate") EventCreateDTO event, BindingResult bindingResult) {
+        logger.debug("Creating event: ", event.toString());
+        EventDTO createdEvent;
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String email = auth.getName();
+            SportsmanDTO sportsman = sportsmanFacade.getByEmail(email);
+            event.setAdmin(sportsman);
+            if (bindingResult.hasErrors()) {
+                logger.debug("Creation of event: {0} was not successuful", event.toString());
+                return "create-event";
+            }
+            createdEvent = eventFacade.create(event);
+        }
+        catch(Exception ex){
+            return "create-event";
+        }
+       // redirectAttributes.addFlashAttribute("alert_success", "Event was created");
+        return "events/"+ createdEvent.getId();
     }
 
 
