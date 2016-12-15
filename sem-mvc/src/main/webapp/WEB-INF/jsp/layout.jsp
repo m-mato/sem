@@ -16,9 +16,10 @@
 <spring:url value="/img/favicon.ico" var="faviconImgUrl"/>
 <spring:url value="/img/logo.png" var="logoImgUrl"/>
 <spring:url value="/js/html5shiv.min.js" var="html5shivJsUrl"/>
-<spring:url value="/js/jquery.min.js" var="jqueryJsUrl"/>
-<spring:url value="/js/respond.min.js" var="respondJsUrl"/>
-<spring:url value="/js/jquery.select2.js" var="select2js"/>
+<spring:url value="/js/jquery/jquery.min.js" var="jqueryJsUrl"/>
+<spring:url value="/js/respond/respond.min.js" var="respondJsUrl"/>
+<spring:url value="/js/select2/css/select2.min.css" var="select2CssUrl"/>
+<spring:url value="/js/select2/js/select2.min.js" var="select2JsUrl"/>
 <spring:url value="/js/script.js" var="scriptJsUrl"/>
 
 <spring:url value="/" var="frontUrl"/>
@@ -41,6 +42,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><c:if test="${!isFront}"><spring:message code="${tilesTitle}"/> | </c:if><spring:message code="sem"/></title>
         <link type="text/css" rel="stylesheet" media="all" href="${bootstrapCssUrl}">
+        <link type="text/css" rel="stylesheet" media="all" href="${select2CssUrl}">
         <link type="text/css" rel="stylesheet" media="all" href="${styleCssUrl}"/>
         <link rel="shortcut icon" href="${faviconImgUrl}"/>
         <!--[if lt IE 9]>
@@ -117,7 +119,7 @@
 
         <script type="text/javascript" src="${jqueryJsUrl}"></script>
         <script type="text/javascript" src="${bootstrapJsUrl}"></script>
-        <script type="text/javascript" src="${select2js}"></script>
+        <script type="text/javascript" src="${select2JsUrl}"></script>
         <script type="text/javascript" src="${scriptJsUrl}"></script>
     </body>
 
