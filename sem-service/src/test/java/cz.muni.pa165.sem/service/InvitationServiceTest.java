@@ -65,7 +65,7 @@ public class InvitationServiceTest extends AbstractTestNGSpringContextTests {
         sport.setName("SportName");
         
         event = getEvent();
-        invitation = getInvitation(sportsman, getEvent());
+        invitation = getInvitation(sportsman, event);
 
         
         Mockito.when(eventDAOMock.findById(event.getId())).thenReturn(event);
