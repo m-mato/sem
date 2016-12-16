@@ -1,9 +1,15 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <spring:url value="/img/sports.jpg" var="sportsImgUrl"/>
+
+<spring:url value="/login" var="userLoginUrl"/>
+<spring:url value="/logout" var="userLogoutUrl"/>
+<spring:url value="/register" var="userRegisterUrl"/>
+<spring:url value="/my-account" var="myAccountUrl"/>
 
 <c:if test="${param.logout != null}">
     <div class="alert alert-success" role="alert">
@@ -13,7 +19,17 @@
 
 <div class="row">
     <div class="col-md-5">
-        <h2><spring:message code="page.index.welcome"/></h2>
+        <p class="lead"><spring:message code="page.index.welcome"/></p>
+        <div class="btn-group btn-group-lg">
+            <sec:authorize access="isAnonymous()">
+                <a href="${userLoginUrl}" class="btn btn-primary"><spring:message code="link.user.login"/></a>
+                <a href="${userRegisterUrl}" class="btn btn-danger"><spring:message code="link.user.register"/></a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <a href="${myAccountUrl}" class="btn btn-primary"><spring:message code="link.my-account"/></a>
+                <a href="${userLogoutUrl}" class="btn btn-danger"><spring:message code="link.user.logout"/></a>
+            </sec:authorize>
+        </div>
     </div>
     <div class="col-md-6 text-center">
         <img src="${sportsImgUrl}"/>

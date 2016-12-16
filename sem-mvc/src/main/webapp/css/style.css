@@ -12,6 +12,10 @@ body {
     height: 18px;
 }
 
+.front .lead {
+    font-size: 30px;
+}
+
 .input-group-addon.email {
     cursor: pointer;
 }
