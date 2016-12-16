@@ -90,13 +90,12 @@ public class EventController extends BaseController {
     public String createEvent(Model model){
         logger.debug("Starting to create event");
         model.addAttribute("sports", sportFacade.getAllSports());
-        //pageContext.setAttribute("list", list);
         model.addAttribute("event", new EventCreateDTO());
         return "create-event";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("productCreate") EventCreateDTO event, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute("event") EventCreateDTO event, BindingResult bindingResult) {
         logger.debug("Creating event: ", event.toString());
         EventDTO createdEvent;
         try{
