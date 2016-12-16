@@ -45,10 +45,14 @@
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="name" id="name"/>
                                 </div>
+                            </div>
+                            <div class="form-group form-group-lg">
                                 <label class="col-sm-3 control-label" for="name"><spring:message code="page.sports.modal.label.desc"/></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="description" id="description"/>
                                 </div>
+                            </div>
+                            <div class="form-group form-group-lg">
                                 <div class="col-sm-5 col-sm-offset-3">
                                     <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.sports.modal.button.submit"/></button>
                                 </div>

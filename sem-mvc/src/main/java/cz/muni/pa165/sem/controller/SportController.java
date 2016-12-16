@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * @author Matej Majdis
  */
 @Controller
 @RequestMapping("/admin")
 public class SportController extends BaseController {
+
+	@Autowired
+	private ServletContext servletContext;
 
 	@Autowired
 	private SportFacade sportFacade;
@@ -29,9 +36,12 @@ public class SportController extends BaseController {
 	}
 
 	@RequestMapping(value = "/sport/create", method = RequestMethod.POST)
-	public String createSport(@ModelAttribute("SpringWeb")SportCreateDTO sportCreateDTO, BindingResult result) {
+	public String createSport(@ModelAttribute("SpringWeb")SportCreateDTO sportCreateDTO, BindingResult result,
+							  HttpServletResponse resp) throws IOException {
 
 		sportFacade.create(sportCreateDTO);
-		return "my-account";
+
+		resp.sendRedirect(servletContext.getContextPath() + "/admin/sports");
+		return null;
 	}
 }
