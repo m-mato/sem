@@ -25,8 +25,6 @@ public class SportsmanDTO {
 
 	private Set<EventDTO> events = new HashSet<>();
 
-	private Set<InvitationDTO> invitations = new HashSet<>();
-
 	public Long getId() {
 		return id;
 	}
@@ -89,14 +87,6 @@ public class SportsmanDTO {
 
 	public void setEvents(Set<EventDTO> events) {
 		this.events = events;
-	}
-
-	public Set<InvitationDTO> getInvitations() {
-		return invitations;
-	}
-
-	public void setInvitations(Set<InvitationDTO> invitations) {
-		this.invitations = invitations;
 	}
 
 	@Override

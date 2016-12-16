@@ -26,4 +26,6 @@ public interface SportsmanFacade {
 	void update(SportsmanUpdateDTO sportsmanUpdateDTO);
 
 	void delete(Long id);
+
+	List<SportsmanDTO> findBySubstring(String substring);
 }

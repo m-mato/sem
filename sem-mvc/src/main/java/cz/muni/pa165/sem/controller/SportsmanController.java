@@ -1,5 +1,6 @@
 package cz.muni.pa165.sem.controller;
 
+import cz.muni.pa165.sem.facade.InvitationFacade;
 import org.springframework.security.core.Authentication;
 import cz.muni.pa165.sem.dto.ResultDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -26,6 +28,9 @@ public class SportsmanController extends BaseController {
 
     @Autowired
     SportsmanFacade sportsmanFacade;
+
+    @Inject
+    InvitationFacade invitationFacade;
 
     @Autowired
     ResultFacade resultFacade;
@@ -49,7 +54,7 @@ public class SportsmanController extends BaseController {
         model.addAttribute("surname", sportsman.getSurname());
         model.addAttribute("email", sportsman.getEmail());
         model.addAttribute("birthdate", sportsman.getBirthDate());
-        model.addAttribute("invitations", sportsman.getInvitations());
+        model.addAttribute("invitations", invitationFacade.findByInvitee(sportsman));
         model.addAttribute("events", sportsman.getEvents());
         model.addAttribute("results", results);
         return "my-account";
@@ -65,7 +70,7 @@ public class SportsmanController extends BaseController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            sportsman.getInvitations();
+            invitationFacade.findByInvitee(sportsman);
                     //Accept invitation with id
         }
         catch(Exception ex){
@@ -82,7 +87,7 @@ public class SportsmanController extends BaseController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            sportsman.getInvitations();
+            invitationFacade.findByInvitee(sportsman);
             //Accept invitation with id
         }
         catch(Exception ex){

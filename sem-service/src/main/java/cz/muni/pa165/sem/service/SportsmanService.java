@@ -24,4 +24,6 @@ public interface SportsmanService {
 	void delete(Sportsman sportsman);
 
 	void update(Sportsman sportsman);
+
+	List<Sportsman> findBySubstring(String substring);
 }

@@ -83,6 +83,11 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 		sportsmanService.delete(sportsmanService.findById(id));
 	}
 
+	@Override
+	public List<SportsmanDTO> findBySubstring(String substring) {
+		return beanMappingService.mapTo(sportsmanService.findBySurname(substring), SportsmanDTO.class);
+	}
+
 	/**
 	 * Only for unit tests
 	 * @param beanMappingService

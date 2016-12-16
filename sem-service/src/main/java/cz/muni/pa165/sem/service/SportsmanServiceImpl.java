@@ -67,6 +67,11 @@ public class SportsmanServiceImpl implements SportsmanService {
 	}
 
 	@Override
+	public List<Sportsman> findBySubstring(String substring) {
+		return sportsmanDAO.findBySubstring(substring);
+	}
+
+	@Override
 	public void delete(Sportsman sportsman) {
 
 		sportsmanDAO.delete(sportsman);

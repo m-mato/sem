@@ -76,4 +76,13 @@ public interface SportsmanDAO {
 	 * @return List of found sportsman objects.
 	 */
 	List<Sportsman> findAll();
+
+	/**
+	 * This method find sportsman which name, surname or email contain substring
+	 *
+	 * @param substring the substring value of objects we want to find.
+	 * @return null if object does not exist in DB otherwise return sportsman object.
+	 * @throws IllegalArgumentException When surname is {@code null}.
+	 */
+	List<Sportsman> findBySubstring(String substring);
 }

@@ -6,6 +6,9 @@ import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -40,13 +44,18 @@ public class EventController extends BaseController {
     private ResultFacade resultFacade;
 
     @RequestMapping("/events")
-    public String renderEvents(Model model) {
+    public String renderEvents(Authentication authentication, Model model) {
         logger.info("renderEvents");
-        List<EventDTO> events = eventFacade.findAll();//todo for specific sportsman
+        SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
+        List<EventDTO> events = eventFacade.findAll();//findByParticipant(1L);//participant.getId());
+        logger.info("events" + events.size());
         model.addAttribute("events", events);
-        model.addAttribute("event", events.get(0));
-        model.addAttribute("result", resultFacade.findById(1L));// TODO: 14-Dec-16 from event
-        return "events-participant";
+        if (!events.isEmpty()) {
+            EventDTO event = events.get(0);
+            model.addAttribute("event", events.get(0));
+            model.addAttribute("result", resultFacade.findBySportsmanAndEvent(participant, event));
+        }
+        return "event-participant";
     }
 
     @RequestMapping("/events/{eventId}")
@@ -58,32 +67,23 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping( value = "/events/{id}/unenroll", method = RequestMethod.GET)
-    public String unenroll(@PathVariable long id) {
-        SportsmanDTO sportsman = sportsmanFacade.getById(1L);// TODO: 14-Dec-16 authenticated user
+    public String unenroll(@PathVariable long id, Authentication authentication) {
+        logger.info("renderEvents");
+        SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
         EventDTO event = eventFacade.findById(id);
-        logger.info("Unenrolling sportman(" + sportsman.getName() + " " + sportsman.getSurname() + ") from event " + event.getName());
+        logger.info("Unenrolling sportman(" + participant.getName() + " " + participant.getSurname() + ") from event " + event.getName());
         resultFacade.delete(
                 //find result we want to delete
                 resultFacade.findBySportsmanAndEvent(
-                        sportsman, //find sportsman  me
+                        participant, //find sportsman  me
                         event).getId());  //find event
         // TODO: 13-Dec-16 redirect where you want
         return "events-participant";
     }
 
-    @RequestMapping(value = "/events/autocomplet", method = RequestMethod.POST)
-    public Set autoComplet(@RequestParam("pattern") String pattern, Model model) {
-        TreeSet sportsmans = new TreeSet();
-        sportsmans.addAll(sportsmanFacade.getByName(pattern));
-        sportsmans.addAll(sportsmanFacade.getBySurname(pattern));
-        model.addAttribute("sportsmans", sportsmans);
-        return sportsmans;
-    }
-
-    @RequestMapping(value = "/events/{id}/invite")
-    public String invite(@PathVariable Long id) {
-//        InvitationDTO invitationDTO =
-        return null;
+    @RequestMapping(value = "/events/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, Model model) {
+        return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern),  HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create-event", method=RequestMethod.GET)
