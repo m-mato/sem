@@ -14,7 +14,14 @@
         <div>
             <form class="form-horizontal" id="fe" name="fe" action="${findUrl}" method="GET">
                 <div>
-                    <input form="fe" id="search" name="search" type="text" class="form-control input-lg" placeholder="<spring:message code="page.find-event.label"/>">
+                    <c:choose>
+                        <c:when test="${not empty search}">
+                            <input form="fe" id="search" name="search" type="text" class="form-control input-lg" value="${search}">
+                        </c:when>
+                        <c:otherwise>
+                            <input form="fe" id="search" name="search" type="text" class="form-control input-lg" placeholder="<spring:message code="page.find-event.label"/>">
+                        </c:otherwise>
+                    </c:choose>
                 <div>
                 <div>
                     <button class="btn btn-primary btn-lg center-block" style="margin-top:15px;"><spring:message code="page.find-event.button.find"/></button>
@@ -30,6 +37,7 @@
                         <td><strong><spring:message code="page.find-event.thead.desc"/></strong></td>
                         <td><strong><spring:message code="page.find-event.thead.admin"/></strong></td>
                     </tr>
+                </thead>
                 <tbody>
                     <c:forEach items="${events}" var="event">
                         <tr>
