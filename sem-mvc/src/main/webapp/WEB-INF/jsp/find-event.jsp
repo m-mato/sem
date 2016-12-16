@@ -19,16 +19,16 @@
             </form>
         </div>
         <table class="table" style="margin-top:15px;">
-        <c:if test="${not empty events}">
-            <div class="col-md-8">
-                <c:forEach items="${events}" var="event">
-                    <tr>
-                        <td>Event Name: <c:out value="${event.name}"/></td>
-                        <td>Event Description: <c:out value="${event.description}"/></td>
-                    </tr>
-                </c:forEach>
-            </div>
-        </c:if>
+            <c:if test="${not empty events}">
+                <div class="col-md-8">
+                    <c:forEach items="${events}" var="event">
+                        <tr>
+                            <td>Event Name: <c:out value="${event.name}"/></td>
+                            <td>Event Description: <c:out value="${event.description}"/></td>
+                        </tr>
+                    </c:forEach>
+                </div>
+            </c:if>
         </table>
     </div>
 </div>

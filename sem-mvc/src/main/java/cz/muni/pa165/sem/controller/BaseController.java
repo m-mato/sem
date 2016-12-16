@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public abstract class BaseController {
 
     @Autowired
-    SportsmanFacade sportsmanFacade;
+    private SportsmanFacade sportsmanFacade;
 
     @ModelAttribute("language")
     public String getLanguage() {

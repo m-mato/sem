@@ -28,6 +28,7 @@
 <spring:url value="/logout" var="logoutUrl"/>
 <spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
+<spring:url value="/admin/sports" var="sportsUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
 <spring:url value="?lang=sk" var="skLangUrl"/>
@@ -73,6 +74,9 @@
                         <li><a href="${findEventUrl}"><spring:message code="link.findEvent"/></a></li>
                         <sec:authorize access="isAuthenticated()">
                             <li><a href="${eventsUrl}"><spring:message code="link.events"/></a></li>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <li><a href="${sportsUrl}"><spring:message code="link.sports"/></a></li>
+                            </sec:authorize>
                         </sec:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
