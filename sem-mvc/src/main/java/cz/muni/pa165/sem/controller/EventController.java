@@ -81,11 +81,6 @@ public class EventController extends BaseController {
         return "events-participant";
     }
 
-    @RequestMapping(value = "/events/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, Model model) {
-        return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern),  HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/create-event", method=RequestMethod.GET)
     public String createEvent(Model model){
         logger.debug("Starting to create event");

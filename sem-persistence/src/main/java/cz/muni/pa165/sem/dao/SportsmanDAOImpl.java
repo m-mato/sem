@@ -128,8 +128,8 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 			return this.findAll();
 		}
 		try {// TODO: 15-Dec-16 not already enrolled
-			return entityManager.createQuery("select s from Sportsman s where s.name LIKE :substring OR s.surname LIKE :substring OR s.email LIKE :substring",
-					Sportsman.class).setParameter("substring", "%" + substring + "%").getResultList();
+			return entityManager.createQuery("select s from Sportsman s where LOWER(s.name) LIKE CONCAT('%',:substring,'%')",// OR s.surname LIKE :substring OR s.email LIKE :substring",
+					Sportsman.class).setParameter("substring", substring.toLowerCase()).getResultList();
 		} catch (NoResultException nrf) {
 			return null;
 		}

@@ -1,6 +1,66 @@
 (function($) {
 
-    $('select').select2();
+    function format(item) { return item; }
+
+    $(".fetchData").select2({
+        placeholder: "Search for sportsman",
+        minimumInputLength: 3,
+        ajax: {
+            url: "http://localhost:8080/pa165/events/autocomplet",
+            dataType: 'json',
+            quietMillis: 250,
+            method: 'POST',
+            data: function (params) {
+                return {
+                    pattern: params.term // search term
+                };
+            },
+            processResults: function (users) {
+                var result = users.map(function(a, index) {
+                    index++;
+                    return {id: index, text: a.name + " " + a.surname + "\n(" + a.email + ")"};
+                });
+                return { results: result};
+            }
+        },
+        formatSelection: format,
+        formatResult: format
+    });
+
+    $('#inviteButton').click(function () {
+        var user = $(".js-data-example-ajax option:selected").text();
+        var email = user.substr(user.indexOf("("));
+        email = email.substr(1, email.length-2);
+        eventId = $("#show_event-id").val();
+        if (email) {
+            $.ajax({
+                url: "http://localhost:8080/pa165/invite/" + eventId + "/" + email,
+                dataType: 'json',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                // data: {
+                //     invitation: {
+                //         eventId: eventId,
+                //         email: email
+                //     }
+                // }
+                // data: {
+                //     eventId: eventId.toString(),
+                //         email: email
+                // }
+
+            })
+        }
+
+    });
+
+
+
+
+
 
     $('.event-item').click(function() {
         var eventId = this.querySelector('[name=event-id]').innerHTML;

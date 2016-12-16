@@ -1,13 +1,7 @@
 package cz.muni.pa165.sem.configuration;
 
-import cz.muni.pa165.sem.dto.EventDTO;
-import cz.muni.pa165.sem.dto.ResultDTO;
-import cz.muni.pa165.sem.dto.SportDTO;
-import cz.muni.pa165.sem.dto.SportsmanDTO;
-import cz.muni.pa165.sem.entity.Event;
-import cz.muni.pa165.sem.entity.Result;
-import cz.muni.pa165.sem.entity.Sport;
-import cz.muni.pa165.sem.entity.Sportsman;
+import cz.muni.pa165.sem.dto.*;
+import cz.muni.pa165.sem.entity.*;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -32,6 +26,7 @@ public class ServiceConfiguration {
         dozer.addMapping(new DozerEventConfig());
         dozer.addMapping(new DozerSportConfig());
         dozer.addMapping(new DozerResultConfig());
+        dozer.addMapping(new DozerInvitationConfig());
         return dozer;
     }
 
@@ -60,6 +55,13 @@ public class ServiceConfiguration {
         @Override
         protected void configure() {
             mapping(Result.class, ResultDTO.class);
+        }
+    }
+
+    private class DozerInvitationConfig extends BeanMappingBuilder {
+        @Override
+        protected void configure() {
+            mapping(Invitation.class, InvitationDTO.class);
         }
     }
 }
