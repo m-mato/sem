@@ -50,6 +50,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/sports.jsp"/>
     </definition>
 
+    <definition name="events" extends="layout">
+        <put-attribute name="title" value="title.events"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/events.jsp"/>
+    </definition>
+
     <definition name="error.403" extends="layout">
         <put-attribute name="title" value="title.error.403"/>
         <put-attribute name="body" value="/WEB-INF/jsp/error/403.jsp"/>

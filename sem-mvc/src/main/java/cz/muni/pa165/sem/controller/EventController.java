@@ -6,6 +6,7 @@ import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -31,19 +35,23 @@ public class EventController extends BaseController {
 
     Logger logger = org.slf4j.LoggerFactory.getLogger(EventController.class);
 
-    @Inject
+
+    @Autowired
+    private ServletContext servletContext;
+
+    @Autowired
     private EventFacade eventFacade;
 
-    @Inject
+    @Autowired
     private SportFacade sportFacade;
 
-    @Inject
+    @Autowired
     private SportsmanFacade sportsmanFacade;
 
-    @Inject
+    @Autowired
     private ResultFacade resultFacade;
 
-    @RequestMapping("/events")
+    /*@RequestMapping("/events")
     public String renderEvents(Authentication authentication, Model model) {
         logger.info("renderEvents");
         SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
@@ -56,9 +64,20 @@ public class EventController extends BaseController {
             model.addAttribute("result", resultFacade.findBySportsmanAndEvent(participant, event));
         }
         return "event-participant";
+    }*/
+
+    //ALL EVENTS VIEW ....not just for user ...but need to be authenticated
+    @RequestMapping("/events")
+    public String renderEvents(Authentication authentication, Model model) {
+        logger.info("Rendering events");
+        List<EventDTO> events = eventFacade.findAll();
+        logger.info("events" + events.size());
+        model.addAttribute("events", events);
+        return "events";
     }
 
-    @RequestMapping("/events/{eventId}")
+
+        @RequestMapping("/events/{eventId}")
     public String renderEvent(@PathVariable long eventId, Model model) {
         model.addAttribute("event", eventFacade.findById(eventId));
         model.addAttribute("result", resultFacade.findById(1L));// TODO: 14-Dec-16 from event
@@ -94,10 +113,14 @@ public class EventController extends BaseController {
         return "create-event";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("event") EventCreateDTO event, BindingResult bindingResult) {
+
+
+    @RequestMapping(value = "/event/create", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("event") EventCreateDTO event, BindingResult bindingResult,
+                         HttpServletResponse resp) throws IOException {
         logger.debug("Creating event: ", event.toString());
         EventDTO createdEvent;
+
         try{
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String email = auth.getName();
@@ -112,8 +135,9 @@ public class EventController extends BaseController {
         catch(Exception ex){
             return "create-event";
         }
+        resp.sendRedirect(servletContext.getContextPath() + "/events/"+ createdEvent.getId());
        // redirectAttributes.addFlashAttribute("alert_success", "Event was created");
-        return "events/"+ createdEvent.getId();
+        return null;
     }
 
 

@@ -16,7 +16,7 @@
         <p><strong><spring:message code="page.my-account.name"/>:</strong><c:out value=" ${name}"/></p>
         <p><strong><spring:message code="page.my-account.surname"/>:</strong><c:out value=" ${surname}"/></p>
         <p><strong><spring:message code="page.my-account.email"/>:</strong><c:out value=" ${email}"/></p>
-        <p><strong><spring:message code="page.my-account.birthdate"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${birthdate.time}" pattern="dd.MM.yyyy"/></p>
+        <p><strong><spring:message code="page.my-account.birthdate"/>:</strong><fmt:formatDate value="${birthdate.time}" type="both" dateStyle="full" pattern="dd.MM.yyyy" /></p>
         <br/>
 
         <table class="table">
