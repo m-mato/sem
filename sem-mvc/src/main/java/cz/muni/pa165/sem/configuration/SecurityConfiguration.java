@@ -39,8 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.logout().logoutSuccessUrl("/?logout");
 
 		http.authorizeRequests().antMatchers("/test/**").access("hasRole('ROLE_ADMIN')").and().formLogin();
-		http.authorizeRequests().antMatchers("/auth/**").access("hasRole('ROLE_USER')").and().formLogin();
 		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')").and().formLogin();
+		http.authorizeRequests().antMatchers("/auth/**").access("hasRole('ROLE_USER')").and().formLogin();
+		http.authorizeRequests().antMatchers("/events/**").access("hasRole('ROLE_USER')").and().formLogin();
+		http.authorizeRequests().antMatchers("/my-account/**").access("hasRole('ROLE_USER')").and().formLogin();
 		http.csrf().disable();
 	}
 
