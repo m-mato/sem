@@ -21,18 +21,8 @@
     </definition>
 
     <definition name="my-account" extends="layout">
-        <put-attribute name="title" value="title.myAccount"/>
+        <put-attribute name="title" value="title.my-account"/>
         <put-attribute name="body" value="/WEB-INF/jsp/my-account.jsp"/>
-    </definition>
-
-    <definition name="create-event" extends="layout">
-        <put-attribute name="title" value="title.createEvent"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/create-event.jsp"/>
-    </definition>
-
-    <definition name="find-event" extends="layout">
-        <put-attribute name="title" value="title.find-event"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/find-event.jsp"/>
     </definition>
 
     <definition name="events-participant" extends="layout">
@@ -43,6 +33,16 @@
     <definition name="event-participant" extends="layout">
         <put-attribute name="title" value="title.events"/>
         <put-attribute name="body" value="/WEB-INF/jsp/event-participant.jsp"/>
+    </definition>
+
+    <definition name="create-event" extends="layout">
+        <put-attribute name="title" value="title.create-event"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/create-event.jsp"/>
+    </definition>
+
+    <definition name="find-event" extends="layout">
+        <put-attribute name="title" value="title.find-event"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/find-event.jsp"/>
     </definition>
 
     <definition name="sports" extends="layout">

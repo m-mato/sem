@@ -1,5 +1,6 @@
 package cz.muni.pa165.sem.controller;
 
+import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import cz.muni.pa165.sem.utils.InvitationState;
 import cz.muni.pa165.sem.utils.PerformanceUnits;
@@ -21,12 +22,12 @@ public abstract class BaseController {
         return LocaleContextHolder.getLocale().getLanguage();
     }
 
-    @ModelAttribute("loggedUserName")
-    public String getloggedUserName(Authentication authentication) {
-        if(authentication != null && authentication.isAuthenticated()) {
-            return sportsmanFacade.getByEmail(authentication.getName()).getName();
+    @ModelAttribute("loggedUser")
+    public SportsmanDTO getLoggedUser(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return sportsmanFacade.getByEmail(authentication.getName());
         }
-        return "";
+        return null;
     }
 
     @ModelAttribute("invitationStates")

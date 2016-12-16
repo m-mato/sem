@@ -15,14 +15,14 @@
 
 <form class="form-horizontal" name="f" action="create" method="POST">
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="name"><spring:message code="page.createEvent.name"/></label>
+        <label class="col-sm-3 control-label" for="name"><spring:message code="page.create-event.name"/></label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="name" id="name"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label" for="event_date"><spring:message code="page.createEvent.eventDate"/></label>
+        <label class="col-sm-3 control-label" for="event_date"><spring:message code="page.create-event.eventDate"/></label>
         <div class="col-xs-5 date">
             <div class="input-group input-append date" id="event_date">
                 <input type=text  data-date-format='yy-mm-dd'  >
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="sport" class="col-sm-3 control-label" ><spring:message code="page.createEvent.sport"/></form:label>
+        <form:label path="sport" class="col-sm-3 control-label" ><spring:message code="page.create-event.sport"/></form:label>
         <div class="col-sm-10">
             <form:select path="sport" cssClass="form-control">
                 <c:forEach items="${sports}" var="sport">
@@ -45,32 +45,32 @@
 
 
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="capacity"><spring:message code="page.createEvent.capacity"/></label>
+        <label class="col-sm-3 control-label" for="capacity"><spring:message code="page.create-event.capacity"/></label>
         <div class="col-sm-5">
             <input type="number" class="form-control" name="capacity" id="capacity"/>
         </div>
     </div>
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="city"><spring:message code="page.createEvent.city"/></label>
+        <label class="col-sm-3 control-label" for="city"><spring:message code="page.create-event.city"/></label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="city" id="city"/>
         </div>
     </div>
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="address"><spring:message code="page.createEvent.address"/></label>
+        <label class="col-sm-3 control-label" for="address"><spring:message code="page.create-event.address"/></label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="address" id="address"/>
         </div>
     </div>
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="description"><spring:message code="page.createEvent.description"/></label>
+        <label class="col-sm-3 control-label" for="description"><spring:message code="page.create-event.description"/></label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="description" id="description"/>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-5 col-sm-offset-3">
-            <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.createEvent.submit"/></button>
+            <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.create-event.submit"/></button>
         </div>
     </div>
 </form>

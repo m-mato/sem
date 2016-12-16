@@ -71,7 +71,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
-                        <li><a href="${findEventUrl}"><spring:message code="link.findEvent"/></a></li>
+                        <li><a href="${findEventUrl}"><spring:message code="link.find-event"/></a></li>
                         <sec:authorize access="isAuthenticated()">
                             <li><a href="${eventsUrl}"><spring:message code="link.events"/></a></li>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -90,13 +90,13 @@
                             <img class="navbar-lang" src="${skImgUrl}"/>
                         </a></li>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${myAccountUrl}"><spring:message code="link.myAccount"/></a></li>
+                            <li><a href="${myAccountUrl}"><spring:message code="link.my-account"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAnonymous()">
                             <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUserName}</a></li>
+                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUser.name}</a></li>
                         </sec:authorize>
                     </ul>
                 </div>
