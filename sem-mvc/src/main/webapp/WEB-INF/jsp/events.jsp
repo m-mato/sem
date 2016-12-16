@@ -69,6 +69,12 @@
                                 </div>
                             </div>
                             <div class="form-group form-group-lg">
+                                <label class="col-sm-3 control-label" for="capacity"><spring:message code="page.events.capacity"/></label>
+                                <div class="col-sm-5">
+                                    <input type="number" min="1" step="1" class="form-control" name="capacity" id="capacity"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-lg">
                                 <label class="col-sm-3 control-label" for="city"><spring:message code="page.events.city"/></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="city" id="city"/>
