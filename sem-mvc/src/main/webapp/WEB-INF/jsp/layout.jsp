@@ -9,13 +9,19 @@
 
 <spring:url value="/bootstrap/css/bootstrap.min.css" var="bootstrapCssUrl"/>
 <spring:url value="/bootstrap/js/bootstrap.min.js" var="bootstrapJsUrl"/>
+
 <spring:url value="/css/style.css" var="styleCssUrl"/>
+
 <spring:url value="/img/cz.png" var="czImgUrl"/>
 <spring:url value="/img/en.png" var="enImgUrl"/>
 <spring:url value="/img/sk.png" var="skImgUrl"/>
 <spring:url value="/img/favicon.ico" var="faviconImgUrl"/>
 <spring:url value="/img/logo.png" var="logoImgUrl"/>
-<spring:url value="/js/html5shiv.min.js" var="html5shivJsUrl"/>
+
+<spring:url value="/js/datepicker/css/bootstrap-datepicker3.min.css" var="datepickerCssUrl"/>
+<spring:url value="/js/datepicker/js/bootstrap-datepicker.min.js" var="datepickerJsUrl"/>
+<spring:url value="/js/datepicker/locales/bootstrap-datepicker.${language}.min.js" var="datepickerLocaleJsUrl"/>
+<spring:url value="/js/html5shiv/html5shiv.min.js" var="html5shivJsUrl"/>
 <spring:url value="/js/jquery/jquery.min.js" var="jqueryJsUrl"/>
 <spring:url value="/js/respond/respond.min.js" var="respondJsUrl"/>
 <spring:url value="/js/select2/css/select2.min.css" var="select2CssUrl"/>
@@ -23,9 +29,10 @@
 <spring:url value="/js/script.js" var="scriptJsUrl"/>
 
 <spring:url value="/" var="frontUrl"/>
-<spring:url value="/login" var="loginUrl"/>
+<spring:url value="/login" var="userLoginUrl"/>
+<spring:url value="/logout" var="userLogoutUrl"/>
+<spring:url value="/register" var="userRegisterUrl"/>
 <spring:url value="/my-account" var="myAccountUrl"/>
-<spring:url value="/logout" var="logoutUrl"/>
 <spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
 <spring:url value="/admin/sports" var="sportsUrl"/>
@@ -43,6 +50,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><c:if test="${!isFront}"><spring:message code="${tilesTitle}"/> | </c:if><spring:message code="sem"/></title>
         <link type="text/css" rel="stylesheet" media="all" href="${bootstrapCssUrl}">
+        <link type="text/css" rel="stylesheet" media="all" href="${datepickerCssUrl}">
         <link type="text/css" rel="stylesheet" media="all" href="${select2CssUrl}">
         <link type="text/css" rel="stylesheet" media="all" href="${styleCssUrl}"/>
         <link rel="shortcut icon" href="${faviconImgUrl}"/>
@@ -89,14 +97,13 @@
                         <li><a href="${skLangUrl}" title="<spring:message code="link.lang.sk"/>">
                             <img class="navbar-lang" src="${skImgUrl}"/>
                         </a></li>
+                        <sec:authorize access="isAnonymous()">
+                            <li><a href="${userLoginUrl}"><spring:message code="link.user.login"/></a></li>
+                            <li><a href="${userRegisterUrl}"><spring:message code="link.user.register"/></a></li>
+                        </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <li><a href="${myAccountUrl}"><spring:message code="link.my-account"/></a></li>
-                        </sec:authorize>
-                        <sec:authorize access="isAnonymous()">
-                            <li><a href="${loginUrl}"><spring:message code="link.login"/></a></li>
-                        </sec:authorize>
-                        <sec:authorize access="isAuthenticated()">
-                            <li><a href="${logoutUrl}"><spring:message code="link.logout"/> - ${loggedUser.name}</a></li>
+                            <li><a href="${userLogoutUrl}"><spring:message code="link.user.logout"/> - ${loggedUser.name}</a></li>
                         </sec:authorize>
                     </ul>
                 </div>
@@ -123,6 +130,10 @@
 
         <script type="text/javascript" src="${jqueryJsUrl}"></script>
         <script type="text/javascript" src="${bootstrapJsUrl}"></script>
+        <script type="text/javascript" src="${datepickerJsUrl}"></script>
+        <c:if test="${language != 'en'}">
+            <script type="text/javascript" src="${datepickerLocaleJsUrl}"></script>
+        </c:if>
         <script type="text/javascript" src="${select2JsUrl}"></script>
         <script type="text/javascript" src="${scriptJsUrl}"></script>
     </body>

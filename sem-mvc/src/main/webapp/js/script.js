@@ -2,6 +2,17 @@
 
     $('select').select2();
 
+    $('.input-group.date').datepicker({
+        format: 'yyyy/mm/dd',
+        language: $('html').attr('lang')
+    });
+
+    $('.input-group-addon.email').click(function() {
+        var input = $(this).parent().find('input');
+        var currentValue = input.val();
+        input.val(currentValue + $(this).text());
+    });
+
     $('.event-item').click(function() {
         var eventId = this.querySelector('[name=event-id]').innerHTML;
         alert("Selected event with id=" + eventId + ". Not done yet :p");

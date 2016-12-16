@@ -31,7 +31,7 @@ public class WebContext extends WebMvcConfigurerAdapter {
      * Configure TilesConfigurer.
      */
     @Bean
-    public TilesConfigurer tilesConfigurer(){
+    public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/tiles.xml"});
         tilesConfigurer.setCheckRefresh(true);
@@ -62,7 +62,7 @@ public class WebContext extends WebMvcConfigurerAdapter {
      * Configure ReloadableResourceBundleMessageSource.
      */
     @Bean
-    public ReloadableResourceBundleMessageSource messageSource(){
+    public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
@@ -73,7 +73,7 @@ public class WebContext extends WebMvcConfigurerAdapter {
      * Configure CookieLocaleResolver.
      */
     @Bean
-    public CookieLocaleResolver localeResolver(){
+    public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(Locale.ENGLISH);
         localeResolver.setCookieName("lang");

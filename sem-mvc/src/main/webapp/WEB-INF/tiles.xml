@@ -15,9 +15,14 @@
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
     </definition>
 
-    <definition name="login" extends="layout">
-        <put-attribute name="title" value="title.login"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
+    <definition name="user.login" extends="layout">
+        <put-attribute name="title" value="title.user.login"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/login.jsp"/>
+    </definition>
+
+    <definition name="user.register" extends="layout">
+        <put-attribute name="title" value="title.user.register"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/register.jsp"/>
     </definition>
 
     <definition name="my-account" extends="layout">
