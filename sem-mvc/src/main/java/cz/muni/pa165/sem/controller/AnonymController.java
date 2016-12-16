@@ -34,6 +34,7 @@ public class AnonymController extends BaseController {
 			}
 
 			model.addAttribute("events", events);
+			model.addAttribute("search", searchValue);
 		}
 
 		return "find-event";
