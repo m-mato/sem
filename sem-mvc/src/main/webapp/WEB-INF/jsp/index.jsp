@@ -5,11 +5,6 @@
 
 <spring:url value="/img/sports.jpg" var="sportsImgUrl"/>
 
-<c:if test="${param.login != null}">
-    <div class="alert alert-success" role="alert">
-        <spring:message code="page.index.login"/>
-    </div>
-</c:if>
 <c:if test="${param.logout != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.index.logout"/>

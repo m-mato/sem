@@ -1,17 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Veronika Aksamitova
---%>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<%--c:if test="${param.error != null}">
-       <div class="alert alert-danger" role="alert">
-          <spring:message code="page.error.403.message"/>
-       </div>
-</c:if--%>
+<c:if test="${param.login != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.index.login"/>
+    </div>
+</c:if>
+
 <p>
     <a href="create-event/${id}" style="float:right;" class="btn btn-primary">Create Event</a>
 </p>

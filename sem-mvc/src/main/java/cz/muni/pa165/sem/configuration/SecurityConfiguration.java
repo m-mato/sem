@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.formLogin().loginPage("/login").defaultSuccessUrl("/?login").failureUrl("/login?error");
+		http.formLogin().loginPage("/login").defaultSuccessUrl("/my-account?login").failureUrl("/login?error");
 		http.logout().logoutSuccessUrl("/?logout");
 
 		http.authorizeRequests().antMatchers("/test/**").access("hasRole('ROLE_ADMIN')").and().formLogin();
