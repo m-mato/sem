@@ -81,6 +81,13 @@ public class EventController extends BaseController {
         return "events-participant";
     }
 
+    @RequestMapping( value = "/events/invite", method = RequestMethod.POST)
+    public void invite(@PathVariable long inv_event_id, @PathVariable String inputEmail) {
+        logger.debug("Invitation fot event with id=" + inv_event_id +"= and for user with email " + inputEmail);
+        //get an email(parse if necessary)
+//        invitationFacade.invite(inv_event_id, sportsmanFacade.getByEmail(inputEmail).getId());
+    }
+
     @RequestMapping(value = "/create-event", method=RequestMethod.GET)
     public String createEvent(Model model){
         logger.debug("Starting to create event");
