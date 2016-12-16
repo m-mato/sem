@@ -139,7 +139,6 @@ public class SportsmanDTO {
 				", password='" + password + '\'' +
 				", is manager=" + isManager +
 				", events=" + events +
-				", invitations=" + invitations +
 				'}';
 	}
 }

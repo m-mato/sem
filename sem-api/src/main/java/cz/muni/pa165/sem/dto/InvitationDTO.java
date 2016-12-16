@@ -1,7 +1,5 @@
 package cz.muni.pa165.sem.dto;
 
-import cz.muni.pa165.sem.entity.Event;
-import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.utils.InvitationState;
 
 /**
@@ -11,9 +9,9 @@ public class InvitationDTO {
 
 	private Long id;
 
-	private Event event;
+	private EventDTO event;
 
-	private Sportsman invitee;
+	private SportsmanDTO invitee;
 
 	private InvitationState state;
 
@@ -25,19 +23,19 @@ public class InvitationDTO {
 		this.id = id;
 	}
 
-	public Event getEvent() {
+	public EventDTO getEventDTO() {
 		return event;
 	}
 
-	public void setEvent(Event event) {
+	public void setEventDTO(EventDTO event) {
 		this.event = event;
 	}
 
-	public Sportsman getInvitee() {
+	public SportsmanDTO getInvitee() {
 		return invitee;
 	}
 
-	public void setInvitee(Sportsman invitee) {
+	public void setInvitee(SportsmanDTO invitee) {
 		this.invitee = invitee;
 	}
 
@@ -57,7 +55,7 @@ public class InvitationDTO {
 		InvitationDTO that = (InvitationDTO) o;
 
 		if (!getId().equals(that.getId())) return false;
-		if (!getEvent().equals(that.getEvent())) return false;
+		if (!getEventDTO().equals(that.getEventDTO())) return false;
 		if (!getInvitee().equals(that.getInvitee())) return false;
 		return getState() == that.getState();
 
@@ -66,8 +64,8 @@ public class InvitationDTO {
 	@Override
 	public int hashCode() {
 		int result = getId().hashCode();
-		result = 31 * result + getEvent().hashCode();
-		result = 31 * result + getInvitee().hashCode();
+//		result = 31 * result + getEventDTO().hashCode();
+//		result = 31 * result + getInvitee().hashCode();
 		result = 31 * result + getState().hashCode();
 		return result;
 	}
@@ -76,8 +74,8 @@ public class InvitationDTO {
 	public String toString() {
 		return "InvitationDTO{" +
 				"id=" + id +
-				", event=" + event +
-				", invitee=" + invitee +
+				", event=" + (event == null ? "null" : event.toString()) +
+				", invitee=" + (invitee == null ? "null" : invitee.toString()) +
 				", state=" + state +
 				'}';
 	}

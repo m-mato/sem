@@ -1,5 +1,9 @@
 package cz.muni.pa165.sem.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 /**
@@ -7,18 +11,29 @@ import java.util.Calendar;
  */
 public class SportsmanUpdateDTO {
 
+	@NotNull
 	private Long id;
 
+	@NotNull
+	@NotBlank
 	private String name;
 
+	@NotNull
+	@NotBlank
 	private String surname;
 
+	@NotNull
 	private Calendar birthDate;
 
+	@NotNull
+	@Email
 	private String email;
 
+	@NotNull
+	@NotBlank
 	private String password;
 
+	@NotNull
 	private Boolean isManager;
 
 	public Long getId() {

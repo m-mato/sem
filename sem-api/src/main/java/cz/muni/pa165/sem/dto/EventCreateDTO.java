@@ -1,5 +1,9 @@
 package cz.muni.pa165.sem.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -8,20 +12,32 @@ import java.util.Objects;
  */
 public class EventCreateDTO {
 
+    @NotNull
+    @NotBlank
     private String name;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private Calendar date;
 
+    @NotNull
     private SportDTO sport;
 
+    @NotNull
+    @Size(min = 1)
     private Integer capacity;
 
+    @NotNull
+    @NotBlank
     private String city;
 
+    @NotNull
+    @NotBlank
     private String address;
 
+    @NotNull
     private SportsmanDTO admin;
 
     public String getName() {
