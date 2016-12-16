@@ -23,6 +23,7 @@ public class SportsmanCreateDTO {
 	private Calendar birthDate;
 
 	@NotNull
+	@NotBlank
 	@Email
 	private String email;
 
