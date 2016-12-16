@@ -2,10 +2,6 @@
   Created by IntelliJ IDEA.
   User: Veronika Aksamitova
 --%>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -13,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<form class="form-horizontal" name="f" action="create" method="POST">
+<form class="form-horizontal" name="f" action="/PA165/create" method="POST">
     <div class="form-group form-group-lg">
         <label class="col-sm-3 control-label" for="name"><spring:message code="page.create-event.name"/></label>
         <div class="col-sm-5">
@@ -21,17 +17,13 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-lg">
         <label class="col-sm-3 control-label" for="event_date"><spring:message code="page.create-event.eventDate"/></label>
         <div class="col-xs-5 date">
-            <div class="input-group input-append date" id="event_date">
-                <input type=text  data-date-format='yy-mm-dd'  >
-                <input type="text" class="form-control" name="event_date" />
-                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-            </div>
+                <input type="datetime-local" id="event_date" class="form-control" name="event_date" />
         </div>
     </div>
-    <div class="form-group">
+    <%--div class="form-group form-group-lg">
         <form:label path="sport" class="col-sm-3 control-label" ><spring:message code="page.create-event.sport"/></form:label>
         <div class="col-sm-10">
             <form:select path="sport" cssClass="form-control">
@@ -41,7 +33,7 @@
             </form:select>
             <form:errors path="sport" cssClass="error"/>
         </div>
-    </div>
+    </div--%>
 
 
     <div class="form-group form-group-lg">
