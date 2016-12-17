@@ -81,9 +81,9 @@
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
                         <li><a href="${findEventUrl}"><spring:message code="link.find-event"/></a></li>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${eventsUrl}"><spring:message code="link.events"/></a></li>
+                            <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <li><a href="${sportsUrl}"><spring:message code="link.sports"/></a></li>
+                                <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
                             </sec:authorize>
                         </sec:authorize>
                     </ul>
@@ -102,7 +102,7 @@
                             <li><a href="${userRegisterUrl}"><spring:message code="link.user.register"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${myAccountUrl}"><spring:message code="link.my-account"/></a></li>
+                            <li><a href="${myAccountUrl}"><spring:message code="link.user.detail"/></a></li>
                             <li><a href="${userLogoutUrl}"><spring:message code="link.user.logout"/> - ${loggedUser.name}</a></li>
                         </sec:authorize>
                     </ul>

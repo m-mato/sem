@@ -10,8 +10,8 @@
             <table class="table table-striped" style="margin-top:15px;">
                 <thead>
                     <tr>
-                        <td><strong><spring:message code="page.sports.thead.name"/></strong></td>
-                        <td><strong><spring:message code="page.sports.thead.desc"/></strong></td>
+                        <td><strong><spring:message code="page.sport.list.thead.name"/></strong></td>
+                        <td><strong><spring:message code="page.sport.list.thead.desc"/></strong></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,7 @@
         </c:if>
 
         <button class="btn btn-primary" data-toggle="modal" data-target="#addSportModal" data-backdrop="static">
-            <spring:message code="page.sports.button.add"/>
+            <spring:message code="page.sport.list.button.add"/>
         </button>
 
         <!-- Modal -->
@@ -36,32 +36,32 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><spring:message code="page.sports.modal.title"/></h4>
+                        <h4 class="modal-title"><spring:message code="page.sport.list.modal.title"/></h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" name="f" action="sport/create" method="POST">
                             <div class="form-group form-group-lg">
-                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sports.modal.label.name"/></label>
+                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sport.list.modal.label.name"/></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="name" id="name"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-lg">
-                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sports.modal.label.desc"/></label>
+                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sport.list.modal.label.desc"/></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="description" id="description"/>
                                 </div>
                             </div>
                             <div class="form-group form-group-lg">
                                 <div class="col-sm-5 col-sm-offset-3">
-                                    <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.sports.modal.button.submit"/></button>
+                                    <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.sport.list.modal.button.submit"/></button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <spring:message code="page.sports.modal.button.close"/>
+                            <spring:message code="page.sport.list.modal.button.close"/>
                         </button>
                     </div>
                 </div>

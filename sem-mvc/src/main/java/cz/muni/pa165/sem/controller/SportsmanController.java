@@ -57,7 +57,7 @@ public class SportsmanController extends BaseController {
         model.addAttribute("invitations", invitationFacade.findByInvitee(sportsman));
         model.addAttribute("events", sportsman.getEvents());
         model.addAttribute("results", results);
-        return "my-account";
+        return "user.detail";
     }
 
 
@@ -75,7 +75,7 @@ public class SportsmanController extends BaseController {
         }
         catch(Exception ex){
         }
-        return "my-account";
+        return "user.detail";
     }
 
     @RequestMapping("/decline/{id}")
@@ -92,7 +92,7 @@ public class SportsmanController extends BaseController {
         }
         catch(Exception ex){
         }
-        return "my-account";
+        return "user.detail";
     }
 
 

@@ -26,7 +26,7 @@
                 <a href="${userRegisterUrl}" class="btn btn-danger"><spring:message code="link.user.register"/></a>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-                <a href="${myAccountUrl}" class="btn btn-primary"><spring:message code="link.my-account"/></a>
+                <a href="${myAccountUrl}" class="btn btn-primary"><spring:message code="link.user.detail"/></a>
                 <a href="${userLogoutUrl}" class="btn btn-danger"><spring:message code="link.user.logout"/></a>
             </sec:authorize>
         </div>

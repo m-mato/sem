@@ -45,7 +45,7 @@
                     </div>
         </div>
         <div class="col-sm-9">
-            <jsp:include page="event-participant.jsp">
+            <jsp:include page="detail.jsp">
                 <jsp:param name="event" value="${event}"/>
                 <jsp:param name="result" value="${result}"/>
             </jsp:include>

@@ -63,7 +63,7 @@ public class EventController extends BaseController {
             model.addAttribute("event", events.get(0));
             model.addAttribute("result", resultFacade.findBySportsmanAndEvent(participant, event));
         }
-        return "event-participant";
+        return "event.detail";
     }*/
 
     //ALL EVENTS VIEW ....not just for user ...but need to be authenticated
@@ -73,7 +73,7 @@ public class EventController extends BaseController {
         List<EventDTO> events = eventFacade.findAll();
         logger.info("events" + events.size());
         model.addAttribute("events", events);
-        return "events";
+        return "event.list";
     }
 
 
@@ -82,7 +82,7 @@ public class EventController extends BaseController {
         model.addAttribute("event", eventFacade.findById(eventId));
         model.addAttribute("result", resultFacade.findById(1L));// TODO: 14-Dec-16 from event
 
-        return "event-participant";
+        return "event.detail";
     }
 
     @RequestMapping( value = "/events/{id}/unenroll", method = RequestMethod.GET)
@@ -97,7 +97,7 @@ public class EventController extends BaseController {
                         participant, //find sportsman  me
                         event).getId());  //find event
         // TODO: 13-Dec-16 redirect where you want
-        return "events-participant";
+        return "event.participant";
     }
 
     @RequestMapping(value = "/events/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -110,7 +110,7 @@ public class EventController extends BaseController {
         logger.debug("Starting to create event");
         model.addAttribute("sports", sportFacade.getAllSports());
         model.addAttribute("event", new EventCreateDTO());
-        return "create-event";
+        return "event.create";
     }
 
 
@@ -128,12 +128,12 @@ public class EventController extends BaseController {
             event.setAdmin(sportsman);
             if (bindingResult.hasErrors()) {
                 logger.debug("Creation of event: {0} was not successuful", event.toString());
-                return "create-event";
+                return "event.create";
             }
             createdEvent = eventFacade.create(event);
         }
         catch(Exception ex){
-            return "create-event";
+            return "event.create";
         }
         resp.sendRedirect(servletContext.getContextPath() + "/events/"+ createdEvent.getId());
        // redirectAttributes.addFlashAttribute("alert_success", "Event was created");

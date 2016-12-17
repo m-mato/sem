@@ -32,7 +32,7 @@ public class SportController extends BaseController {
 
 		model.addAttribute("sports", sportFacade.getAllSports());
 
-		return "sports";
+		return "sport.list";
 	}
 
 	@RequestMapping(value = "/sport/create", method = RequestMethod.POST)

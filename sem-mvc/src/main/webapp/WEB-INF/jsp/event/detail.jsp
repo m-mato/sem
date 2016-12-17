@@ -25,12 +25,12 @@
         </div>
         <div class="row">
             <div class="col-md-6 event-info">
-                <p><strong><spring:message code="page.event.where"/>:</strong><c:out value=" ${event.address}, ${event.city}"/></p>
-                <p><strong><spring:message code="page.event.when"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
-                <p><strong><spring:message code="page.event.what"/>:</strong><c:out value="${event.sport.name}"/></p>
+                <p><strong><spring:message code="page.event.detail.where"/>:</strong><c:out value=" ${event.address}, ${event.city}"/></p>
+                <p><strong><spring:message code="page.event.detail.when"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
+                <p><strong><spring:message code="page.event.detail.what"/>:</strong><c:out value="${event.sport.name}"/></p>
             </div>
             <div class="col-md-6 event-admin div-border">
-                <p><strong><spring:message code="page.event.admin"/></strong><p>
+                <p><strong><spring:message code="page.event.detail.admin"/></strong><p>
                 <p><c:out value="${event.admin.name}"/></p>
                  <p><strong>Email:</strong><c:out value="${event.admin.email}"/></p>
             </div>
@@ -43,9 +43,9 @@
         <c:if test="${not empty result}">
         <div class="row">
             <div class="col-md-4 event-admin div-border">
-                <p><strong><big><spring:message code="page.event.result.title"/></big></strong><p>
-                <p><strong><spring:message code="page.event.result.result"/>:</strong><c:out value="${result.performance}, ${result.performanceUnit}"/></p>
-                <p><strong><spring:message code="page.event.result.position"/>:</strong><c:out value="${result.position}"/></p>
+                <p><strong><big><spring:message code="page.event.detail.result.title"/></big></strong><p>
+                <p><strong><spring:message code="page.event.detail.result.result"/>:</strong><c:out value="${result.performance}, ${result.performanceUnit}"/></p>
+                <p><strong><spring:message code="page.event.detail.result.position"/>:</strong><c:out value="${result.position}"/></p>
                 <div class="col-md-8">
                     <p><c:out value="${page.description}"/></p>
                 </div>
@@ -58,17 +58,17 @@
             <div class="col-md-4">
                     <p>
                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <spring:message code="page.event.unenroll.main"/>
+                            <spring:message code="page.event.detail.unenroll.main"/>
                         </a>
                     </p>
                     <div class="collapse" id="collapseExample">
                         <div class="card card-block">
-                            <spring:message code="page.event.unenroll.msg"/>
+                            <spring:message code="page.event.detail.unenroll.msg"/>
                         </div>
                         <form class="form-horizontal" name="f" action="${unEnrollUrl}" method="GET">
-                            <button type="submit" class="btn btn-danger"><spring:message code="page.event.unenroll.confirm"/></button>
+                            <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.unenroll.confirm"/></button>
                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                <spring:message code="page.event.unenroll.cancel"/>
+                                <spring:message code="page.event.detail.unenroll.cancel"/>
                             </button>
                         </form>
                     </div>
@@ -77,12 +77,12 @@
             <c:if test="${ fn:length(event.participants) lt event.capacity}">
             <div class="col-md-8">
                 <form class="form-inline">
-                    <label for="InputEmail"><spring:message code="page.event.invite.title"/></label><br>
+                    <label for="InputEmail"><spring:message code="page.event.detail.invite.title"/></label><br>
                     <div class="form-group">
                         <input type="email" class="form-control" id="InputEmail"
-                               placeholder="email@example.com" title="<spring:message code="page.event.invite.type"/>">
+                               placeholder="email@example.com" title="<spring:message code="page.event.detail.invite.type"/>">
                     </div>
-                    <button type="submit" class="btn btn-primary"><spring:message code="page.event.invite.button"/></button>
+                    <button type="submit" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
                 </form>
             </div>
             </c:if>
