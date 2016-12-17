@@ -31,16 +31,6 @@ public abstract class BaseController {
         return null;
     }
 
-    @ModelAttribute("invitationStates")
-    public InvitationState[] getInvitationStates() {
-        return InvitationState.values();
-    }
-
-    @ModelAttribute("performanceUnits")
-    public PerformanceUnits[] getPerformanceUnits() {
-        return PerformanceUnits.values();
-    }
-
     /**
      * Sends redirect so string model attributes are not visible in URL.
      */

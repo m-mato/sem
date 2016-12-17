@@ -6,16 +6,6 @@
 
 <spring:url value="/sports/create" var="createUrl"/>
 
-<c:if test="${param.create != null}">
-    <div class="alert alert-success" role="alert">
-        <spring:message code="page.sport.list.alert.create"/>
-    </div>
-</c:if>
-<c:if test="${param.update != null}">
-    <div class="alert alert-success" role="alert">
-        <spring:message code="page.sport.list.alert.update"/>
-    </div>
-</c:if>
 <c:if test="${param.delete != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.sport.list.alert.delete"/>

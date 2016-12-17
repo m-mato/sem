@@ -1,6 +1,6 @@
 (function($) {
 
-    $('select').select2();
+    // $('select').select2();
 
     $('.input-group.date').datepicker({
         format: 'yyyy/mm/dd',

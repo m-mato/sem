@@ -9,6 +9,17 @@
 <spring:url value="/sports/${sport.id}/update" var="updateUrl"/>
 <spring:url value="/sports/${sport.id}/delete" var="deleteUrl"/>
 
+<c:if test="${param.create != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.sport.detail.alert.create"/>
+    </div>
+</c:if>
+<c:if test="${param.update != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.sport.detail.alert.update"/>
+    </div>
+</c:if>
+
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <p>
         <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>

@@ -9,11 +9,11 @@ import java.util.Date;
 /**
  * @author Vit Hovezak
  */
-public class CustomCalendarEditor extends PropertyEditorSupport {
+public class CalendarEditor extends PropertyEditorSupport {
 
     private final String format;
 
-    public CustomCalendarEditor(String format) {
+    public CalendarEditor(String format) {
         this.format = format;
     }
 

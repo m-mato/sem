@@ -1,7 +1,7 @@
 package cz.muni.pa165.sem.controller;
 
 import cz.muni.pa165.sem.dto.SportsmanCreateDTO;
-import cz.muni.pa165.sem.editor.CustomCalendarEditor;
+import cz.muni.pa165.sem.editor.CalendarEditor;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class UserController extends BaseController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Calendar.class, new CustomCalendarEditor("yyyy/MM/dd"));
+        binder.registerCustomEditor(Calendar.class, new CalendarEditor("yyyy/MM/dd"));
     }
 
     @RequestMapping("/login")

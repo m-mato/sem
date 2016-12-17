@@ -62,8 +62,8 @@ public class SportController extends BaseController {
 			model.addAttribute("error", true);
 			return "sport.create";
 		}
-		sportFacade.create(sportCreateDTO);
-		return redirect("/sports?create");
+		SportDTO sportDTO = sportFacade.create(sportCreateDTO);
+		return redirect("/sports/" + sportDTO.getId() + "?create");
 	}
 
 	@RequestMapping("/{id}/update")
@@ -83,7 +83,7 @@ public class SportController extends BaseController {
 			return "sport.update";
 		}
 		sportFacade.update(sportUpdateDTO);
-		return redirect("/sports?update");
+		return redirect("/sports/" + sportUpdateDTO.getId() + "?update");
 	}
 
 	@RequestMapping("/{id}/delete")
