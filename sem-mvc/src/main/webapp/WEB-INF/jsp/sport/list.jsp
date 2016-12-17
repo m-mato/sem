@@ -1,72 +1,55 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<div id="sports">
-    <div class="container">
+<spring:url value="/sports/create" var="createUrl"/>
 
-        <c:if test="${not empty sports}">
-            <table class="table table-striped" style="margin-top:15px;">
-                <thead>
-                    <tr>
-                        <td><strong><spring:message code="page.sport.list.thead.name"/></strong></td>
-                        <td><strong><spring:message code="page.sport.list.thead.desc"/></strong></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${sports}" var="sport">
-                        <tr>
-                            <td><c:out value="${sport.name}"/></td>
-                            <td><c:out value="${sport.description}"/></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </c:if>
-
-        <button class="btn btn-primary" data-toggle="modal" data-target="#addSportModal" data-backdrop="static">
-            <spring:message code="page.sport.list.button.add"/>
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="addSportModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><spring:message code="page.sport.list.modal.title"/></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" name="f" action="sport/create" method="POST">
-                            <div class="form-group form-group-lg">
-                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sport.list.modal.label.name"/></label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="name" id="name"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-lg">
-                                <label class="col-sm-3 control-label" for="name"><spring:message code="page.sport.list.modal.label.desc"/></label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="description" id="description"/>
-                                </div>
-                            </div>
-                            <div class="form-group form-group-lg">
-                                <div class="col-sm-5 col-sm-offset-3">
-                                    <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.sport.list.modal.button.submit"/></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <spring:message code="page.sport.list.modal.button.close"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<c:if test="${param.create != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.sport.list.alert.create"/>
     </div>
-</div>
+</c:if>
+<c:if test="${param.update != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.sport.list.alert.update"/>
+    </div>
+</c:if>
+<c:if test="${param.delete != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.sport.list.alert.delete"/>
+    </div>
+</c:if>
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <p>
+        <a href="${createUrl}" class="btn btn-primary"><spring:message code="page.sport.list.create"/></a>
+    </p>
+</sec:authorize>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><spring:message code="entity.sport.name"/></th>
+            <th><spring:message code="entity.sport.description"/></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${sports}" var="sport">
+            <tr>
+                <td><c:out value="${sport.name}"/></td>
+                <td><c:out value="${sport.description}"/></td>
+                <td>
+                    <spring:url value="/sports/${sport.id}" var="detailUrl"/>
+                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <spring:url value="/sports/${sport.id}/update" var="updateUrl"/>
+                        <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
+                    </sec:authorize>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>

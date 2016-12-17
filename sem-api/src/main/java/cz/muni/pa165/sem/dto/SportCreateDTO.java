@@ -1,5 +1,7 @@
 package cz.muni.pa165.sem.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -8,9 +10,11 @@ import javax.validation.constraints.NotNull;
 public class SportCreateDTO {
 
     @NotNull
+    @NotBlank
     private String name;
 
     @NotNull
+    @NotBlank
     private String description;
 
     public String getName() {

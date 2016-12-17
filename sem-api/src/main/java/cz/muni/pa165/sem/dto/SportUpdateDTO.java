@@ -16,6 +16,7 @@ public class SportUpdateDTO {
     private String name;
 
     @NotNull
+    @NotBlank
     private String description;
 
     public Long getId() {

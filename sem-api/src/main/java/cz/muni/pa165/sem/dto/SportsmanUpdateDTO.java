@@ -26,6 +26,7 @@ public class SportsmanUpdateDTO {
 	private Calendar birthDate;
 
 	@NotNull
+	@NotBlank
 	@Email
 	private String email;
 

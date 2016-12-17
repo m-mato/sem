@@ -58,6 +58,18 @@
         <put-attribute name="title" value="title.sport.list"/>
         <put-attribute name="body" value="/WEB-INF/jsp/sport/list.jsp"/>
     </definition>
+    <definition name="sport.detail" extends="layout">
+        <put-attribute name="title" value="title.sport.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/detail.jsp"/>
+    </definition>
+    <definition name="sport.create" extends="layout">
+        <put-attribute name="title" value="title.sport.create"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/create.jsp"/>
+    </definition>
+    <definition name="sport.update" extends="layout">
+        <put-attribute name="title" value="title.sport.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/update.jsp"/>
+    </definition>
 
     <!-- ERROR -->
     <definition name="error.403" extends="layout">
