@@ -13,23 +13,21 @@
 
 <c:if test="${param.logout != null}">
     <div class="alert alert-success" role="alert">
-        <spring:message code="page.index.logout"/>
+        <spring:message code="page.index.alert.logout"/>
     </div>
 </c:if>
 
 <div class="row">
     <div class="col-md-5">
         <p class="lead"><spring:message code="page.index.welcome"/></p>
-        <div class="btn-group btn-group-lg">
-            <sec:authorize access="isAnonymous()">
-                <a href="${userLoginUrl}" class="btn btn-primary"><spring:message code="link.user.login"/></a>
-                <a href="${userRegisterUrl}" class="btn btn-danger"><spring:message code="link.user.register"/></a>
-            </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-                <a href="${myAccountUrl}" class="btn btn-primary"><spring:message code="link.user.detail"/></a>
-                <a href="${userLogoutUrl}" class="btn btn-danger"><spring:message code="link.user.logout"/></a>
-            </sec:authorize>
-        </div>
+        <sec:authorize access="isAnonymous()">
+            <a href="${userLoginUrl}" class="btn btn-primary btn-lg"><spring:message code="link.user.login"/></a>
+            <a href="${userRegisterUrl}" class="btn btn-danger btn-lg"><spring:message code="link.user.register"/></a>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <a href="${myAccountUrl}" class="btn btn-primary btn-lg"><spring:message code="link.user.detail"/></a>
+            <a href="${userLogoutUrl}" class="btn btn-danger btn-lg"><spring:message code="link.user.logout"/></a>
+        </sec:authorize>
     </div>
     <div class="col-md-6 text-center">
         <img src="${sportsImgUrl}"/>

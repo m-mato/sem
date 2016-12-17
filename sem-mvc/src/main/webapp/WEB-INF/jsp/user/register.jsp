@@ -8,7 +8,7 @@
 
 <c:if test="${error != null}">
     <div class="alert alert-danger" role="alert">
-        <spring:message code="page.user.register.error"/>
+        <spring:message code="page.user.register.alert.error"/>
     </div>
 </c:if>
 

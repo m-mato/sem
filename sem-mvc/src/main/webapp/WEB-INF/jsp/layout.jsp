@@ -29,13 +29,13 @@
 <spring:url value="/js/script.js" var="scriptJsUrl"/>
 
 <spring:url value="/" var="frontUrl"/>
+<spring:url value="/my-account" var="userDetailUrl"/>
 <spring:url value="/login" var="userLoginUrl"/>
 <spring:url value="/logout" var="userLogoutUrl"/>
 <spring:url value="/register" var="userRegisterUrl"/>
-<spring:url value="/my-account" var="myAccountUrl"/>
-<spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
-<spring:url value="/admin/sports" var="sportsUrl"/>
+<spring:url value="/find-event" var="findEventUrl"/>
+<spring:url value="/sports" var="sportsUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
 <spring:url value="?lang=sk" var="skLangUrl"/>
@@ -79,13 +79,9 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
+                        <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
                         <li><a href="${findEventUrl}"><spring:message code="link.find-event"/></a></li>
-                        <sec:authorize access="isAuthenticated()">
-                            <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
-                            </sec:authorize>
-                        </sec:authorize>
+                        <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="${enLangUrl}" title="<spring:message code="link.lang.en"/>">
@@ -102,7 +98,7 @@
                             <li><a href="${userRegisterUrl}"><spring:message code="link.user.register"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="${myAccountUrl}"><spring:message code="link.user.detail"/></a></li>
+                            <li><a href="${userDetailUrl}"><spring:message code="link.user.detail"/></a></li>
                             <li><a href="${userLogoutUrl}"><spring:message code="link.user.logout"/> - ${loggedUser.name}</a></li>
                         </sec:authorize>
                     </ul>

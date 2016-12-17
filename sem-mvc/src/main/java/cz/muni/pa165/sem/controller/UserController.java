@@ -52,7 +52,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processBasicUserRegister(@ModelAttribute("sportsman") @Valid SportsmanCreateDTO sportsmanCreateDTO, BindingResult result, Model model) {
+    public String processRegister(@ModelAttribute("sportsman") @Valid SportsmanCreateDTO sportsmanCreateDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", true);
             return "user.register";

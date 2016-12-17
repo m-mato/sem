@@ -8,12 +8,12 @@
 
 <c:if test="${param.register != null}">
     <div class="alert alert-success" role="alert">
-        <spring:message code="page.user.login.register"/>
+        <spring:message code="page.user.login.alert.register"/>
     </div>
 </c:if>
 <c:if test="${param.error != null}">
     <div class="alert alert-danger" role="alert">
-        <spring:message code="page.user.login.error"/>
+        <spring:message code="page.user.login.alert.error"/>
     </div>
 </c:if>
 

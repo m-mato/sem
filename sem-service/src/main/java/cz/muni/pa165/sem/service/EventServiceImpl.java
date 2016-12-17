@@ -4,15 +4,13 @@ import cz.muni.pa165.sem.dao.EventDAO;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Vit Hovezak
