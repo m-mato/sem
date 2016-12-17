@@ -44,7 +44,7 @@ public abstract class BaseController {
     /**
      * Sends redirect so string model attributes are not visible in URL.
      */
-    RedirectView redirect(String url) {
+    protected RedirectView redirect(String url) {
         RedirectView view = new RedirectView(url, true);
         view.setExposeModelAttributes(false);
         return view;

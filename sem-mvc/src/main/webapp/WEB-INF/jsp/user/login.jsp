@@ -19,7 +19,7 @@
 
 <form class="form-horizontal" name="f" action="${formUrl}" method="POST">
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="username"><spring:message code="page.user.login.username"/></label>
+        <label class="col-sm-3 control-label" for="username"><spring:message code="entity.sportsman.email"/></label>
         <div class="col-sm-5">
             <div class="input-group">
                 <input type="text" class="form-control" name="username" id="username"/>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="password"><spring:message code="page.user.login.password"/></label>
+        <label class="col-sm-3 control-label" for="password"><spring:message code="entity.sportsman.password"/></label>
         <div class="col-sm-5">
             <div class="input-group">
                 <input type="password" class="form-control" name="password" id="password"/>

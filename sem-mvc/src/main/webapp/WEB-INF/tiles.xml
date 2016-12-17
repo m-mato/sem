@@ -44,6 +44,10 @@
         <put-attribute name="title" value="title.event.create"/>
         <put-attribute name="body" value="/WEB-INF/jsp/event/create.jsp"/>
     </definition>
+    <definition name="event.update" extends="layout">
+        <put-attribute name="title" value="title.event.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/update.jsp"/>
+    </definition>
     <definition name="event.participant" extends="layout">
         <put-attribute name="title" value="title.event.participant"/>
         <put-attribute name="body" value="/WEB-INF/jsp/event/participant.jsp"/>

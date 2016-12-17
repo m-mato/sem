@@ -14,10 +14,10 @@
     <a href="create-event/${id}" style="float:right;" class="btn btn-primary">Create Event</a>
 </p>
 <div class="container">
-        <p><strong><spring:message code="page.user.detail.name"/>:</strong> <c:out value="${name}"/></p>
-        <p><strong><spring:message code="page.user.detail.surname"/>:</strong> <c:out value="${surname}"/></p>
-        <p><strong><spring:message code="page.user.detail.email"/>:</strong> <c:out value="${email}"/></p>
-        <p><strong><spring:message code="page.user.detail.birthdate"/>:</strong> <fmt:formatDate value="${birthdate.time}" type="both" dateStyle="full" pattern="dd.MM.yyyy"/></p>
+        <p><strong><spring:message code="entity.sportsman.name"/>:</strong> <c:out value="${name}"/></p>
+        <p><strong><spring:message code="entity.sportsman.surname"/>:</strong> <c:out value="${surname}"/></p>
+        <p><strong><spring:message code="entity.sportsman.email"/>:</strong> <c:out value="${email}"/></p>
+        <p><strong><spring:message code="entity.sportsman.birth-date"/>:</strong> <fmt:formatDate value="${birthdate.time}" type="both" dateStyle="full" pattern="dd.MM.yyyy"/></p>
         <br/>
 
         <table class="table">

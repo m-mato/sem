@@ -19,7 +19,7 @@
     <spring:bind path="email">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="email" class="col-sm-3 control-label">
-                <spring:message code="page.user.register.email"/>
+                <spring:message code="entity.sportsman.email"/>
             </form:label>
             <div class="col-sm-5">
                 <div class="input-group">
@@ -36,7 +36,7 @@
     <spring:bind path="password">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="password" class="col-sm-3 control-label">
-                <spring:message code="page.user.register.password"/>
+                <spring:message code="entity.sportsman.password"/>
             </form:label>
             <div class="col-sm-5">
                 <div class="input-group">
@@ -53,7 +53,7 @@
     <spring:bind path="name">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="name" class="col-sm-3 control-label">
-                <spring:message code="page.user.register.name"/>
+                <spring:message code="entity.sportsman.name"/>
             </form:label>
             <div class="col-sm-5">
                 <form:input path="name" class="form-control"/>
@@ -67,7 +67,7 @@
     <spring:bind path="surname">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="surname" class="col-sm-3 control-label">
-                <spring:message code="page.user.register.surname"/>
+                <spring:message code="entity.sportsman.surname"/>
             </form:label>
             <div class="col-sm-5">
                 <form:input path="surname" class="form-control"/>
@@ -81,7 +81,7 @@
     <spring:bind path="birthDate">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="birthDate" class="col-sm-3 control-label">
-                <spring:message code="page.user.register.birthDate"/>
+                <spring:message code="entity.sportsman.birth-date"/>
             </form:label>
             <div class="col-sm-5">
                 <div class="input-group date">
