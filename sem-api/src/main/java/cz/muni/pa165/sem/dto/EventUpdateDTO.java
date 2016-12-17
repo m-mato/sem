@@ -2,6 +2,7 @@ package cz.muni.pa165.sem.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
@@ -29,7 +30,7 @@ public class EventUpdateDTO {
     private SportDTO sport;
 
     @NotNull
-    @Size(min = 1)
+    @Min(1)
     private Integer capacity;
 
     @NotNull
