@@ -33,17 +33,17 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("/login")
-    public String renderLogin(Principal principal) {
+    public Object renderLogin(Principal principal) {
         if (principal != null) {
-            return "redirect:/my-account";
+            redirect("/my-account");
         }
         return "user.login";
     }
 
     @RequestMapping("/register")
-    public String renderRegister(Principal principal, Model model) {
+    public Object renderRegister(Principal principal, Model model) {
         if (principal != null) {
-            return "redirect:/my-account";
+            return redirect("/my-account");
         }
         SportsmanCreateDTO sportsmanCreateDTO = new SportsmanCreateDTO();
         sportsmanCreateDTO.setIsManager(false);
@@ -52,13 +52,13 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute("sportsman") @Valid SportsmanCreateDTO sportsmanCreateDTO, BindingResult result, Model model) {
+    public Object processRegister(@ModelAttribute("sportsman") @Valid SportsmanCreateDTO sportsmanCreateDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", true);
             return "user.register";
         }
         sportsmanFacade.create(sportsmanCreateDTO);
-        return "redirect:/login?register";
+        return redirect("/login?register");
     }
 
 }

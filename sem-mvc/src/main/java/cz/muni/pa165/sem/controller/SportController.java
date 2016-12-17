@@ -40,10 +40,10 @@ public class SportController extends BaseController {
 	}
 
 	@RequestMapping("/{id}")
-	public String renderDetail(@PathVariable("id") Long id, Model model) {
+	public Object renderDetail(@PathVariable("id") Long id, Model model) {
 		SportDTO sportDTO = sportFacade.getSportById(id);
 		if (sportDTO == null) {
-			return "redirect:/sports";
+			return redirect("/sports");
 		}
 		model.addAttribute("sport", sportDTO);
 		model.addAttribute("events", eventFacade.findBySport(sportDTO.getId()));
@@ -57,42 +57,42 @@ public class SportController extends BaseController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String processCreate(@ModelAttribute("sport") @Valid SportCreateDTO sportCreateDTO, BindingResult result, Model model) {
+	public Object processCreate(@ModelAttribute("sport") @Valid SportCreateDTO sportCreateDTO, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("error", true);
 			return "sport.create";
 		}
 		sportFacade.create(sportCreateDTO);
-		return "redirect:/sports?create";
+		return redirect("/sports?create");
 	}
 
 	@RequestMapping("/{id}/update")
-	public String renderUpdate(@PathVariable("id") Long id, Model model) {
+	public Object renderUpdate(@PathVariable("id") Long id, Model model) {
 		SportDTO sportDTO = sportFacade.getSportById(id);
 		if (sportDTO == null) {
-			return "redirect:/sports";
+			return redirect("/sports");
 		}
 		model.addAttribute("sport", beanMappingService.mapTo(sportDTO, SportUpdateDTO.class));
 		return "sport.update";
 	}
 
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
-	public String processUpdate(@Valid @ModelAttribute("sport") SportUpdateDTO sportUpdateDTO, BindingResult result, Model model) {
+	public Object processUpdate(@Valid @ModelAttribute("sport") SportUpdateDTO sportUpdateDTO, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("error", true);
 			return "sport.update";
 		}
 		sportFacade.update(sportUpdateDTO);
-		return "redirect:/sports?update";
+		return redirect("/sports?update");
 	}
 
 	@RequestMapping("/{id}/delete")
-	public String renderDelete(@PathVariable("id") Long id) {
+	public Object renderDelete(@PathVariable("id") Long id) {
 		SportDTO sportDTO = sportFacade.getSportById(id);
 		if (sportDTO != null) {
 			sportFacade.delete(sportDTO.getId());
 		}
-		return "redirect:/sports?delete";
+		return redirect("/sports?delete");
 	}
 
 }
