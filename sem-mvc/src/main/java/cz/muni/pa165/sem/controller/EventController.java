@@ -122,8 +122,11 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping("/create")
-    public String renderCreate(Model model) {
-        model.addAttribute("event", new EventCreateDTO());
+    public String renderCreate(Authentication authentication, Model model) {
+        EventCreateDTO eventCreateDTO = new EventCreateDTO();
+        SportsmanDTO sportsmanDTO = sportsmanFacade.getByEmail(authentication.getName());
+        eventCreateDTO.setAdmin(sportsmanDTO);
+        model.addAttribute("event", eventCreateDTO);
         return "event.create";
     }
 

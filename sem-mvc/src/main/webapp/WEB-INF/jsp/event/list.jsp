@@ -45,7 +45,9 @@
         <th><spring:message code="entity.event.address"/></th>
         <th><spring:message code="entity.event.admin"/></th>
         <th><spring:message code="entity.event.description"/></th>
-        <th></th>
+        <sec:authorize access="isAuthenticated()">
+            <th></th>
+        </sec:authorize>
     </tr>
     </thead>
     <tbody>
@@ -59,14 +61,16 @@
             <td><c:out value="${event.address}"/></td>
             <td><c:out value="${event.admin.name} ${event.admin.surname}"/></td>
             <td><c:out value="${event.description}"/></td>
-            <td>
-                <spring:url value="/events/${event.id}" var="detailUrl"/>
-                <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <spring:url value="/events/${event.id}/update" var="updateUrl"/>
-                    <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                </sec:authorize>
-            </td>
+            <sec:authorize access="isAuthenticated()">
+                <td>
+                    <spring:url value="/events/${event.id}" var="detailUrl"/>
+                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <spring:url value="/events/${event.id}/update" var="updateUrl"/>
+                        <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
+                    </sec:authorize>
+                </td>
+            </sec:authorize>
         </tr>
     </c:forEach>
     </tbody>

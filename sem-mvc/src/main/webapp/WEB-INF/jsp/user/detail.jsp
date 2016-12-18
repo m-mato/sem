@@ -11,7 +11,7 @@
 </c:if>
 
 <p>
-    <a href="create-event/${id}" style="float:right;" class="btn btn-primary">Create Event</a>
+    <a href="events/create" style="float:right;" class="btn btn-primary">Create Event</a>
 </p>
 <div class="container">
         <p><strong><spring:message code="entity.sportsman.name"/>:</strong> <c:out value="${name}"/></p>
