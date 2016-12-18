@@ -82,7 +82,7 @@
         <%--<c:if test="${event.date.time gt now}">--%>
             <div class="row">
                 <c:choose>
-                    <c:when test="${isParticipant}"> //is enrolled -> can unenroll
+                    <c:when test="${isParticipant}">
                         <div class="col-md-4">
                             <p>
                                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
