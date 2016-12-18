@@ -34,7 +34,6 @@
 <spring:url value="/logout" var="userLogoutUrl"/>
 <spring:url value="/register" var="userRegisterUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
-<spring:url value="/find-event" var="findEventUrl"/>
 <spring:url value="/sports" var="sportsUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
@@ -66,7 +65,8 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only"><spring:message code="link.nav-toggle"/></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -80,7 +80,6 @@
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
                         <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
-                        <li><a href="${findEventUrl}"><spring:message code="link.find-event"/></a></li>
                         <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -99,7 +98,8 @@
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                             <li><a href="${userDetailUrl}"><spring:message code="link.user.detail"/></a></li>
-                            <li><a href="${userLogoutUrl}"><spring:message code="link.user.logout"/> - ${loggedUser.name}</a></li>
+                            <li><a href="${userLogoutUrl}"><spring:message code="link.user.logout"/> -
+                                <strong>${loggedUser.name}</strong></a></li>
                         </sec:authorize>
                     </ul>
                 </div>

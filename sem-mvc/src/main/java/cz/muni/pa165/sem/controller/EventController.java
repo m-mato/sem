@@ -22,6 +22,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -68,8 +69,26 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping
-    public String renderList(Model model) {
-        model.addAttribute("events", eventFacade.findAll());
+    public String renderList(@RequestParam(value = "search", required = false) String search, Model model) {
+        List<EventDTO> allEvents = eventFacade.findAll();
+
+        if (search != null && !search.isEmpty()) {
+            search = search.toLowerCase();
+            List<EventDTO> foundEvents = new ArrayList<>();
+            for (EventDTO event : allEvents) {
+                if (event.getName().toLowerCase().contains(search)
+                        || event.getSport().getName().toLowerCase().contains(search)
+                        || event.getCity().toLowerCase().contains(search)
+                        || event.getDescription().toLowerCase().contains(search)) {
+                    foundEvents.add(event);
+                }
+            }
+            model.addAttribute("events", foundEvents);
+            model.addAttribute("search", search);
+        }
+        else {
+            model.addAttribute("events", allEvents);
+        }
         return "event.list";
     }
 

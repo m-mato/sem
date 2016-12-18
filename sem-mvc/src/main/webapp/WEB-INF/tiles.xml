@@ -52,10 +52,6 @@
         <put-attribute name="title" value="title.event.participant"/>
         <put-attribute name="body" value="/WEB-INF/jsp/event/participant.jsp"/>
     </definition>
-    <definition name="find-event" extends="layout">
-        <put-attribute name="title" value="title.find-event"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/event/find-event.jsp"/>
-    </definition>
 
     <!-- SPORT -->
     <definition name="sport.list" extends="layout">

@@ -1,7 +1,13 @@
+/**
+ * GLOBAL
+ */
 body {
     padding-top: 70px;
 }
 
+/**
+ * NAVIGATION
+ */
 .navbar-brand {
     padding: 10px 15px;
 }
@@ -12,14 +18,25 @@ body {
     height: 18px;
 }
 
+/**
+ * PAGE
+ */
 .front .lead {
     font-size: 30px;
 }
-
+.form-inline.search {
+    margin-bottom: 10px;
+}
+.form-inline.search input {
+    width: 300px;
+}
 .input-group-addon.email {
     cursor: pointer;
 }
 
+/**
+ * FOOTER
+ */
 .page-footer {
     margin-top: 20px;
     background-color: #f8f8f8;
