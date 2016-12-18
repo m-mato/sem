@@ -16,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,7 +61,14 @@ public class ResultController extends BaseController {
 
 	@RequestMapping
 	public String renderList(Model model) {
-		model.addAttribute("results", resultFacade.findAll());
+		List<ResultDTO> results = new ArrayList<>();
+		List<ResultDTO> allResults = resultFacade.findAll();
+		for (ResultDTO result : allResults) {
+			if (result.getPerformance() >= 0 && result.getPosition() >= 0) {
+				results.add(result);
+			}
+		}
+		model.addAttribute("results", results);
 		return "result.list";
 	}
 

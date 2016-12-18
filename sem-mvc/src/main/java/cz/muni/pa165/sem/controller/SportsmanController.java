@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,12 +49,17 @@ public class SportsmanController extends BaseController {
     public String myAccount(Model model) {
         String email;
         SportsmanDTO sportsman = new SportsmanDTO();
-        List<ResultDTO> results;
-        try{
+        List<ResultDTO> results = new ArrayList<>();
+        try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            results = resultFacade.findBySportsman(sportsman);
+            List<ResultDTO> allResults = resultFacade.findBySportsman(sportsman);
+            for (ResultDTO result : allResults) {
+                if (result.getPerformance() >= 0 && result.getPosition() >= 0) {
+                    results.add(result);
+                }
+            }
         }
         catch(Exception ex){
             return "index";
