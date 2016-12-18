@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Kamil Triscik
@@ -102,7 +103,13 @@ public class EventController extends BaseController {
         SportsmanDTO sportsman = sportsmanFacade.getByEmail(authentication.getName());
         model.addAttribute("event", eventDTO);
         model.addAttribute("results", resultFacade.findByEvent(eventDTO));
-        model.addAttribute("isParticipant", eventDTO.getParticipants().contains(sportsman)); //check if is participant
+        if (resultFacade.findByEvent(eventDTO).stream().filter(
+                resultDTO -> resultDTO.getSportsman().getEmail().equals(sportsman.getEmail())
+        ).collect(Collectors.toList()).isEmpty()) {
+            model.addAttribute("isParticipant", false); //check if is participant
+        } else {
+            model.addAttribute("isParticipant", true); //check if is participant
+        }
         return "event.detail";
     }
 
@@ -181,10 +188,14 @@ public class EventController extends BaseController {
         result.setSportsman(participant);
         result.setPosition(new Integer(-1));
         result.setPerformance(new Double(-1));
+        result.setNote("");
         resultFacade.create(result);
+        List<SportsmanDTO> part = event.getParticipants();
+        part.add(participant);
+        event.setParticipants(part);
+        eventFacade.update(beanMappingService.mapTo(event, EventUpdateDTO.class));
         model.addAttribute("enrollProcess", "enrolled");
-//        return redirect("/events/" + id);
-        return "user.detail";
+        return redirect("/events/" + id);
     }
 
     @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
