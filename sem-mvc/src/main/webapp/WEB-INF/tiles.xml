@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <!-- LAYOUT -->
+    <definition name="layout" template="/WEB-INF/jsp/layout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <!-- INDEX -->
+    <definition name="index" extends="layout">
+        <put-attribute name="title" value="title.index"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
+    </definition>
+
+    <!-- USER -->
+    <definition name="user.detail" extends="layout">
+        <put-attribute name="title" value="title.user.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/detail.jsp"/>
+    </definition>
+    <definition name="user.login" extends="layout">
+        <put-attribute name="title" value="title.user.login"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/login.jsp"/>
+    </definition>
+    <definition name="user.register" extends="layout">
+        <put-attribute name="title" value="title.user.register"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user/register.jsp"/>
+    </definition>
+
+    <!-- EVENT -->
+    <definition name="event.list" extends="layout">
+        <put-attribute name="title" value="title.event.list"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/list.jsp"/>
+    </definition>
+    <definition name="event.detail" extends="layout">
+        <put-attribute name="title" value="title.event.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/detail.jsp"/>
+    </definition>
+    <definition name="event.create" extends="layout">
+        <put-attribute name="title" value="title.event.create"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/create.jsp"/>
+    </definition>
+    <definition name="event.update" extends="layout">
+        <put-attribute name="title" value="title.event.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/update.jsp"/>
+    </definition>
+    <definition name="event.participant" extends="layout">
+        <put-attribute name="title" value="title.event.participant"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/event/participant.jsp"/>
+    </definition>
+
+    <!-- RESULT -->
+    <definition name="result.list" extends="layout">
+        <put-attribute name="title" value="title.result.list"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/list.jsp"/>
+    </definition>
+    <definition name="result.detail" extends="layout">
+        <put-attribute name="title" value="title.result.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/detail.jsp"/>
+    </definition>
+    <definition name="result.create" extends="layout">
+        <put-attribute name="title" value="title.result.create"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/create.jsp"/>
+    </definition>
+    <definition name="result.update" extends="layout">
+        <put-attribute name="title" value="title.result.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/update.jsp"/>
+    </definition>
+
+    <!-- SPORT -->
+    <definition name="sport.list" extends="layout">
+        <put-attribute name="title" value="title.sport.list"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/list.jsp"/>
+    </definition>
+    <definition name="sport.detail" extends="layout">
+        <put-attribute name="title" value="title.sport.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/detail.jsp"/>
+    </definition>
+    <definition name="sport.create" extends="layout">
+        <put-attribute name="title" value="title.sport.create"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/create.jsp"/>
+    </definition>
+    <definition name="sport.update" extends="layout">
+        <put-attribute name="title" value="title.sport.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/sport/update.jsp"/>
+    </definition>
+
+    <!-- ERROR -->
+    <definition name="error.403" extends="layout">
+        <put-attribute name="title" value="title.error.403"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/error/403.jsp"/>
+    </definition>
+    <definition name="error.404" extends="layout">
+        <put-attribute name="title" value="title.error.404"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/error/404.jsp"/>
+    </definition>
+
+</tiles-definitions>

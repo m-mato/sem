@@ -1,5 +1,7 @@
 package cz.muni.pa165.sem.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -10,9 +12,11 @@ public class SportUpdateDTO {
     private Long id;
 
     @NotNull
+    @NotBlank
     private String name;
 
     @NotNull
+    @NotBlank
     private String description;
 
     public Long getId() {

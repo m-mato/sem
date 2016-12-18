@@ -14,13 +14,15 @@ import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author Matej Majdis
  * @author Kamil Triscik
  */
 @Configuration
-@ComponentScan(basePackages = "cz.muni.pa165.sem.service")
+@Import({DBConfig.class})
+@ComponentScan(basePackages = "cz.muni.pa165.sem")
 public class ServiceConfiguration {
 
     @Bean

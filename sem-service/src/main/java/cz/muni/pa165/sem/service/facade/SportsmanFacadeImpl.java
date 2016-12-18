@@ -32,7 +32,8 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 		sportsman.setSurname(sportCreateDTO.getSurname());
 		sportsman.setBirthDate(sportCreateDTO.getBirthDate());
 		sportsman.setEmail(sportCreateDTO.getEmail());
-		sportsman.setPassword(sportCreateDTO.getPassword()); //TODO : Hash
+		sportsman.setPassword(sportCreateDTO.getPassword());
+		sportsman.setIsManager(sportCreateDTO.getIsManager());
 
 		sportsmanService.create(sportsman);
 		return beanMappingService.mapTo(sportsman, SportsmanDTO.class);
@@ -54,6 +55,11 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	}
 
 	@Override
+	public SportsmanDTO getByEmail(String email) {
+		return beanMappingService.mapTo(sportsmanService.findByEmail(email), SportsmanDTO.class);
+	}
+
+	@Override
 	public List<SportsmanDTO> getAll() {
 		return beanMappingService.mapTo(sportsmanService.findAll(), SportsmanDTO.class);
 	}
@@ -66,7 +72,8 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 		sportsman.setSurname(sportsmanUpdateDTO.getSurname());
 		sportsman.setBirthDate(sportsmanUpdateDTO.getBirthDate());
 		sportsman.setEmail(sportsmanUpdateDTO.getEmail());
-		sportsman.setPassword(sportsmanUpdateDTO.getPassword()); //TODO : Hash
+		sportsman.setPassword(sportsmanUpdateDTO.getPassword());
+		sportsman.setIsManager(sportsmanUpdateDTO.getIsManager());
 
 		sportsmanService.update(sportsman);
 	}
@@ -74,6 +81,11 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	@Override
 	public void delete(Long id) {
 		sportsmanService.delete(sportsmanService.findById(id));
+	}
+
+	@Override
+	public List<SportsmanDTO> findBySubstring(String substring) {
+		return beanMappingService.mapTo(sportsmanService.findBySurname(substring), SportsmanDTO.class);
 	}
 
 	/**

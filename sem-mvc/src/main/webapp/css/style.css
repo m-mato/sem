@@ -1,0 +1,134 @@
+/**
+ * GLOBAL
+ */
+body {
+    padding-top: 70px;
+}
+
+/**
+ * NAVIGATION
+ */
+.navbar-brand {
+    padding: 10px 15px;
+}
+.navbar-logo {
+    height: 30px;
+}
+.navbar-lang {
+    height: 18px;
+}
+
+/**
+ * PAGE
+ */
+.front .lead {
+    font-size: 30px;
+}
+.form-inline.search {
+    margin-bottom: 10px;
+}
+.form-inline.search input {
+    width: 300px;
+}
+.input-group-addon.email {
+    cursor: pointer;
+}
+
+/**
+ * FOOTER
+ */
+.page-footer {
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+}
+.footer-text {
+    margin: 0;
+    line-height: 50px;
+}
+
+
+
+
+/*///////////////////////////////*/
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 1500px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height: auto;}
+}
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+#myInput {
+    background-image: url('../img/search-icon.png'); /* Add a search icon to input */
+    background-position: 5px 5px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2;
+    cursor: default;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+.event-item {
+    width: 220px;
+}
+
+/*.event-admin {*/
+    /*width: 250px;*/
+/*}*/
+
+.list {
+    height: 85%;
+    margin-bottom: 0;
+    overflow: auto;
+}
+
+.div-border {
+    border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+    box-shadow: 1px 1px 5px #999;
+}

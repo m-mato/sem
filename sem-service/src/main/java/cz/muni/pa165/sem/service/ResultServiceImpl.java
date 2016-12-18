@@ -1,13 +1,15 @@
 package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.ResultDAO;
-import cz.muni.pa165.sem.entity.*;
+import cz.muni.pa165.sem.entity.Event;
+import cz.muni.pa165.sem.entity.Result;
+import cz.muni.pa165.sem.entity.Sport;
+import cz.muni.pa165.sem.entity.Sportsman;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -56,6 +58,11 @@ public class ResultServiceImpl implements ResultService{
     public List<Result> findByEvent(Event event) {
         List<Result> results = resultDAO.findByEvent(event);
         return results == null ? new ArrayList<>() : results;
+    }
+
+    @Override
+    public Result findBySportsmanAndEvent(Sportsman sportsman, Event event) {
+        return resultDAO.findBySportsmanAndEvent(sportsman, event);
     }
 
     @Override

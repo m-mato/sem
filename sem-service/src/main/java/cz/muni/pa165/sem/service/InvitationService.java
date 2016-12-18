@@ -21,5 +21,11 @@ public interface InvitationService {
 
 	Invitation findById(Long id);
 
+	Invitation findByEventAndInvitee(Event event, Sportsman invitee);
+
+	List<Invitation> findByEvent(Event event);
+
+	List<Invitation> findByInvitee(Sportsman invitee);
+
 	List<Invitation> findAll();
 }

@@ -15,9 +15,9 @@ import cz.muni.pa165.sem.service.SportService;
 import cz.muni.pa165.sem.service.SportsmanService;
 import java.util.Calendar;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vit Hovezak
@@ -93,6 +93,7 @@ public class EventFacadeImpl implements EventFacade {
         return beanMappingService.mapTo(result, EventDTO.class);
     }
 
+    // TODO: 15-Dec-16 bad preco je tam Id
     @Override
     public List<EventDTO> findByParticipant(Long participantId) {
         Sportsman sportsman = sportsmanService.findById(participantId);

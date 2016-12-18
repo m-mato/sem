@@ -50,6 +50,16 @@ public interface ResultFacade {
     List<ResultDTO> findByEvent(EventDTO event);
 
     /**
+     * This method find unique result objects for Event and sportsman
+     *
+     * @param event the event we want to find results for
+     * param sportsman the sportsman we want to find results for
+     * @return results for specific event nad sportsman
+     * @throws IllegalArgumentException When event is {@code null}.
+     */
+    ResultDTO findBySportsmanAndEvent(SportsmanDTO sportsman, EventDTO event);
+
+    /**
      * This method finds results objects by Sport
      *
      * @param sport the sport object we want to find results for
@@ -103,8 +113,8 @@ public interface ResultFacade {
     /**
      * Method which deletes result from DB
      *
-     * @param result
+     * @param  resultId
      * @throws IllegalArgumentException When result is {@code null}.
      */
-    void delete(ResultDTO result);
+    void delete(Long resultId);
 }

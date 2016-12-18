@@ -2,27 +2,25 @@ package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.*;
 import cz.muni.pa165.sem.entity.*;
+
 import java.util.*;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
 import static org.mockito.Matchers.argThat;
 import static org.hamcrest.CoreMatchers.not;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.fail;
 
 /**
  * @author Veronika Aksamitova
  */
-@RunWith(MockitoJUnitRunner.class)
-public class EventServiceTest {
+@ContextConfiguration(locations = "classpath:service-test-context.xml")
+public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private EventService eventService = new EventServiceImpl();
@@ -99,7 +97,7 @@ public class EventServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateNull() {
-        doThrow(new IllegalArgumentException("Trying to create null object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent null object!"))
                 .when(eventDAO)
                 .create(null);
 
@@ -109,7 +107,7 @@ public class EventServiceTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateUninitializedObject() {
         Event event1 = new Event();
-        doThrow(new IllegalArgumentException("Trying to create uninitialized object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent uninitialized object!"))
                 .when(eventDAO)
                 .create(event1);
 
@@ -118,7 +116,7 @@ public class EventServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateAlreadyExisted() {
-        doThrow(new IllegalArgumentException("Trying to create already existing object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent already existing object!"))
                 .when(eventDAO)
                 .create(this.event);
 
@@ -133,7 +131,7 @@ public class EventServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testUpdateNull() {
-        doThrow(new IllegalArgumentException("Trying to update null object!"))
+        doThrow(new IllegalArgumentException("Trying to updateEvent null object!"))
                 .when(eventDAO)
                 .update(null);
 
@@ -148,7 +146,7 @@ public class EventServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNotExistingObject() {
-        doThrow(new IllegalArgumentException("Trying to delete not existing object!"))
+        doThrow(new IllegalArgumentException("Trying to deleteEvent not existing object!"))
                 .when(eventDAO)
                 .delete(new Event());
 
@@ -157,7 +155,7 @@ public class EventServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNull() {
-        doThrow(new IllegalArgumentException("Trying to delete null object!"))
+        doThrow(new IllegalArgumentException("Trying to deleteEvent null object!"))
                 .when(eventDAO)
                 .delete(null);
 
@@ -329,7 +327,7 @@ public class EventServiceTest {
 
     @Test
     public void testFindNonExistingByDate() {
-        Calendar cal = new GregorianCalendar(2015,1,31);;
+        Calendar cal = new GregorianCalendar(2015,1,31);
         List<Event> events = eventService.findByDate(cal);
         Assert.assertNotNull(events);
         Assert.assertTrue(events.isEmpty());

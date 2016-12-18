@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackages = "cz.muni.pa165.sem.dao")
+@ComponentScan(basePackages = "cz.muni.pa165.sem")
 public class DBConfig {
 
 	@Bean

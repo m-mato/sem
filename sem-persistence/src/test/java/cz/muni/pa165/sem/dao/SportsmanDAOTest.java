@@ -115,7 +115,30 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
         assertNotNull(result);
         assertEquals(result.get(0), expResult);
     }
-    
+
+    @Test
+    public void testFindByEmailNotFound(){
+        Sportsman result = sportsmanDAO.findByEmail("nonexisitng@example.com");
+        assertNull(result);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFindByEmailNull(){
+        sportsmanDAO.findBySurname(null);
+    }
+
+    @Test
+    public void testFindByEmail(){
+        String expectedEmail = "test.jano@example.com";
+        Sportsman expResult = generateSportsman("Jano");
+        expResult.setEmail(expectedEmail);
+        sportsmanDAO.create(expResult);
+
+        Sportsman result = sportsmanDAO.findByEmail(expectedEmail);
+        assertNotNull(result);
+        assertEquals(result, expResult);
+    }
+
     @Test
     public void testUpdate(){
         Sportsman sportsman1 = generateSportsman("Janči");
@@ -154,6 +177,7 @@ public class SportsmanDAOTest extends AbstractTestNGSpringContextTests {
         sportsman1.setBirthDate(Calendar.getInstance());
         sportsman1.setEmail(name + "@email");
         sportsman1.setPassword("asdf");
+        sportsman1.setIsManager(true);
         sportsmanDAO.create(sportsman1);
         return sportsman1;
     }

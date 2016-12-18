@@ -1,5 +1,9 @@
 package cz.muni.pa165.sem.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 /**
@@ -7,15 +11,28 @@ import java.util.Calendar;
  */
 public class SportsmanCreateDTO {
 
+	@NotNull
+	@NotBlank
 	private String name;
 
+	@NotNull
+	@NotBlank
 	private String surname;
 
+	@NotNull
 	private Calendar birthDate;
 
+	@NotNull
+	@NotBlank
+	@Email
 	private String email;
 
+	@NotNull
+	@NotBlank
 	private String password;
+
+	@NotNull
+	private Boolean isManager;
 
 	public String getName() {
 		return name;
@@ -57,6 +74,14 @@ public class SportsmanCreateDTO {
 		this.password = password;
 	}
 
+	public Boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Boolean manager) {
+		isManager = manager;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -68,6 +93,7 @@ public class SportsmanCreateDTO {
 		if (!getSurname().equals(sportsman.getSurname())) return false;
 		if (!getBirthDate().equals(sportsman.getBirthDate())) return false;
 		if (!getEmail().equals(sportsman.getEmail())) return false;
+		if (!getIsManager().equals(sportsman.getIsManager())) return false;
 		return getPassword().equals(sportsman.getPassword());
 
 	}
@@ -79,6 +105,7 @@ public class SportsmanCreateDTO {
 		result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
 		result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
 		result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+		result = 31 * result + (getIsManager() != null ? getIsManager().hashCode() : 0);
 		return result;
 	}
 
@@ -90,6 +117,7 @@ public class SportsmanCreateDTO {
 				", birthDate=" + birthDate +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
+				", is manager='" + isManager + '\'' +
 				'}';
 	}
 }

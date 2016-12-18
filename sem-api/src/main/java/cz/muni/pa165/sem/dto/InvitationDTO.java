@@ -1,7 +1,5 @@
 package cz.muni.pa165.sem.dto;
 
-import cz.muni.pa165.sem.entity.Event;
-import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.utils.InvitationState;
 
 /**
@@ -11,9 +9,9 @@ public class InvitationDTO {
 
 	private Long id;
 
-	private Event event;
+	private EventDTO event;
 
-	private Sportsman invitee;
+	private SportsmanDTO invitee;
 
 	private InvitationState state;
 
@@ -25,19 +23,19 @@ public class InvitationDTO {
 		this.id = id;
 	}
 
-	public Event getEvent() {
+	public EventDTO getEvent() {
 		return event;
 	}
 
-	public void setEvent(Event event) {
+	public void setEvent(EventDTO event) {
 		this.event = event;
 	}
 
-	public Sportsman getInvitee() {
+	public SportsmanDTO getInvitee() {
 		return invitee;
 	}
 
-	public void setInvitee(Sportsman invitee) {
+	public void setInvitee(SportsmanDTO invitee) {
 		this.invitee = invitee;
 	}
 
@@ -76,8 +74,8 @@ public class InvitationDTO {
 	public String toString() {
 		return "InvitationDTO{" +
 				"id=" + id +
-				", event=" + event +
-				", invitee=" + invitee +
+				", event=" + (event == null ? "null" : event.toString()) +
+				", invitee=" + (invitee == null ? "null" : invitee.toString()) +
 				", state=" + state +
 				'}';
 	}

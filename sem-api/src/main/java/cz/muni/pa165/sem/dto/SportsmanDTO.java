@@ -21,9 +21,9 @@ public class SportsmanDTO {
 
 	private String password;
 
-	private Set<EventDTO> events = new HashSet<>();
+	private Boolean isManager;
 
-	private Set<InvitationDTO> invitations = new HashSet<>();
+	private Set<EventDTO> events = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -73,20 +73,20 @@ public class SportsmanDTO {
 		this.password = password;
 	}
 
+	public Boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Boolean manager) {
+		isManager = manager;
+	}
+
 	public Set<EventDTO> getEvents() {
 		return events;
 	}
 
 	public void setEvents(Set<EventDTO> events) {
 		this.events = events;
-	}
-
-	public Set<InvitationDTO> getInvitations() {
-		return invitations;
-	}
-
-	public void setInvitations(Set<InvitationDTO> invitations) {
-		this.invitations = invitations;
 	}
 
 	@Override
@@ -101,6 +101,7 @@ public class SportsmanDTO {
 		if (!getSurname().equals(sportsman.getSurname())) return false;
 		if (!getBirthDate().equals(sportsman.getBirthDate())) return false;
 		if (!getEmail().equals(sportsman.getEmail())) return false;
+		if (!getIsManager().equals(sportsman.getIsManager())) return false;
 		return getPassword().equals(sportsman.getPassword());
 
 	}
@@ -113,6 +114,7 @@ public class SportsmanDTO {
 		result = 31 * result + getBirthDate().hashCode();
 		result = 31 * result + getEmail().hashCode();
 		result = 31 * result + getPassword().hashCode();
+		result = 31 * result + getIsManager().hashCode();
 		return result;
 	}
 
@@ -125,8 +127,8 @@ public class SportsmanDTO {
 				", birthDate=" + birthDate +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
+				", is manager=" + isManager +
 				", events=" + events +
-				", invitations=" + invitations +
 				'}';
 	}
 }

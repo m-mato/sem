@@ -23,6 +23,8 @@ public interface ResultService {
 
     List<Result> findByEvent(Event event);
 
+    Result findBySportsmanAndEvent(Sportsman sportsman, Event event);
+
     List<Result> findBySport(Sport sport);
 
     List<Result> findByPerformance(Double performance);

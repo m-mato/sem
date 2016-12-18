@@ -1,38 +1,28 @@
 package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.configuration.EmailConfiguration;
-import org.junit.*;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
-import javax.mail.Session;
-import static org.mockito.Mockito.*;
-import static org.testng.Assert.assertEquals;
 
 /**
  * @author Veronika Aksamitova
  */
 @ContextConfiguration(locations = "classpath:service-test-context.xml")
-@RunWith(MockitoJUnitRunner.class)
-public class EmailServiceTest {
+public class EmailServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private final EmailService emailService = new EmailServiceImpl();
 
-    @Rule
-    public final ExpectedException expectedException = ExpectedException.none();
-
     @Mock
     private EmailConfiguration emailConfigurationMock;
-    private Session session;
 
     @BeforeMethod
     public void setUp() throws Exception {

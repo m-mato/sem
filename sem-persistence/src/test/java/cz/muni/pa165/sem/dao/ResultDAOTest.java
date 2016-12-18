@@ -408,6 +408,7 @@ public class ResultDAOTest extends AbstractTestNGSpringContextTests {
             sportsman.setBirthDate(Calendar.getInstance());
             sportsman.setEmail("sportsman" + i + "@sem.muni.cz");
             sportsman.setPassword("SportsmanPassword" + i);
+            sportsman.setIsManager(true);
             sportsmanDAO.create(sportsman);
             sportsmans.add(sportsman);
         }

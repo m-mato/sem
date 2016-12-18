@@ -45,6 +45,16 @@ public interface SportsmanDAO {
 	List<Sportsman> findBySurname(String surname);
 
 	/**
+	 * This method find sportsman by email.
+	 *
+	 * @param email the email value of object we want to find.
+	 * @return null if object does not exist in DB otherwise return sportsman object.
+	 * @throws IllegalArgumentException When email is {@code null}.
+	 * @throws IllegalArgumentException When email is not unique.
+	 */
+	Sportsman findByEmail(String email);
+
+	/**
 	 * Method update sportsman object.
 	 *
 	 * @param sportsman the sportsman object to be updated in DB
@@ -66,4 +76,13 @@ public interface SportsmanDAO {
 	 * @return List of found sportsman objects.
 	 */
 	List<Sportsman> findAll();
+
+	/**
+	 * This method find sportsman which name, surname or email contain substring
+	 *
+	 * @param substring the substring value of objects we want to find.
+	 * @return null if object does not exist in DB otherwise return sportsman object.
+	 * @throws IllegalArgumentException When surname is {@code null}.
+	 */
+	List<Sportsman> findBySubstring(String substring);
 }

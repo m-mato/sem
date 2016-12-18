@@ -5,11 +5,11 @@ import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cz.muni.pa165.sem.service.BeanMappingService;
 import cz.muni.pa165.sem.service.ResultService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -41,7 +41,7 @@ public class ResultFacadeImpl implements ResultFacade{
         result1.setNote(result.getNote());
         
         resultService.create(result1);
-        return beanMappingService.mapTo(result, ResultDTO.class);
+        return beanMappingService.mapTo(result1, ResultDTO.class);
     }
 
     @Override
@@ -60,6 +60,14 @@ public class ResultFacadeImpl implements ResultFacade{
     public List<ResultDTO> findByEvent(EventDTO event) {
         List<Result> results = resultService.findByEvent(beanMappingService.mapTo(event, Event.class));
         return beanMappingService.mapTo(results, ResultDTO.class);
+    }
+
+    @Override
+    public ResultDTO findBySportsmanAndEvent(SportsmanDTO sportsman, EventDTO event) {
+        Result result = resultService.findBySportsmanAndEvent(
+                beanMappingService.mapTo(sportsman, Sportsman.class),
+                beanMappingService.mapTo(event, Event.class));
+        return beanMappingService.mapTo(result, ResultDTO.class);
     }
 
     @Override
@@ -102,16 +110,16 @@ public class ResultFacadeImpl implements ResultFacade{
         SportsmanDTO sportsmanDTO = resultUpdateDTO.getSportsman();
         result.setSportsman(beanMappingService.mapTo(sportsmanDTO, Sportsman.class));
         
-        result.setPosition(result.getPosition());
-        result.setPerformance(result.getPerformance());
-        result.setPerformanceUnit(result.getPerformanceUnit());
-        result.setNote(result.getNote());
+        result.setPosition(resultUpdateDTO.getPosition());
+        result.setPerformance(resultUpdateDTO.getPerformance());
+        result.setPerformanceUnit(resultUpdateDTO.getPerformanceUnit());
+        result.setNote(resultUpdateDTO.getNote());
         resultService.update(result);
     }
 
     @Override
-    public void delete(ResultDTO result) {
-        resultService.delete(resultService.findById(result.getId()));
+    public void delete(Long resultId) {
+        resultService.delete(resultService.findById(resultId));
     }
 
     /**

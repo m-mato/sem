@@ -3,11 +3,8 @@ package cz.muni.pa165.sem.service;
 import cz.muni.pa165.sem.dao.SportDAO;
 import cz.muni.pa165.sem.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

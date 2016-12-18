@@ -4,16 +4,16 @@ import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.utils.InvitationState;
 import cz.muni.pa165.sem.utils.PerformanceUnits;
+
 import org.dozer.Mapper;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.*;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,8 +21,8 @@ import java.util.Calendar;
 /**
  * @author Veronika Aksamitova
  */
-@RunWith(MockitoJUnitRunner.class)
-public class BeanMappingServiceTest {
+@ContextConfiguration(locations = "classpath:service-test-context.xml")
+public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private final BeanMappingService beanMappingService = new BeanMappingServiceImpl();

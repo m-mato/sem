@@ -2,34 +2,26 @@ package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.*;
 import cz.muni.pa165.sem.entity.*;
-import cz.muni.pa165.sem.utils.InvitationState;
+import cz.muni.pa165.sem.utils.PerformanceUnits;
 
 import java.util.*;
-
-import cz.muni.pa165.sem.utils.PerformanceUnits;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
 import static org.mockito.Matchers.argThat;
 import static org.hamcrest.CoreMatchers.not;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.assertEquals;
 
 /**
  * @author Veronika Aksamitova
  */
-@RunWith(MockitoJUnitRunner.class)
-public class ResultServiceTest {
+@ContextConfiguration(locations = "classpath:service-test-context.xml")
+public class ResultServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private  ResultService resultService = new ResultServiceImpl();
@@ -113,7 +105,7 @@ public class ResultServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateNull() {
-        doThrow(new IllegalArgumentException("Trying to create null object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent null object!"))
                 .when(resultDAO)
                 .create(null);
 
@@ -123,7 +115,7 @@ public class ResultServiceTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateUninitializedObject() {
         Result result1 = new Result();
-        doThrow(new IllegalArgumentException("Trying to create uninitialized object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent uninitialized object!"))
                 .when(resultDAO)
                 .create(result1);
 
@@ -132,7 +124,7 @@ public class ResultServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCreateAlreadyExisted() {
-        doThrow(new IllegalArgumentException("Trying to create already existing object!"))
+        doThrow(new IllegalArgumentException("Trying to createEvent already existing object!"))
                 .when(resultDAO)
                 .create(this.result);
 
@@ -147,7 +139,7 @@ public class ResultServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testUpdateNull() {
-        doThrow(new IllegalArgumentException("Trying to update null object!"))
+        doThrow(new IllegalArgumentException("Trying to updateEvent null object!"))
                 .when(resultDAO)
                 .update(null);
 
@@ -164,7 +156,7 @@ public class ResultServiceTest {
     public void testDeleteNotExistingResult() {
         Result res = new Result();
         res.setPosition(3);
-        doThrow(new IllegalArgumentException("Trying to delete not existing object!"))
+        doThrow(new IllegalArgumentException("Trying to deleteEvent not existing object!"))
                 .when(resultDAO)
                 .delete(res);
 
@@ -173,7 +165,7 @@ public class ResultServiceTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDeleteNull() {
-        doThrow(new IllegalArgumentException("Trying to delete null object!"))
+        doThrow(new IllegalArgumentException("Trying to deleteEvent null object!"))
                 .when(resultDAO)
                 .delete(null);
 

@@ -136,6 +136,33 @@ public class InvitationServiceImpl implements InvitationService {
 	}
 
 	@Override
+	public Invitation findByEventAndInvitee(Event event, Sportsman invitee) {
+		try {
+			return invitationDAO.findByEventAndInvitee(event, invitee);
+		} catch (Exception e) {
+			throw new DataRetrievalFailureException("Failed to find invitation", e);
+		}
+	}
+
+	@Override
+	public List<Invitation> findByEvent(Event event) {
+		try {
+			return invitationDAO.findByEvent(event);
+		} catch (Exception e) {
+			throw new DataRetrievalFailureException("Failed to find invitations, exception: ", e);
+		}
+	}
+
+	@Override
+	public List<Invitation> findByInvitee(Sportsman invitee) {
+		try {
+			return invitationDAO.findByInvitee(invitee);
+		} catch (Exception e) {
+			throw new DataRetrievalFailureException("Failed to find invitations, exception: ", e);
+		}
+	}
+
+	@Override
 	public List<Invitation> findAll() {
 		try {
 			return invitationDAO.findAll();

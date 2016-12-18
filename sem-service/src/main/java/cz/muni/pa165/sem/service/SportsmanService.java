@@ -17,9 +17,13 @@ public interface SportsmanService {
 
 	List<Sportsman> findBySurname(String surname);
 
+	Sportsman findByEmail(String email);
+
 	List<Sportsman> findAll();
 
 	void delete(Sportsman sportsman);
 
 	void update(Sportsman sportsman);
+
+	List<Sportsman> findBySubstring(String substring);
 }
