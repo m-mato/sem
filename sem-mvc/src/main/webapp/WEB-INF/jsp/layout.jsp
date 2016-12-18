@@ -34,6 +34,7 @@
 <spring:url value="/logout" var="userLogoutUrl"/>
 <spring:url value="/register" var="userRegisterUrl"/>
 <spring:url value="/events" var="eventsUrl"/>
+<spring:url value="/results" var="resultsUrl"/>
 <spring:url value="/sports" var="sportsUrl"/>
 <spring:url value="?lang=cs" var="csLangUrl"/>
 <spring:url value="?lang=en" var="enLangUrl"/>
@@ -80,6 +81,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
                         <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
+                        <li><a href="${resultsUrl}"><spring:message code="link.result.list"/></a></li>
                         <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

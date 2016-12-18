@@ -53,6 +53,24 @@
         <put-attribute name="body" value="/WEB-INF/jsp/event/participant.jsp"/>
     </definition>
 
+    <!-- RESULT -->
+    <definition name="result.list" extends="layout">
+        <put-attribute name="title" value="title.result.list"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/list.jsp"/>
+    </definition>
+    <definition name="result.detail" extends="layout">
+        <put-attribute name="title" value="title.result.detail"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/detail.jsp"/>
+    </definition>
+    <definition name="result.create" extends="layout">
+        <put-attribute name="title" value="title.result.create"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/create.jsp"/>
+    </definition>
+    <definition name="result.update" extends="layout">
+        <put-attribute name="title" value="title.result.update"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/update.jsp"/>
+    </definition>
+
     <!-- SPORT -->
     <definition name="sport.list" extends="layout">
         <put-attribute name="title" value="title.sport.list"/>
