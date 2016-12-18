@@ -52,19 +52,18 @@
         </div>
         <div class="row">
             <div class="col-md-6 event-info">
-                <p><strong><spring:message code="page.event.detail.where"/>:</strong><c:out value=" ${event.address}, ${event.city}"/></p>
-                <p><strong><spring:message code="page.event.detail.when"/>:</strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
-                <p><strong><spring:message code="page.event.detail.what"/>:</strong><c:out value="${event.sport.name}"/></p>
+                <p><strong><spring:message code="page.event.detail.where"/>: </strong><c:out value="${event.address}, ${event.city}"/></p>
+                <p><strong><spring:message code="page.event.detail.when"/>: </strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
+                <p><strong><spring:message code="page.event.detail.what"/>: </strong><c:out value="${event.sport.name}"/></p>
             </div>
             <div class="col-md-6 event-admin div-border">
-                <p><strong><spring:message code="page.event.detail.admin"/></strong><p>
-                <p><c:out value="${event.admin.name}"/></p>
-                 <p><strong>Email:</strong><c:out value="${event.admin.email}"/></p>
+                <p><strong><spring:message code="page.event.detail.admin"/>: </strong><c:out value="${event.admin.name}"/></p>
+                 <p><strong>Email: </strong><c:out value="${event.admin.email}"/></p>
             </div>
         </div><br>
         <div class="row">
             <div class="col-md-12">
-                <p><c:out value="${page.description}"/>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p><strong><spring:message code="page.events.description"/>: </strong><c:out value="${event.description}"/></p>
             </div>
         </div><br>
         <c:if test="${not empty result}">
@@ -103,8 +102,8 @@
                             </div>
                         </div>
                     </c:when>
-                    <c:otherwise> //not enrolled, can enroll
-                        <c:if test="${ fn:length(event.participants) lt event.capacity}"> //only if there is a enough capacity
+                    <c:otherwise> <%--//not enrolled, can enroll //only if there is a enough capacity--%>
+                        <c:if test="${ fn:length(event.participants) lt event.capacity}">
                         <div class="col-md-4">
                             <p>
                                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
