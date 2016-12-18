@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
@@ -106,14 +107,16 @@
         </div>
     </spring:bind>
 
+    <c:set var="admin">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+    </c:set>
     <spring:bind path="admin">
-        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+        <div class="form-group form-group-lg ${!admin ? 'hidden' : ''} ${status.error ? 'has-error' : ''}">
             <form:label path="admin" class="col-sm-3 control-label">
                 <spring:message code="entity.event.admin"/>
             </form:label>
             <div class="col-sm-5">
                 <form:select path="admin" class="form-control">
-                    <form:option value="">-</form:option>
                     <form:options items="${sportsmans}" itemvalue="id" itemLabel="email"/>
                 </form:select>
             </div>
