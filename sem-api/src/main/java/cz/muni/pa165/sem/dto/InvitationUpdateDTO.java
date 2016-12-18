@@ -29,11 +29,11 @@ public class InvitationUpdateDTO {
         this.id = id;
     }
 
-    public EventDTO getEventDTO() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEventDTO(EventDTO event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 
@@ -61,7 +61,7 @@ public class InvitationUpdateDTO {
         InvitationDTO that = (InvitationDTO) o;
 
         if (!getId().equals(that.getId())) return false;
-        if (!getEventDTO().equals(that.getEvent())) return false;
+        if (!getEvent().equals(that.getEvent())) return false;
         if (!getInvitee().equals(that.getInvitee())) return false;
         return getState() == that.getState();
 
@@ -70,7 +70,7 @@ public class InvitationUpdateDTO {
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getEventDTO().hashCode();
+        result = 31 * result + getEvent().hashCode();
         result = 31 * result + getInvitee().hashCode();
         result = 31 * result + getState().hashCode();
         return result;
