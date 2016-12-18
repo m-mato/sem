@@ -41,7 +41,7 @@ public class ResultFacadeImpl implements ResultFacade{
         result1.setNote(result.getNote());
         
         resultService.create(result1);
-        return beanMappingService.mapTo(result, ResultDTO.class);
+        return beanMappingService.mapTo(result1, ResultDTO.class);
     }
 
     @Override
@@ -110,10 +110,10 @@ public class ResultFacadeImpl implements ResultFacade{
         SportsmanDTO sportsmanDTO = resultUpdateDTO.getSportsman();
         result.setSportsman(beanMappingService.mapTo(sportsmanDTO, Sportsman.class));
         
-        result.setPosition(result.getPosition());
-        result.setPerformance(result.getPerformance());
-        result.setPerformanceUnit(result.getPerformanceUnit());
-        result.setNote(result.getNote());
+        result.setPosition(resultUpdateDTO.getPosition());
+        result.setPerformance(resultUpdateDTO.getPerformance());
+        result.setPerformanceUnit(resultUpdateDTO.getPerformanceUnit());
+        result.setNote(resultUpdateDTO.getNote());
         resultService.update(result);
     }
 

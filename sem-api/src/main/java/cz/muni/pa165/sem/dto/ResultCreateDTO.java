@@ -2,6 +2,8 @@ package cz.muni.pa165.sem.dto;
 
 import cz.muni.pa165.sem.utils.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
 /**
  *
  * @author Veronika Aksamitova
@@ -107,13 +109,17 @@ public class ResultCreateDTO {
         if(!getNote().equals(result.getNote())) return false;
         return getEvent().equals(result.getEvent());
     }
-    
+
     @Override
-    public int hashCode(){
-        int result = getPerformance().hashCode();
-        result = 31 * result + getPosition().hashCode();
-        result = 31 * result + getNote().hashCode();
-        result = 31 * result + getEvent().hashCode();
-        return result;
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.performance);
+        hash = 47 * hash + Objects.hashCode(this.performanceUnit);
+        hash = 47 * hash + Objects.hashCode(this.position);
+        hash = 47 * hash + Objects.hashCode(this.sportsman);
+        hash = 47 * hash + Objects.hashCode(this.note);
+        hash = 47 * hash + Objects.hashCode(this.event);
+        return hash;
     }
+
 }
