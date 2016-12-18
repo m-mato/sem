@@ -60,12 +60,13 @@
                         <td>${invite.state}</td>
                         <td>
                             <c:if test="${invite.state != 'DECLINED'}">
-
+                                <c:if test="${invite.state != 'ACCEPTED'}">
                                         <span>
                                             <a href="accept/${invite.id}" style="float:right;" class="btn btn-primary">Accept</a>
                                             <a href="decline/${invite.id}" style="float:right;" class="btn btn-primary">Decline</a>
 
                                         </span>
+                                </c:if>
                             </c:if>
                         </td>
                     </tr>
