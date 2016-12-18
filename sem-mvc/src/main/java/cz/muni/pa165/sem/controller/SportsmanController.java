@@ -1,9 +1,11 @@
 package cz.muni.pa165.sem.controller;
 
 import cz.muni.pa165.sem.facade.InvitationFacade;
+import cz.muni.pa165.sem.utils.InvitationState;
 import org.springframework.security.core.Authentication;
 import cz.muni.pa165.sem.dto.ResultDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
+import cz.muni.pa165.sem.dto.InvitationDTO;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
@@ -64,14 +66,17 @@ public class SportsmanController extends BaseController {
     @RequestMapping("/accept/{id}")
     public String accept(@PathVariable Long id) {
         String email;
-        SportsmanDTO sportsman = new SportsmanDTO();
-        List<ResultDTO> results;
+        SportsmanDTO sportsman;
         try{
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            invitationFacade.findByInvitee(sportsman);
-                    //Accept invitation with id
+            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);
+            for(InvitationDTO invitation : invitations){
+                if(invitation.getId().equals(id)){
+                    invitation.setState(InvitationState.ACCEPTED);
+                }
+            }
         }
         catch(Exception ex){
         }
@@ -87,8 +92,12 @@ public class SportsmanController extends BaseController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            invitationFacade.findByInvitee(sportsman);
-            //Accept invitation with id
+            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);
+            for(InvitationDTO invitation : invitations){
+                if(invitation.getId().equals(id)){
+                    invitation.setState(InvitationState.DECLINED);
+                }
+            }
         }
         catch(Exception ex){
         }
