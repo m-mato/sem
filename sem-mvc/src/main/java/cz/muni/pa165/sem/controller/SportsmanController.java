@@ -1,6 +1,9 @@
 package cz.muni.pa165.sem.controller;
 
+import cz.muni.pa165.sem.dto.InvitationUpdateDTO;
+import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.facade.InvitationFacade;
+import cz.muni.pa165.sem.service.BeanMappingService;
 import cz.muni.pa165.sem.utils.InvitationState;
 import org.springframework.security.core.Authentication;
 import cz.muni.pa165.sem.dto.ResultDTO;
@@ -24,6 +27,9 @@ import java.util.List;
  */
 @Controller
 public class SportsmanController extends BaseController {
+
+    @Autowired
+    BeanMappingService beanMappingService;
 
     @Autowired
     EventFacade eventFacade;
@@ -68,17 +74,21 @@ public class SportsmanController extends BaseController {
         String email;
         SportsmanDTO sportsman;
         try{
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            email = auth.getName();
+            /*Sportsman user = (Sportsman)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            email = user.getEmail();
             sportsman = sportsmanFacade.getByEmail(email);
-            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);
+            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);*
             for(InvitationDTO invitation : invitations){
                 if(invitation.getId().equals(id)){
-                    invitation.setState(InvitationState.ACCEPTED);
+                    invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
                 }
-            }
+            }*/
+            InvitationDTO  invitation = invitationFacade.findById(id);
+            invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }
         catch(Exception ex){
+
+            return "error.403";
         }
         return "user.detail";
     }
@@ -89,17 +99,22 @@ public class SportsmanController extends BaseController {
         SportsmanDTO sportsman = new SportsmanDTO();
         List<ResultDTO> results;
         try{
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
             List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);
             for(InvitationDTO invitation : invitations){
                 if(invitation.getId().equals(id)){
-                    invitation.setState(InvitationState.DECLINED);
+                    invitationFacade.decline(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
                 }
-            }
+            }*/
+
+            InvitationDTO  invitation = invitationFacade.findById(id);
+            invitationFacade.decline(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }
         catch(Exception ex){
+
+            return "error.403";
         }
         return "user.detail";
     }
