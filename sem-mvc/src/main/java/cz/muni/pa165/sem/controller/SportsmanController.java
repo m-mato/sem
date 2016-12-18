@@ -90,7 +90,7 @@ public class SportsmanController extends BaseController {
 
             return "error.403";
         }
-        return "user.detail";
+        return "event.list";
     }
 
     @RequestMapping("/decline/{id}")
@@ -116,7 +116,7 @@ public class SportsmanController extends BaseController {
 
             return "error.403";
         }
-        return "user.detail";
+        return "event.list";
     }
 
 
