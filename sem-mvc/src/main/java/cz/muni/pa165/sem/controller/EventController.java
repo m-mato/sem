@@ -93,21 +93,6 @@ public class EventController extends BaseController {
         return "event.list";
     }
 
-    /*@RequestMapping
-    public String renderEvents(Authentication authentication, Model model) {
-        logger.info("renderEvents");
-        SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
-        List<EventDTO> events = eventFacade.findAll();//findByParticipant(1L);//participant.getId());
-        logger.info("events" + events.size());
-        model.addAttribute("events", events);
-        if (!events.isEmpty()) {
-            EventDTO event = events.get(0);
-            model.addAttribute("event", events.get(0));
-            model.addAttribute("result", resultFacade.findBySportsmanAndEvent(participant, event));
-        }
-        return "event.detail";
-    }*/
-
     @RequestMapping("/{id}")
     public Object renderDetail(@PathVariable("id") Long id, Model model, Authentication authentication) {
         EventDTO eventDTO = eventFacade.findById(id);
@@ -136,21 +121,6 @@ public class EventController extends BaseController {
             model.addAttribute("error", true);
             return "event.create";
         }
-//        TODO: Fill logged user as admin for ROLE_USER and hide selectbox in JSP for them
-//        try{
-//            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//            String email = auth.getName();
-//            SportsmanDTO sportsman = sportsmanFacade.getByEmail(email);
-//            event.setAdmin(sportsman);
-//            if (bindingResult.hasErrors()) {
-//                logger.debug("Creation of event: {0} was not successuful", event.toString());
-//                return "event.create";
-//            }
-//            createdEvent = eventFacade.create(event);
-//        }
-//        catch(Exception ex){
-//            return "event.create";
-//        }
         EventDTO eventDTO = eventFacade.create(eventCreateDTO);
         return redirect("/events/" + eventDTO.getId() + "?create");
     }
