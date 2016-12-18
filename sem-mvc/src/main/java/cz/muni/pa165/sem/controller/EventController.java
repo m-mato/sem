@@ -9,6 +9,7 @@ import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import cz.muni.pa165.sem.service.BeanMappingService;
+import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -108,13 +109,15 @@ public class EventController extends BaseController {
     }*/
 
     @RequestMapping("/{id}")
-    public Object renderDetail(@PathVariable("id") Long id, Model model) {
+    public Object renderDetail(@PathVariable("id") Long id, Model model, Authentication authentication) {
         EventDTO eventDTO = eventFacade.findById(id);
         if (eventDTO == null) {
             return redirect("/events");
         }
+        SportsmanDTO sportsman = sportsmanFacade.getByEmail(authentication.getName());
         model.addAttribute("event", eventDTO);
         model.addAttribute("results", resultFacade.findByEvent(eventDTO));
+        model.addAttribute("isParticipant", eventDTO.getParticipants().contains(sportsman)); //check if is participant
         return "event.detail";
     }
 
@@ -179,7 +182,7 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping( value = "/{id}/unenroll", method = RequestMethod.GET)
-    public String unenroll(@PathVariable long id, Authentication authentication) {
+    public Object unenroll(@PathVariable long id, Authentication authentication, Model model) {
         logger.info("renderEvents");
         SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
         EventDTO event = eventFacade.findById(id);
@@ -189,8 +192,26 @@ public class EventController extends BaseController {
                 resultFacade.findBySportsmanAndEvent(
                         participant, //find sportsman  me
                         event).getId());  //find event
-        // TODO: 13-Dec-16 redirect where you want
-        return "event.participant";
+        model.addAttribute("message", "unenrolled");
+        return redirect("/events/" + id);
+    }
+
+    @RequestMapping( value = "/{id}/enroll", method = RequestMethod.GET)
+    public Object enroll(@PathVariable long id, Authentication authentication, Model model) {
+        logger.info("renderEvents");
+        SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
+        EventDTO event = eventFacade.findById(id);
+        logger.info("Enrolling sportman(" + participant.getName() + " " + participant.getSurname() + ") from event " + event.getName());
+        ResultCreateDTO  result = new ResultCreateDTO();
+        result.setPerformanceUnit(PerformanceUnits.SECOND);
+        result.setEvent(event);
+        result.setSportsman(participant);
+        result.setPosition(new Integer(-1));
+        result.setPerformance(new Double(-1));
+        resultFacade.create(result);
+        model.addAttribute("enrollProcess", "enrolled");
+//        return redirect("/events/" + id);
+        return "user.detail";
     }
 
     @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
