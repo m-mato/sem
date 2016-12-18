@@ -61,7 +61,7 @@ public class InvitationUpdateDTO {
         InvitationDTO that = (InvitationDTO) o;
 
         if (!getId().equals(that.getId())) return false;
-        if (!getEventDTO().equals(that.getEventDTO())) return false;
+        if (!getEventDTO().equals(that.getEvent())) return false;
         if (!getInvitee().equals(that.getInvitee())) return false;
         return getState() == that.getState();
 

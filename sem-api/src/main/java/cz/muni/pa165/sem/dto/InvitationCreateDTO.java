@@ -49,7 +49,7 @@ public class InvitationCreateDTO {
 
         InvitationDTO that = (InvitationDTO) o;
 
-        if (!getEvent().equals(that.getEventDTO())) return false;
+        if (!getEvent().equals(that.getEvent())) return false;
         if (!getInvitee().equals(that.getInvitee())) return false;
         return getState() == that.getState();
 
