@@ -1,43 +1,39 @@
 package cz.muni.pa165.sem.controller;
 
 import cz.muni.pa165.sem.dto.*;
+import cz.muni.pa165.sem.editor.CalendarEditor;
+import cz.muni.pa165.sem.editor.SportEditor;
+import cz.muni.pa165.sem.editor.SportsmanEditor;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
+import cz.muni.pa165.sem.service.BeanMappingService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
-import java.io.IOException;
+import javax.validation.Valid;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.validation.Valid;
 
 /**
  * @author Kamil Triscik
  */
 @Controller
+@RequestMapping("/events")
 public class EventController extends BaseController {
 
     Logger logger = org.slf4j.LoggerFactory.getLogger(EventController.class);
-
-
-    @Autowired
-    private ServletContext servletContext;
 
     @Autowired
     private EventFacade eventFacade;
@@ -51,7 +47,33 @@ public class EventController extends BaseController {
     @Autowired
     private ResultFacade resultFacade;
 
-    /*@RequestMapping("/events")
+    @Autowired
+    private BeanMappingService beanMappingService;
+
+    @ModelAttribute("sports")
+    public List<SportDTO> getSports() {
+        return sportFacade.getAllSports();
+    }
+
+    @ModelAttribute("sportsmans")
+    public List<SportsmanDTO> getSportsmans() {
+        return sportsmanFacade.getAll();
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Calendar.class, new CalendarEditor("yyyy/MM/dd"));
+        binder.registerCustomEditor(SportDTO.class, new SportEditor(sportFacade));
+        binder.registerCustomEditor(SportsmanDTO.class, new SportsmanEditor(sportsmanFacade));
+    }
+
+    @RequestMapping
+    public String renderList(Model model) {
+        model.addAttribute("events", eventFacade.findAll());
+        return "event.list";
+    }
+
+    /*@RequestMapping
     public String renderEvents(Authentication authentication, Model model) {
         logger.info("renderEvents");
         SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
@@ -66,26 +88,78 @@ public class EventController extends BaseController {
         return "event.detail";
     }*/
 
-    //ALL EVENTS VIEW ....not just for user ...but need to be authenticated
-    @RequestMapping("/events")
-    public String renderEvents(Authentication authentication, Model model) {
-        logger.info("Rendering events");
-        List<EventDTO> events = eventFacade.findAll();
-        logger.info("events" + events.size());
-        model.addAttribute("events", events);
-        return "event.list";
-    }
-
-
-        @RequestMapping("/events/{eventId}")
-    public String renderEvent(@PathVariable long eventId, Model model) {
-        model.addAttribute("event", eventFacade.findById(eventId));
-        model.addAttribute("result", resultFacade.findById(1L));// TODO: 14-Dec-16 from event
-
+    @RequestMapping("/{id}")
+    public Object renderDetail(@PathVariable("id") Long id, Model model) {
+        EventDTO eventDTO = eventFacade.findById(id);
+        if (eventDTO == null) {
+            return redirect("/events");
+        }
+        model.addAttribute("event", eventDTO);
+        model.addAttribute("results", resultFacade.findByEvent(eventDTO));
         return "event.detail";
     }
 
-    @RequestMapping( value = "/events/{id}/unenroll", method = RequestMethod.GET)
+    @RequestMapping("/create")
+    public String renderCreate(Model model) {
+        model.addAttribute("event", new EventCreateDTO());
+        return "event.create";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Object processCreate(@ModelAttribute("event") @Valid EventCreateDTO eventCreateDTO, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", true);
+            return "event.create";
+        }
+//        TODO: Fill logged user as admin for ROLE_USER and hide selectbox in JSP for them
+//        try{
+//            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//            String email = auth.getName();
+//            SportsmanDTO sportsman = sportsmanFacade.getByEmail(email);
+//            event.setAdmin(sportsman);
+//            if (bindingResult.hasErrors()) {
+//                logger.debug("Creation of event: {0} was not successuful", event.toString());
+//                return "event.create";
+//            }
+//            createdEvent = eventFacade.create(event);
+//        }
+//        catch(Exception ex){
+//            return "event.create";
+//        }
+        EventDTO eventDTO = eventFacade.create(eventCreateDTO);
+        return redirect("/events/" + eventDTO.getId() + "?create");
+    }
+
+    @RequestMapping("/{id}/update")
+    public Object renderUpdate(@PathVariable("id") Long id, Model model) {
+        EventDTO eventDTO = eventFacade.findById(id);
+        if (eventDTO == null) {
+            return redirect("/events");
+        }
+        model.addAttribute("event", beanMappingService.mapTo(eventDTO, EventUpdateDTO.class));
+        return "event.update";
+    }
+
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    public Object processUpdate(@Valid @ModelAttribute("event") EventUpdateDTO eventUpdateDTO, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", true);
+            return "event.update";
+        }
+        eventFacade.update(eventUpdateDTO);
+        return redirect("/events/" + eventUpdateDTO.getId() + "?update");
+    }
+
+    @RequestMapping("/{id}/delete")
+    public Object renderDelete(@PathVariable("id") Long id) {
+        EventDTO eventDTO = eventFacade.findById(id);
+        if (eventDTO != null) {
+            eventFacade.delete(eventDTO.getId());
+        }
+        return redirect("/events?delete");
+    }
+
+    @RequestMapping( value = "/{id}/unenroll", method = RequestMethod.GET)
     public String unenroll(@PathVariable long id, Authentication authentication) {
         logger.info("renderEvents");
         SportsmanDTO participant = sportsmanFacade.getByEmail(authentication.getName());
@@ -100,47 +174,9 @@ public class EventController extends BaseController {
         return "event.participant";
     }
 
-    @RequestMapping(value = "/events/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, Model model) {
         return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern),  HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create-event", method=RequestMethod.GET)
-    public String createEvent(Model model){
-        logger.debug("Starting to create event");
-        model.addAttribute("sports", sportFacade.getAllSports());
-        model.addAttribute("event", new EventCreateDTO());
-        return "event.create";
-    }
-
-
-
-    @RequestMapping(value = "/event/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("event") EventCreateDTO event, BindingResult bindingResult,
-                         HttpServletResponse resp) throws IOException {
-        logger.debug("Creating event: ", event.toString());
-        EventDTO createdEvent;
-
-        try{
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String email = auth.getName();
-            SportsmanDTO sportsman = sportsmanFacade.getByEmail(email);
-            event.setAdmin(sportsman);
-            if (bindingResult.hasErrors()) {
-                logger.debug("Creation of event: {0} was not successuful", event.toString());
-                return "event.create";
-            }
-            createdEvent = eventFacade.create(event);
-        }
-        catch(Exception ex){
-            return "event.create";
-        }
-        resp.sendRedirect(servletContext.getContextPath() + "/events/"+ createdEvent.getId());
-       // redirectAttributes.addFlashAttribute("alert_success", "Event was created");
-        return null;
-    }
-
-
-
 }
-

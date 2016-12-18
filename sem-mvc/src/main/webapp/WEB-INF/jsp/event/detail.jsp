@@ -1,10 +1,36 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<spring:url value="/events/${event.id}/update" var="updateUrl"/>
+<spring:url value="/events/${event.id}/delete" var="deleteUrl"/>
+
+<c:if test="${param.create != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.event.detail.alert.create"/>
+    </div>
+</c:if>
+<c:if test="${param.update != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.event.detail.alert.update"/>
+    </div>
+</c:if>
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <p>
+        <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
+        <c:if test="${fn:length(results) == 0}">
+            <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
+        </c:if>
+    </p>
+</sec:authorize>
+
+
 
 <jsp:useBean id="now" class="java.util.Date"/>
 

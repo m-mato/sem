@@ -1,64 +1,146 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<spring:url value="/events/create" var="formUrl"/>
 
-<form class="form-horizontal" name="f" action="/PA165/create" method="POST">
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="name"><spring:message code="entity.event.name"/></label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="name" id="name"/>
-        </div>
+<c:if test="${error != null}">
+    <div class="alert alert-danger" role="alert">
+        <spring:message code="page.event.create.alert.error"/>
     </div>
+</c:if>
 
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="event_date"><spring:message code="entity.event.date"/></label>
-        <div class="col-xs-5 date">
-                <input type="datetime-local" id="event_date" class="form-control" name="event_date" />
-        </div>
-    </div>
-    <%--div class="form-group form-group-lg">
-        <form:label path="sport" class="col-sm-3 control-label" ><spring:message code="entity.event.sport"/></form:label>
-        <div class="col-sm-10">
-            <form:select path="sport" cssClass="form-control">
-                <c:forEach items="${sports}" var="sport">
-                    <form:option value="${sport.id}">${sport.name}</form:option>
-                </c:forEach>
-            </form:select>
-            <form:errors path="sport" cssClass="error"/>
-        </div>
-    </div--%>
+<form:form modelAttribute="event" class="form-horizontal" action="${formUrl}" method="POST">
 
+    <spring:bind path="name">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="name" class="col-sm-3 control-label">
+                <spring:message code="entity.event.name"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:input path="name" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="name"/>
+            </div>
+        </div>
+    </spring:bind>
 
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="capacity"><spring:message code="entity.event.capacity"/></label>
-        <div class="col-sm-5">
-            <input type="number" class="form-control" name="capacity" id="capacity"/>
+    <spring:bind path="date">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="date" class="col-sm-3 control-label">
+                <spring:message code="entity.event.date"/>
+            </form:label>
+            <div class="col-sm-5">
+                <div class="input-group date">
+                    <form:input path="date" class="form-control"/>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="date"/>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="city"><spring:message code="entity.event.city"/></label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="city" id="city"/>
+    </spring:bind>
+
+    <spring:bind path="sport">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="sport" class="col-sm-3 control-label">
+                <spring:message code="entity.event.sport"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:select path="sport" class="form-control">
+                    <form:option value="">-</form:option>
+                    <form:options items="${sports}" itemvalue="id" itemLabel="name"/>
+                </form:select>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="sport"/>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="address"><spring:message code="entity.event.address"/></label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="address" id="address"/>
+    </spring:bind>
+
+    <spring:bind path="capacity">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="capacity" class="col-sm-3 control-label">
+                <spring:message code="entity.event.capacity"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:input path="capacity" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="capacity"/>
+            </div>
         </div>
-    </div>
-    <div class="form-group form-group-lg">
-        <label class="col-sm-3 control-label" for="description"><spring:message code="entity.event.description"/></label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="description" id="description"/>
+    </spring:bind>
+
+    <spring:bind path="city">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="city" class="col-sm-3 control-label">
+                <spring:message code="entity.event.city"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:input path="city" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="city"/>
+            </div>
         </div>
-    </div>
+    </spring:bind>
+
+    <spring:bind path="address">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="address" class="col-sm-3 control-label">
+                <spring:message code="entity.event.address"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:input path="address" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="address"/>
+            </div>
+        </div>
+    </spring:bind>
+
+    <spring:bind path="admin">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="admin" class="col-sm-3 control-label">
+                <spring:message code="entity.event.admin"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:select path="admin" class="form-control">
+                    <form:option value="">-</form:option>
+                    <form:options items="${sportsmans}" itemvalue="id" itemLabel="email"/>
+                </form:select>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="admin"/>
+            </div>
+        </div>
+    </spring:bind>
+
+    <spring:bind path="description">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="description" class="col-sm-3 control-label">
+                <spring:message code="entity.event.description"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:textarea path="description" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="description"/>
+            </div>
+        </div>
+    </spring:bind>
+
     <div class="form-group">
         <div class="col-sm-5 col-sm-offset-3">
-            <button type="submit" class="btn btn-primary btn-lg"><spring:message code="page.event.create.submit"/></button>
+            <form:button class="btn btn-primary btn-lg">
+                <spring:message code="page.event.create.submit"/>
+            </form:button>
         </div>
     </div>
-</form>
+
+</form:form>
