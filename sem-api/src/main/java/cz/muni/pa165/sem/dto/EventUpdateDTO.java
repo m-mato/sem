@@ -21,6 +21,7 @@ public class EventUpdateDTO {
     private String name;
 
     @NotNull
+    @NotBlank
     private String description;
 
     @NotNull
