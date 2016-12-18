@@ -32,7 +32,7 @@ public class ResultCreateDTO {
     }
     
     public void setPerformance(Double perform){
-        if(perform == null || perform < 0){   
+        if(perform == null || perform < -1){
             throw new IllegalArgumentException("perform is not valid");
         }
         
@@ -56,7 +56,7 @@ public class ResultCreateDTO {
     }
     
     public void setPosition(Integer pos){
-        if(pos == null || pos < 1){
+        if(pos == null || pos < -1){
             throw new IllegalArgumentException("position value is not valid");
         }
         

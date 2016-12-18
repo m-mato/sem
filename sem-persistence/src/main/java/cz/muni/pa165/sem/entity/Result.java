@@ -59,7 +59,7 @@ public class Result {
     }
     
     public void setPerformance(Double perform){
-        if(perform == null || perform < 0){   
+        if(perform == null || perform < -1){
             throw new IllegalArgumentException("perform is not valid");
         }
         
@@ -83,7 +83,7 @@ public class Result {
     }
     
     public void setPosition(Integer pos){
-        if(pos == null || pos < 1){
+        if(pos == null || pos < -1){
             throw new IllegalArgumentException("position value is not valid");
         }
         
@@ -108,7 +108,8 @@ public class Result {
     
     public void setNote(String note){
         if(note == null){
-            throw new NullPointerException("note value is not valid");
+            this.note = "";
+            return;
         }
         
         this.note = note;
