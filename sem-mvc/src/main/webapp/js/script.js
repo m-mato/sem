@@ -38,7 +38,7 @@
     function format(item) { return item; }
 
     $(".fetchSportsmans").select2({
-        placeholder: "Search for sportsman",
+        placeholder: "",
         minimumInputLength: 3,
         ajax: {
             url: "http://localhost:8080/pa165/events/autocomplet",
@@ -63,4 +63,50 @@
         formatResult: format
     });
 
+    $('#invite_button').click(function () {
+        var user = $(".fetchSportsmans option:selected").text();
+        var email = user.substr(user.indexOf("("));
+        email = email.substr(1, email.length-2);
+        event_id = $("#inv_event_id").val();
+        if (email) {
+            $.ajax({
+                url: "http://localhost:8080/pa165/events/invite",
+                dataType: 'json',
+                headers: {
+                    // 'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                data: JSON.stringify({
+                    "event_id": event_id,
+                    "inputEmail": email
+                }),
+                async: false,
+                cache: false,
+                processData:false,
+                success: function () {
+                    addMessage("Invitation sent!","", "success");
+                },
+                error: function () {
+                    addMessage("Sorry", "Unexpected error occurred during sending invitation.", "danger");
+                }
+            })
+        }
+    });
+
+
+    function addMessage(mainMessage, message, type) {
+        $('#invite_button').after(
+            "<div id='fail_invite' class='alert alert-" + type + " myWidth' role='alert'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>" +
+                "<strong>" + mainMessage + "<br></strong> " + message +
+            "</div>");
+        $(".fetchSportsmans").text("");
+    }
+
+
 })(jQuery);
+
+
+
+

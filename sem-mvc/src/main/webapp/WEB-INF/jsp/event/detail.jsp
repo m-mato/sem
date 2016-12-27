@@ -9,6 +9,8 @@
 
 <spring:url value="/events/${event.id}/update" var="updateUrl"/>
 <spring:url value="/events/${event.id}/delete" var="deleteUrl"/>
+<spring:url value="/events/invite" var="inviteUrl"/>
+
 
 <c:if test="${param.create != null}">
     <div class="alert alert-success" role="alert">
@@ -129,13 +131,13 @@
         <%--no possible to invite another sportmans if capacity is full--%>
             <c:if test="${ fn:length(event.participants) lt event.capacity && isParticipant}">
             <div class="col-md-8">
-                <form class="form-inline">
+                <form class="form-inline" name="invite" action="${inviteUrl}" method="POST">
                     <label for="InputEmail"><spring:message code="page.event.detail.invite.title"/></label><br>
                     <input type="number" name="inv_event_id" value="${event.id}" id="inv_event_id" hidden>
-                    <select class="fetchSportsmans" name="inputEmail" id="inputEmail">
-                        <option value="2" selected="selected"></option>
+                    <select class="fetchSportsmans myWidth" name="inputEmail" id="inputEmail">
+                        <option value="2" name="sel" selected="selected"></option>
                     </select>
-                    <button type="submit" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
+                    <button id="invite_button" type="button" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
                 </form>
             </div>
             </c:if>

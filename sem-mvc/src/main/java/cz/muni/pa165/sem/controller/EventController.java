@@ -1,14 +1,17 @@
 package cz.muni.pa165.sem.controller;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.editor.CalendarEditor;
 import cz.muni.pa165.sem.editor.SportEditor;
 import cz.muni.pa165.sem.editor.SportsmanEditor;
 import cz.muni.pa165.sem.facade.EventFacade;
+import cz.muni.pa165.sem.facade.InvitationFacade;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.SportFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
 import cz.muni.pa165.sem.service.BeanMappingService;
+import cz.muni.pa165.sem.util.InviteRequest;
 import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +53,9 @@ public class EventController extends BaseController {
 
     @Autowired
     private ResultFacade resultFacade;
+
+    @Inject
+    private InvitationFacade invitationFacade;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -201,6 +208,13 @@ public class EventController extends BaseController {
     @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, @RequestParam("event_id") Long event_id, Model model) {
         return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern, event_id),  HttpStatus.OK);
+    }
+
+    @RequestMapping( value = "/invite", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity invite(@RequestBody InviteRequest request) {
+        logger.debug("Invitation for event with id=" + request.getEvent_id() +" and for user with email " + request.getInputEmail());
+        invitationFacade.invite(request.getEvent_id(), sportsmanFacade.getByEmail(request.getInputEmail()).getId());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
