@@ -84,8 +84,8 @@ public class SportsmanFacadeImpl implements SportsmanFacade {
 	}
 
 	@Override
-	public List<SportsmanDTO> findBySubstring(String substring) {
-		return beanMappingService.mapTo(sportsmanService.findBySurname(substring), SportsmanDTO.class);
+	public List<SportsmanDTO> findBySubstring(String substring, Long event_id) {
+		return beanMappingService.mapTo(sportsmanService.findBySubstring(substring.toLowerCase(), event_id), SportsmanDTO.class);
 	}
 
 	/**

@@ -67,8 +67,8 @@ public class SportsmanServiceImpl implements SportsmanService {
 	}
 
 	@Override
-	public List<Sportsman> findBySubstring(String substring) {
-		return sportsmanDAO.findBySubstring(substring);
+	public List<Sportsman> findBySubstring(String substring, Long event_id) {
+		return sportsmanDAO.findBySubstring(substring, event_id);
 	}
 
 	@Override

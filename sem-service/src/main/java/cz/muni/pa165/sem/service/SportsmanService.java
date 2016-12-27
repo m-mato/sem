@@ -25,5 +25,5 @@ public interface SportsmanService {
 
 	void update(Sportsman sportsman);
 
-	List<Sportsman> findBySubstring(String substring);
+	List<Sportsman> findBySubstring(String substring, Long event_id);
 }

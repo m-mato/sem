@@ -120,16 +120,24 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 	}
 
 	@Override
-	public List<Sportsman> findBySubstring(String substring) {
+	public List<Sportsman> findBySubstring(String substring, Long event_id) {
 		if (substring == null) {
 			throw new IllegalArgumentException("substring is null");
 		}
 		if (substring.isEmpty()) {
 			return this.findAll();
 		}
-		try {// TODO: 15-Dec-16 not already enrolled
-			return entityManager.createQuery("select s from Sportsman s where s.name LIKE :substring OR s.surname LIKE :substring OR s.email LIKE :substring",
-					Sportsman.class).setParameter("substring", "%" + substring + "%").getResultList();
+		Long event = event_id;
+		if (event_id == null) {
+			event = -1L;
+		}
+		try {
+			Query quer = entityManager.createQuery("select s from Sportsman s where " +
+					"(LOWER(s.name) LIKE :substring OR LOWER(s.surname) LIKE :substring OR LOWER(s.email) LIKE :substring) " +
+					"AND s.id NOT IN (select r.sportsman.id from Result r where r.event.id=:event_id)");
+			quer.setParameter("substring", "%" + substring + "%");
+			quer.setParameter("event_id", event);
+			return quer.getResultList();
 		} catch (NoResultException nrf) {
 			return null;
 		}

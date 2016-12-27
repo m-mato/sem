@@ -131,10 +131,10 @@
             <div class="col-md-8">
                 <form class="form-inline">
                     <label for="InputEmail"><spring:message code="page.event.detail.invite.title"/></label><br>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="InputEmail"
-                               placeholder="email@example.com" title="<spring:message code="page.event.detail.invite.type"/>">
-                    </div>
+                    <input type="number" name="inv_event_id" value="${event.id}" id="inv_event_id" hidden>
+                    <select class="fetchSportsmans" name="inputEmail" id="inputEmail">
+                        <option value="2" selected="selected"></option>
+                    </select>
                     <button type="submit" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
                 </form>
             </div>

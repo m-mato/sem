@@ -199,8 +199,8 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, Model model) {
-        return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern),  HttpStatus.OK);
+    public ResponseEntity<Collection<SportsmanDTO>> autoComplet(@RequestParam("pattern") String pattern, @RequestParam("event_id") Long event_id, Model model) {
+        return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern, event_id),  HttpStatus.OK);
     }
 
 }

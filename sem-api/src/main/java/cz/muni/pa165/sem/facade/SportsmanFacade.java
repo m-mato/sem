@@ -27,5 +27,5 @@ public interface SportsmanFacade {
 
 	void delete(Long id);
 
-	List<SportsmanDTO> findBySubstring(String substring);
+	List<SportsmanDTO> findBySubstring(String substring, Long event_id);
 }

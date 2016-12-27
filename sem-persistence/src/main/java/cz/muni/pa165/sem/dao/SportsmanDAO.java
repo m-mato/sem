@@ -81,8 +81,9 @@ public interface SportsmanDAO {
 	 * This method find sportsman which name, surname or email contain substring
 	 *
 	 * @param substring the substring value of objects we want to find.
+	 * @param event_id (optional) id of event we are looking new available sportsmans(no enrolled in event with id event_id)
 	 * @return null if object does not exist in DB otherwise return sportsman object.
 	 * @throws IllegalArgumentException When surname is {@code null}.
 	 */
-	List<Sportsman> findBySubstring(String substring);
+	List<Sportsman> findBySubstring(String substring, Long event_id);
 }
