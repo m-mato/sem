@@ -210,11 +210,11 @@ public class EventController extends BaseController {
         return new ResponseEntity<>(sportsmanFacade.findBySubstring(pattern, event_id),  HttpStatus.OK);
     }
 
-    @RequestMapping( value = "/invite", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping( value = "/invite", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity invite(@RequestBody InviteRequest request) {
         logger.debug("Invitation for event with id=" + request.getEvent_id() +" and for user with email " + request.getInputEmail());
         invitationFacade.invite(request.getEvent_id(), sportsmanFacade.getByEmail(request.getInputEmail()).getId());
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("{}", HttpStatus.OK);
     }
 
 }
