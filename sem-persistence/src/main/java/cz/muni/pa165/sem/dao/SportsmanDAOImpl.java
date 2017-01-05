@@ -134,7 +134,8 @@ public class SportsmanDAOImpl implements SportsmanDAO {
 		try {
 			Query quer = entityManager.createQuery("select s from Sportsman s where " +
 					"(LOWER(s.name) LIKE :substring OR LOWER(s.surname) LIKE :substring OR LOWER(s.email) LIKE :substring) " +
-					"AND s.id NOT IN (select r.sportsman.id from Result r where r.event.id=:event_id)");
+					"AND s.id NOT IN (select r.sportsman.id from Result r where r.event.id=:event_id) " + //not already enrolled
+					"AND s.id NOT IN (select i.invitee.id from Invitation i where i.event.id=:event_id)"); //not already invited
 			quer.setParameter("substring", "%" + substring + "%");
 			quer.setParameter("event_id", event);
 			return quer.getResultList();
