@@ -128,7 +128,6 @@ public class SportsmanDTO {
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
 				", is manager=" + isManager +
-				", events=" + events +
-				'}';
+				"}";
 	}
 }
