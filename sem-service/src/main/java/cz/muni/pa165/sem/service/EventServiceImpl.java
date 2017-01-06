@@ -1,7 +1,10 @@
 package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.EventDAO;
+import cz.muni.pa165.sem.dao.InvitationDAO;
+import cz.muni.pa165.sem.dao.ResultDAO;
 import cz.muni.pa165.sem.entity.Event;
+import cz.muni.pa165.sem.entity.Invitation;
 import cz.muni.pa165.sem.entity.Sport;
 import cz.muni.pa165.sem.entity.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,12 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventDAO eventDAO;
+
+    @Autowired
+    private ResultDAO resultDAO;
+
+    @Autowired
+    private InvitationDAO invitationDAO;
 
     @Autowired
     private NotificationService notificationService;
@@ -80,16 +89,35 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void update(Event event) {
-
         eventDAO.update(event);
     }
 
     @Override
     public void delete(Event event) {
+        if (event == null) {
+            throw  new IllegalArgumentException("Trying to delete null object");
+        }
+        if (event.getId() == null) {
+            throw  new IllegalArgumentException("Trying to delete in DB non existing event");
+        }
         Set<Sportsman> participants = new HashSet<>();
-        participants.addAll(event.getParticipants());
+        if (event.getParticipants() != null) {
+            participants.addAll(event.getParticipants());
+            //notify
+            notificationService.notifyEventCanceled(participants, event);
+
+            //next delete results due to foreign constraints
+            resultDAO.findByEvent(event).forEach(result -> resultDAO.delete(result));
+        }
+
+        //next delete all invitations for this event due to foreign key
+        List<Invitation> invitationList = invitationDAO.findByEvent(event);
+        if (invitationList != null) {
+            for(Invitation invitation : invitationDAO.findByEvent(event)) {
+                invitationDAO.delete(invitation);
+            }
+        }
         eventDAO.delete(event);
-        notificationService.notifyEventCanceled(participants, event);
     }
 
     @Override

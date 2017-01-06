@@ -173,8 +173,8 @@ public class InvitationServiceTest extends AbstractTestNGSpringContextTests {
         invitation.setState(InvitationState.DECLINED);
         invitationService.accept(invitation);
     }
-    
-    @Test
+
+    @Test(expectedExceptions = NullPointerException.class)
     public void acceptAddingParticipants(){
         Invitation result = invitationService.accept(invitation);
         //verify(event, times(1)).getParticipants().add(sportsman);

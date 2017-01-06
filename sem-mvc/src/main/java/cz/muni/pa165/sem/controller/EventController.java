@@ -165,7 +165,7 @@ public class EventController extends BaseController {
         if (eventDTO != null) {
             eventFacade.delete(eventDTO.getId());
         }
-        return redirect("/events?delete");
+        return redirect("/events");
     }
 
     @RequestMapping( value = "/{id}/unenroll", method = RequestMethod.GET)

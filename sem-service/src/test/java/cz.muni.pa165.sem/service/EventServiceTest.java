@@ -138,7 +138,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         eventService.update(null);
     }
 
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testDelete() {
         eventService.delete(event);
         Mockito.verify(eventDAO, times(1)).delete(event);

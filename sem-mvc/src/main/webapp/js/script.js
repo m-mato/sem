@@ -37,6 +37,8 @@
 
     function format(item) { return item; }
 
+    $('.fetchSportsmans').val('');
+
     $(".fetchSportsmans").select2({
         placeholder: "",
         minimumInputLength: 3,
@@ -54,6 +56,7 @@
             processResults: function (users) {
                 var result = users.map(function(a, index) {
                     index++;
+                    console.log({id: index, text: a.name + " " + a.surname + "\n(" + a.email + ")"});
                     return {id: index, text: a.name + " " + a.surname + "\n(" + a.email + ")"};
                 });
                 return { results: result};

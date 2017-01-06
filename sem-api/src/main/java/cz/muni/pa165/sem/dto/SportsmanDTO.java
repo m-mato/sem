@@ -116,7 +116,6 @@ public class SportsmanDTO {
 				", surname='" + surname + '\'' +
 				", birthDate=" + birthDate +
 				", email='" + email + '\'' +
-				", password='" + password + '\'' +
 				", is manager=" + isManager +
 				"}";
 	}

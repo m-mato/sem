@@ -26,9 +26,9 @@
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <p>
         <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
-        <c:if test="${fn:length(results) == 0}">
+        <%--<c:if test="${fn:length(results) == 0}">--%>
             <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
-        </c:if>
+        <%--</c:if>--%>
     </p>
 </sec:authorize>
 
