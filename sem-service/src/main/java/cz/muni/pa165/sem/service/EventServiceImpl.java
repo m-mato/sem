@@ -89,7 +89,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void update(Event event) {
+        Set<Sportsman> participants = new HashSet<>();
+        participants.addAll(event.getParticipants());
         eventDAO.update(event);
+        notificationService.notifyEventEdited(participants, event);
     }
 
     @Override
