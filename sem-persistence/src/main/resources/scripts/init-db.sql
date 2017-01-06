@@ -25,8 +25,8 @@ INSERT INTO result(performance,  performance_unit, position, sportsman, note, ev
 INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (20220.5, 1, 2, 6, 'silver medal', 1);
 INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (20220.2, 1, 1, 5, 'gold medal', 2);
 INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (54256.2, 1, 2, 1, 'silver medal', 2);
-INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (12, 5, 1, 3, 'gold', 4);
-INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (7, 2, 3, 4, 'third place', 8);
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (12, 4, 2, 3, 'gold', 4);
+INSERT INTO result(performance,  performance_unit, position, sportsman, note, event) VALUES (7, 1, 3, 4, 'third place', 8);
 
 INSERT INTO invitation(event, invitee, state) VALUES(4, 6, 1);
 INSERT INTO invitation(event, invitee, state) VALUES(5, 6, 2);
