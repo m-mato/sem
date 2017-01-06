@@ -1,19 +1,15 @@
 package cz.muni.pa165.sem.controller;
 
 import cz.muni.pa165.sem.dto.InvitationUpdateDTO;
-import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.facade.InvitationFacade;
 import cz.muni.pa165.sem.service.BeanMappingService;
-import cz.muni.pa165.sem.utils.InvitationState;
 import org.springframework.security.core.Authentication;
 import cz.muni.pa165.sem.dto.ResultDTO;
-import cz.muni.pa165.sem.dto.ResultCreateDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.dto.InvitationDTO;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
-import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -71,7 +67,7 @@ public class SportsmanController extends BaseController {
         model.addAttribute("email", sportsman.getEmail());
         model.addAttribute("birthdate", sportsman.getBirthDate());
         model.addAttribute("invitations", invitationFacade.findByInvitee(sportsman));
-        model.addAttribute("events", sportsman.getEvents());
+        model.addAttribute("events", eventFacade.findByParticipant(sportsman.getId()));
         model.addAttribute("results", results);
         return "user.detail";
     }
@@ -79,28 +75,9 @@ public class SportsmanController extends BaseController {
 
     @RequestMapping("/accept/{id}")
     public Object accept(@PathVariable Long id) {
-        String email;
-        SportsmanDTO sportsman;
-        InvitationDTO  invitation = null;
+        InvitationDTO  invitation;
         try{
-            /*Sportsman user = (Sportsman)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            email = user.getEmail();
-            sportsman = sportsmanFacade.getByEmail(email);
-            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);*
-            for(InvitationDTO invitation : invitations){
-                if(invitation.getId().equals(id)){
-                    invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
-                }
-            }*/
             invitation = invitationFacade.findById(id);
-            ResultCreateDTO  result = new ResultCreateDTO();
-            result.setPerformanceUnit(PerformanceUnits.SECOND);
-            result.setEvent(invitation.getEvent());
-            result.setSportsman(invitation.getInvitee());
-            result.setPosition(new Integer(-1));
-            result.setPerformance(new Double(-1));
-            result.setNote("");
-            resultFacade.create(result);
             invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }
         catch(Exception ex){
@@ -112,20 +89,7 @@ public class SportsmanController extends BaseController {
 
     @RequestMapping("/decline/{id}")
     public Object decline(@PathVariable Long id) {
-        String email;
-        SportsmanDTO sportsman = new SportsmanDTO();
-        List<ResultDTO> results;
         try{
-            /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            email = auth.getName();
-            sportsman = sportsmanFacade.getByEmail(email);
-            List<InvitationDTO> invitations =invitationFacade.findByInvitee(sportsman);
-            for(InvitationDTO invitation : invitations){
-                if(invitation.getId().equals(id)){
-                    invitationFacade.decline(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
-                }
-            }*/
-
             InvitationDTO  invitation = invitationFacade.findById(id);
             invitationFacade.decline(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }

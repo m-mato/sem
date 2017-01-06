@@ -40,7 +40,10 @@ public class MessageGenerator {
 
 	public static String generateEventCancelBody(String sportsmanName, Event event) {
 
-		//TODO
-		return null;
+		String greeting = "Hello " + sportsmanName + "\n\n";
+		String message = event.getAdmin().getName() + " " + event.getAdmin().getSurname() + " just cancel Event: " + event.getName() + "\n";
+		String link = "If you want to review changes just click here: TODO-URL\n\n";
+
+		return greeting + message + link + BYE;
 	}
 }

@@ -23,8 +23,6 @@ public class SportsmanDTO {
 
 	private Boolean isManager;
 
-	private Set<EventDTO> events = new HashSet<>();
-
 	public Long getId() {
 		return id;
 	}
@@ -79,14 +77,6 @@ public class SportsmanDTO {
 
 	public void setIsManager(Boolean manager) {
 		isManager = manager;
-	}
-
-	public Set<EventDTO> getEvents() {
-		return events;
-	}
-
-	public void setEvents(Set<EventDTO> events) {
-		this.events = events;
 	}
 
 	@Override

@@ -2,16 +2,20 @@ package cz.muni.pa165.sem.service;
 
 import cz.muni.pa165.sem.dao.EventDAO;
 import cz.muni.pa165.sem.dao.InvitationDAO;
+import cz.muni.pa165.sem.dao.ResultDAO;
 import cz.muni.pa165.sem.dao.SportsmanDAO;
 import cz.muni.pa165.sem.entity.Event;
 import cz.muni.pa165.sem.entity.Invitation;
+import cz.muni.pa165.sem.entity.Result;
 import cz.muni.pa165.sem.entity.Sportsman;
 import cz.muni.pa165.sem.utils.InvitationState;
+import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Matej Majdis
@@ -33,6 +37,9 @@ public class InvitationServiceImpl implements InvitationService {
 
 	@Autowired
 	private NotificationService notificationService;
+
+	@Autowired
+	private ResultDAO resultDAO;
 
 	@Override
 	public Invitation invite(long eventId, long sportsmanId) {
@@ -103,8 +110,19 @@ public class InvitationServiceImpl implements InvitationService {
 			throw new IllegalStateException("Invitation is already in state: " + invitation.getState());
 		}
 
+		Result result = new Result();
+		result.setPerformanceUnit(PerformanceUnits.SECOND);
+		result.setEvent(invitation.getEvent());
+		result.setSportsman(invitation.getInvitee());
+		result.setPosition(new Integer(-1));
+		result.setPerformance(new Double(-1));
+		result.setNote("");
+		resultDAO.create(result);
+
 		Event event = invitation.getEvent();
-		event.getParticipants().add(invitation.getInvitee());
+		Set<Sportsman> participants = event.getParticipants();
+		participants.add(invitation.getInvitee());
+		event.setParticipants(participants);
 		eventDAO.update(event);
 
 		notificationService.notifyInvitationAccepted(invitation);

@@ -56,4 +56,18 @@ public class NotificationServiceImpl implements NotificationService {
 
 		return check;
 	}
+
+	@Override
+	public boolean notifyEventCanceled(Set<Sportsman> participants, Event event) {
+
+		final String subject = "SEM Notification";
+		boolean check = true;
+
+		for (Sportsman participant : participants) {
+			final String body = MessageGenerator.generateEventCancelBody(participant.getName(), event);
+			check = check && emailService.sendMessage(subject, body, participant.getEmail());
+		}
+
+		return check;
+	}
 }

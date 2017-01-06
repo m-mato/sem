@@ -86,8 +86,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void delete(Event event) {
-
+        Set<Sportsman> participants = new HashSet<>();
+        participants.addAll(event.getParticipants());
         eventDAO.delete(event);
+        notificationService.notifyEventCanceled(participants, event);
     }
 
     @Override
