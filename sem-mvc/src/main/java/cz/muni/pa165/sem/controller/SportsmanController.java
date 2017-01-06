@@ -7,11 +7,13 @@ import cz.muni.pa165.sem.service.BeanMappingService;
 import cz.muni.pa165.sem.utils.InvitationState;
 import org.springframework.security.core.Authentication;
 import cz.muni.pa165.sem.dto.ResultDTO;
+import cz.muni.pa165.sem.dto.ResultCreateDTO;
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.dto.InvitationDTO;
 import cz.muni.pa165.sem.facade.ResultFacade;
 import cz.muni.pa165.sem.facade.EventFacade;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
+import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -76,9 +78,10 @@ public class SportsmanController extends BaseController {
 
 
     @RequestMapping("/accept/{id}")
-    public String accept(@PathVariable Long id) {
+    public Object accept(@PathVariable Long id) {
         String email;
         SportsmanDTO sportsman;
+        InvitationDTO  invitation = null;
         try{
             /*Sportsman user = (Sportsman)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             email = user.getEmail();
@@ -89,18 +92,26 @@ public class SportsmanController extends BaseController {
                     invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
                 }
             }*/
-            InvitationDTO  invitation = invitationFacade.findById(id);
+            invitation = invitationFacade.findById(id);
+            ResultCreateDTO  result = new ResultCreateDTO();
+            result.setPerformanceUnit(PerformanceUnits.SECOND);
+            result.setEvent(invitation.getEvent());
+            result.setSportsman(invitation.getInvitee());
+            result.setPosition(new Integer(-1));
+            result.setPerformance(new Double(-1));
+            result.setNote("");
+            resultFacade.create(result);
             invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }
         catch(Exception ex){
 
             return "error.403";
         }
-        return "event.list";
+        return redirect("/events/" + invitation.getEvent().getId());
     }
 
     @RequestMapping("/decline/{id}")
-    public String decline(@PathVariable Long id) {
+    public Object decline(@PathVariable Long id) {
         String email;
         SportsmanDTO sportsman = new SportsmanDTO();
         List<ResultDTO> results;
@@ -122,7 +133,7 @@ public class SportsmanController extends BaseController {
 
             return "error.403";
         }
-        return "event.list";
+        return redirect("/my-account");
     }
 
 
