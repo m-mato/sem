@@ -32,4 +32,4 @@ INSERT INTO invitation(event, invitee, state) VALUES(4, 6, 1);
 INSERT INTO invitation(event, invitee, state) VALUES(5, 6, 2);
 INSERT INTO invitation(event, invitee, state) VALUES(6, 6, 3);
 INSERT INTO invitation(event, invitee, state) VALUES(7, 6, 4);
-INSERT INTO invitation(event, invitee, state) VALUES(8, 6, 5);
+INSERT INTO invitation(event, invitee, state) VALUES(8, 6, 0);
