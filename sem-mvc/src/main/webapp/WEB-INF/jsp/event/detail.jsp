@@ -150,3 +150,28 @@
 
 <br><br>
 </div>
+
+<c:if test="${fn:length(results) > 0}">
+    <h2><spring:message code="title.result.list"/></h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><spring:message code="entity.result.performance"/></th>
+            <th><spring:message code="entity.result.position"/></th>
+            <th><spring:message code="entity.result.sportsman"/></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${results}" var="result">
+            <tr>
+                <td><c:out value="${result.performance}"/></td>
+                <td><c:out value="${result.position}"/></td>
+                <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
+                <spring:url value="/results/${result.id}" var="detailUrl"/>
+                <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</c:if>

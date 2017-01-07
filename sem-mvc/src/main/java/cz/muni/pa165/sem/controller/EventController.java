@@ -111,7 +111,16 @@ public class EventController extends BaseController {
         }
         SportsmanDTO sportsman = sportsmanFacade.getByEmail(authentication.getName());
         model.addAttribute("event", eventDTO);
-        model.addAttribute("results", resultFacade.findByEvent(eventDTO));
+
+        List<ResultDTO> results = new ArrayList<>();
+        List<ResultDTO> allResults = resultFacade.findByEvent(eventDTO);
+        for (ResultDTO result : allResults) {
+            if (result.getPerformance() >= 0 && result.getPosition() >= 0) {
+                results.add(result);
+            }
+        }
+        model.addAttribute("results", results);
+
         if (resultFacade.findByEvent(eventDTO).stream().filter(
                 resultDTO -> resultDTO.getSportsman().getEmail().equals(sportsman.getEmail())
         ).collect(Collectors.toList()).isEmpty()) {
