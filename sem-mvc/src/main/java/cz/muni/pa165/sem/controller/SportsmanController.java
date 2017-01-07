@@ -83,7 +83,7 @@ public class SportsmanController extends BaseController {
 
             return "error.403";
         }
-        return redirect("/events/" + invitation.getEvent().getId());
+        return redirect("/events/" + invitation.getEvent().getId() + "?accepted");
     }
 
     @RequestMapping("/decline/{id}")

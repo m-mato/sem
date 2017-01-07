@@ -191,7 +191,7 @@ public class EventController extends BaseController {
                         participant, //find sportsman  me
                         event).getId());  //find event
         model.addAttribute("message", "unenrolled");
-        return redirect("/events/" + id);
+        return redirect("/events/" + id + "?unenrolled");
     }
 
     @RequestMapping( value = "/{id}/enroll", method = RequestMethod.GET)
@@ -213,7 +213,7 @@ public class EventController extends BaseController {
         event.setParticipants(part);
         eventFacade.update(beanMappingService.mapTo(event, EventUpdateDTO.class));
         model.addAttribute("enrollProcess", "enrolled");
-        return redirect("/events/" + id);
+        return redirect("/events/" + id + "?enrolled");
     }
 
     @RequestMapping(value = "/autocomplet", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
