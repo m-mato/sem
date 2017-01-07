@@ -18,6 +18,23 @@
     <form:hidden path="sportsman"/>
     <form:hidden path="event"/>
 
+    <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+        <label class="col-sm-3 control-label">
+            <spring:message code="entity.result.sportsman"/>
+        </label>
+        <div class="col-sm-5">
+            <input readonly="true" value="${result.sportsman.surname}, ${result.sportsman.name}"  class="form-control"/>
+        </div>
+    </div>
+    <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+        <label class="col-sm-3 control-label">
+            <spring:message code="entity.result.event"/>
+        </label>
+        <div class="col-sm-5">
+            <input readonly="true" value=${result.event.name} class="form-control"/>
+        </div>
+    </div>
+
     <spring:bind path="performance">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
             <form:label path="performance" class="col-sm-3 control-label">
