@@ -51,7 +51,7 @@
                 <td>
                     <spring:url value="/results/${result.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                    <spring:url value="/results/${result.id}/reset" var="resetUrl"/>
+                    <spring:url value="/results/${result.event.id}/reset/${result.id}" var="resetUrl"/>
                     <a href="${resetUrl}" class="btn btn-danger btn-xs"><spring:message code="link.reset"/></a>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <spring:url value="/results/${result.event.id}/insert/${result.id}" var="insertUrl"/>
