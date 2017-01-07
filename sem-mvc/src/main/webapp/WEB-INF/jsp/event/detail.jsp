@@ -12,6 +12,8 @@
 <spring:url value="/results/create?event=${event.id}" var="resultCreateUrl"/>
 <spring:url value="/events/invite" var="inviteUrl"/>
 
+<jsp:useBean id="now" class="java.util.Date"/>
+
 <c:if test="${param.create != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.event.detail.alert.create"/>
@@ -28,23 +30,20 @@
 </c:set>
 <c:if test="${admin || event.admin.id == loggedUser.id}">
     <p>
-        <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
-        <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
-        <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.insert"/></a>
+        <c:if test="${event.date.time gt now}">
+            <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
+            <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
+        </c:if>
+        <c:if test="${event.date.time lt now}">
+            <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.insert"/></a>
+        </c:if>
     </p>
 </c:if>
-
-
-
-<jsp:useBean id="now" class="java.util.Date"/>
 
 
 <spring:url value="/img/search-icon.jpg" var="searchImgUrl"/>
 <spring:url value="/events/${event.id}/unenroll" var="unEnrollUrl"/>
 <spring:url value="/events/${event.id}/enroll" var="enrollUrl"/>
-
-
-
 
 
 <div id="event-detail">
@@ -83,7 +82,7 @@
         </div><br>
         </c:if>
     <%--//it is past event, there is nothing todo--%>
-        <%--<c:if test="${event.date.time gt now}">--%>
+        <c:if test="${event.date.time gt now}">
             <div class="row">
                 <c:choose>
                     <c:when test="${isParticipant}">
@@ -144,7 +143,7 @@
             </div>
             </c:if>
         </div>
-        <%--</c:if>--%>
+        </c:if>
 
     </div>
 
