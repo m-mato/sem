@@ -20,6 +20,7 @@
         <p><strong><spring:message code="entity.sportsman.birth-date"/>:</strong> <fmt:formatDate value="${birthdate.time}" type="both" dateStyle="full" pattern="dd.MM.yyyy"/></p>
         <br/>
 
+        <h2><spring:message code="page.user.detail.results"/></h2>
         <table class="table">
             <thead>
                 <tr>
@@ -28,23 +29,22 @@
                     <th><spring:message code="entity.event.description"/></th>
                     <th><spring:message code="entity.event.admin"/></th>
                     <th><spring:message code="entity.result.performance"/></th>
-                    <th><spring:message code="entity.result.performance-unit"/></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${results}" var="result">
                     <tr>
-                        <td>${result.event.name}</td>
+                        <td><strong>${result.event.name}</strong></td>
                         <td><fmt:formatDate value="${result.event.date.time}" pattern="dd.MM.yyyy"/></td>
                         <td>${result.event.description}</td>
                         <td>${result.event.admin.surname}, ${result.event.admin.name}</td>
                         <c:if test="${result.position >= 0}">
-                            <td><c:out value="${result.performance}"/></td>
-                            <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
+                            <td>
+                                <c:out value="${result.performance}"/>&nbsp;<spring:message code="performance-units.${result.performanceUnit}"/>
+                            </td>
                         </c:if>
                         <c:if test="${result.position < 0}">
-                            <td> -- </td>
-                            <td> -- </td>
+                            <td>--</td>
                         </c:if>
                         <spring:url value="/events/${result.event.id}" var="detailUrl"/>
                         <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
@@ -52,6 +52,8 @@
                 </c:forEach>
             </tbody>
         </table>
+
+        <h2><spring:message code="page.user.detail.invitations"/></h2>
         <table class="table">
             <thead>
                 <tr>
