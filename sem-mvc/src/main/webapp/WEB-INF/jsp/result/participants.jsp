@@ -51,10 +51,12 @@
                 <td>
                     <spring:url value="/results/${result.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                    <%--sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <spring:url value="/results/${result.id}/update" var="updateUrl"/>
-                        <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                    </sec:authorize--%>
+                    <spring:url value="/results/${result.id}/reset" var="resetUrl"/>
+                    <a href="${resetUrl}" class="btn btn-danger btn-xs"><spring:message code="link.reset"/></a>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <spring:url value="/results/${result.event.id}/insert/${result.id}" var="insertUrl"/>
+                        <a href="${insertUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
+                    </sec:authorize>
                 </td>
             </sec:authorize>
         </tr>

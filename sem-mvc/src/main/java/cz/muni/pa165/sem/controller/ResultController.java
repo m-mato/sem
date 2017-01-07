@@ -130,4 +130,15 @@ public class ResultController extends BaseController {
 		return "result.participants";
 	}
 
+	@RequestMapping("/{id}/reset")
+	public Object renderReset(@PathVariable("id") Long id) {
+		ResultDTO resultDTO = resultFacade.findById(id);
+		if (resultDTO != null) {
+			resultDTO.setPerformance(new Double(-1));
+			resultDTO.setPosition(new Integer(-1));
+			resultFacade.update(beanMappingService.mapTo(resultDTO, ResultUpdateDTO.class));
+		}
+		return redirect("/results/" + resultDTO.getId() + "?insert");
+	}
+
 }
