@@ -85,27 +85,6 @@ public class ResultController extends BaseController {
 		return "result.detail";
 	}
 
-	@RequestMapping("/create")
-	public String renderCreate(@RequestParam(value = "event", required = false) Long eventId, Model model) {
-		ResultCreateDTO resultCreateDTO = new ResultCreateDTO();
-		if (eventId != null) {
-			EventDTO eventDTO = eventFacade.findById(eventId);
-			resultCreateDTO.setEvent(eventDTO);
-		}
-		model.addAttribute("result", resultCreateDTO);
-		return "result.create";
-	}
-
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public Object processCreate(@ModelAttribute("result") @Valid ResultCreateDTO resultCreateDTO, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("error", true);
-			return "result.create";
-		}
-		ResultDTO resultDTO = resultFacade.create(resultCreateDTO);
-		return redirect("/results/" + resultDTO.getId() + "?create");
-	}
-
 	@RequestMapping("/{id}/update")
 	public Object renderUpdate(@PathVariable("id") Long id, Model model) {
 		ResultDTO resultDTO = resultFacade.findById(id);

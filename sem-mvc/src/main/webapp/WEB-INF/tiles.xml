@@ -62,9 +62,9 @@
         <put-attribute name="title" value="title.result.detail"/>
         <put-attribute name="body" value="/WEB-INF/jsp/result/detail.jsp"/>
     </definition>
-    <definition name="result.create" extends="layout">
-        <put-attribute name="title" value="title.result.create"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/result/create.jsp"/>
+    <definition name="result.participants" extends="layout">
+        <put-attribute name="title" value="title.result.participants"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/result/participants.jsp"/>
     </definition>
     <definition name="result.update" extends="layout">
         <put-attribute name="title" value="title.result.update"/>
