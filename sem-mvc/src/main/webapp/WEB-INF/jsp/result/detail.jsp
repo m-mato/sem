@@ -81,8 +81,18 @@
         <tbody>
         <c:forEach items="${results}" var="result">
             <tr>
-                <td><c:out value="${result.performance}"/></td>
-                <td><c:out value="${result.position}"/></td>
+                <c:if test="${result.performance >= 0}">
+                    <td><c:out value="${result.performance}"/></td>
+                </c:if>
+                <c:if test="${result.performance < 0}">
+                    <td> -- </td>
+                </c:if>
+                <c:if test="${result.position >= 0}">
+                    <td><c:out value="${result.position}"/></td>
+                </c:if>
+                <c:if test="${result.position < 0}">
+                    <td> -- </td>
+                </c:if>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
                 <spring:url value="/results/${result.id}" var="detailUrl"/>
                 <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
