@@ -52,12 +52,8 @@ public class SportsmanController extends BaseController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             email = auth.getName();
             sportsman = sportsmanFacade.getByEmail(email);
-            List<ResultDTO> allResults = resultFacade.findBySportsman(sportsman);
-            for (ResultDTO result : allResults) {
-                if (result.getPerformance() >= 0 && result.getPosition() >= 0) {
-                    results.add(result);
-                }
-            }
+            results = resultFacade.findBySportsman(sportsman);
+
         }
         catch(Exception ex){
             return "index";

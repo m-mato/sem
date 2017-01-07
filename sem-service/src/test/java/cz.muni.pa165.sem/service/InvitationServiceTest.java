@@ -143,18 +143,9 @@ public class InvitationServiceTest extends AbstractTestNGSpringContextTests {
         Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
         Invitation result = invitationService.invite(event, sportsman);
         verify(emailServiceMock, times(0)).sendInvitationMessage(invitation);
-        invitation.setState(InvitationState.ALREADY_INVITED);
         assertEquals(invitation, result);
     }
-    
-    @Test
-    public void inviteALREADY_INVITED(){
-        invitation.setState(InvitationState.ALREADY_INVITED);
-        Mockito.when(invitationDAOMock.findByEventAndInvitee(event, sportsman)).thenReturn(invitation);
-        Invitation result = invitationService.invite(event, sportsman);
-        verify(emailServiceMock, times(0)).sendInvitationMessage(invitation);
-        assertEquals(invitation, result);
-    }
+
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void acceptInvitationNull(){

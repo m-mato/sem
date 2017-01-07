@@ -78,8 +78,6 @@ public class ExampleController {
 				return sportsman.getName() + " SUCCESSFULLY invited to event : " + event.getName() + ".";
 			case REINVITED:
 				return sportsman.getName() + " SUCCESSFULLY re-invited to event : " + event.getName() + ".";
-			case ALREADY_INVITED:
-				return sportsman.getName() + " WAS ALREADY re-invited to event : " + event.getName() + ".";
 			default:
 				throw new IllegalStateException("Invitation is in unexpected state");
 		}

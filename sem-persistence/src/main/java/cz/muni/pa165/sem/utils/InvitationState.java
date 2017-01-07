@@ -9,8 +9,6 @@ public enum InvitationState {
 
 	REINVITED,
 
-	ALREADY_INVITED,
-
 	ACCEPTED,
 
 	DECLINED;

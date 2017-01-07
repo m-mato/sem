@@ -81,8 +81,6 @@ public class InvitationServiceImpl implements InvitationService {
 			if (InvitationState.INVITED.equals(existingInvitation.getState())) {
 				emailService.sendInvitationMessage(existingInvitation);
 				return changeInvitationState(existingInvitation, InvitationState.REINVITED);
-			} else if (InvitationState.REINVITED.equals(existingInvitation.getState())) {
-				return changeInvitationState(existingInvitation, InvitationState.ALREADY_INVITED);
 			}
 			return existingInvitation;
 		}
