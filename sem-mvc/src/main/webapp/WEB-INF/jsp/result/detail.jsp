@@ -47,7 +47,8 @@
         </tr>
         <tr>
             <td><spring:message code="entity.result.event"/></td>
-            <td><c:out value="${result.event.name}"/></td>
+            <spring:url value="/events/${result.event.id}" var="eventDetailUrl"/>
+            <td><a href="${eventDetailUrl}"><c:out value="${result.event.name}"/></a></td>
         </tr>
         <tr>
             <td><spring:message code="entity.result.note"/></td>
