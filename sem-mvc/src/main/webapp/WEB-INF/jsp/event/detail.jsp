@@ -9,7 +9,7 @@
 
 <spring:url value="/events/${event.id}/update" var="updateUrl"/>
 <spring:url value="/events/${event.id}/delete" var="deleteUrl"/>
-<spring:url value="/results/create?event=${event.id}" var="resultCreateUrl"/>
+<spring:url value="/results/${event.id}/participants" var="participantsUrl"/>
 <spring:url value="/events/invite" var="inviteUrl"/>
 
 <jsp:useBean id="now" class="java.util.Date"/>
@@ -35,7 +35,7 @@
             <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
         </c:if>
         <c:if test="${event.date.time lt now}">
-            <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.insert"/></a>
+            <a href="${participantsUrl}" class="btn btn-success"><spring:message code="page.result.list.insert"/></a>
         </c:if>
     </p>
 </c:if>

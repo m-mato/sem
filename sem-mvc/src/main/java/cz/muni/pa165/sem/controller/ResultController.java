@@ -114,4 +114,20 @@ public class ResultController extends BaseController {
 		return redirect("/results?delete");
 	}
 
+	@RequestMapping("/{id}/participants")
+	public Object renderParticipants(@PathVariable("id") Long id, Model model) {
+		EventDTO eventDTO = eventFacade.findById(id);
+		if (eventDTO == null) {
+			return redirect("/event/"+id);
+		}
+		List<ResultDTO> results = resultFacade.findByEvent(eventDTO);
+
+		if(results.isEmpty()){
+			return redirect("/event/"+id);
+		}
+
+		model.addAttribute("results", beanMappingService.mapTo(results, ResultUpdateDTO.class));
+		return "result.participants";
+	}
+
 }

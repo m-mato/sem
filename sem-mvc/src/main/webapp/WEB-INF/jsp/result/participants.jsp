@@ -31,9 +31,19 @@
     <tbody>
     <c:forEach items="${results}" var="result">
         <tr>
-            <td><c:out value="${result.performance}"/></td>
+            <c:if test="${result.performance >= 0}">
+                <td><c:out value="${result.performance}"/></td>
+            </c:if>
+            <c:if test="${result.performance < 0}">
+                <td> -- </td>
+            </c:if>
             <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
-            <td><c:out value="${result.position}"/></td>
+            <c:if test="${result.position >= 0}">
+                <td><c:out value="${result.position}"/></td>
+            </c:if>
+            <c:if test="${result.position < 0}">
+                <td> -- </td>
+            </c:if>
             <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
             <td><c:out value="${result.event.name}"/></td>
             <td><c:out value="${result.note}"/></td>
@@ -41,10 +51,10 @@
                 <td>
                     <spring:url value="/results/${result.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <%--sec:authorize access="hasRole('ROLE_ADMIN')">
                         <spring:url value="/results/${result.id}/update" var="updateUrl"/>
                         <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                    </sec:authorize>
+                    </sec:authorize--%>
                 </td>
             </sec:authorize>
         </tr>
