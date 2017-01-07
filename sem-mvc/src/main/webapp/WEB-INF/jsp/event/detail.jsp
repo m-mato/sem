@@ -9,8 +9,8 @@
 
 <spring:url value="/events/${event.id}/update" var="updateUrl"/>
 <spring:url value="/events/${event.id}/delete" var="deleteUrl"/>
+<spring:url value="/results/create?event=${event.id}" var="resultCreateUrl"/>
 <spring:url value="/events/invite" var="inviteUrl"/>
-
 
 <c:if test="${param.create != null}">
     <div class="alert alert-success" role="alert">
@@ -29,6 +29,7 @@
         <%--<c:if test="${fn:length(results) == 0}">--%>
             <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
         <%--</c:if>--%>
+        <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.create"/></a>
     </p>
 </sec:authorize>
 

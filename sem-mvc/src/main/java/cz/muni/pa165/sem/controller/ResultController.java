@@ -86,8 +86,13 @@ public class ResultController extends BaseController {
 	}
 
 	@RequestMapping("/create")
-	public String renderCreate(Model model) {
-		model.addAttribute("result", new ResultCreateDTO());
+	public String renderCreate(@RequestParam(value = "event", required = false) Long eventId, Model model) {
+		ResultCreateDTO resultCreateDTO = new ResultCreateDTO();
+		if (eventId != null) {
+			EventDTO eventDTO = eventFacade.findById(eventId);
+			resultCreateDTO.setEvent(eventDTO);
+		}
+		model.addAttribute("result", resultCreateDTO);
 		return "result.create";
 	}
 
