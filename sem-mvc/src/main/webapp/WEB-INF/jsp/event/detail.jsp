@@ -23,15 +23,16 @@
     </div>
 </c:if>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+<c:if test="${admin || event.admin.id == loggedUser.id}">
     <p>
         <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
-        <%--<c:if test="${fn:length(results) == 0}">--%>
-            <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
-        <%--</c:if>--%>
+        <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
         <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.create"/></a>
     </p>
-</sec:authorize>
+</c:if>
 
 
 
