@@ -124,8 +124,7 @@ public class InvitationServiceImpl implements InvitationService {
 		participants.add(invitation.getInvitee());
 		event.setParticipants(participants);
 		eventDAO.update(event);
-
-		notificationService.notifyInvitationAccepted(invitation);
+		//notificationService.notifyInvitationAccepted(invitation);
 
 		return changeInvitationState(invitation, InvitationState.ACCEPTED);
 	}
