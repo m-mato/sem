@@ -31,7 +31,12 @@
     <tbody>
         <tr>
             <td><spring:message code="entity.result.performance"/></td>
-            <td class="lead"><strong><c:out value="${result.performance}"/></strong></td>
+            <c:if test="${result.performance >= 0}">
+                <td class="lead"><strong><c:out value="${result.performance}"/></strong></td>
+            </c:if>
+            <c:if test="${result.performance < 0}">
+                <td class="lead"><strong> -- </strong></td>
+            </c:if>
         </tr>
         <tr>
             <td><spring:message code="entity.result.performance-unit"/></td>
@@ -39,7 +44,12 @@
         </tr>
         <tr>
             <td><spring:message code="entity.result.position"/></td>
-            <td><c:out value="${result.position}"/></td>
+            <c:if test="${result.position >= 0}">
+                <td class="lead"><strong><c:out value="${result.position}"/></strong></td>
+            </c:if>
+            <c:if test="${result.position < 0}">
+                <td class="lead"><strong> -- </strong></td>
+            </c:if>
         </tr>
         <tr>
             <td><spring:message code="entity.result.sportsman"/></td>
