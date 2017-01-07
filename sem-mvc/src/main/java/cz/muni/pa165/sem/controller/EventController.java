@@ -88,7 +88,9 @@ public class EventController extends BaseController {
                 if (event.getName().toLowerCase().contains(search)
                         || event.getSport().getName().toLowerCase().contains(search)
                         || event.getCity().toLowerCase().contains(search)
-                        || event.getDescription().toLowerCase().contains(search)) {
+                        || event.getDescription().toLowerCase().contains(search)
+                        || event.getAdmin().getSurname().toLowerCase().contains(search)
+                        || event.getAdmin().getName().toLowerCase().contains(search)) {
                     foundEvents.add(event);
                 }
             }
