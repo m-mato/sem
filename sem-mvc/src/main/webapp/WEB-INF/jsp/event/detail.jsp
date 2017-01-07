@@ -152,7 +152,7 @@
 
 <c:if test="${fn:length(results) > 0}">
     <h2><spring:message code="title.result.list"/></h2>
-    <table class="table table-striped">
+    <table class="table">
         <thead>
         <tr>
             <th><spring:message code="entity.result.performance"/></th>
@@ -165,7 +165,15 @@
         </thead>
         <tbody>
         <c:forEach items="${results}" var="result">
-            <tr>
+            <c:choose>
+                <c:when test="${loggedUser.email==result.sportsman.email}">
+                    <tr class="row-colored">
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                </c:otherwise>
+            </c:choose>
+
                 <td><c:out value="${result.performance}"/></td>
                 <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.position}"/></td>

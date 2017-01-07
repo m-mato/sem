@@ -136,3 +136,7 @@ body {
 .myWidth {
     width: 220px;
 }
+
+.row-colored {
+    background-color:#BDE3FB;
+}
