@@ -108,10 +108,15 @@
     </spring:bind>
 
     <div class="form-group">
-        <div class="col-sm-5 col-sm-offset-3">
+        <div class="col-sm-3 col-sm-offset-3">
             <form:button class="btn btn-primary btn-lg">
                 <spring:message code="page.result.create.submit"/>
             </form:button>
+        </div>
+        <div class="col-sm-2 text-right">
+            <button type="button" class="btn btn-warning btn-lg" onclick="window.history.back()">
+                <spring:message code="link.back"/>
+            </button>
         </div>
     </div>
 
