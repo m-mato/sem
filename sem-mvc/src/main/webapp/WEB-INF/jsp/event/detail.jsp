@@ -30,7 +30,7 @@
     <p>
         <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
         <a href="${deleteUrl}" class="btn btn-danger"><spring:message code="link.delete"/></a>
-        <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.create"/></a>
+        <a href="${resultCreateUrl}" class="btn btn-success"><spring:message code="page.result.list.insert"/></a>
     </p>
 </c:if>
 
@@ -157,8 +157,10 @@
         <thead>
         <tr>
             <th><spring:message code="entity.result.performance"/></th>
+            <th><spring:message code="entity.result.performance-unit"/></th>
             <th><spring:message code="entity.result.position"/></th>
             <th><spring:message code="entity.result.sportsman"/></th>
+            <th><spring:message code="entity.result.note"/></th>
             <th></th>
         </tr>
         </thead>
@@ -166,8 +168,10 @@
         <c:forEach items="${results}" var="result">
             <tr>
                 <td><c:out value="${result.performance}"/></td>
+                <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.position}"/></td>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
+                <td><c:out value="${result.note}"/></td>
                 <spring:url value="/results/${result.id}" var="detailUrl"/>
                 <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
             </tr>

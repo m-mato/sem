@@ -23,19 +23,31 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Event</th>
-                    <th>Event description</th>
-                    <th>Admin</th>
-                    <th>Result</th>
+                    <th><spring:message code="entity.event.name"/></th>
+                    <th><spring:message code="entity.event.date"/></th>
+                    <th><spring:message code="entity.event.description"/></th>
+                    <th><spring:message code="entity.event.admin"/></th>
+                    <th><spring:message code="entity.result.performance"/></th>
+                    <th><spring:message code="entity.result.performance-unit"/></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${results}" var="result">
                     <tr>
                         <td>${result.event.name}</td>
+                        <td><fmt:formatDate value="${result.event.date.time}" pattern="dd.MM.yyyy"/></td>
                         <td>${result.event.description}</td>
                         <td>${result.event.admin.surname}, ${result.event.admin.name}</td>
-                        <td>${result.position}</td>
+                        <c:if test="${result.position >= 0}">
+                            <td><c:out value="${result.performance}"/></td>
+                            <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
+                        </c:if>
+                        <c:if test="${result.position < 0}">
+                            <td> -- </td>
+                            <td> -- </td>
+                        </c:if>
+                        <spring:url value="/events/${result.event.id}" var="detailUrl"/>
+                        <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -43,10 +55,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Event invitation</th>
-                    <th>Event description</th>
-                    <th>Admin</th>
-                    <th>State</th>
+                    <th><spring:message code="entity.sportsman.invitations"/></th>
+                    <th><spring:message code="entity.event.description"/></th>
+                    <th><spring:message code="entity.event.admin"/></th>
+                    <th><spring:message code="entity.invitation.state"/></th>
                     <th></th>
                     <th></th>
                 </tr>
