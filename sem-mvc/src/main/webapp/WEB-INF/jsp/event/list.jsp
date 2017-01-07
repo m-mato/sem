@@ -10,6 +10,8 @@
 <spring:url value="/events/create" var="createUrl"/>
 <spring:url value="/events" var="formUrl"/>
 
+<jsp:useBean id="now" class="java.util.Date"/>
+
 <c:if test="${param.delete != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.event.list.alert.delete"/>
@@ -52,7 +54,7 @@
     </thead>
     <tbody>
     <c:forEach items="${events}" var="event">
-        <tr>
+        <tr <c:if test="${event.date.time gt now}">class="future"</c:if>>
             <td><c:out value="${event.name}"/></td>
             <td><fmt:formatDate value="${event.date.time}" pattern="dd.MM.yyyy"/></td>
             <td><c:out value="${event.sport.name}"/></td>

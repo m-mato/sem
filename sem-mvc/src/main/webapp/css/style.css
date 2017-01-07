@@ -34,6 +34,10 @@ body {
 .input-group-addon.email {
     cursor: pointer;
 }
+tr.future {
+    color: #449d44;
+    font-weight: bold;
+}
 
 /**
  * FOOTER
