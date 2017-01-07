@@ -120,7 +120,7 @@
 
         </div>
 
-        <footer class="page-footer">
+        <footer class="page-footer navbar-fixed-bottom">
             <div class="container">
                 <p class="footer-text">&copy; 2016 Gold team PA165</p>
             </div>
