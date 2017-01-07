@@ -73,6 +73,7 @@
         <thead>
             <tr>
                 <th><spring:message code="entity.result.performance"/></th>
+                <th><spring:message code="entity.result.performance-unit"/></th>
                 <th><spring:message code="entity.result.position"/></th>
                 <th><spring:message code="entity.result.sportsman"/></th>
                 <th></th>
@@ -87,6 +88,7 @@
                 <c:if test="${result.performance < 0}">
                     <td> -- </td>
                 </c:if>
+                <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <c:if test="${result.position >= 0}">
                     <td><c:out value="${result.position}"/></td>
                 </c:if>
