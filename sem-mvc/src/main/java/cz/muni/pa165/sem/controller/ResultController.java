@@ -141,4 +141,26 @@ public class ResultController extends BaseController {
 		return redirect("/results/"+ eventId + "/participants/");
 	}
 
+	@RequestMapping("/{eventId}/insert/{id}")
+	public Object renderInsert(@PathVariable("eventId") Long eventId, @PathVariable("id") Long id, Model model) {
+		ResultDTO resultDTO = resultFacade.findById(id);
+		if (resultDTO == null) {
+			return redirect("/results/"+ eventId + "/participants/");
+		}
+		model.addAttribute("result", beanMappingService.mapTo(resultDTO, ResultUpdateDTO.class));
+		return "result.insert";
+	}
+
+	@RequestMapping(value = "/{eventId}/insert/{id}", method = RequestMethod.POST)
+	public Object processInsert(@Valid @ModelAttribute("result") ResultUpdateDTO resultUpdateDTO,
+								@PathVariable("eventId") Long eventId,
+								BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("error", true);
+			return "result.insert";
+		}
+		resultFacade.update(resultUpdateDTO);
+		return redirect("/results/" + eventId + "/participants/");
+	}
+
 }
