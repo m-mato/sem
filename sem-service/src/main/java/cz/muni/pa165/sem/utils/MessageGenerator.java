@@ -1,6 +1,7 @@
 package cz.muni.pa165.sem.utils;
 
 import cz.muni.pa165.sem.entity.Event;
+import cz.muni.pa165.sem.entity.Invitation;
 import cz.muni.pa165.sem.entity.Sportsman;
 
 /**
@@ -10,14 +11,15 @@ public class MessageGenerator {
 
 	private static final String BYE = "Best regards\nSport Events Manager";
 
-	public static String generateInvitationBody(Sportsman admin, String eventName, Sportsman invitee) {
+	public static String generateInvitationBody(Invitation invitation) {
 
-		String greeting = "Hello " + invitee.getName() + "\n\n";
-		String message = admin.getName() + " " + admin.getSurname() + " just invited you to Event: " + eventName + "\n";
-		String joinLink = "If you want to join this event just click here: TODO-URL\n";
-		String manageLink = "If you want to manage your invitations click here: TODO-URL\n\n";
+		String greeting = "Hello " + invitation.getInvitee().getName() + "\n\n";
+		String message = "You was just invited to Event: " + invitation.getEvent().getName() + " in " + invitation.getEvent().getCity() + ".\n";
+		String desc = "Description: " + invitation.getEvent().getDescription() + ".\n";
+		String manageLink = "If you want to manage your invitations click here: http://localhost:8080/pa165/my-account\n";
+		String joinLink = "If you want to join this event click here: http://localhost:8080/pa165/accept/" + invitation.getId() + "\n\n";
 
-		return greeting + message + joinLink + manageLink + BYE;
+		return greeting + message + desc + manageLink + joinLink + BYE;
 	}
 
 	public static String generateInvitationAcceptBody(String sportsmanName, Sportsman invitee, String eventName) {
@@ -33,7 +35,7 @@ public class MessageGenerator {
 
 		String greeting = "Hello " + sportsmanName + "\n\n";
 		String message = event.getAdmin().getName() + " " + event.getAdmin().getSurname() + " just edited Event: " + event.getName() + "\n";
-		String link = "If you want to review changes just click here: TODO-URL\n\n";
+		String link = "If you want to review changes just click here: http://localhost:8080/pa165/events/" + event.getId() + "\n\n";
 
 		return greeting + message + link + BYE;
 	}
@@ -42,7 +44,7 @@ public class MessageGenerator {
 
 		String greeting = "Hello " + sportsmanName + "\n\n";
 		String message = event.getAdmin().getName() + " " + event.getAdmin().getSurname() + " just cancel Event: " + event.getName() + "\n";
-		String link = "If you want to review changes just click here: TODO-URL\n\n";
+		String link = "If you want to choose from some other events just click here: http://localhost:8080/pa165/events\n\n";
 
 		return greeting + message + link + BYE;
 	}

@@ -80,11 +80,7 @@ public class EmailServiceImpl implements EmailService{
 	@Override
 	public boolean sendInvitationMessage(Invitation invitation) {
 		final String subject = "SEM Invitation";
-		final String body = MessageGenerator.generateInvitationBody(
-				invitation.getEvent().getAdmin(),
-				invitation.getEvent().getName(),
-				invitation.getInvitee()
-		);
+		final String body = MessageGenerator.generateInvitationBody(invitation);
 
 		return sendMessage(subject, body, invitation.getInvitee().getEmail());
 	}

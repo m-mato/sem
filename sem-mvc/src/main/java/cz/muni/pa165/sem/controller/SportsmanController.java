@@ -70,10 +70,13 @@ public class SportsmanController extends BaseController {
 
 
     @RequestMapping("/accept/{id}")
-    public Object accept(@PathVariable Long id) {
+    public Object accept(Authentication authentication, @PathVariable Long id) {
         InvitationDTO  invitation;
         try{
             invitation = invitationFacade.findById(id);
+            if(!authentication.getName().equals(invitation.getInvitee().getEmail())) {
+                return "error.403";
+            }
             invitationFacade.accept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
         }
         catch(Exception ex){
