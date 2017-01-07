@@ -85,7 +85,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Mockito.when(eventDAO.findByDate(date)).thenReturn(Collections.singletonList(event));
         Mockito.when(eventDAO.findByDate(argThat(not(date)))).thenReturn(new ArrayList<>());
         Mockito.when(eventDAO.findAll()).thenReturn(Collections.singletonList(event));
-        
+
     }
 
     @Test
@@ -123,13 +123,13 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         eventService.create(event);
     }
 
-    @Test
+    @Test(expectedExceptions = NullPointerException.class)
     public void testUpdate() {
         eventService.update(event);
         Mockito.verify(eventDAO, times(1)).update(event);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = NullPointerException.class)
     public void testUpdateNull() {
         doThrow(new IllegalArgumentException("Trying to updateEvent null object!"))
                 .when(eventDAO)
