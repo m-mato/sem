@@ -81,7 +81,9 @@
                     <ul class="nav navbar-nav">
                         <li><a href="${frontUrl}"><spring:message code="link.index"/></a></li>
                         <li><a href="${eventsUrl}"><spring:message code="link.event.list"/></a></li>
-                        <li><a href="${resultsUrl}"><spring:message code="link.result.list"/></a></li>
+                        <sec:authorize access="isAuthenticated()">
+                            <li><a href="${resultsUrl}"><spring:message code="link.result.list"/></a></li>
+                        </sec:authorize>
                         <li><a href="${sportsUrl}"><spring:message code="link.sport.list"/></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
