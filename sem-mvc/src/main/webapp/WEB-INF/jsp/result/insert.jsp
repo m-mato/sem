@@ -15,15 +15,8 @@
 <form:form modelAttribute="result" class="form-horizontal" action="${formUrl}" method="POST">
 
     <form:hidden path="id"/>
-
-
-    <div class="row">
-        <div class="col-sm-4"><strong><spring:message code="entity.sportsman.name"/>:</strong></div>
-        <div class="col-sm-2"><c:out  value="${result.sportsman.name} ${result.sportsman.surname}"/></div>
-
-    </div>
-
-
+    <form:hidden path="sportsman"/>
+    <form:hidden path="event"/>
 
     <spring:bind path="performance">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
@@ -66,40 +59,6 @@
             </div>
             <div class="col-sm-4">
                 <form:errors path="position"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="sportsman">
-        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
-            <form:label path="sportsman" class="col-sm-3 control-label">
-                <spring:message code="entity.result.sportsman"/>
-            </form:label>
-            <div class="col-sm-5">
-                <form:select path="sportsman" class="form-control">
-                    <form:option value="">-</form:option>
-                    <form:options items="${sportsmans}" itemvalue="id" itemLabel="email"/>
-                </form:select>
-            </div>
-            <div class="col-sm-4">
-                <form:errors path="sportsman"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="event">
-        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
-            <form:label path="event" class="col-sm-3 control-label">
-                <spring:message code="entity.result.event"/>
-            </form:label>
-            <div class="col-sm-5">
-                <form:select path="event" class="form-control">
-                    <form:option value="">-</form:option>
-                    <form:options items="${events}" itemvalue="id" itemLabel="name"/>
-                </form:select>
-            </div>
-            <div class="col-sm-4">
-                <form:errors path="event"/>
             </div>
         </div>
     </spring:bind>
