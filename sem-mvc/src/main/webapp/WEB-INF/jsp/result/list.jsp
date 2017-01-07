@@ -12,11 +12,6 @@
     </div>
 </c:if>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <p>
-        <a href="${createUrl}" class="btn btn-primary"><spring:message code="page.result.list.create"/></a>
-    </p>
-</sec:authorize>
 
 <table class="table table-striped">
     <thead>
