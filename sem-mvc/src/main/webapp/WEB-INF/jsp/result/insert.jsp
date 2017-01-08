@@ -20,20 +20,35 @@
 
     <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
         <label class="col-sm-3 control-label">
-            <spring:message code="entity.result.sportsman"/>
-        </label>
-        <div class="col-sm-5">
-            <input readonly="true" value="${result.sportsman.surname}, ${result.sportsman.name}"  class="form-control"/>
-        </div>
-    </div>
-    <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
-        <label class="col-sm-3 control-label">
             <spring:message code="entity.result.event"/>
         </label>
         <div class="col-sm-5">
             <input readonly="true" value=${result.event.name} class="form-control"/>
         </div>
     </div>
+
+    <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+        <label class="col-sm-3 control-label">
+            <spring:message code="entity.result.sportsman"/>
+        </label>
+        <div class="col-sm-5">
+            <input readonly="true" value="${result.sportsman.surname}, ${result.sportsman.name}"  class="form-control"/>
+        </div>
+    </div>
+
+    <spring:bind path="position">
+        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
+            <form:label path="position" class="col-sm-3 control-label">
+                <spring:message code="entity.result.position"/>
+            </form:label>
+            <div class="col-sm-5">
+                <form:input path="position" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <form:errors path="position"/>
+            </div>
+        </div>
+    </spring:bind>
 
     <spring:bind path="performance">
         <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
@@ -62,20 +77,6 @@
             </div>
             <div class="col-sm-4">
                 <form:errors path="performanceUnit"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="position">
-        <div class="form-group form-group-lg ${status.error ? 'has-error' : ''}">
-            <form:label path="position" class="col-sm-3 control-label">
-                <spring:message code="entity.result.position"/>
-            </form:label>
-            <div class="col-sm-5">
-                <form:input path="position" class="form-control"/>
-            </div>
-            <div class="col-sm-4">
-                <form:errors path="position"/>
             </div>
         </div>
     </spring:bind>

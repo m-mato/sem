@@ -152,8 +152,8 @@ public class ResultController extends BaseController {
 	}
 
 	@RequestMapping(value = "/{eventId}/insert/{id}", method = RequestMethod.POST)
-	public Object processInsert(@Valid @ModelAttribute("result") ResultUpdateDTO resultUpdateDTO,
-								@PathVariable("eventId") Long eventId,
+	public Object processInsert(@PathVariable("eventId") Long eventId,
+								@Valid @ModelAttribute("result") ResultUpdateDTO resultUpdateDTO,
 								BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("error", true);

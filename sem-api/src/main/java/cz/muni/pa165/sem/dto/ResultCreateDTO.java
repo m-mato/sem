@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
- *
  * @author Veronika Aksamitova
  */
 public class ResultCreateDTO {
@@ -26,66 +25,47 @@ public class ResultCreateDTO {
     
     @NotNull
     private EventDTO event;
-    
-    public Double getPerformance(){
+
+    public Double getPerformance() {
         return performance;
     }
-    
-    public void setPerformance(Double perform){
-        if(perform == null || perform < -1){
-            throw new IllegalArgumentException("perform is not valid");
-        }
-        
-        this.performance = perform;
+
+    public void setPerformance(Double performance) {
+        this.performance = performance;
     }
-    
-    public PerformanceUnits getPerformanceUnit(){
+
+    public PerformanceUnits getPerformanceUnit() {
         return performanceUnit;
     }
-    
-    public void setPerformanceUnit(PerformanceUnits unit){
-        if(unit == null ){//||ak to nie je platny enum ...spavit 
-            throw new IllegalArgumentException("units value is not valid");
-        }
-        
-        this.performanceUnit = unit;
+
+    public void setPerformanceUnit(PerformanceUnits performanceUnit) {
+        this.performanceUnit = performanceUnit;
     }
-    
-    public Integer getPosition(){
+
+    public Integer getPosition() {
         return position;
     }
-    
-    public void setPosition(Integer pos){
-        if(pos == null || pos < -1){
-            throw new IllegalArgumentException("position value is not valid");
-        }
-        
-        this.position = pos;
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
-    
-    public SportsmanDTO getSportsman(){
+
+    public SportsmanDTO getSportsman() {
         return sportsman;
     }
-    
-    public void setSportsman(SportsmanDTO sportsman){
-        if(sportsman == null){
-            throw new NullPointerException("Sportsman is null");
-        }
+
+    public void setSportsman(SportsmanDTO sportsman) {
         this.sportsman = sportsman;
     }
-    
-    public String getNote(){
+
+    public String getNote() {
         return note;
     }
-    
-    public void setNote(String note){
-        if(note == null){
-            throw new NullPointerException("note value is not valid");
-        }
-        
+
+    public void setNote(String note) {
         this.note = note;
     }
-    
+
     public EventDTO getEvent() {
         return event;
     }
@@ -93,8 +73,8 @@ public class ResultCreateDTO {
     public void setEvent(EventDTO event) {
         this.event = event;
     }
-    
-    @Override 
+
+    @Override
     public boolean equals(Object o){
         if(o == null) return false;
         if(this == o) return true;
