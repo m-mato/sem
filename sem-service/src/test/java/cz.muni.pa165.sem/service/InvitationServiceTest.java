@@ -4,8 +4,6 @@ import cz.muni.pa165.sem.dao.*;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.utils.InvitationState;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataAccessException;
@@ -14,7 +12,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.util.*;
-import static org.mockito.Matchers.argThat;
+
 import static org.hamcrest.CoreMatchers.not;
 import org.mockito.Mock;
 import org.mockito.Mockito;

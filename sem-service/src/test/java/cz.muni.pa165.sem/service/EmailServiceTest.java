@@ -10,7 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.testng.annotations.Test;
 
 /**
  * @author Veronika Aksamitova

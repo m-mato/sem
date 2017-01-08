@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import static org.mockito.Matchers.argThat;
+
 import static org.hamcrest.CoreMatchers.not;
 import org.mockito.Mock;
 import org.mockito.Mockito;

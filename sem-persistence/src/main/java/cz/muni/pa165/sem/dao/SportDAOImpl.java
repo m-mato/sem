@@ -2,7 +2,6 @@ package cz.muni.pa165.sem.dao;
 
 import cz.muni.pa165.sem.entity.Sport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

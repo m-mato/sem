@@ -2,8 +2,6 @@ package cz.muni.pa165.sem.controller;
 
 import cz.muni.pa165.sem.dto.SportsmanDTO;
 import cz.muni.pa165.sem.facade.SportsmanFacade;
-import cz.muni.pa165.sem.utils.InvitationState;
-import cz.muni.pa165.sem.utils.PerformanceUnits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
