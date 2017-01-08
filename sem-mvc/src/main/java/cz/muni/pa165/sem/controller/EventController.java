@@ -201,7 +201,7 @@ public class EventController extends BaseController {
         EventDTO event = eventFacade.findById(id);
         logger.info("Enrolling sportman(" + participant.getName() + " " + participant.getSurname() + ") from event " + event.getName());
         ResultCreateDTO  result = new ResultCreateDTO();
-        result.setPerformanceUnit(PerformanceUnits.SECOND);
+        result.setPerformanceUnit(PerformanceUnits.POINT);
         result.setEvent(event);
         result.setSportsman(participant);
         result.setPosition(new Integer(-1));

@@ -2,6 +2,7 @@ package cz.muni.pa165.sem.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +23,7 @@ public class EventCreateDTO {
     private String description;
 
     @NotNull
+    @Future
     private Calendar date;
 
     @NotNull
