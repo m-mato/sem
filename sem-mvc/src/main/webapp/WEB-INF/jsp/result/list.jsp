@@ -12,27 +12,29 @@
     </div>
 </c:if>
 
-<table class="table table-striped">
-    <thead>
+
+
+<c:forEach var="event" items="${events}">
+    <spring:url value="/events/${result.event.id}" var="detailUrl"/>
+    <h3><a style="color: black" href="${detailUrl}" class="fill-div">${event.key.name}</a></h3>
+    <table class="table table-striped">
+        <thead>
         <tr>
             <th><spring:message code="entity.result.position"/></th>
             <th><spring:message code="entity.result.performance"/></th>
             <th><spring:message code="entity.result.sportsman"/></th>
-            <th><spring:message code="entity.result.event"/></th>
             <th><spring:message code="entity.result.note"/></th>
             <sec:authorize access="isAuthenticated()">
                 <th></th>
             </sec:authorize>
         </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${results}" var="result">
+        </thead>
+        <tbody>
+        <c:forEach items="${event.value}" var="result">
             <tr>
                 <td><strong><c:out value="${result.position}"/></strong></td>
                 <td><c:out value="${result.performance}"/><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
-                <spring:url value="/events/${result.event.id}" var="detailUrl"/>
-                <td><a style="color: black" href="${detailUrl}" class="fill-div">${result.event.name}</a></td>
                 <td><c:out value="${result.note}"/></td>
                 <sec:authorize access="isAuthenticated()">
                     <td>
@@ -46,5 +48,6 @@
                 </sec:authorize>
             </tr>
         </c:forEach>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</c:forEach>

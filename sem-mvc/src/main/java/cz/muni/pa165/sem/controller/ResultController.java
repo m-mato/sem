@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Vit Hovezak
@@ -61,14 +64,18 @@ public class ResultController extends BaseController {
 
 	@RequestMapping
 	public String renderList(Model model) {
-		List<ResultDTO> results = new ArrayList<>();
 		List<ResultDTO> allResults = resultFacade.findAll();
+		Map<EventDTO, List<ResultDTO>> events = new HashMap<>();
 		for (ResultDTO result : allResults) {
 			if (result.getPerformance() >= 0 && result.getPosition() >= 0) {
-				results.add(result);
+				if (events.keySet().contains(result.getEvent())) {
+					events.get(result.getEvent()).add(result);
+				} else {
+					events.put(result.getEvent(), new ArrayList<ResultDTO>(){{add(result);}});
+				}
 			}
 		}
-		model.addAttribute("results", results);
+		model.addAttribute("events", events);
 		return "result.list";
 	}
 
