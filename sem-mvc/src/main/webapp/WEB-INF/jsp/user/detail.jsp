@@ -11,7 +11,7 @@
 </c:if>
 
 <p>
-    <a href="events/create" style="float:right;" class="btn btn-primary">Create Event</a>
+    <a href="events/create" style="float:right;" class="btn btn-primary"><spring:message code="page.event.create.submit"/></a>
 </p>
 <div class="container">
         <p><strong><spring:message code="entity.sportsman.name"/>:</strong> <c:out value="${name}"/></p>
@@ -34,7 +34,8 @@
             <tbody>
                 <c:forEach items="${results}" var="result">
                     <tr>
-                        <td><strong>${result.event.name}</strong></td>
+                        <spring:url value="/events/${result.event.id}" var="detailUrl"/>
+                        <td><strong><a style="color: black" href="${detailUrl}" class="fill-div">${result.event.name}</a></strong></td>
                         <td><fmt:formatDate value="${result.event.date.time}" pattern="dd.MM.yyyy"/></td>
                         <td>${result.event.description}</td>
                         <td>${result.event.admin.surname}, ${result.event.admin.name}</td>
@@ -67,8 +68,10 @@
             </thead>
             <tbody>
                 <c:forEach items="${invitations}" var="invite">
+                    <spring:url value="/events/${invite.event.id}" var="detailUrl"/>
                     <tr>
-                        <td>${invite.event.name}</td>
+                        <%--<td><strong>${invite.event.name}</strong></td>--%>
+                        <td><strong><a style="color: black" href="${detailUrl}" class="fill-div">${invite.event.name}</a></strong></td>
                         <td>${invite.event.description}</td>
                         <td>${invite.event.admin.surname}, ${invite.event.admin.name}</td>
                         <td>${invite.state}</td>
@@ -76,8 +79,8 @@
                             <c:if test="${invite.state != 'DECLINED'}">
                                 <c:if test="${invite.state != 'ACCEPTED'}">
                                         <span>
-                                            <a href="accept/${invite.id}" style="float:right;" class="btn btn-primary">Accept</a>
-                                            <a href="decline/${invite.id}" style="float:right;" class="btn btn-primary">Decline</a>
+                                            <a href="accept/${invite.id}" style="float:right;" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                            <a href="decline/${invite.id}" style="float:right;" class="btn btn-primary"><spring:message code="page.user.detail.invitation.decline"/></a>
 
                                         </span>
                                 </c:if>

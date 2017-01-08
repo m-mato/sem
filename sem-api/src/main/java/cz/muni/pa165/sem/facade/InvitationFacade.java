@@ -17,6 +17,8 @@ public interface InvitationFacade {
 
     InvitationDTO accept(InvitationUpdateDTO invitationUpdate);
 
+    InvitationDTO simpleAccept(InvitationUpdateDTO invitationUpdate);
+
     InvitationDTO decline(InvitationUpdateDTO invitationUpdate);
 
     InvitationDTO findById(Long id);

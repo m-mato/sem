@@ -17,6 +17,8 @@ public interface InvitationService {
 
 	Invitation accept(Invitation invitation);
 
+	Invitation simpleAccept(Invitation invitation);
+
 	Invitation decline(Invitation invitation);
 
 	Invitation findById(Long id);
