@@ -55,7 +55,7 @@
     <tbody>
     <c:forEach items="${events}" var="event">
         <tr <c:if test="${event.date.time gt now}">class="future"</c:if>>
-            <td><c:out value="${event.name}"/></td>
+            <td><strong><c:out value="${event.name}"/></strong></td>
             <td><fmt:formatDate value="${event.date.time}" pattern="dd.MM.yyyy"/></td>
             <td><c:out value="${event.sport.name}"/></td>
             <td><c:out value="${event.capacity}"/></td>

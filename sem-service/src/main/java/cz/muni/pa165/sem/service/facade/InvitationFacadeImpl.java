@@ -54,6 +54,12 @@ public class InvitationFacadeImpl implements InvitationFacade {
     }
 
     @Override
+    public InvitationDTO simpleAccept(InvitationUpdateDTO invitationUpdate) {
+        Invitation invitation = invitationService.accept(beanMappingService.mapTo(invitationUpdate, Invitation.class));
+        return beanMappingService.mapTo(invitation, InvitationDTO.class);
+    }
+
+    @Override
     public InvitationDTO decline(InvitationUpdateDTO invitationUpdate) {
         Invitation invitation = invitationService.decline(beanMappingService.mapTo(invitationUpdate, Invitation.class));
         return beanMappingService.mapTo(invitation, InvitationDTO.class);

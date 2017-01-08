@@ -1,6 +1,5 @@
 package cz.muni.pa165.sem.controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.editor.CalendarEditor;
 import cz.muni.pa165.sem.editor.SportEditor;
@@ -128,6 +127,7 @@ public class EventController extends BaseController {
         } else {
             model.addAttribute("isParticipant", true); //check if is participant
         }
+        model.addAttribute("invitation", invitationFacade.findByEventAndInvitee(eventDTO, sportsman));
         return "event.detail";
     }
 
@@ -208,10 +208,17 @@ public class EventController extends BaseController {
         result.setPerformance(new Double(-1));
         result.setNote("");
         resultFacade.create(result);
+
         List<SportsmanDTO> part = event.getParticipants();
         part.add(participant);
         event.setParticipants(part);
         eventFacade.update(beanMappingService.mapTo(event, EventUpdateDTO.class));
+
+        InvitationDTO invitation = invitationFacade.findByEventAndInvitee(event, participant);
+        if (invitation != null) {
+            invitationFacade.simpleAccept(beanMappingService.mapTo(invitation, InvitationUpdateDTO.class));
+        }
+
         model.addAttribute("enrollProcess", "enrolled");
         return redirect("/events/" + id + "?enrolled");
     }

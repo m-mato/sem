@@ -127,6 +127,11 @@ public class InvitationServiceImpl implements InvitationService {
 	}
 
 	@Override
+	public Invitation simpleAccept(Invitation invitation) {
+		return changeInvitationState(invitation, InvitationState.ACCEPTED);
+	}
+
+	@Override
 	public Invitation decline(Invitation invitation) {
 
 		if (invitation == null) {

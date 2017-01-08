@@ -120,37 +120,49 @@
                             </div>
                         </div>
                     </c:when>
-                    <c:otherwise> <%--//not enrolled, can enroll //only if there is a enough capacity--%>
+                    <c:otherwise>
                         <c:choose>
-                            <c:when test="${ fn:length(event.participants) lt event.capacity}">
-                                <div class="col-md-4">
-                                    <p>
-                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                            <spring:message code="page.event.detail.enroll.main"/>
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseExample">
-                                        <div class="card card-block">
-                                            <spring:message code="page.event.detail.enroll.msg"/>
+                            <c:when test="${empty invitation}">
+                                <c:choose><%--//not enrolled, can enroll //only if there is a enough capacity--%>
+                                    <c:when test="${ fn:length(event.participants) lt event.capacity}">
+                                        <div class="col-md-4">
+                                            <p>
+                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                    <spring:message code="page.event.detail.enroll.main"/>
+                                                </a>
+                                            </p>
+                                            <div class="collapse" id="collapseExample">
+                                                <div class="card card-block">
+                                                    <spring:message code="page.event.detail.enroll.msg"/>
+                                                </div>
+                                                <form class="form-horizontal" name="f" action="${enrollUrl}" method="GET">
+                                                    <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.enroll.confirm"/></button>
+                                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                        <spring:message code="page.event.detail.enroll.cancel"/>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" disabled="true" style="text-decoration: line-through">
+                                                    <spring:message code="page.event.detail.enroll.main"/>
+                                                </a>
+                                            </p>
+                                            <p class="text-danger"><spring:message code="page.event.detail.enroll.full" /></p>
                                         </div>
-                                        <form class="form-horizontal" name="f" action="${enrollUrl}" method="GET">
-                                            <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.enroll.confirm"/></button>
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                <spring:message code="page.event.detail.enroll.cancel"/>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
+                                    </c:otherwise>
+                                </c:choose> <%--//not enrolled, can enroll //only if there is a enough capacity--%>
                             </c:when>
                             <c:otherwise>
-                                <div class="col-md-4">
-                                    <p>
-                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" disabled="true" style="text-decoration: line-through">
-                                            <spring:message code="page.event.detail.enroll.main"/>
-                                        </a>
-                                    </p>
-                                    <p class="text-danger"><spring:message code="page.event.detail.enroll.full" /></p>
-                                </div>
+                                <p><strong><spring:message code="page.event.detail.invite.msg"/></strong></p>
+                                <span>
+                                    <a href="accept/${invitation.id}" style="" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                    <a href="decline/${invitation.id}" style="" class="btn btn-primary"><spring:message code="page.user.detail.invitation.decline"/></a>
+
+                                </span>
                             </c:otherwise>
                         </c:choose>
                     </c:otherwise>
@@ -182,9 +194,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th><spring:message code="entity.result.performance"/></th>
-            <th><spring:message code="entity.result.performance-unit"/></th>
             <th><spring:message code="entity.result.position"/></th>
+            <th><spring:message code="entity.result.performance"/></th>
             <th><spring:message code="entity.result.sportsman"/></th>
             <th><spring:message code="entity.result.note"/></th>
             <th></th>
@@ -200,10 +211,8 @@
                     <tr>
                 </c:otherwise>
             </c:choose>
-
-                <td><c:out value="${result.performance}"/></td>
-                <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.position}"/></td>
+                <td><c:out value="${result.performance}"/><spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
                 <td><c:out value="${result.note}"/></td>
                 <spring:url value="/results/${result.id}" var="detailUrl"/>
