@@ -62,7 +62,7 @@ tr.future {
 
 .clickable-row:hover
 {
-    text-shadow: 3px 3px 30px rgba(0, 0, 0, 0.86);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.30);
 }
 
 
