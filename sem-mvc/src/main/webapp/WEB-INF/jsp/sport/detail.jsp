@@ -60,7 +60,9 @@
                 <td><fmt:formatDate value="${event.date.time}" pattern="dd.MM.yyyy"/></td>
                 <td><c:out value="${event.city}"/></td>
                 <spring:url value="/events/${event.id}" var="detailUrl"/>
-                <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
+                <td class="text-right">
+                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

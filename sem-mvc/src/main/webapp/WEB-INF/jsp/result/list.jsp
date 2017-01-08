@@ -23,9 +23,9 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><spring:message code="entity.result.position"/></th>
-            <th><spring:message code="entity.result.performance"/></th>
-            <th><spring:message code="entity.result.sportsman"/></th>
+            <th style="width: 15%;"><spring:message code="entity.result.position"/></th>
+            <th style="width: 20%;"><spring:message code="entity.result.performance"/></th>
+            <th style="width: 25%;"><spring:message code="entity.result.sportsman"/></th>
             <th><spring:message code="entity.result.note"/></th>
             <sec:authorize access="isAuthenticated()">
                 <th></th>
@@ -36,11 +36,11 @@
         <c:forEach items="${event.value}" var="result">
             <tr>
                 <td><strong><c:out value="${result.position}"/></strong></td>
-                <td><c:out value="${result.performance}"/><spring:message code="performance-units.${result.performanceUnit}"/></td>
+                <td><c:out value="${result.performance}"/>&nbsp;<spring:message code="performance-units.${result.performanceUnit}"/></td>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
                 <td><c:out value="${result.note}"/></td>
                 <sec:authorize access="isAuthenticated()">
-                    <td>
+                    <td class="text-right">
                         <spring:url value="/results/${result.id}" var="detailUrl"/>
                         <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                         <c:if test="${admin || result.event.admin.id == loggedUser.id}">

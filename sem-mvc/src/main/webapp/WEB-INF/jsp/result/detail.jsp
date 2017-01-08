@@ -100,7 +100,9 @@
                 </c:if>
                 <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
                 <spring:url value="/results/${result.id}" var="detailUrl"/>
-                <td><a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a></td>
+                <td class="text-right">
+                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

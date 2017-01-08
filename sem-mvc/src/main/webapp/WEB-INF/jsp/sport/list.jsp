@@ -31,7 +31,7 @@
             <tr>
                 <td><c:out value="${sport.name}"/></td>
                 <td><c:out value="${sport.description}"/></td>
-                <td>
+                <td class="text-right">
                     <spring:url value="/sports/${sport.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
