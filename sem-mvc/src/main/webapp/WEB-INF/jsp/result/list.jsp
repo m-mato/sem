@@ -51,23 +51,6 @@
                     <%--</td>--%>
                 <%--</sec:authorize>--%>
             </tr>
-
-            <tr  class='clickable-row' data-href='${detailUrl}'>
-                <td><strong><c:out value="${result.position}"/></strong></td>
-                <td><c:out value="${result.performance}"/><spring:message code="performance-units.${result.performanceUnit}"/></td>
-                <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
-                <td><c:out value="${result.note}"/></td>
-                    <%--<sec:authorize access="isAuthenticated()">--%>
-                    <%--<td>--%>
-                    <%--<spring:url value="/results/${result.id}" var="detailUrl"/>--%>
-                    <%--<a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>--%>
-                    <%--<c:if test="${admin || result.event.admin.id == loggedUser.id}">--%>
-                    <%--<spring:url value="/results/${result.id}/update" var="updateUrl"/>--%>
-                    <%--<a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>--%>
-                    <%--</c:if>--%>
-                    <%--</td>--%>
-                    <%--</sec:authorize>--%>
-            </tr>
         </c:forEach>
         </tbody>
     </table>
