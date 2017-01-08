@@ -67,11 +67,7 @@
     </c:forEach>
     </tbody>
 </table>
-<div class="form-group">
-    <div class="col-sm-2 text-right">
-        <button type="button" class="btn btn-warning btn-lg" onclick="window.history.back()">
-            <spring:message code="link.back-to-event"/>
-        </button>
-    </div>
-</div>
 
+<button type="button" class="btn btn-warning" onclick="window.history.back()">
+    <spring:message code="link.back-to-event"/>
+</button>
