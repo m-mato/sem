@@ -1,7 +1,6 @@
 package cz.muni.pa165.sem.dto;
 
 import cz.muni.pa165.sem.utils.PerformanceUnits;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Veronika Aksamitova

@@ -1,6 +1,5 @@
 package cz.muni.pa165.sem.service.facade;
 
-import cz.muni.pa165.sem.dto.EventDTO;
 import cz.muni.pa165.sem.dto.*;
 import cz.muni.pa165.sem.entity.*;
 import cz.muni.pa165.sem.facade.ResultFacade;

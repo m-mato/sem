@@ -1,8 +1,6 @@
 package cz.muni.pa165.sem.dto;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Matej Majdis
