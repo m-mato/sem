@@ -4,14 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<spring:url value="/events/create" var="eventCreateUrl"/>
+
 <c:if test="${param.login != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.user.detail.alert.login"/>
     </div>
 </c:if>
+<c:if test="${param.decline != null}">
+    <div class="alert alert-success" role="alert">
+        <spring:message code="page.user.detail.alert.decline"/>
+    </div>
+</c:if>
 
 <p>
-    <a href="events/create" style="float:right;" class="btn btn-primary"><spring:message code="page.event.create.submit"/></a>
+    <a href="${eventCreateUrl}" class="btn btn-primary" style="float:right;"><spring:message code="page.event.create.submit"/></a>
 </p>
 <div class="container">
         <p><strong><spring:message code="entity.sportsman.name"/>:</strong> <c:out value="${name}"/></p>
@@ -76,14 +83,13 @@
                         <td>${invite.event.admin.surname}, ${invite.event.admin.name}</td>
                         <td>${invite.state}</td>
                         <td>
-                            <c:if test="${invite.state != 'DECLINED'}">
-                                <c:if test="${invite.state != 'ACCEPTED'}">
-                                        <span>
-                                            <a href="accept/${invite.id}" style="float:right;" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
-                                            <a href="decline/${invite.id}" style="float:right;" class="btn btn-primary"><spring:message code="page.user.detail.invitation.decline"/></a>
-
-                                        </span>
-                                </c:if>
+                            <c:if test="${invite.state != 'DECLINED' && invite.state != 'ACCEPTED'}">
+                                <span>
+                                    <spring:url value="/accept/${invite.id}" var="acceptUrl"/>
+                                    <spring:url value="/decline/${invite.id}" var="declineUrl"/>
+                                    <a href="${declineUrl}" class="btn btn-danger" style="float:right;"><spring:message code="page.user.detail.invitation.decline"/></a>
+                                    <a href="${acceptUrl}" class="btn btn-primary" style="float:right;"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                </span>
                             </c:if>
                         </td>
                     </tr>
