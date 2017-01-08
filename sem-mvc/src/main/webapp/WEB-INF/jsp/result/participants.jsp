@@ -17,9 +17,8 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th><spring:message code="entity.result.performance"/></th>
-        <th><spring:message code="entity.result.performance-unit"/></th>
         <th><spring:message code="entity.result.position"/></th>
+        <th><spring:message code="entity.result.performance"/></th>
         <th><spring:message code="entity.result.sportsman"/></th>
         <th><spring:message code="entity.result.event"/></th>
         <th><spring:message code="entity.result.note"/></th>
@@ -31,19 +30,20 @@
     <tbody>
     <c:forEach items="${results}" var="result">
         <tr>
-            <c:if test="${result.performance >= 0}">
-                <td><c:out value="${result.performance}"/></td>
-            </c:if>
-            <c:if test="${result.performance < 0}">
-                <td> -- </td>
-            </c:if>
-            <td><spring:message code="performance-units.${result.performanceUnit}"/></td>
             <c:if test="${result.position >= 0}">
                 <td><c:out value="${result.position}"/></td>
             </c:if>
             <c:if test="${result.position < 0}">
                 <td> -- </td>
             </c:if>
+
+            <c:if test="${result.performance >= 0}">
+                <td><c:out value="${result.performance}"/><spring:message code="performance-units.${result.performanceUnit}"/></td>
+            </c:if>
+            <c:if test="${result.performance < 0}">
+                <td> -- </td>
+            </c:if>
+
             <td><c:out value="${result.sportsman.name} ${result.sportsman.surname}"/></td>
             <td><c:out value="${result.event.name}"/></td>
             <td><c:out value="${result.note}"/></td>
