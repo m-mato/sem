@@ -96,7 +96,7 @@ public class SportsmanController extends BaseController {
 
             return "error.403";
         }
-        return redirect("/my-account");
+        return redirect("/my-account?decline");
     }
 
 

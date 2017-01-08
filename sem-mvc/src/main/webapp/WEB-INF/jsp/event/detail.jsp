@@ -159,9 +159,10 @@
                             <c:otherwise>
                                 <p><strong><spring:message code="page.event.detail.invite.msg"/></strong></p>
                                 <span>
-                                    <a href="accept/${invitation.id}" style="" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
-                                    <a href="decline/${invitation.id}" style="" class="btn btn-primary"><spring:message code="page.user.detail.invitation.decline"/></a>
-
+                                    <spring:url value="/accept/${invitation.id}" var="acceptUrl"/>
+                                    <spring:url value="/decline/${invitation.id}" var="declineUrl"/>
+                                    <a href="${acceptUrl}" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                    <a href="${declineUrl}" class="btn btn-danger"><spring:message code="page.user.detail.invitation.decline"/></a>
                                 </span>
                             </c:otherwise>
                         </c:choose>
