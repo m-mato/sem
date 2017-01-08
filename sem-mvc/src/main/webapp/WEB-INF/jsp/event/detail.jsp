@@ -72,9 +72,9 @@
             <p><strong><spring:message code="page.event.detail.when"/>: </strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
             <p><strong><spring:message code="page.event.detail.what"/>: </strong><c:out value="${event.sport.name}"/></p>
         </div>
-        <div class="col-md-6 event-admin div-border">
+        <div class="col-md-6 event-admin div-border" style="padding-top: 10px;">
             <p><strong><spring:message code="page.event.detail.admin"/>: </strong><c:out value="${event.admin.name}"/></p>
-             <p><strong>Email: </strong><c:out value="${event.admin.email}"/></p>
+            <p><strong>Email: </strong><c:out value="${event.admin.email}"/></p>
         </div>
     </div>
     <br>
