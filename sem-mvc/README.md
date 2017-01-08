@@ -65,8 +65,8 @@ Available on `http://localhost:8080/pa165/rest`
 
 - update sport
 
-`curl -H "Content-Type: application/json" -X PUT -d '{"id":3,"name":"newSport","description":"new sport updated"}'  http://localhost:8080/pa165/rest/sports/update`
+`curl -H "Content-Type: application/json" -X PUT -d '{"id":6,"name":"newSport","description":"new sport updated"}'  http://localhost:8080/pa165/rest/sports/update`
 
 - delete sport with id 1
 
-`curl -X DELETE http://localhost:8080/pa165/rest/sports/1`
+`curl -X DELETE http://localhost:8080/pa165/rest/sports/6`
