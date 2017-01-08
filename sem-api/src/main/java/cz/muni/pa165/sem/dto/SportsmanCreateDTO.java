@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Calendar;
 
 /**
@@ -20,6 +21,7 @@ public class SportsmanCreateDTO {
 	private String surname;
 
 	@NotNull
+	@Past
 	private Calendar birthDate;
 
 	@NotNull
