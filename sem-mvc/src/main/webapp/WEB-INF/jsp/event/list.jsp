@@ -68,10 +68,22 @@
                     <spring:url value="/events/${event.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                     <c:if test="${event.date.time gt now}">
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <c:set var="admin">
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+                        </c:set>
+                        <c:if test="${admin || event.admin.id == loggedUser.id}">
                             <spring:url value="/events/${event.id}/update" var="updateUrl"/>
                             <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                        </sec:authorize>
+                        </c:if>
+                    </c:if>
+                    <c:if test="${event.date.time lt now}">
+                        <c:set var="admin">
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+                        </c:set>
+                        <c:if test="${admin || event.admin.id == loggedUser.id}">
+                            <spring:url value="/results/${event.id}/participants" var="participantsUrl"/>
+                            <a href="${participantsUrl}" class="btn btn-primary btn-xs"><spring:message code="link.result.insert"/></a>
+                        </c:if>
                     </c:if>
                 </td>
             </sec:authorize>
