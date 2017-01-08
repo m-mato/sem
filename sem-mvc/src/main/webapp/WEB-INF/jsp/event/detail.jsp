@@ -14,6 +14,10 @@
 
 <jsp:useBean id="now" class="java.util.Date"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+
 <c:if test="${param.create != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.event.detail.alert.create"/>
@@ -40,9 +44,6 @@
     </div>
 </c:if>
 
-<c:set var="admin">
-    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
-</c:set>
 <c:if test="${admin || event.admin.id == loggedUser.id}">
     <p>
         <c:if test="${event.date.time gt now}">

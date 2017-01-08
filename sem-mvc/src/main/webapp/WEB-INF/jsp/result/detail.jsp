@@ -9,6 +9,10 @@
 <spring:url value="/results/${result.id}/update" var="updateUrl"/>
 <spring:url value="/results/${result.id}/delete" var="deleteUrl"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+
 <c:if test="${param.create != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.result.detail.alert.create"/>
@@ -20,11 +24,11 @@
     </div>
 </c:if>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+<c:if test="${admin || result.event.admin.id == loggedUser.id}">
     <p>
         <a href="${updateUrl}" class="btn btn-primary"><spring:message code="link.update"/></a>
     </p>
-</sec:authorize>
+</c:if>
 
 <table class="table table-striped">
     <tbody>

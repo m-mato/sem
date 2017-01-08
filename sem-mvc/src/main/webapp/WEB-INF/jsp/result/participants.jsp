@@ -1,11 +1,15 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <spring:url value="/results/${event.id}/participants" var="formUrl"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
 
 <c:if test="${param.delete != null}">
     <div class="alert alert-success" role="alert">
@@ -51,12 +55,12 @@
                 <td>
                     <spring:url value="/results/${result.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                    <spring:url value="/results/${result.event.id}/reset/${result.id}" var="resetUrl"/>
-                    <a href="${resetUrl}" class="btn btn-danger btn-xs"><spring:message code="link.reset"/></a>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <c:if test="${admin || result.event.admin.id == loggedUser.id}">
+                        <spring:url value="/results/${result.event.id}/reset/${result.id}" var="resetUrl"/>
+                        <a href="${resetUrl}" class="btn btn-danger btn-xs"><spring:message code="link.reset"/></a>
                         <spring:url value="/results/${result.event.id}/insert/${result.id}" var="insertUrl"/>
                         <a href="${insertUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                    </sec:authorize>
+                    </c:if>
                 </td>
             </sec:authorize>
         </tr>

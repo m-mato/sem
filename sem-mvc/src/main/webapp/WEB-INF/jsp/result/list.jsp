@@ -6,12 +6,15 @@
 
 <spring:url value="/results/create" var="createUrl"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+
 <c:if test="${param.delete != null}">
     <div class="alert alert-success" role="alert">
         <spring:message code="page.result.list.alert.delete"/>
     </div>
 </c:if>
-
 
 
 <c:forEach var="event" items="${events}">
@@ -40,10 +43,10 @@
                     <td>
                         <spring:url value="/results/${result.id}" var="detailUrl"/>
                         <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <c:if test="${admin || result.event.admin.id == loggedUser.id}">
                             <spring:url value="/results/${result.id}/update" var="updateUrl"/>
                             <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
-                        </sec:authorize>
+                        </c:if>
                     </td>
                 </sec:authorize>
             </tr>

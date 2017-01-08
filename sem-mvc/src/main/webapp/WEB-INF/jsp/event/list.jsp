@@ -10,6 +10,10 @@
 <spring:url value="/events/create" var="createUrl"/>
 <spring:url value="/events" var="formUrl"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+
 <jsp:useBean id="now" class="java.util.Date"/>
 
 <c:if test="${param.delete != null}">
@@ -68,18 +72,12 @@
                     <spring:url value="/events/${event.id}" var="detailUrl"/>
                     <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                     <c:if test="${event.date.time gt now}">
-                        <c:set var="admin">
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
-                        </c:set>
                         <c:if test="${admin || event.admin.id == loggedUser.id}">
                             <spring:url value="/events/${event.id}/update" var="updateUrl"/>
                             <a href="${updateUrl}" class="btn btn-primary btn-xs"><spring:message code="link.update"/></a>
                         </c:if>
                     </c:if>
                     <c:if test="${event.date.time lt now}">
-                        <c:set var="admin">
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
-                        </c:set>
                         <c:if test="${admin || event.admin.id == loggedUser.id}">
                             <spring:url value="/results/${event.id}/participants" var="participantsUrl"/>
                             <a href="${participantsUrl}" class="btn btn-primary btn-xs"><spring:message code="link.result.insert"/></a>

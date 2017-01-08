@@ -7,6 +7,10 @@
 
 <spring:url value="/events/create" var="formUrl"/>
 
+<c:set var="admin">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
+</c:set>
+
 <c:if test="${error != null}">
     <div class="alert alert-danger" role="alert">
         <spring:message code="page.event.create.alert.error"/>
@@ -105,9 +109,6 @@
         </div>
     </spring:bind>
 
-    <c:set var="admin">
-        <sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>
-    </c:set>
     <spring:bind path="admin">
         <div class="form-group form-group-lg ${!admin ? 'hidden' : ''} ${status.error ? 'has-error' : ''}">
             <form:label path="admin" class="col-sm-3 control-label">
