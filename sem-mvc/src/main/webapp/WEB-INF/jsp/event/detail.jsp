@@ -62,29 +62,26 @@
 
 
 <div id="event-detail">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h2><c:out value="${event.name}"/></h2>
-            </div>
+
+    <h2><c:out value="${event.name}"/></h2>
+
+    <div class="row">
+        <div class="col-md-6 event-info">
+            <p><strong><spring:message code="page.event.detail.where"/>: </strong><c:out value="${event.address}, ${event.city}"/></p>
+            <p><strong><spring:message code="page.event.detail.when"/>: </strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
+            <p><strong><spring:message code="page.event.detail.what"/>: </strong><c:out value="${event.sport.name}"/></p>
         </div>
-        <div class="row">
-            <div class="col-md-6 event-info">
-                <p><strong><spring:message code="page.event.detail.where"/>: </strong><c:out value="${event.address}, ${event.city}"/></p>
-                <p><strong><spring:message code="page.event.detail.when"/>: </strong><fmt:formatDate type="both" dateStyle="full" value="${event.date.time}" pattern="dd.MM.yyyy"/></p>
-                <p><strong><spring:message code="page.event.detail.what"/>: </strong><c:out value="${event.sport.name}"/></p>
-            </div>
-            <div class="col-md-6 event-admin div-border">
-                <p><strong><spring:message code="page.event.detail.admin"/>: </strong><c:out value="${event.admin.name}"/></p>
-                 <p><strong>Email: </strong><c:out value="${event.admin.email}"/></p>
-            </div>
-        </div><br>
-        <div class="row">
-            <div class="col-md-12">
-                <p><strong><spring:message code="page.events.description"/>: </strong><c:out value="${event.description}"/></p>
-            </div>
-        </div><br>
-        <c:if test="${not empty result}">
+        <div class="col-md-6 event-admin div-border">
+            <p><strong><spring:message code="page.event.detail.admin"/>: </strong><c:out value="${event.admin.name}"/></p>
+             <p><strong>Email: </strong><c:out value="${event.admin.email}"/></p>
+        </div>
+    </div>
+    <br>
+
+    <p><strong><spring:message code="page.events.description"/>: </strong><c:out value="${event.description}"/></p>
+    <br>
+
+    <c:if test="${not empty result}">
         <div class="row">
             <div class="col-md-4 event-admin div-border">
                 <p><strong><big><spring:message code="page.event.detail.result.title"/></big></strong><p>
@@ -94,69 +91,71 @@
                     <p><c:out value="${page.description}"/></p>
                 </div>
             </div>
-        </div><br>
-        </c:if>
+        </div>
+        <br>
+    </c:if>
     <%--//it is past event, there is nothing todo--%>
-        <c:if test="${event.date.time gt now}">
-            <div class="row">
-                <c:choose>
-                    <c:when test="${isParticipant}">
-                        <div class="col-md-4">
-                            <p>
-                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    <spring:message code="page.event.detail.unenroll.main"/>
-                                </a>
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-block">
-                                    <spring:message code="page.event.detail.unenroll.msg"/>
-                                </div>
-                                <form class="form-horizontal" name="f" action="${unEnrollUrl}" method="GET">
-                                    <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.unenroll.confirm"/></button>
-                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        <spring:message code="page.event.detail.unenroll.cancel"/>
-                                    </button>
-                                </form>
+    <c:if test="${event.date.time gt now}">
+        <div class="row">
+            <c:choose>
+                <c:when test="${isParticipant}">
+                    <div class="col-md-4">
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <spring:message code="page.event.detail.unenroll.main"/>
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-block">
+                                <spring:message code="page.event.detail.unenroll.msg"/>
                             </div>
+                            <form class="form-horizontal" name="f" action="${unEnrollUrl}" method="GET">
+                                <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.unenroll.confirm"/></button>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <spring:message code="page.event.detail.unenroll.cancel"/>
+                                </button>
+                            </form>
                         </div>
-                    </c:when>
-                    <c:otherwise>
-                        <c:choose>
-                            <c:when test="${empty invitation}">
-                                <c:choose><%--//not enrolled, can enroll //only if there is a enough capacity--%>
-                                    <c:when test="${ fn:length(event.participants) lt event.capacity}">
-                                        <div class="col-md-4">
-                                            <p>
-                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                    <spring:message code="page.event.detail.enroll.main"/>
-                                                </a>
-                                            </p>
-                                            <div class="collapse" id="collapseExample">
-                                                <div class="card card-block">
-                                                    <spring:message code="page.event.detail.enroll.msg"/>
-                                                </div>
-                                                <form class="form-horizontal" name="f" action="${enrollUrl}" method="GET">
-                                                    <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.enroll.confirm"/></button>
-                                                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                        <spring:message code="page.event.detail.enroll.cancel"/>
-                                                    </button>
-                                                </form>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${empty invitation}">
+                            <c:choose><%--//not enrolled, can enroll //only if there is a enough capacity--%>
+                                <c:when test="${ fn:length(event.participants) lt event.capacity}">
+                                    <div class="col-md-4">
+                                        <p>
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                <spring:message code="page.event.detail.enroll.main"/>
+                                            </a>
+                                        </p>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-block">
+                                                <spring:message code="page.event.detail.enroll.msg"/>
                                             </div>
-                                            </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="col-md-4">
-                                            <p>
-                                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" disabled="true" style="text-decoration: line-through">
-                                                    <spring:message code="page.event.detail.enroll.main"/>
-                                                </a>
-                                            </p>
-                                            <p class="text-danger"><spring:message code="page.event.detail.enroll.full" /></p>
+                                            <form class="form-horizontal" name="f" action="${enrollUrl}" method="GET">
+                                                <button type="submit" class="btn btn-danger"><spring:message code="page.event.detail.enroll.confirm"/></button>
+                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                    <spring:message code="page.event.detail.enroll.cancel"/>
+                                                </button>
+                                            </form>
                                         </div>
-                                    </c:otherwise>
-                                </c:choose> <%--//not enrolled, can enroll //only if there is a enough capacity--%>
-                            </c:when>
-                            <c:otherwise>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-4">
+                                        <p>
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" disabled="true" style="text-decoration: line-through">
+                                                <spring:message code="page.event.detail.enroll.main"/>
+                                            </a>
+                                        </p>
+                                        <p class="text-danger"><spring:message code="page.event.detail.enroll.full" /></p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose> <%--//not enrolled, can enroll //only if there is a enough capacity--%>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="col-md-12">
                                 <p><strong><spring:message code="page.event.detail.invite.msg"/></strong></p>
                                 <span>
                                     <spring:url value="/accept/${invitation.id}" var="acceptUrl"/>
@@ -164,31 +163,31 @@
                                     <a href="${acceptUrl}" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
                                     <a href="${declineUrl}" class="btn btn-danger"><spring:message code="page.user.detail.invitation.decline"/></a>
                                 </span>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:otherwise>
-                </c:choose>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </c:otherwise>
+            </c:choose>
 
-        <%--no possible to invite another sportmans if capacity is full--%>
+            <%--no possible to invite another sportmans if capacity is full--%>
             <c:if test="${ fn:length(event.participants) lt event.capacity && isParticipant}">
-            <div class="col-md-8">
-                <form class="form-inline" name="invite" action="${inviteUrl}" method="POST">
-                    <label for="InputEmail"><spring:message code="page.event.detail.invite.title"/></label><br>
-                    <input type="number" name="inv_event_id" value="${event.id}" id="inv_event_id" hidden>
-                    <select class="fetchSportsmans myWidth" name="inputEmail" id="inputEmail">
-                        <option name="sel" selected="selected"></option>
-                    </select>
-                    <button id="invite_button" type="button" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
-                </form>
-            </div>
+                <div class="col-md-8">
+                    <form class="form-inline" name="invite" action="${inviteUrl}" method="POST">
+                        <label for="InputEmail"><spring:message code="page.event.detail.invite.title"/></label><br>
+                        <input type="number" name="inv_event_id" value="${event.id}" id="inv_event_id" hidden>
+                        <select class="fetchSportsmans myWidth" name="inputEmail" id="inputEmail">
+                            <option name="sel" selected="selected"></option>
+                        </select>
+                        <button id="invite_button" type="button" class="btn btn-primary"><spring:message code="page.event.detail.invite.button"/></button>
+                    </form>
+                </div>
             </c:if>
         </div>
-        </c:if>
+    </c:if>
 
-    </div>
+</div>
 
 <br><br>
-</div>
 
 <c:if test="${fn:length(results) > 0}">
     <h2><spring:message code="title.result.list"/></h2>
