@@ -99,7 +99,11 @@
         $('.fetchSportsmans').next('.select2').find('.select2-selection__rendered').removeAttr('title').html('<span class="select2-selection__placeholder"></span>');
     });
 
-
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
 
 
     function addMessage(mainMessage, message, type) {

@@ -52,6 +52,19 @@ tr.future {
     line-height: 50px;
 }
 
+.clickable-row
+{
+    cursor: pointer;
+
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+}
+
+.clickable-row:hover
+{
+    text-shadow: 3px 3px 30px rgba(0, 0, 0, 0.86);
+}
+
 
 
 
