@@ -17,8 +17,8 @@
     </div>
 </c:if>
 
-<p>
-    <a href="${eventCreateUrl}" class="btn btn-primary" style="float:right;"><spring:message code="page.event.create.submit"/></a>
+<p style="float:right;">
+    <a href="${eventCreateUrl}" class="btn btn-primary"><spring:message code="page.event.create.submit"/></a>
 </p>
 <div class="container">
         <p><strong><spring:message code="entity.sportsman.name"/>:</strong> <c:out value="${name}"/></p>
@@ -77,18 +77,17 @@
                 <c:forEach items="${invitations}" var="invite">
                     <spring:url value="/events/${invite.event.id}" var="detailUrl"/>
                     <tr>
-                        <%--<td><strong>${invite.event.name}</strong></td>--%>
                         <td><strong><a style="color: black" href="${detailUrl}" class="fill-div">${invite.event.name}</a></strong></td>
                         <td>${invite.event.description}</td>
                         <td>${invite.event.admin.surname}, ${invite.event.admin.name}</td>
                         <td>${invite.state}</td>
                         <td>
                             <c:if test="${invite.state != 'DECLINED' && invite.state != 'ACCEPTED'}">
-                                <span>
+                                <span style="float:right;">
                                     <spring:url value="/accept/${invite.id}" var="acceptUrl"/>
                                     <spring:url value="/decline/${invite.id}" var="declineUrl"/>
-                                    <a href="${declineUrl}" class="btn btn-danger" style="float:right;"><spring:message code="page.user.detail.invitation.decline"/></a>
-                                    <a href="${acceptUrl}" class="btn btn-primary" style="float:right;"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                    <a href="${acceptUrl}" class="btn btn-primary"><spring:message code="page.user.detail.invitation.accept"/></a>
+                                    <a href="${declineUrl}" class="btn btn-danger"><spring:message code="page.user.detail.invitation.decline"/></a>
                                 </span>
                             </c:if>
                         </td>
