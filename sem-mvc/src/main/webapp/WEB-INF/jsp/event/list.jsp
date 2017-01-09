@@ -69,8 +69,6 @@
             <td><c:out value="${event.description}"/></td>
             <sec:authorize access="isAuthenticated()">
                 <td class="text-right">
-                    <spring:url value="/events/${event.id}" var="detailUrl"/>
-                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                     <c:if test="${event.date.time gt now}">
                         <c:if test="${admin || event.admin.id == loggedUser.id}">
                             <spring:url value="/events/${event.id}/update" var="updateUrl"/>
@@ -83,6 +81,8 @@
                             <a href="${participantsUrl}" class="btn btn-primary btn-xs"><spring:message code="link.result.list"/></a>
                         </c:if>
                     </c:if>
+                    <spring:url value="/events/${event.id}" var="detailUrl"/>
+                    <a href="${detailUrl}" class="btn btn-success btn-xs"><spring:message code="link.detail"/></a>
                 </td>
             </sec:authorize>
         </tr>
